@@ -1,0 +1,4 @@
+interface:
+  display_name: "电路课堂引导实验"
+  short_description: "把电路课题转成先预测、再操作观察、解释公式并检查理解的交互式教学网页"
+  default_prompt: "使用 $guided-circuit-lessons 将我提出的课题制作成当前项目中的引导实验教学网页，根据我的基础设计实验并验证关键数值。"

@@ -28,6 +28,9 @@ concurrency:
 
 jobs:
   site:
+    # The original deployment credentials and custom domains belong to the upstream owner.
+    # Forks use the standalone Pages deployment documented in web/CLOUDFLARE-PAGES.md.
+    if: github.repository == 'Arcadia-1/circuits-and-systems-classroom'
     needs: toolbox-drift
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -55,6 +58,8 @@ jobs:
         run: pnpm check
 
       - run: pnpm build
+        env:
+          SITE_URL: https://circuits-and-systems.tokenzhang.com
 
       # The reference manual keeps living in the ADCToolbox repository and its own Sphinx build; it is published here
       # under /doc/ so the toolbox has one front door, with the illustrations at the root.

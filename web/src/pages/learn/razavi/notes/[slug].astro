@@ -1,0 +1,29 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { articles } from '../../../../illustrations/razavi-roadmap/plan';
+export function getStaticPaths() {
+  return articles.filter(item => 'note' in item && item.note).map(item => ({
+    params: { slug: ('note' in item ? item.note! : '').replace('.md', '').toLowerCase() }, props: { item },
+  }));
+}
+const { item } = Astro.props;
+const note = 'note' in item ? item.note! : '';
+const notes = import.meta.glob('../../../../../../*.md', { query: '?raw', import: 'default', eager: true });
+const content = Object.entries(notes).find(([path]) => path.endsWith(`/${note}`))?.[1] as string | undefined;
+if (!content) throw new Error(`Missing research note: ${note}`);
+---
+<Base title={item.title} description="已有原文核验与独立推导的研究笔记；包含模型假设、来源与待验证项。">
+  <main lang="zh-CN">
+    <nav><a href="/learn/razavi/">← 返回学习路线</a><a href={item.url} target="_blank" rel="noreferrer">原始 PDF ↗</a></nav>
+    <h1>{item.title}</h1>
+    <p>研究笔记 · Markdown 原文。公式保留 LaTeX 记法，图像路径对应仓库材料。</p>
+    <pre>{content}</pre>
+  </main>
+</Base>
+<style>
+  main { max-width: 1000px; padding: 32px 24px; margin: auto; }
+  nav { display: flex; flex-wrap: wrap; gap: 24px; color: var(--brand); }
+  h1 { font-size: clamp(22px, 4vw, 32px); }
+  p { color: var(--ink-2); }
+  pre { font: 13px/1.9 var(--mono); white-space: pre-wrap; overflow-wrap: anywhere; padding: 24px; background: var(--plot); border: 1px solid var(--rule); border-radius: 6px; }
+</style>

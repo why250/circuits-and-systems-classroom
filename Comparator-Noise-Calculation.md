@@ -1,8 +1,9 @@
 # Comparator Noise Calculation
 
 <!--
-Input: StrongArm comparator | Output: noise simulation methods | Position: comparator design
-⚠️ After any change, update this comment AND relevant .FOLDER.md
+Input: Gaussian decision model and Razavi's 2020 comparator article
+Output: Probability-based noise extraction and clearly defined comparison metrics
+Position: Statistical companion to StrongARM-Comparator-Design.md
 -->
 
 
@@ -54,6 +55,18 @@ $$\sigma_{noise} = \frac{V_{in}}{\Phi^{-1}(P)}$$
 
 This is the formula used in MATLAB: `sigma = Vin/norminv(P)`
 
+This one-point result assumes zero input offset, a Gaussian equivalent input noise, and logical polarity such that positive input increases the probability of output 1. For an offset $V_{OS}$, use
+
+$$P(1\mid V_{in})=\Phi\left(\frac{V_{in}-V_{OS}}{\sigma_{noise}}\right).$$
+
+The 50% crossing locates $V_{OS}$. With two input levels and probabilities strictly between zero and one,
+
+$$\sigma_{noise}=\frac{V_{in,2}-V_{in,1}}{\Phi^{-1}(P_2)-\Phi^{-1}(P_1)}.$$
+
+Avoid extracting noise from $P=0$, $P=1$, or a single point at $P=0.5$. Finite decision records need statistical uncertainty estimates; the approximate binomial standard error is $\sqrt{P(1-P)/K}$ for $K$ independent trials. A 16% minority-decision rate corresponds approximately to an input one noise standard deviation from the offset threshold.
+
+Razavi's *The Design of a Comparator*, pp. 13–14, Figs. 14–15, illustrates this extraction using transient-noise simulations. See [StrongARM Comparator Design](StrongARM-Comparator-Design.md) for the source conditions, offset/noise separation, regeneration and kickback. [Original article](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2020.pdf), [DOI 10.1109/MSSC.2020.3021865](https://doi.org/10.1109/MSSC.2020.3021865).
+
 ![Sigma Extraction Method](figures/sigma_extraction.png)
 
 *Figure 3: Illustration of noise extraction from probability measurement. By measuring the input voltage and output probability, we can calculate σ using the inverse Gaussian CDF formula.*
@@ -68,8 +81,14 @@ The following figure shows how different input voltages affect the comparator ou
 
 ## Figure of Merit
 
-$$\text{FoM}_1 = V_n^2 \times P \quad [\mu V^2 \cdot nJ]$$
+For a comparison convention based on energy per decision $E_{cmp}$, define
 
-$$\text{FoM}_2 = V_n^2 \times P \times T_{cmp} \quad [\mu V^2 \cdot nJ \cdot ns]$$
+$$\text{FoM}_{E} = \sigma_{noise}^2 E_{cmp}
+\quad [(\mu\mathrm{V})^2\cdot\mathrm{nJ}].$$
 
-Lower FoM is better. FoM₂ includes speed consideration.
+An optional metric including decision delay is
+
+$$\text{FoM}_{ED} = \sigma_{noise}^2 E_{cmp} T_{cmp}
+\quad [(\mu\mathrm{V})^2\cdot\mathrm{nJ}\cdot\mathrm{ns}].$$
+
+These are explicitly defined project comparison metrics, not a claim of a universal FoM standard. Lower values indicate a smaller product under matched conditions. If $P$ denotes average power, use $E_{cmp}=P/f_{cmp}$ with the actual decision rate; $\sigma^2P$ has units of noise variance times power, not energy. Report input common mode, clock rate, delay threshold, load and which drivers are included in the energy measurement.

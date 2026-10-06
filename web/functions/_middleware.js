@@ -16,7 +16,8 @@ function isTutorialPath(pathname) {
     || pathname.startsWith('/adc/')
     || pathname.startsWith('/pll/')
     || pathname.startsWith('/amplifiers/')
-    || pathname.startsWith('/serdes/');
+    || pathname.startsWith('/serdes/')
+    || pathname.startsWith('/learn/');
 }
 
 function isManualPath(pathname) {

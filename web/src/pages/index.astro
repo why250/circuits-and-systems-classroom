@@ -38,6 +38,10 @@ const digitalPath = `M0 ${SIGNAL_H / 2} ` + Array.from({ length: 32 }, (_, i) =>
     </section>
 
     <div class="content">
+      <a class="reading-route" href="/learn/razavi/">
+        <div><strong>Razavi 文章学习路线</strong><span>ADC · PLL · 高速链路：按基础和每周时间安排阅读、推导与实验。</span></div>
+        <span aria-hidden="true">开始学习 →</span>
+      </a>
       <section id="lessons" aria-label="Interactive lessons">
         <nav class="filters" aria-label="Filter lessons by topic" hidden>
           <button type="button" data-filter="all" aria-pressed="true" aria-controls="lesson-grid">All</button>
@@ -86,6 +90,11 @@ const digitalPath = `M0 ${SIGNAL_H / 2} ` + Array.from({ length: 32 }, (_, i) =>
 </script>
 
 <style>
+  .reading-route { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 0 0 22px; padding: 18px 20px; border: 1px solid var(--rule); border-left: 3px solid var(--brand); border-radius: 5px; text-decoration: none; color: var(--brand); }
+  .reading-route div { display: grid; gap: 6px; }
+  .reading-route div span { color: var(--ink-2); font-size: 12px; }
+  .reading-route > span { flex: none; font-size: 12px; }
+  @media (max-width: 600px) { .reading-route { align-items: start; flex-direction: column; } }
   .hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--rule-soft); }
   .hero::before { content: ''; position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(var(--rule-soft) 1px, transparent 1px), linear-gradient(90deg, var(--rule-soft) 1px, transparent 1px); background-size: 32px 32px; mask-image: linear-gradient(90deg, transparent 20%, #000 100%); opacity: 0.45; }
   .hero-inner { position: relative; max-width: 1152px; margin: auto; padding: 20px 32px 18px; display: flex; justify-content: space-between; align-items: center; gap: 48px; }

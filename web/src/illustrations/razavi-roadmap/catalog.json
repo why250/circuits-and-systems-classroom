@@ -1,0 +1,1234 @@
+{
+  "source": "https://www.seas.ucla.edu/brweb/journal.html",
+  "checked": "2026-10-05",
+  "articles": [
+    {
+      "id": "BR_SSCM_3_2026.pdf",
+      "title": "The Design of a Clock and Data Recovery Circuit",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2026.pdf",
+      "citation": "B. Razavi, \"The Design of a Clock and Data Recovery Circuit [The Analog Mind],\" IEEE Solid-State Circuits Magazine, Volume. 18, Issue. 3 , pp. 11-116 , Summer 202 6 .",
+      "group": "Analog Mind",
+      "reviewed": false,
+      "note": null,
+      "issue": "2026 Summer"
+    },
+    {
+      "id": "MS_BR_TMTT_2026.pdf",
+      "title": "A Compact Low-Power D-Band Receiver With Integrated LO Generation and Phase Shifting for Beamforming Applications,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/MS_BR_TMTT_2026.pdf",
+      "citation": "M. C. Snai, H. Razavi, P. K. Khanna and B. Razavi, \"A Compact Low-Power D-Band Receiver With Integrated LO Generation and Phase Shifting for Beamforming Applications,\" IEEE Transactions on Microwave Theory and Techniques, vol. 74, Issue 9 , pp. 8176-8195 , Aug. 202 6 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "Kshitiz_Razavi_sscl_2026.pdf",
+      "title": "A 64-Gb/s/pin 0.25-pJ/b Single-Ended Short-Reach PAM4 Transceiver in 28-nm CMOS,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/Kshitiz_Razavi_sscl_2026.pdf",
+      "citation": "K. Tyagi, K. Ma, J. W. Park and B. Razavi, \"A 64-Gb/s/pin 0.25-pJ/b Single-Ended Short-Reach PAM4 Transceiver in 28-nm CMOS,\" IEEE Solid-State Circuits Letters, Early Access , pp. 1-1 , Summer 202 6 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "PK_BR_JSSC_2026.pdf",
+      "title": "A Low-Power 28-GHz Beamforming Receiver With On-Chip LO Synthesis,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/PK_BR_JSSC_2026.pdf",
+      "citation": "P. Khanna and B. Razavi, \"A Low-Power 28-GHz Beamforming Receiver With On-Chip LO Synthesis,\" IEEE Journal of Solid-State Circuits, vol. 61, Issue 6 , pp. 2532-2544 , Jun. 202 6 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BR_SSCM_2_2026.pdf",
+      "title": "Analog Design Experiments With AI-Part 2",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_2_2026.pdf",
+      "citation": "B. Razavi, \"Analog Design Experiments With AI-Part 2 [The Analog Mind],\" IEEE Solid-State Circuits Magazine, Volume. 18, Issue. 2 , pp. 8-13 , Spring 202 6 .",
+      "group": "Analog Mind",
+      "reviewed": false,
+      "note": null,
+      "issue": "2026 Spring"
+    },
+    {
+      "id": "BR_SSCM_4_2025.pdf",
+      "title": "Analog Design Experiments With AI-Part 1",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2025.pdf",
+      "citation": "B. Razavi, \"Analog Design Experiments With AI-Part 1 [The Analog Mind],\" IEEE Solid-State Circuits Magazine, Volume. 17, Issue. 4 , pp. 11-15 , Fall 202 5 .",
+      "group": "Analog Mind",
+      "reviewed": false,
+      "note": null,
+      "issue": "2025 Fall"
+    },
+    {
+      "id": "BR_OJSSCS_2025_11.pdf",
+      "title": "LO Generation Techniques for Millimeter-Wave Receivers,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_OJSSCS_2025_11.pdf",
+      "citation": "B. Razavi, \"LO Generation Techniques for Millimeter-Wave Receivers,\" IEEE Open Journal of the Solid-State Circuits Society, Early Access , pp. 1-1 , October 202 5 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "Matias_TCAS1_2025.pdf",
+      "title": "A Predictive SAR ADC Architecture,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/Matias_TCAS1_2025.pdf",
+      "citation": "M. Jara and B. Razavi, \"A Predictive SAR ADC Architecture,\" IEEE Transactions on Circuits and Systems I: Regular Papers, Volume. 72, Issue. 9 , pp. 4513-4526 , September 202 5 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BR_SSCM_3_2025.pdf",
+      "title": "Fifty Applications of the CMOS Inverter-Part 5",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2025.pdf",
+      "citation": "B. Razavi, \"Fifty Applications of the CMOS Inverter-Part 5 [The Analog Mind],\" IEEE Solid-State Circuits Magazine, Volume. 17, Issue. 3 , pp. 9-28 , Summer 202 5 .",
+      "group": "Analog Mind",
+      "reviewed": false,
+      "note": null,
+      "issue": "2025 Summer"
+    },
+    {
+      "id": "BR_SSCM_2_2025.pdf",
+      "title": "Fifty Applications of the CMOS Inverter-Part 4",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_2_2025.pdf",
+      "citation": "B. Razavi, \"Fifty Applications of the CMOS Inverter-Part 4 [The Analog Mind],\" IEEE Solid-State Circuits Magazine, Volume. 17, Issue. 2 , pp. 8-18 , Spring 202 5 .",
+      "group": "Analog Mind",
+      "reviewed": false,
+      "note": null,
+      "issue": "2025 Spring"
+    },
+    {
+      "id": "BR_SSCM_1_2025.pdf",
+      "title": "Fifty Applications of the CMOS Inverter-Part 3",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_1_2025.pdf",
+      "citation": "B. Razavi, \"Fifty Applications of the CMOS Inverter-Part 3 [The Analog Mind],\" IEEE Solid-State Circuits Magazine, Volume. 17, Issue. 1 , pp. 12-159 , Winter 202 5 .",
+      "group": "Analog Mind",
+      "reviewed": false,
+      "note": null,
+      "issue": "2025 Winter"
+    },
+    {
+      "id": "BR_SSCM_4_2024.pdf",
+      "title": "Fifty Applications of the CMOS Inverter-Part 2",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2024.pdf",
+      "citation": "B. Razavi, \"Fifty Applications of the CMOS Inverter-Part 2 [The Analog Mind],\" IEEE Solid-State Circuits Magazine, Volume. 16, Issue. 4 , pp. 12-20 , Fall 202 4 .",
+      "group": "Analog Mind",
+      "reviewed": false,
+      "note": null,
+      "issue": "2024 Fall"
+    },
+    {
+      "id": "BR_SSCM_3_2024.pdf",
+      "title": "Fifty Applications of the CMOS Inverter-Part 1",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2024.pdf",
+      "citation": "B. Razavi, \"Fifty Applications of the CMOS Inverter-Part 1 [The Analog Mind],\" IEEE Solid-State Circuits Magazine, Volume. 16, Issue. 3 , pp. 7-14 , Summer 202 4 .",
+      "group": "Analog Mind",
+      "reviewed": false,
+      "note": null,
+      "issue": "2024 Summer"
+    },
+    {
+      "id": "BR_SSCM_2_2024.pdf",
+      "title": "Education of Chip Designers at a Large Scale: A Proposal [Society News],",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_2_2024.pdf",
+      "citation": "B. Razavi, \"Education of Chip Designers at a Large Scale: A Proposal [Society News],\" IEEE Solid-State Circuits Magazine, Volume. 16, Issue. 2 , pp. 76-83 , Spring 202 4 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BR_SSCM_1_2024.pdf",
+      "title": "The Design of a Biquadratic Filter",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_1_2024.pdf",
+      "citation": "B. Razavi, \"The Design of a Biquadratic Filter [The Analog Mind],\" IEEE Solid-State Circuits Magazine, Volume. 16, Issue. 1 , pp. 6-13 , Winter 202 4 .",
+      "group": "Analog Mind",
+      "reviewed": true,
+      "note": "Tow-Thomas-Biquadratic-Filter.md",
+      "issue": "2024 Winter"
+    },
+    {
+      "id": "BR_SSCM_4_2023.pdf",
+      "title": "The Design of a Phase Interpolator",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2023.pdf",
+      "citation": "B. Razavi, \"The Design of a Phase Interpolator [The Analog Mind],\" IEEE Solid-State Circuits Magazine, Volume. 15, Issue. 4 , pp. 6-10 , Fall 202 3 .",
+      "group": "Analog Mind",
+      "reviewed": false,
+      "note": null,
+      "issue": "2023 Fall"
+    },
+    {
+      "id": "BR_SSCM_3_2023.pdf",
+      "title": "75 Years of RF Design: Highlights and Paradigm Shifts,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2023.pdf",
+      "citation": "B. Razavi, \"75 Years of RF Design: Highlights and Paradigm Shifts,\" IEEE Solid-State Circuits Magazine, Volume. 15, Issue. 3 , pp. 62-79 , Summer 202 3 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BROJSSCJune23.pdf",
+      "title": "Design Techniques for CMOS Wireline NRZ Receivers Up To 56 Gb/s,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BROJSSCJune23.pdf",
+      "citation": "B. Razavi, \"Design Techniques for CMOS Wireline NRZ Receivers Up To 56 Gb/s,\" IEEE Open Journal of the Solid-State Circuits Society, Volume. 3 , pp. 118-133 , June. 202 3 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "Hossein_JSSC_2023.pdf",
+      "title": "A Study of Injection Locking in Oscillators and Frequency Dividers,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/Hossein_JSSC_2023.pdf",
+      "citation": "H. Razavi and B. Razavi, \"A Study of Injection Locking in Oscillators and Frequency Dividers,\" IEEE Journal of Solid-State Circuits, vol. 58, Issue 8 , pp. 2129-2140 , Aug. 202 3 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "Onur_JSSC_2023.pdf",
+      "title": "A 300-GHz 52-mW CMOS Receiver With On-Chip LO Generation,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/Onur_JSSC_2023.pdf",
+      "citation": "O. Memioglu, Y. Zhao and B. Razavi, \"A 300-GHz 52-mW CMOS Receiver With On-Chip LO Generation,\" IEEE Journal of Solid-State Circuits, vol. 58, Issue 8 , pp. 2141-2156 , Aug. 202 3 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BR_SSCM_2_2023.pdf",
+      "title": "The Design of a Millimeter-Wave Frequency Synthesizer",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_2_2023.pdf",
+      "citation": "B. Razavi, \"The Design of a Millimeter-Wave Frequency Synthesizer [The Analog Mind],\" IEEE Solid-State Circuits Magazine, Volume. 15, Issue. 2 , pp. 7-17 , Spring 202 3 .",
+      "group": "Analog Mind",
+      "reviewed": false,
+      "note": null,
+      "issue": "2023 Spring"
+    },
+    {
+      "id": "KT_TCAS_2023.pdf",
+      "title": "Performance Bounds of ADC-Based Receivers Due to Clock Jitter,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/KT_TCAS_2023.pdf",
+      "citation": "K. Tyagi and B. Razavi, \"Performance Bounds of ADC-Based Receivers Due to Clock Jitter,\" IEEE Trans. Circuits and Systems - Part II, vol.7 0 , pp. 1749-1753 , May. 202 3 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "Yu_JSSC_2023_20fs.pdf",
+      "title": "A 20-GHz PLL With 20.9-fs Random Jitter,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/Yu_JSSC_2023_20fs.pdf",
+      "citation": "Y. Zhao, M. Forghani and B. Razavi, \"A 20-GHz PLL With 20.9-fs Random Jitter,\" IEEE Journal of Solid-State Circuits, vol. 58, Issue 6 , pp. 1597-1609 , June. 202 3 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BR_SSCM_1_2023.pdf",
+      "title": "The Design of a Transimpedance Amplifier",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_1_2023.pdf",
+      "citation": "B. Razavi, \"The Design of a Transimpedance Amplifier [The Analog Mind],\" IEEE Solid-State Circuits Magazine, Volume. 15, Issue. 1 , pp. 7-11 , Winter 202 3 .",
+      "group": "Analog Mind",
+      "reviewed": true,
+      "note": "Transimpedance-Amplifier-Design.md",
+      "issue": "2023 Winter"
+    },
+    {
+      "id": "Yu_JSSC_2022.pdf",
+      "title": "A 56-GHz Fractional-N PLL With 110-fs Jitter,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/Yu_JSSC_2022.pdf",
+      "citation": "Y. Zhao, O. Memioglu, L. Kong and B. Razavi, \"A 56-GHz Fractional-N PLL With 110-fs Jitter,\" IEEE Journal of Solid-State Circuits, vol. 58, Issue 1 , pp. 57-67 , Jan. 202 3 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BR_SSCM_Fall_2022.pdf",
+      "title": "The Design of a Millimeter-Wave Frequency Divider",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_Fall_2022.pdf",
+      "citation": "B. Razavi, \"The Design of a Millimeter-Wave Frequency Divider,\" IEEE Solid-State Circuits Magazine, Volume. 14, Issue. 4 , pp. 6-16 , Fall 202 2 .",
+      "group": "Analog Mind",
+      "reviewed": false,
+      "note": null,
+      "issue": "2022 Fall"
+    },
+    {
+      "id": "SB_TCAS_I_22.pdf",
+      "title": "Relation Between INL and ACPR of RF DACs,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/SB_TCAS_I_22.pdf",
+      "citation": "M. Babamir and B. Razavi, \"Relation Between INL and ACPR of RF DACs,\" IEEE Trans. Circuits and Systems-Part I, vol. 69, Issue 10 , pp. 3877-3887 , Sep. 202 2 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BR_SSCM_2_2022.pdf",
+      "title": "The Design of a Millimeter-Wave VCO",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_2_2022.pdf",
+      "citation": "B. Razavi, \"The Design of a Millimeter-Wave VCO,\" IEEE Solid-State Circuits Magazine, Volume. 14, Issue. 3 , pp. 6-12 , Summer 202 2 .",
+      "group": "Analog Mind",
+      "reviewed": false,
+      "note": null,
+      "issue": "2022 Summer"
+    },
+    {
+      "id": "HR_JSSC_Sep22.pdf",
+      "title": "A 0.4-6 GHz Receiver for Cellular and WiFi Applications,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/HR_JSSC_Sep22.pdf",
+      "citation": "H.Razavi and B. Razavi, \"A 0.4-6 GHz Receiver for Cellular and WiFi Applications,\" IEEE Journal of Solid-State Circuits, vol. 57, Issue 9 , pp. 2640-2657 , Sep. 202 2 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "GH_JSSC_Sep22.pdf",
+      "title": "A 56-Gb/s 8-mW PAM4 CDR/DMUX With High Jitter Tolerance,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/GH_JSSC_Sep22.pdf",
+      "citation": "G.Hou and B. Razavi, \"A 56-Gb/s 8-mW PAM4 CDR/DMUX With High Jitter Tolerance,\" IEEE Journal of Solid-State Circuits, vol. 57, Issue 9 , pp. 2856-2867 , Sep. 202 2 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BR_Magzine5.pdf",
+      "title": "The Design of An LDO Regulator",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_Magzine5.pdf",
+      "citation": "B. Razavi, \"The Design of An LDO Regulator [The Analog Mind],\" IEEE Solid-State Circuits Magazine, Volume. 14, Issue. 2 , pp. 7-17 , Spring 202 2 .",
+      "group": "Analog Mind",
+      "reviewed": true,
+      "note": "LDO-Regulator-Design.md",
+      "issue": "2022 Spring"
+    },
+    {
+      "id": "BR_NanoTech_22.pdf",
+      "title": "Breaking the Speed-Power Tradeoffs in Broadband Circuits,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_NanoTech_22.pdf",
+      "citation": "B. Razavi, \"Breaking the Speed-Power Tradeoffs in Broadband Circuits,\" IEEE Nanotechnology Magazine, vol. 16, Issue 3 , pp. 6-15 , June 202 2 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BR_SSCM_1_2022.pdf",
+      "title": "The Design of an Equalizer-Part Two",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_1_2022.pdf",
+      "citation": "B. Razavi, \"The Design of an Equalizer-Part Two [The Analog Mind],\" IEEE Solid-State Circuits Magazine, Volume. 14, Issue. 1 , pp. 7-12 , Winter 202 2 .",
+      "group": "Analog Mind",
+      "reviewed": false,
+      "note": null,
+      "issue": "2022 Winter"
+    },
+    {
+      "id": "Atharav&BR_JSSC22.pdf",
+      "title": "A 56-Gb/s 50-mW NRZ Receiver in 28-nm CMOS,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/Atharav&BR_JSSC22.pdf",
+      "citation": "A.Atharav and B. Razavi, \"A 56-Gb/s 50-mW NRZ Receiver in 28-nm CMOS,\" IEEE Journal of Solid-State Circuits, vol. 57, Issue 1 , pp. 54-67 , Jan. 202 2 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BR_SSCM_4_2021.pdf",
+      "title": "The Design of an Equalizer-Part One",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2021.pdf",
+      "citation": "B. Razavi, \"The Design of an Equalizer-Part One [The Analog Mind],\" IEEE Solid-State Circuits Magazine, Volume. 13, Issue. 4 , pp. 7-160 , Fall 202 1 .",
+      "group": "Analog Mind",
+      "reviewed": false,
+      "note": null,
+      "issue": "2021 Fall"
+    },
+    {
+      "id": "BR_SSCM_3_2021.pdf",
+      "title": "The Design of a Low-Voltage Bandgap Reference",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2021.pdf",
+      "citation": "B. Razavi, \"The Design of a Low-Voltage Bandgap Reference [The Analog Mind],\" IEEE Solid-State Circuits Magazine, Volume. 13, Issue. 3 , pp. 6-16 , Summer 202 1 .",
+      "group": "Analog Mind",
+      "reviewed": true,
+      "note": "Low-Voltage-Bandgap-Reference.md",
+      "issue": "2021 Summer"
+    },
+    {
+      "id": "BROJSSCSep21.pdf",
+      "title": "Design Techniques for High-Speed Wireline Transmitters,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BROJSSCSep21.pdf",
+      "citation": "B. Razavi, \"Design Techniques for High-Speed Wireline Transmitters,\" IEEE Open Journal of the Solid-State Circuits Society, Volume. 1 , pp. 53-66 , Sep. 202 1 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BR_SSCM_2_2021.pdf",
+      "title": "The Design of Broadband I/O Circuits",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_2_2021.pdf",
+      "citation": "B. Razavi, \"The Design of Broadband I/O Circuits [The Analog Mind],\" IEEE Solid-State Circuits Magazine, Volume. 13, Issue. 2 , pp. 6-15 , Spring 202 1 .",
+      "group": "Analog Mind",
+      "reviewed": false,
+      "note": null,
+      "issue": "2021 Spring"
+    },
+    {
+      "id": "BR_TCAS_2021.pdf",
+      "title": "Jitter-Power Trade-Offs in PLLs,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_TCAS_2021.pdf",
+      "citation": "B. Razavi, \"Jitter-Power Trade-Offs in PLLs,\" IEEE Trans. Circuits and Systems-Part I, Volume. 68, Issue. 4 , pp. 1381-1387 , April 202 1 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BR_SSCM_1_2021.pdf",
+      "title": "The Design of a bootstrapped Sampling Circuit",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_1_2021.pdf",
+      "citation": "B. Razavi, \"The Design of a bootstrapped Sampling Circuit [The Analog Mind],\" IEEE Solid-State Circuits Magazine, Volume. 13, Issue. 1 , pp. 7-12 , Summer 202 1 .",
+      "group": "Analog Mind",
+      "reviewed": true,
+      "note": "Bootstrapped-Sampling-Switch.md",
+      "issue": "2021 Winter"
+    },
+    {
+      "id": "BR_SSCM_4_2020.pdf",
+      "title": "The Design of a Comparator",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2020.pdf",
+      "citation": "B. Razavi, \"The Design of a Comparator [The Analog Mind],\" IEEE Solid-State Circuits Magazine, Volume. 12, Issue. 4 , pp. 8-14 , Fall 202 0 .",
+      "group": "Analog Mind",
+      "reviewed": true,
+      "note": "StrongARM-Comparator-Design.md",
+      "issue": "2020 Fall"
+    },
+    {
+      "id": "BR_SSCM_3_2020.pdf",
+      "title": "The z-Transform for Analog Designers",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2020.pdf",
+      "citation": "B. Razavi, \"The z-Transform for Analog Designers [The Analog Mind],\" IEEE Solid-State Circuits Magazine, Volume. 12, Issue. 3 , pp. 8-14 , Summer 202 0 .",
+      "group": "Analog Mind",
+      "reviewed": true,
+      "note": "Z-Transform-for-Analog-Designers.md",
+      "issue": "2020 Summer"
+    },
+    {
+      "id": "MB_BR_20.pdf",
+      "title": "A Digital RF Transmitter With Background Nonlinearity Correction,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/MB_BR_20.pdf",
+      "citation": "M. Babamir and B. Razavi, \"A Digital RF Transmitter With Background Nonlinearity Correction,\" IEEE Journal of Solid-State Circuits, vol. 55, Issue 6 , pp. 1502-1515 , April 202 0 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BR_SSCM_2_2020.pdf",
+      "title": "The Active Inductor,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_2_2020.pdf",
+      "citation": "B. Razavi, \"The Active Inductor [A Circuit for All Seasons],\" IEEE Solid-State Circuits Magazine, Volume. 12, Issue. 2 , pp. 7-11 , Spring 202 0 .",
+      "group": "A Circuit for All Seasons",
+      "reviewed": false
+    },
+    {
+      "id": "BR_SSCM_4_2019.pdf",
+      "title": "The Ring Oscillator,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2019.pdf",
+      "citation": "B. Razavi, \"The Ring Oscillator [A Circuit for All Seasons],\" IEEE Solid-State Circuits Magazine, Volume. 11, Issue. 4 , pp. 10-81 , Fall 201 9 .",
+      "group": "A Circuit for All Seasons",
+      "reviewed": false
+    },
+    {
+      "id": "BR_SSCM_3_2019.pdf",
+      "title": "The R-2R and C-2C Ladder,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2019.pdf",
+      "citation": "B. Razavi, \"The R-2R and C-2C Ladder [A Circuit for All Seasons],\" IEEE Solid-State Circuits Magazine, Volume. 11, Issue. 3 , pp. 10-15 , Summer 201 9 .",
+      "group": "A Circuit for All Seasons",
+      "reviewed": false
+    },
+    {
+      "id": "BR_SSCM_2_2019.pdf",
+      "title": "The Low Dropout Regulator,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_2_2019.pdf",
+      "citation": "B. Razavi, \"The Low Dropout Regulator [A Circuit for All Seasons],\" IEEE Solid-State Circuits Magazine, Volume. 11, Issue. 2 , pp. 8-13 , Spring 201 9 .",
+      "group": "A Circuit for All Seasons",
+      "reviewed": false
+    },
+    {
+      "id": "BR_SSCM_1_2019.pdf",
+      "title": "The Transimpedance Amplifier,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_1_2019.pdf",
+      "citation": "B. Razavi, \"The Transimpedance Amplifier [A Circuit for All Seasons],\" IEEE Solid-State Circuits Magazine, Volume. 11, Issue. 1 , pp. 10-97 , Winter 201 9 .",
+      "group": "A Circuit for All Seasons",
+      "reviewed": false
+    },
+    {
+      "id": "BR_SSCM_4_2018.pdf",
+      "title": "The Harmonic-Rejection Mixer,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2018.pdf",
+      "citation": "B. Razavi, \"The Harmonic-Rejection Mixer [A Circuit for All Seasons],\" IEEE Solid-State Circuits Magazine, Volume. 10, Issue. 4 , pp. 10-14 , Fall 201 8 .",
+      "group": "A Circuit for All Seasons",
+      "reviewed": false
+    },
+    {
+      "id": "BR_SSCM_3_2018.pdf",
+      "title": "The Delay-Locked Loop,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2018.pdf",
+      "citation": "B. Razavi, \"The Delay-Locked Loop [A Circuit for All Seasons],\" IEEE Solid-State Circuits Magazine, Volume. 10, Issue. 3 , pp. 9-15 , Summer 201 8 .",
+      "group": "A Circuit for All Seasons",
+      "reviewed": false
+    },
+    {
+      "id": "BR_SSCM_SPR_18.pdf",
+      "title": "The Biquadratic Filter,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_SPR_18.pdf",
+      "citation": "B. Razavi, \"The Biquadratic Filter [A Circuit for All Seasons],\" IEEE Solid-State Circuits Magazine, Volume. 10, Issue. 2 , pp. 11-15 , Spring 201 8 .",
+      "group": "A Circuit for All Seasons",
+      "reviewed": false
+    },
+    {
+      "id": "LK_BR_18.pdf",
+      "title": "A 2.4-GHz RF Fractional-N Synthesizer With BW = 0.25 fREF,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/LK_BR_18.pdf",
+      "citation": "L. Kong and B. Razavi, \"A 2.4-GHz RF Fractional-N Synthesizer With BW = 0.25 fREF,\" IEEE Journal of Solid-State Circuits, vol. 53 , pp. 1707-1718 , June 201 8 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BRWinter18DAC.pdf",
+      "title": "The Current-Steering DAC,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRWinter18DAC.pdf",
+      "citation": "B. Razavi, \"The Current-Steering DAC [A Circuit for All Seasons],\" IEEE Solid-State Circuits Magazine, Volume. 10, Issue. 1 , pp. 11-15 , Winter 201 8 .",
+      "group": "A Circuit for All Seasons",
+      "reviewed": false
+    },
+    {
+      "id": "BRFall17DFE.pdf",
+      "title": "The Decision-Feedback Equalizer,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRFall17DFE.pdf",
+      "citation": "B. Razavi, \"The Decision-Feedback Equalizer [A Circuit for All Seasons],\" IEEE Solid-State Circuits Magazine, Volume. 9, Issue. 4 , pp. 13-16 , Fall 201 7 .",
+      "group": "A Circuit for All Seasons",
+      "reviewed": false
+    },
+    {
+      "id": "Abishek_JSSC17.pdf",
+      "title": "A 40-Gb/s 14-mW CMOS Wireline Receiver,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/Abishek_JSSC17.pdf",
+      "citation": "A. Manian and B. Razavi, \"A 40-Gb/s 14-mW CMOS Wireline Receiver,\" IEEE Journal of Solid-State Circuits, vol. 52 , pp. 2407-2421 , Sep. 201 7 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BRSummer17FlashADC.pdf",
+      "title": "The Flash ADC,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRSummer17FlashADC.pdf",
+      "citation": "B. Razavi, \"The Flash ADC [A Circuit for All Seasons],\" IEEE Solid-State Circuits Magazine, Volume. 9, Issue. 3 , pp. 9-13 , Summer 201 7 .",
+      "group": "A Circuit for All Seasons",
+      "reviewed": false
+    },
+    {
+      "id": "LongKong_JSSC17.pdf",
+      "title": "A 2.4-GHz 6.4-mW Fractional-N Inductorless RF Synthesizer,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/LongKong_JSSC17.pdf",
+      "citation": "L. Kong and B. Razavi, \"A 2.4-GHz 6.4-mW Fractional-N Inductorless RF Synthesizer,\" IEEE Journal of Solid-State Circuits, vol. 52 , pp. 2117-2127 , Aug. 201 7 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BRSpring17CrystalOsc.pdf",
+      "title": "The Crystal Oscillator,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRSpring17CrystalOsc.pdf",
+      "citation": "B. Razavi, \"The Crystal Oscillator [A Circuit for All Seasons],\" IEEE Solid-State Circuits Magazine, Volume. 9, Issue. 2 , pp. 7-9 , Spring 201 7 .",
+      "group": "A Circuit for All Seasons",
+      "reviewed": false
+    },
+    {
+      "id": "Joung_TCAS17.pdf",
+      "title": "Analysis of Second-Order Intermodulation in Miller Bandpass Filter,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/Joung_TCAS17.pdf",
+      "citation": "J.W.Park and B. Razavi, \"Analysis of Second-Order Intermodulation in Miller Bandpass Filter,\" IEEE Trans. Circuits and Systems - Part II, vol.64 0 , pp. 264-268 , Mar. 201 7 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BRWinter17SwCap.pdf",
+      "title": "The Switched-Capacitor Integrator,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRWinter17SwCap.pdf",
+      "citation": "B. Razavi, \"The Switched-Capacitor Integrator [A Circuit for All Seasons],\" IEEE Solid-State Circuits Magazine, Volume. 9, Issue. 1 , pp. 9-11 , Winter 201 7 .",
+      "group": "A Circuit for All Seasons",
+      "reviewed": false
+    },
+    {
+      "id": "BRNov16.pdf",
+      "title": "From Red to Gold: The Rise of IEEE Journal of Solid-State Circuits to a High-Impact Journal,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRNov16.pdf",
+      "citation": "B. Razavi, \"From Red to Gold: The Rise of IEEE Journal of Solid-State Circuits to a High-Impact Journal,\" IEEE Journal of Solid-State Circuits, vol.8 0 , pp. 34-38 , Nov. 201 6 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BRFall16TSPC.pdf",
+      "title": "TSPC Logic,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRFall16TSPC.pdf",
+      "citation": "B. Razavi, \"TSPC Logic [A Circuit for All Seasons],\" IEEE Solid-State Circuits Magazine, Volume. 8, Issue. 4 , pp. 10-13 , Fall 201 6 .",
+      "group": "A Circuit for All Seasons",
+      "reviewed": false
+    },
+    {
+      "id": "BRSummer16Bandgap.pdf",
+      "title": "The Bandgap Reference,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRSummer16Bandgap.pdf",
+      "citation": "B. Razavi, \"The Bandgap Reference [A Circuit for All Seasons],\" IEEE Solid-State Circuits Magazine, Volume. 8, Issue. 3 0 , pp. 9-12 , Summer 201 6 .",
+      "group": "A Circuit for All Seasons",
+      "reviewed": false
+    },
+    {
+      "id": "Ali_TCAS16.pdf",
+      "title": "On the Stability of Charge-Pump Phase-Locked Loops,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/Ali_TCAS16.pdf",
+      "citation": "A. Homayoun, B. Razavi, \"On the Stability of Charge-Pump Phase-Locked Loops,\" IEEE Solid-State IEEE Trans. Ciruits and Systems - Part I, vol.63, no.6, pp. 626-635 , June 201 6 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BRSpring16DeltaSigma.pdf",
+      "title": "The Delta-Sigma Modulator,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRSpring16DeltaSigma.pdf",
+      "citation": "B. Razavi, \"The Delta-Sigma Modulator [A Circuit for All Seasons],\" IEEE Solid-State Circuits Magazine, Volume. 8, Issue. 2 0 , pp. 10-15 , Spring 201 6 .",
+      "group": "A Circuit for All Seasons",
+      "reviewed": false
+    },
+    {
+      "id": "JSSC16_LK.pdf",
+      "title": "A 2.4 GHz 4 mW Integer-N Inductorless RF Synthesizer,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/JSSC16_LK.pdf",
+      "citation": "L. Kong, B. Razavi, \"A 2.4 GHz 4 mW Integer-N Inductorless RF Synthesizer,\" IEEE Journal of Solid-State Circuits, vol.51, pp. 626-635 , Mar. 201 6 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BRFall15Wireline.pdf",
+      "title": "Historical Trends In Wireline Communications,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRFall15Wireline.pdf",
+      "citation": "B. Razavi, \"Historical Trends In Wireline Communications,\" IEEE Solid-State Circuits Magazine, Volume. 7, Issue. 4 0 , pp. 42-46 , Fall 201 5 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BRWinter16Translation.pdf",
+      "title": "Translational Circuits,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRWinter16Translation.pdf",
+      "citation": "B. Razavi, \"Translational Circuits [A Circuit for All Seasons],\" IEEE Solid-State Circuits Magazine, Volume. 8, Issue. 1 , pp. 9-13 , Winter 201 6 .",
+      "group": "A Circuit for All Seasons",
+      "reviewed": false
+    },
+    {
+      "id": "BRFall15TCoil.pdf",
+      "title": "The Bridged T-Coil,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRFall15TCoil.pdf",
+      "citation": "B. Razavi, \"The Bridged T-Coil [A Circuit for All Seasons],\" IEEE Solid-State Circuits Magazine, Volume. 7, Issue. 4 0 , pp. 10-13 , Fall 201 5 .",
+      "group": "A Circuit for All Seasons",
+      "reviewed": false
+    },
+    {
+      "id": "BRSummer15Switch.pdf",
+      "title": "The Bootstrapped Switch,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRSummer15Switch.pdf",
+      "citation": "B. Razavi, \"The Bootstrapped Switch [A Circuit for All Seasons],\" IEEE Solid-State Circuits Magazine, Volume. 7, Issue. 3 , pp. 12-15 , Summer 201 5 .",
+      "group": "A Circuit for All Seasons",
+      "reviewed": false
+    },
+    {
+      "id": "BRSummer15ADC.pdf",
+      "title": "A Tale of Two ADCs,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRSummer15ADC.pdf",
+      "citation": "B. Razavi, \"A Tale of Two ADCs,\" IEEE Solid-State Circuits Magazine, Volume. 7, Issue. 3 0 , pp. 38-46 , Summer 201 5 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BR_Magzine4.pdf",
+      "title": "The StrongARM Latch,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_Magzine4.pdf",
+      "citation": "B. Razavi, \"The StrongARM Latch [A Circuit for All Seasons],\" IEEE Solid-State Circuits Magazine, Issue. 2 , pp. 12-17 , Spring 201 5 .",
+      "group": "A Circuit for All Seasons",
+      "reviewed": false
+    },
+    {
+      "id": "Steve_JSSC15.pdf",
+      "title": "An RF Receiver for Intra-Band Carrier Aggregation,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/Steve_JSSC15.pdf",
+      "citation": "S. Hwu and B. Razavi, \"An RF Receiver for Intra-Band Carrier Aggregation,\" IEEE Journal of Solid-State Circuits, vol. 5 0 , pp. 946-961 , Apr. 201 5 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "Ali_JSSC15.pdf",
+      "title": "A Low-Power CMOS Receiver for 5 GHz WLAN,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/Ali_JSSC15.pdf",
+      "citation": "A. Homayoun and B. Razavi, \"A Low-Power CMOS Receiver for 5 GHz WLAN,\" IEEE Journal of Solid-State Circuits, vol. 5 0 , pp. 630-643 , Mar. 201 5 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "Jun_JSSC15.pdf",
+      "title": "A 25 Gb/s 5.8 mW CMOS Equalizer,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/Jun_JSSC15.pdf",
+      "citation": "J. W. Jung and B. Razavi, \"A 25 Gb/s 5.8 mW CMOS Equalizer,\" IEEE Journal of Solid-State Circuits, vol. 5 0 , pp. 515-526 , Feb. 201 5 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BR_Magzine3.pdf",
+      "title": "The Cross-Coupled Pair - Part III,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_Magzine3.pdf",
+      "citation": "B. Razavi, \"The Cross-Coupled Pair - Part III [A Circuit for All Seasons],\" IEEE Solid-State Circuits Magazine, Issue. 1 , pp. 10-13 , Winter 201 5 .",
+      "group": "A Circuit for All Seasons",
+      "reviewed": false
+    },
+    {
+      "id": "BR_Magzine2.pdf",
+      "title": "The Cross-Coupled Pair - Part II,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_Magzine2.pdf",
+      "citation": "B. Razavi, \"The Cross-Coupled Pair - Part II [A Circuit for All Seasons],\" IEEE Solid-State Circuits Magazine, Issue 4 , pp. 9-12 , Fall 201 4 .",
+      "group": "A Circuit for All Seasons",
+      "reviewed": false
+    },
+    {
+      "id": "BR_Magzine1.pdf",
+      "title": "The Cross-Coupled Pair - Part I,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BR_Magzine1.pdf",
+      "citation": "B. Razavi, \"The Cross-Coupled Pair - Part I [A Circuit for All Seasons],\" IEEE Solid-State Circuits Magazine, Issue 3 , pp. 7-10 , Summer 201 4 .",
+      "group": "A Circuit for All Seasons",
+      "reviewed": false
+    },
+    {
+      "id": "Joung_JSSC14.pdf",
+      "title": "Channel Selection at RF Using Miller Bandpass Filters,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/Joung_JSSC14.pdf",
+      "citation": "J. W. Park and B. Razavi, \"Channel Selection at RF Using Miller Bandpass Filters,\" IEEE Journal of Solid-State Circuits, vol. 4 9 , pp. 3063-3078 , Dec. 201 4 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "Sedigheh_JSSC14.pdf",
+      "title": "A 7.1 mW 1 GS/s ADC With 48 dB SNDR at Nyquist Rate,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/Sedigheh_JSSC14.pdf",
+      "citation": "S. Hashemi and B. Razavi, \"A 7.1 mW 1 GS/s ADC With 48 dB SNDR at Nyquist Rate,\" IEEE Journal of Solid-State Circuits, vol. 4 9 , pp. 1739-1750 , Aug. 201 4 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "Hegong_JSSC14.pdf",
+      "title": "An 8 Bit 4 GS/s 120 mW CMOS ADC,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/Hegong_JSSC14.pdf",
+      "citation": "H. Wei and B. Razavi, \"An 8 Bit 4 GS/s 120 mW CMOS ADC,\" IEEE Journal of Solid-State Circuits, vol. 4 9 , pp. 1751-1761 , Aug. 201 4 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "Sedigheh_JSSC.pdf",
+      "title": "Analysis of Metastability in Pipelined ADCs,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/Sedigheh_JSSC.pdf",
+      "citation": "S. Hashemi and B. Razavi, \"Analysis of Metastability in Pipelined ADCs,\" IEEE Journal of Solid-State Circuits, vol. 4 9 , pp. 1198-1209 , May. 201 4 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "Wood_JSSC2014.pdf",
+      "title": "A 10-Bit 800-MHz 19-mW CMOS ADC,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/Wood_JSSC2014.pdf",
+      "citation": "S.W. Chiang and B. Razavi, \"A 10-Bit 800-MHz 19-mW CMOS ADC,\" IEEE Journal of Solid-State Circuits, vol. 4 9 , pp. 935-949 , Apr. 201 4 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "Ali_JSSC2014.pdf",
+      "title": "Relation Between Delay Line Phase Noise and Ring Oscillator Phase Noise,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/Ali_JSSC2014.pdf",
+      "citation": "A. Homayoun and B. Razavi, \"Relation Between Delay Line Phase Noise and Ring Oscillator Phase Noise,\" IEEE Journal of Solid-State Circuits, vol. 4 9 , pp. 384-391 , Feb. 201 4 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BRAug13.pdf",
+      "title": "Design Considerations for Interleaved ADCs,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRAug13.pdf",
+      "citation": "B. Razavi, \"Design Considerations for Interleaved ADCs,\" IEEE Journal of Solid-State Circuits, vol. 4 9 , pp. 1806-1817 , Aug. 201 3 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "S&RJun13.pdf",
+      "title": "A 10-b 1-GHz 33-mW CMOS ADC,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/S&RJun13.pdf",
+      "citation": "B. D. Sahoo and B. Razavi, \"A 10-b 1-GHz 33-mW CMOS ADC,\" IEEE Journal of Solid-State Circuits, vol. 4 8 , pp. 1442-1452 , Jun. 201 3 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "P&RApr13.pdf",
+      "title": "A Harmonic-Rejecting CMOS LNA for Broadband Radios,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/P&RApr13.pdf",
+      "citation": "J.W. Park and B. Razavi, \"A Harmonic-Rejecting CMOS LNA for Broadband Radios,\" IEEE Journal of Solid-State Circuits, vol. 4 8 , pp. 1072-1084 , Apr. 201 3 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "J&RMar13.pdf",
+      "title": "A 25-Gb/s 5-mW CMOS CDR/Deserializer ,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/J&RMar13.pdf",
+      "citation": "J.W. Jung and B. Razavi, \" A 25-Gb/s 5-mW CMOS CDR/Deserializer ,\" IEEE Journal of Solid-State Circuits, vol. 4 8 , pp. 684-697 , Mar. 201 3 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "HRTCASMar13.pdf",
+      "title": "Analysis of Phase Noise in Phase/Frequency Detectors,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/HRTCASMar13.pdf",
+      "citation": "A. Homayoun and B. Razavi, \"Analysis of Phase Noise in Phase/Frequency Detectors,\" IEEE Trans. Circuits and Systems - Part I, vol. 60 , pp. 529-539 , Mar. 201 3 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "L&RSep11.pdf",
+      "title": "Transmitter Linearization by Beamforming ,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/L&RSep11.pdf",
+      "citation": "C.K. Liang and B. Razavi, \" Transmitter Linearization by Beamforming ,\" IEEE Journal of Solid-State Circuits, vol. 4 6 , pp. 1956-1969 , Sep. 201 1 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "S&RJun11.pdf",
+      "title": "Low-Power CMOS Equalizer Design for 20-Gb/s Systems,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/S&RJun11.pdf",
+      "citation": "S. Ibrahim and B. Razavi, \"Low-Power CMOS Equalizer Design for 20-Gb/s Systems,\" IEEE Journal of Solid-State Circuits, vol. 46 , pp. 1321-1336 , June 201 1 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BRApr11.pdf",
+      "title": "A 300-GHz Fundamental Oscillator in 65-nm CMOS Technology ,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRApr11.pdf",
+      "citation": "B. Razavi, \" A 300-GHz Fundamental Oscillator in 65-nm CMOS Technology ,\" IEEE Journal of Solid-State Circuits, vol. 4 6 , pp. 894-903 , Apr. 201 1 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "A&RTCASDec10.pdf",
+      "title": "A New DAC Mismatch Shaping Technique for Sigma-Delta Modulators,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/A&RTCASDec10.pdf",
+      "citation": "M. Aboudina and B. Razavi, \"A New DAC Mismatch Shaping Technique for Sigma-Delta Modulators,\" IEEE Trans. Circuits and Systems - Part II, vol. 57 , pp. 966-970 , Dec. 201 0 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BRAug10.pdf",
+      "title": "Cognitive Radio Design Challenges and Techniques ,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRAug10.pdf",
+      "citation": "B. Razavi, \" Cognitive Radio Design Challenges and Techniques ,\" IEEE Journal of Solid-State Circuits, vol. 4 5 , pp. 1542-1553 , Aug. 201 0 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "V&R09.pdf",
+      "title": "A 10-Bit 500-MS/s 55-mW CMOS ADC,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/V&R09.pdf",
+      "citation": "A. Verma and B. Razavi, \"A 10-Bit 500-MS/s 55-mW CMOS ADC,\" IEEE Journal of Solid-State Circuits, vol. 4 4 , pp. 3039-3050 , Nov. 200 9 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "S&RJSSC09.pdf",
+      "title": "A 12-Bit 200-MHz CMOS ADC ,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/S&RJSSC09.pdf",
+      "citation": "B. D. Sahoo and B. Razavi, \" A 12-Bit 200-MHz CMOS ADC ,\" IEEE Journal of Solid-State Circuits, vol. 4 4 , pp. 2366-2380 , Sept. 200 9 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BRTCAS109.pdf",
+      "title": "The Role of PLLs in Future Wireline Transmitters ,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRTCAS109.pdf",
+      "citation": "B. Razavi, \"The Role of PLLs in Future Wireline Transmitters ,\" IEEE Trans. Circuits and Systems - Part I, vol. 56, pp. 1786-1793 , Aug . 2009 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "P&RJSSC09.pdf",
+      "title": "A New Transceiver Architecture for the 60-GHz Band ,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/P&RJSSC09.pdf",
+      "citation": "A. Parsa and B. Razavi, \" A New Transceiver Architecture for the 60-GHz Band ,\" IEEE Journal of Solid-State Circuits, vol. 4 4 , pp. 751-762 , Mar. 200 9 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "CK&RJSSC09.pdf",
+      "title": "Systematic Transistor and Inductor Modeling for Millimeter-Wave Design ,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/CK&RJSSC09.pdf",
+      "citation": "C.K. Liang and B. Razavi, \" Systematic Transistor and Inductor Modeling for Millimeter-Wave Design ,\" IEEE Journal of Solid-State Circuits, vol. 4 4 , pp. 450-457 , Feb. 200 9 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BRTransI09.pdf",
+      "title": "Design of Millimeter-Wave CMOS Radios: A Tutorial ,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRTransI09.pdf",
+      "citation": "B. Razavi, \"Design of Millimeter-Wave CMOS Radios: A Tutorial ,\" IEEE Trans. Circuits and Systems - Part I, vol. 56, pp. 4-16 , Jan . 2009 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BRSept08.pdf",
+      "title": "A Millimeter-Wave Circuit Technique ,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRSept08.pdf",
+      "citation": "B. Razavi, \" A Millimeter-Wave Circuit Technique ,\" IEEE Journal of Solid-State Circuits, vol. 4 3 , pp. 2090-2098 , Sept. 200 8 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "RspecFeb08.pdf",
+      "title": "Gadgets Gab at 60 GHz ,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/RspecFeb08.pdf",
+      "citation": "B. Razavi, \" Gadgets Gab at 60 GHz ,\" IEEE Spectrum , vol. 45 , pp. 46-58 , Feb. 200 8 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "RFeb08.pdf",
+      "title": "A Millimeter-Wave CMOS Heterodyne Receiver with On-Chip LO and Divider ,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/RFeb08.pdf",
+      "citation": "B. Razavi, \" A Millimeter-Wave CMOS Heterodyne Receiver with On-Chip LO and Divider ,\" IEEE Journal of Solid-State Circuits, vol. 4 3 , pp. 477-485 , Feb. 200 8 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "RDec07.pdf",
+      "title": "Heterodyne Phase Locking: A Technique for High-Speed Frequency Division ,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/RDec07.pdf",
+      "citation": "B. Razavi, \" Heterodyne Phase Locking: A Technique for High-Speed Frequency Division ,\" IEEE Journal of Solid-State Circuits, vol. 4 2 , pp. 2877-2892 , Dec. 200 7 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "GBRSep07.pdf",
+      "title": "Equalization and Clock and Data Recovery Techniques for 10-Gb/s CMOS Serial Links,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/GBRSep07.pdf",
+      "citation": "S. Gondi and B. Razavi, \"Equalization and Clock and Data Recovery Techniques for 10-Gb/s CMOS Serial Links,\" IEEE Journal of Solid-State Circuits, vol. 42, pp. 1999-2011, Sep t. 2007.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "RBRJun07.pdf",
+      "title": "A Receiver Architecture for Dual-Antenna Systems,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/RBRJun07.pdf",
+      "citation": "H. Rafati and B. Razavi, \"A Receiver Architecture for Dual-Antenna Systems,\" IEEE Journal of Solid-State Circuits, vol. 42, pp. 1291-1299, June 2007.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "RJan06.pdf",
+      "title": "A 60-GHz CMOS receiver front-end,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/RJan06.pdf",
+      "citation": "B. Razavi, \"A 60-GHz CMOS receiver front-end,\" IEEE Journal of Solid-State Circuits, vol. 41, pp. 17-22, Jan. 2006.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "R&AetcDec05.pdf",
+      "title": "A UWB CMOS transceiver,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/R&AetcDec05.pdf",
+      "citation": "B. Razavi et al, \"A UWB CMOS transceiver,\" IEEE Journal of Solid-State Circuits, vol. 40, pp. 2555-2562, Dec. 2005.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "G&RDec04.pdf",
+      "title": "40-Gb/s amplifier and ESD protection circuit in 0.18um CMOS technology,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/G&RDec04.pdf",
+      "citation": "S. Galal and B. Razavi, \"40-Gb/s amplifier and ESD protection circuit in 0.18um CMOS technology,\" IEEE Journal of Solid-State Circuits, vol. 39, pp. 2389-2396, Dec. 2004.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "RSep04.pdf",
+      "title": "A study of injection locking and pulling in oscillators,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/RSep04.pdf",
+      "citation": "B. Razavi, \"A study of injection locking and pulling in oscillators,\" IEEE Journal of Solid-State Circuits, vol. 39, pp. 1415-1424, Sep. 2004.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "L&RSep04.pdf",
+      "title": "Analysis and modeling of bang-bang clock and data recovery circuits,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/L&RSep04.pdf",
+      "citation": "J. Lee and B. Razavi, \"Analysis and modeling of bang-bang clock and data recovery circuits,\" IEEE Journal of Solid-State Circuits, vol. 39, pp. 1571-1580, Sep. 2004.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "L&RApr04.pdf",
+      "title": "A 40-GHz frequency divider in 0.18um CMOS technology,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/L&RApr04.pdf",
+      "citation": "J. Lee and B. Razavi, \"A 40-GHz frequency divider in 0.18um CMOS technology,\" IEEE Journal of Solid-State Circuits, vol. 39, pp. 594-601, Apr. 2004.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "L&RDec03.pdf",
+      "title": "A 40-Gb/s clock and data recovery circuit in 0.18um CMOS technology,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/L&RDec03.pdf",
+      "citation": "J. Lee and B. Razavi, \"A 40-Gb/s clock and data recovery circuit in 0.18um CMOS technology,\" IEEE Journal of Solid-State Circuits, vol. 38, pp. 2181-2190, Dec. 2003.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "G&RDec03_1.pdf",
+      "title": "Broadband ESD Protection Circuits in CMOS Technology,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/G&RDec03_1.pdf",
+      "citation": "S. Galal and B. Razavi, \"Broadband ESD Protection Circuits in CMOS Technology,\" IEEE Journal of Solid-State Circuits, vol. 38, pp. 2334-2340, Dec. 2003.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "G&RDec03_2.pdf",
+      "title": "S. Galal and B. Razavi, \"10-Gb/s Limiting Amplifier and Laser/Modulator Driver in 0.18um CMOS Technology,” IEEE Journal of Solid-State Circuits, vol. 38, pp. 2138-2146, Dec. 2003.",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/G&RDec03_2.pdf",
+      "citation": "S. Galal and B. Razavi, \"10-Gb/s Limiting Amplifier and Laser/Modulator Driver in 0.18um CMOS Technology,” IEEE Journal of Solid-State Circuits, vol. 38, pp. 2138-2146, Dec. 2003.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "ComMag03.pdf",
+      "title": "RF CMOS Transceivers for Cellular Telephony,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/ComMag03.pdf",
+      "citation": "B. Razavi, \"RF CMOS Transceivers for Cellular Telephony,\" IEEE Comm. Mag., pp. 144-149, August 2003.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "L&RJune03.pdf",
+      "title": "A Stabilization Technique for Phase-Locked Frequency Synthesizers,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/L&RJune03.pdf",
+      "citation": "T. C. Lee and B. Razavi, \"A Stabilization Technique for Phase-Locked Frequency Synthesizers,\" IEEE Journal of Solid-State Circuits, vol. 38, pp.888-894, June 2003.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "Z&RFeb03.pdf",
+      "title": "A Low-Power 2.4-GHz Transmitter/Receiver CMOS IC,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/Z&RFeb03.pdf",
+      "citation": "A. Zolfaghari and B. Razavi, \"A Low-Power 2.4-GHz Transmitter/Receiver CMOS IC,\" IEEE Journal of Solid-State Circuits, vol. 38, pp.176-183, Feb. 2003.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "D&RFeb03.pdf",
+      "title": "A 2-GHz CMOS Image-Reject Receiver With LMS Calibration ,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/D&RFeb03.pdf",
+      "citation": "L. Der and B. Razavi, \" A 2-GHz CMOS Image-Reject Receiver With LMS Calibration ,\" IEEE Journal of Solid-State Circuits, vol. 38, pp.167-175, Feb. 2003.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "S&RJan03.pdf",
+      "title": "A 10-Gb/s CMOS Clock and Data Recovery Circuit With a Half-Rate Binary Phase/Frequency Detector,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/S&RJan03.pdf",
+      "citation": "J. Savoj and B. Razavi, \"A 10-Gb/s CMOS Clock and Data Recovery Circuit With a Half-Rate Binary Phase/Frequency Detector,\" IEEE Journal of Solid-State Circuits, vol. 38, pp.13-21, Jan. 2003.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BRSept02.pdf",
+      "title": "Prospects of CMOS Technology for High-Speed Optical Communication Circuits,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRSept02.pdf",
+      "citation": "B. Razavi, \"Prospects of CMOS Technology for High-Speed Optical Communication Circuits,\" IEEE Journal of Solid-State Circuits, vol. 37, pp. 1135-1145, September 2002.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BRAug02.pdf",
+      "title": "Challenges in the Design of High-Speed Clock and Data Recovery Circuits,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRAug02.pdf",
+      "citation": "B. Razavi, \"Challenges in the Design of High-Speed Clock and Data Recovery Circuits,\" IEEE Comm. Mag., vol. 40, pp. 94-101, August 2002.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "S&RMay01.pdf",
+      "title": "A 10-Gb/s CMOS Clock and Data Recovery Circuit with a Half-Rate Linear Phase Detector,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/S&RMay01.pdf",
+      "citation": "J. Savoj and B. Razavi, \"A 10-Gb/s CMOS Clock and Data Recovery Circuit with a Half-Rate Linear Phase Detector,\" IEEE Journal of Solid-State Circuits, vol. 36, pp. 761-768, May 2001",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BRMay01.pdf",
+      "title": "A 5.2-GHz CMOS Receiver with 62-dB Image Rejection,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRMay01.pdf",
+      "citation": "B. Razavi, \"A 5.2-GHz CMOS Receiver with 62-dB Image Rejection,\" IEEE Journal of Solid-State Circuits, vol. 36, pp. 810-815, May 2001.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "Z&RApr01.pdf",
+      "title": "Stacked Inductors and 1-to-2 Transformers in CMOS Technology,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/Z&RApr01.pdf",
+      "citation": "A. Zolfaghari, A. Y. Chan, and B. Razavi, \"Stacked Inductors and 1-to-2 Transformers in CMOS Technology,\" IEEE Journal of Solid-State Circuits, vol. 36, pp. 620-628, April 2001.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "A&RMar01.pdf",
+      "title": "A 2.5-Gb/s Clock Recovery Circuit for NRZ Data in 0.4-?m CMOS Technology,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/A&RMar01.pdf",
+      "citation": "S. B. Anand and B. Razavi, \"A 2.5-Gb/s Clock Recovery Circuit for NRZ Data in 0.4-?m CMOS Technology,\" IEEE Journal of Solid-State Circuits, vol. 36, pp. 432-439, March 2001.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "L&RMar01.pdf",
+      "title": "A 4-Tap 125-MHz Mixed-Signal Echo Canceller for Gigabit Ethernet on Copper Wire,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/L&RMar01.pdf",
+      "citation": "T. C. Lee and B. Razavi, \"A 4-Tap 125-MHz Mixed-Signal Echo Canceller for Gigabit Ethernet on Copper Wire,\" IEEE Journal of Solid-State Circuits, vol. 36, pp. 366-373, March 2001.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "L&RMay00.pdf",
+      "title": "A 2.6-GHz/5.2-GHz Frequency Synthesizer in 0.4-?m CMOS Technology,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/L&RMay00.pdf",
+      "citation": "C. Lam and B. Razavi, \"A 2.6-GHz/5.2-GHz Frequency Synthesizer in 0.4-?m CMOS Technology,\" IEEE Journal of Solid-State Circuits, vol. 35, pp. 788-794, May 2000.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "W&RMar00.pdf",
+      "title": "An 8-bit 150-MHz CMOS A/D Converter,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/W&RMar00.pdf",
+      "citation": "Y. T. Wang and B. Razavi, \"An 8-bit 150-MHz CMOS A/D Converter,\" IEEE Journal of Solid-State Circuits, vol. 35, pp. 308-317, March 2000.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BROct99.pdf",
+      "title": "A 2.4-GHz CMOS Receiver for IEEE 802.11 Wireless LAN Applications,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BROct99.pdf",
+      "citation": "B. Razavi, \"A 2.4-GHz CMOS Receiver for IEEE 802.11 Wireless LAN Applications,\" IEEE Journal of Solid-State Circuits, vol. 34, pp. 1382-1385, Oct. 1999.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BRMay99.pdf",
+      "title": "A 900-MHz/1.8-GHz CMOS Transmitter for Dual-Band Applications,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRMay99.pdf",
+      "citation": "B. Razavi, \"A 900-MHz/1.8-GHz CMOS Transmitter for Dual-Band Applications,\" IEEE Journal of Solid- State Circuits, vol. 34, pp. 573-579, May 1999.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BRMar99.pdf",
+      "title": "CMOS Technology Characterization for Analog and RF Design,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRMar99.pdf",
+      "citation": "B. Razavi, \"CMOS Technology Characterization for Analog and RF Design,\" IEEE Journal of Solid-State Circuits, vol. 34, pp. 268-276, March 1999.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "H&RTCas99.pdf",
+      "title": "A Study of Oscillator Jitter Due to Supply and Substrate Noise,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/H&RTCas99.pdf",
+      "citation": "F. Herzel and B. Razavi, \"A Study of Oscillator Jitter Due to Supply and Substrate Noise,\" IEEE Transactions on Circuits and Systems, Part II, vol. 46, pp. 56-62, Jan. 1999.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "W&RDec98.pdf",
+      "title": "A 900-MHz/1.8-GHz CMOS Receiver for Dual-Band Applications,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/W&RDec98.pdf",
+      "citation": "S. Wu and B. Razavi, \"A 900-MHz/1.8-GHz CMOS Receiver for Dual-Band Applications,\" IEEE Journal of Solid-State Circuits, vol. 34, pp. 2178-2185, Dec. 1998.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BRMag97.pdf",
+      "title": "Recent Advances in RF Integrated Circuits ,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRMag97.pdf",
+      "citation": "B. Razavi, \" Recent Advances in RF Integrated Circuits ,\" IEEE Circuits and Devices Magazine , vol. 35 , pp. 36-43 , Dec. 199 7 .",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "RTCAS97.pdf",
+      "title": "Design Considerations for Direct Conversion Receivers,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/RTCAS97.pdf",
+      "citation": "B. Razavi, \"Design Considerations for Direct Conversion Receivers,\" IEEE Transactions on Circuits and Systems, Part II, vol. 44, pp. 428-435, June 1997.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BRMay97.pdf",
+      "title": "A 2-GHz 1.6-mW Phase-Locked Loop,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRMay97.pdf",
+      "citation": "B. Razavi, \"A 2-GHz 1.6-mW Phase-Locked Loop,\" IEEE Journal of Solid-State Circuits, vol. 32, pp. 730- 735, April 1997.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BRMag96.pdf",
+      "title": "Challenges in Portable RF Transceiver Design ,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRMag96.pdf",
+      "citation": "B. Razavi, \" Challenges in Portable RF Transceiver Design ,\" IEEE Circuits and Devices Magazine , vol. 12 , pp. 12-25 , Sep. 1996.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BRApr96.pdf",
+      "title": "A 2.5-Gb/sec 15-mW Clock Recovery Circuit,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRApr96.pdf",
+      "citation": "B. Razavi, \"A 2.5-Gb/sec 15-mW Clock Recovery Circuit,\" IEEE Journal of Solid-State Circuits, vol. 31, pp. 472-480, April 1996.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BRMar96.pdf",
+      "title": "A Study of Phase Noise in CMOS Oscillators,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRMar96.pdf",
+      "citation": "B. Razavi, \"A Study of Phase Noise in CMOS Oscillators,\" IEEE Journal of Solid-State Circuits, vol. 31, pp. 331-343, March 1996.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BRDec95.pdf",
+      "title": "A 200-MHz 15-mW BiCMOS Sample-and-Hold Amplifier with 3-V Supply,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRDec95.pdf",
+      "citation": "B. Razavi, \"A 200-MHz 15-mW BiCMOS Sample-and-Hold Amplifier with 3-V Supply,\" IEEE Journal of Solid-State Circuits, vol. 30, pp. 1326-1332, Dec. 1995.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BRJul95.pdf",
+      "title": "Design of a 100-MHz 10-mW 3-V Sample-and-Hold Amplifier in Digital Bipolar Technology,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRJul95.pdf",
+      "citation": "B. Razavi, \"Design of a 100-MHz 10-mW 3-V Sample-and-Hold Amplifier in Digital Bipolar Technology,\" IEEE Journal of Solid-State Circuits, vol. 30, pp. 724-730, July 1995.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BRDec94.pdf",
+      "title": "A 6-GHz 60-mW BiCMOS Phase-Locked Loop,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRDec94.pdf",
+      "citation": "B. Razavi, and J. Sung, \"A 6-GHz 60-mW BiCMOS Phase-Locked Loop,\" IEEE Journal of Solid-State Circuits, vol. 29, pp. 1560-1565, Dec. 1994.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BRFeb95.pdf",
+      "title": "Design of High-Speed Low-Power Frequency Dividers and Phase- Locked Loops in Deep Submicron CMOS,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRFeb95.pdf",
+      "citation": "B. Razavi, K. F. Lee, and R. H. Yan, \"Design of High-Speed Low-Power Frequency Dividers and Phase- Locked Loops in Deep Submicron CMOS,\" IEEE Journal of Solid-State Circuits, vol. 30, pp. 101-109, Feb. 1995.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "R&YNov94.pdf",
+      "title": "Impact of Distributed Gate Resistance on the Performance of MOS Devices,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/R&YNov94.pdf",
+      "citation": "B. Razavi, R. H. Yan, and K. F. Lee, \"Impact of Distributed Gate Resistance on the Performance of MOS Devices,\" IEEE Trans. Circuits and Systems - Part I, pp. 750-754, Nov. 1994.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "BRMar94.pdf",
+      "title": "Design Techniques for Low-Voltage High-Speed Digital Bipolar Circuits,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/BRMar94.pdf",
+      "citation": "B. Razavi, Y. Ota, and R. G. Swartz, \"Design Techniques for Low-Voltage High-Speed Digital Bipolar Circuits,\" IEEE Journal of Solid-State Circuits, vol. 29, pp.332-339, March 1994.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "R&WDec92_1.pdf",
+      "title": "A 12-Bit 5-Msample/sec Two-Step CMOS A/D Converter,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/R&WDec92_1.pdf",
+      "citation": "B. Razavi and B. A. Wooley, \"A 12-Bit 5-Msample/sec Two-Step CMOS A/D Converter,\" IEEE Journal of Solid-State Circuits, vol. 27, pp. 1667-1678, Dec. 1992.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    },
+    {
+      "id": "R&WDec92_2.pdf",
+      "title": "Design Techniques for High-Speed, High-Resolution Comparators,",
+      "url": "https://www.seas.ucla.edu/brweb/papers/Journals/R&WDec92_2.pdf",
+      "citation": "B. Razavi and B. A. Wooley, \"Design Techniques for High-Speed, High-Resolution Comparators,\" IEEE Journal of Solid-State Circuits, vol. 27, pp. 1916-1926, Dec. 1992.",
+      "group": "研究与其他文章",
+      "reviewed": false
+    }
+  ]
+}

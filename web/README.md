@@ -40,6 +40,22 @@ Run these in `web/` with Node 22.12 or newer and pnpm 11.
 
 ## Illustrations
 
+- **Razavi reading roadmap** at `/learn/razavi/`, linked from the home page and shared navigation.
+  Chinese plans cover ADC/mixed-signal, PLL/RF clocking, and high-speed links/CDR, with selectable background and
+  weekly time budget, per-stage tasks and self-checks, local progress/notes, and Markdown export. The searchable
+  source catalog contains 148 PDF links checked against the UCLA journal directory on 2026-10-05, including 22
+  PDF-confirmed Analog Mind articles. Seven existing research notes are available under `/learn/razavi/notes/`.
+  Durations are study estimates; source verification status is distinct from learner completion. Planner tests
+  verify prerequisite order, catalog references, hour conservation and week/date boundaries.
+
+- **Time-interleaved ADCs** at `/adc/time-interleaved-adcs/`. Opens with a Chinese introductory guided course for readers
+  who know ordinary ADCs and spectra. Five experiments cover ideal interleaving, offset, gain, skew and independent
+  aperture jitter. Each asks for a prediction, enables a controlled experiment, reveals an explanation on request,
+  and offers a transfer question. The complete original lab remains available through the mode switch. Both modes keep
+  their state while mounted. Guided presets reuse the same verified model, retain quantisation, and use a 2 GS/s total
+  sampling rate; unrelated impairments are disabled. Nyquist offset markers are converted from peak amplitude to the
+  FFT's power convention. `tests/timeinterleave-lesson.test.ts` independently projects the captured waveforms to check
+  the lesson's spur and jitter claims. Calibration is a follow-up topic, not performed by this introductory course.
 - **Open-loop & closed-loop gain** at `/amplifiers/open-loop-and-closed-loop/`. Adjust A₀ and β independently in two cases.
   In **Hold open loop**, chosen A₀ and fOL remain fixed as β changes the closed-loop gain and bandwidth.
   In **Hold closed-loop BW**, the target fCL stays fixed and the model solves `fOL = fCL/(1 + βA₀)` and the required GBW.
@@ -65,6 +81,10 @@ Run these in `web/` with Node 22.12 or newer and pnpm 11.
 
 ## Adding an illustration
 
+For a guided course, use the project skill [guided-circuit-lessons](../.agents/skills/guided-circuit-lessons/SKILL.md).
+It captures the prediction → controlled experiment → explanation → transfer-question workflow, with the time-interleaved
+ADC introduction as its working example. It is scoped to this repository and stays adjustable to the learner's background.
+
 1. Write the model in `src/illustrations/<topic>/model.ts`, a Python reference in `python/` and a test in `tests/`.
 2. Build the page component next to the model from the shared `ui` and `chart` components.
 3. Add a route in `src/pages/<topic>/` that renders the component with `client:load` and imports `illustration.css`.
@@ -86,6 +106,12 @@ to the source except for the page title; update it by copying the folder again. 
   front of the Pages site and deployed with `pnpm deploy:analytics`.
 
 ## Deploy
+
+For an independent free `pages.dev` deployment, use [CLOUDFLARE-PAGES.md](CLOUDFLARE-PAGES.md).
+`node scripts/deploy-pages.mjs` builds with the project's own `SITE_URL`, stages only static assets and deploys them
+to the signed-in Cloudflare account. `--prepare-only` does not connect or publish. API manual links are preserved
+through static redirects to the separately hosted reference. The original custom-domain workflow runs only in
+the upstream owner's repository; forks do not run its domain-binding or deployment steps.
 
 `.github/workflows/deploy-web.yml` installs, checks and builds the site for every pull request that touches `web/`. On `main` it
 deploys `dist/` to the existing Cloudflare Pages project `ams-class`, ensures

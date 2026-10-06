@@ -5,7 +5,7 @@
   import { clamp } from '../../lib/scale';
   import { inputValue, type HarmonicLevels, type Mismatch } from './model';
 
-  let { samples, truth, fin, fs, harmonics, decimation, hover, onhover, label }: {
+  let { samples, truth, fin, fs, harmonics, decimation, hover, onhover, label, channelColors = [] }: {
     samples: Float64Array;
     truth: Mismatch;
     fin: number;
@@ -15,6 +15,7 @@
     hover: number | null;
     onhover: (index: number | null) => void;
     label: string;
+    channelColors?: readonly string[];
   } = $props();
 
   const X0 = 45, COUNT = 48;
@@ -22,6 +23,7 @@
   const ideal = (i: number) => inputValue(i / fs, fin, harmonics);
   const markerShape = (channel: number) => channel % 5;
   const channelColor = (channel: number, count: number) => {
+    if (channelColors[channel]) return channelColors[channel];
     const hue = (210 + channel * 360 / Math.max(1, count)) % 360;
     return `color-mix(in srgb, hsl(${hue} 70% 50%), var(--ink) 10%)`;
   };

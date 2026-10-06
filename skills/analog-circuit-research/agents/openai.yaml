@@ -1,0 +1,4 @@
+interface:
+  display_name: "模拟与混合信号电路研究"
+  short_description: "研究电路拓扑、推导与验证关键公式，形成可追溯且可用于设计的技术知识笔记"
+  default_prompt: "使用 $analog-circuit-research 研究自举开关，明确拓扑、假设、推导、设计取舍与验证状态，并整理为项目知识文档。"

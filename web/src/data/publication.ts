@@ -6,6 +6,7 @@
  * the same editorial and visual standard.
  */
 export const publicLessonPaths = [
+  '/learn/razavi/',
   '/adc/aliasing-and-nyquist-zones/',
   '/adc/binary-vs-redundant-sar/',
   '/adc/analog-panel/',
@@ -31,5 +32,5 @@ export function isPublicExternalHref(href: string): boolean {
 }
 
 export function isLessonPath(pathname: string): boolean {
-  return pathname.startsWith('/adc/') || pathname.startsWith('/pll/') || pathname.startsWith('/amplifiers/') || pathname.startsWith('/serdes/');
+  return pathname.startsWith('/adc/') || pathname.startsWith('/pll/') || pathname.startsWith('/amplifiers/') || pathname.startsWith('/serdes/') || pathname.startsWith('/learn/');
 }

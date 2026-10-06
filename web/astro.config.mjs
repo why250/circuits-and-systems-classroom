@@ -11,7 +11,8 @@ const publicPages = new Set(['/', ...publicLessonPaths]);
 // React. ADC lessons link to the separately maintained ADCToolbox reference manual, which is built into dist/doc by
 // the deploy workflow from the Sphinx source in the ADCToolbox repository.
 export default defineConfig({
-  site: 'https://circuits-and-systems.tokenzhang.com',
+  // Independent deployments use their own origin, including Cloudflare's free pages.dev domain.
+  site: process.env.SITE_URL || process.env.CF_PAGES_URL || 'http://localhost:4321',
   output: 'static',
   trailingSlash: 'always',
   integrations: [svelte(), react(), sitemap({ filter: (page) => publicPages.has(new URL(page).pathname) })],
