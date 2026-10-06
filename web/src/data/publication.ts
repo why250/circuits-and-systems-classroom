@@ -7,13 +7,18 @@
  */
 export const publicLessonPaths = [
   '/learn/razavi/',
+  '/pll/introduction/',
+  '/adc/nonlinear-calibration/',
   '/adc/aliasing-and-nyquist-zones/',
   '/adc/binary-vs-redundant-sar/',
+  '/adc/pipeline-adc/',
   '/adc/analog-panel/',
   '/adc/time-interleaved-adcs/',
   '/pll/integer-vs-fractional/',
   '/amplifiers/open-loop-and-closed-loop/',
   '/serdes/112g-pam4-link/',
+  '/serdes/clock-and-data-recovery/',
+  '/serdes/pci-express/',
 ] as const;
 
 export const publicExternalHrefs = [

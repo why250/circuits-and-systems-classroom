@@ -1,5 +1,5 @@
 /** Draws an EyeImage density onto a canvas: grid, persistence-style colour map, slicer levels and axis labels. */
-import { EyeImage } from './streams';
+import type { EyeImage } from './streams';
 
 type Rgba = [number, number, number, number];
 function ramp(stops: [number, Rgba][]): Uint8ClampedArray {
@@ -23,6 +23,8 @@ export interface EyeStyle {
   /** PAM4 level amplitude for the dashed slicer thresholds, or null for none. */
   amplitude: number | null;
   corner: string;
+  /** Width of the displayed time window, in UI. */
+  spanUi?: number;
 }
 
 const offscreen = new WeakMap<HTMLCanvasElement, { canvas: HTMLCanvasElement; ctx: CanvasRenderingContext2D; img: ImageData }>();
@@ -32,13 +34,13 @@ export function drawEye(canvas: HTMLCanvasElement, eye: EyeImage, style: EyeStyl
   const g = canvas.getContext('2d');
   if (!W || !H || !css || !g) return;
   let off = offscreen.get(canvas);
-  if (!off) {
+  if (!off || off.canvas.width !== eye.width || off.canvas.height !== eye.height) {
     const c = document.createElement('canvas');
-    c.width = EyeImage.W;
-    c.height = EyeImage.H;
+    c.width = eye.width;
+    c.height = eye.height;
     const ctx = c.getContext('2d');
     if (!ctx) return;
-    off = { canvas: c, ctx, img: ctx.createImageData(EyeImage.W, EyeImage.H) };
+    off = { canvas: c, ctx, img: ctx.createImageData(eye.width, eye.height) };
     offscreen.set(canvas, off);
   }
   const lut = style.light ? LIGHT : DARK, buf = eye.buf, d = off.img.data;
@@ -94,7 +96,7 @@ export function drawEye(canvas: HTMLCanvasElement, eye: EyeImage, style: EyeStyl
   g.textAlign = 'left';
   g.fillText(style.corner, 5 * dpr, 4 * dpr);
   g.textBaseline = 'bottom';
-  g.fillText('−1 UI', 5 * dpr, H - 3 * dpr);
+  g.fillText(`−${(style.spanUi ?? 2) / 2} UI`, 5 * dpr, H - 3 * dpr);
   g.textAlign = 'right';
-  g.fillText('+1 UI', W - 5 * dpr, H - 3 * dpr);
+  g.fillText(`+${(style.spanUi ?? 2) / 2} UI`, W - 5 * dpr, H - 3 * dpr);
 }

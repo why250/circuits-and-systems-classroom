@@ -22,7 +22,7 @@ export default function Visits({ path, counter = false }: { path: string; counte
           setPublicStats(totals);
         }
       })
-      .catch(() => { /* Keep the placeholder when totals are unavailable. */ });
+      .catch(() => { /* Keep the placeholder while totals are unavailable. */ });
     return () => controller.abort();
   }, [path, counter]);
 
