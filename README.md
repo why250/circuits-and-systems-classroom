@@ -5,9 +5,11 @@ An interactive classroom and knowledge base for analog and mixed-signal circuits
 ## Interactive illustrations
 
 The `web/` folder holds **Circuits & Systems Classroom**, published at
-<https://circuits-and-systems.tokenzhang.com>. It combines selected interactive lessons on data converters and PLLs with
+<https://why250-circuits-classroom.pages.dev/>. It combines selected interactive lessons on data converters and PLLs with
 an external Bode-plot tool. The [ADCToolbox](https://github.com/Arcadia-1/ADCToolbox) reference manual remains at
 <https://adctoolbox.tokenzhang.com/doc/>. See [`web/README.md`](web/README.md) for development and deployment.
+
+The Razavi learning roadmap is available at <https://why250-circuits-classroom.pages.dev/learn/razavi/>.
 
 ## Contents
 

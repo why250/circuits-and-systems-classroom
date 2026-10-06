@@ -26,7 +26,7 @@ const publicPages = new Set(['/', ...publicLessonPaths]);
 // the deploy workflow from the Sphinx source in the ADCToolbox repository.
 export default defineConfig({
   // Independent deployments use their own origin, including Cloudflare's free pages.dev domain.
-  site: process.env.SITE_URL || process.env.CF_PAGES_URL || 'http://localhost:4321',
+  site: process.env.SITE_URL || process.env.CF_PAGES_URL || 'https://why250-circuits-classroom.pages.dev',
   output: 'static',
   trailingSlash: 'always',
   integrations: [svelte(), react(), sitemap({ filter: (page) => publicPages.has(new URL(page).pathname) })],

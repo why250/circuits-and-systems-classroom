@@ -1,7 +1,7 @@
 # Circuits & Systems Classroom
 
 Interactive lessons on data converters, PLLs, clocking and circuit analysis, served at
-<https://circuits-and-systems.tokenzhang.com>. ADC pages run ports of
+<https://why250-circuits-classroom.pages.dev/>. ADC pages run ports of
 [ADCToolbox](https://github.com/Arcadia-1/ADCToolbox) models in the browser. The library's reference manual remains at
 <https://adctoolbox.tokenzhang.com/doc/>.
 
@@ -191,19 +191,21 @@ module, preserve those customizations and do not restore its theme switch. The h
 
 ## Deploy
 
-For an independent free `pages.dev` deployment, use [CLOUDFLARE-PAGES.md](CLOUDFLARE-PAGES.md).
+This fork is published at <https://why250-circuits-classroom.pages.dev/> in the Cloudflare Pages project
+`why250-circuits-classroom`. To update the existing site, run `node scripts/deploy-pages.mjs` from `web/`.
+See [CLOUDFLARE-PAGES.md](CLOUDFLARE-PAGES.md) for the setup and publishing commands.
 `node scripts/deploy-pages.mjs` builds with the project's own `SITE_URL`, stages only static assets and deploys them
 to the signed-in Cloudflare account. `--prepare-only` does not connect or publish. API manual links are preserved
 through static redirects to the separately hosted reference. The original custom-domain workflow runs only in
 the upstream owner's repository; forks do not run its domain-binding or deployment steps.
 
-`.github/workflows/deploy-web.yml` installs, checks and builds the site for every pull request that touches `web/`. On `main` it
+In the upstream repository, `.github/workflows/deploy-web.yml` installs, checks and builds the site for every pull request that touches `web/`. On `main` it
 deploys `dist/` to the existing Cloudflare Pages project `ams-class`, ensures
 `circuits-and-systems.tokenzhang.com` is attached, and preserves the host-aware redirects. The analytics Worker route for
 both domains is declared in `worker/wrangler.jsonc` and deployed separately with `pnpm deploy:analytics`. The old host keeps
 the ADCToolbox manual; its home page and tutorial paths redirect to the matching path on the new host.
 
-The site deploys only after both numerical verification and the browser regressions succeed.
+The upstream workflow deploys only after both numerical verification and the browser regressions succeed.
 
 The numerical drift job resolves ADCToolbox's upstream revision once; the manual checkout uses that exact SHA. The raw
 English and Chinese Sphinx outputs are cached by that SHA, Python and installed dependency versions, and build/postprocess

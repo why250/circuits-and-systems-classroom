@@ -2,6 +2,8 @@
 
 本项目已于 2026-10-05 发布为纯静态网站，项目名为 `why250-circuits-classroom`。
 
+正式网站：<https://why250-circuits-classroom.pages.dev/>。Astro 默认使用这个地址生成 canonical、Open Graph 和 sitemap；使用 `SITE_URL` 或 `CF_PAGES_URL` 可以覆盖默认值。
+
 正式学习路线：<https://why250-circuits-classroom.pages.dev/learn/razavi/>。手机和电脑都可访问，本地电脑关机后仍可使用。首页、学习路线、研究笔记和互动实验已确认返回 HTTP 200。
 
 学习路线现包含可点击的三分支路线图：共同基础 → ADC / PLL / 高速链路 → 系统补充与设计审查。节点显示按每周投入估算的周次和浏览器中的学习状态。手机展示所选方向的纵向路线，可在图内切换方向。图中箭头表示建议阅读顺序，具体先修以阶段详情为准。
