@@ -1,0 +1,2 @@
+ vdd             @m.xdut.m1[cgs] @m.xdut.m1[cgd] @m.xdut.m1[cgb] @m.xdut.m2[cgs] @m.xdut.m2[cgd] @m.xdut.m2[cgb] @m.xdut.m3[cgs] @m.xdut.m3[cgd] @m.xdut.m3[cgb] @m.xdut.m4[cgs] @m.xdut.m4[cgd] @m.xdut.m4[cgb] @m.xdut.m5[cgs] @m.xdut.m5[cgd] @m.xdut.m5[cgb]
+ 1.80000000e+00  3.10209587e-15  8.00000000e-16  0.00000000e+00  3.10209587e-15  8.00000000e-16  0.00000000e+00  6.20419173e-15  1.60000000e-15  0.00000000e+00  6.20419173e-15  1.60000000e-15  0.00000000e+00  1.08083835e-14  1.60000000e-15  0.00000000e+00 

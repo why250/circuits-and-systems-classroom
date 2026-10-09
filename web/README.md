@@ -7,6 +7,11 @@ Interactive lessons on data converters, PLLs, clocking and circuit analysis, ser
 
 The site is static [Astro](https://astro.build) with [Svelte 5](https://svelte.dev) islands in strict TypeScript.
 
+The home page and shared navigation link to the independently maintained
+[Digital IC Classroom](https://why250-digital-ic-classroom.pages.dev/): Chinese RTL, SPI, STA/CDC,
+mixed-signal control, converter digital modules and AMS courses, with local learning records and a SPI timing demo.
+The target URL lives in `src/data/learning-sites.ts`; `DIGITAL_IC_SITE_URL` can override it during joint development.
+
 ## Commands
 
 Run these in `web/` with Node 22.12 or newer and pnpm 11.

@@ -1,0 +1,22 @@
+5T OTA one-sided noise densities; input reference is VINP-VINN
+.include models.lib
+.include ota-core.cir
+.temp 27
+VDD vdd 0 1.8
+VB vb 0 0.65
+VCM cm 0 0.9
+VDIFF diff 0 DC 0 AC 1
+EPLUS vinp cm diff 0 0.5
+EMINUS vinn cm diff 0 -0.5
+XDUT vdd 0 vinp vinn out vb ota_5t
+CL out 0 1p
+.control
+set noaskquit
+set wr_singlescale
+set wr_vecnames
+noise v(out) VDIFF dec 80 1 100G 1
+setplot noise1
+wrdata noise.dat onoise_spectrum inoise_spectrum onoise_m.xdut.m1 onoise_m.xdut.m2 onoise_m.xdut.m3 onoise_m.xdut.m4 onoise_m.xdut.m5
+quit
+.endc
+.end

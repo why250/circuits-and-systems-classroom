@@ -1,0 +1,10 @@
+* Generated from educational.icproj.json by code/export_5t_ota.mjs
+* Gallery topology and W/L; primitive educational models replace SKY130.
+
+.subckt ota_5t VDD VSS vinp vinn vout vb
+M1 Y vinp X VSS NMOS_EDU l=0.5u m=1 w=4u
+M2 vout vinn X VSS NMOS_EDU l=0.5u m=1 w=4u
+M3 Y Y VDD VDD PMOS_EDU l=0.5u m=1 w=8u
+M4 vout Y VDD VDD PMOS_EDU l=0.5u m=1 w=8u
+M5 X vb VSS VSS NMOS_EDU l=1u m=1 w=8u
+.ends ota_5t

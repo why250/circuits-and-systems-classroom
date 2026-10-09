@@ -1,0 +1,8 @@
+
+.subckt ota_5t VDD VSS vinp vinn vout vb
+XM1 net1 vinp net0 VSS sky130_fd_pr__nfet_01v8 l=0.5 w=4 nf=1 m=1
+XM2 vout vinn net0 VSS sky130_fd_pr__nfet_01v8 l=0.5 w=4 nf=1 m=1
+XM3 net1 net1 VDD VDD sky130_fd_pr__pfet_01v8 l=0.5 w=8 nf=1 m=1
+XM4 vout net1 VDD VDD sky130_fd_pr__pfet_01v8 l=0.5 w=8 nf=1 m=1
+XM5 net0 vb VSS VSS sky130_fd_pr__nfet_01v8 l=1 w=8 nf=1 m=1
+.ends ota_5t

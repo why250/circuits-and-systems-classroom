@@ -1,0 +1,21 @@
+5T OTA output impedance; inject 1 A AC into OUT with inputs/rails/bias grounded in AC
+.include models.lib
+.include ota-core.cir
+.temp 27
+VDD vdd 0 1.8
+VB vb 0 0.65
+VINP vinp 0 0.9
+VINN vinn 0 0.9
+ITEST 0 out DC 0 AC 1
+XDUT vdd 0 vinp vinn out vb ota_5t
+CL out 0 1p
+.control
+set noaskquit
+set wr_singlescale
+set wr_vecnames
+ac dec 80 1 100G
+let impedance = v(out)
+wrdata ac-output-resistance.dat real(impedance) imag(impedance)
+quit
+.endc
+.end

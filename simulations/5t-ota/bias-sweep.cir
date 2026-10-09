@@ -1,0 +1,25 @@
+5T OTA balanced-input bias sweep; VB 0.55-0.75 V
+.include models.lib
+.include ota-core.cir
+.temp 27
+VDD vdd 0 1.8
+VB vb 0 0.65
+VINP vinp 0 0.9
+VINN vinn 0 0.9
+XDUT vdd 0 vinp vinn out vb ota_5t
+CL out 0 1p
+.control
+set noaskquit
+set wr_singlescale
+set wr_vecnames
+save all @m.xdut.m1[vdsat] @m.xdut.m2[vdsat] @m.xdut.m3[vdsat] @m.xdut.m4[vdsat]
+dc VB 0.55 0.75 0.001
+let margin1 = abs(v(xdut.y)-v(xdut.x))-abs(@m.xdut.m1[vdsat])
+let margin2 = abs(v(out)-v(xdut.x))-abs(@m.xdut.m2[vdsat])
+let margin3 = abs(v(vdd)-v(xdut.y))-abs(@m.xdut.m3[vdsat])
+let margin4 = abs(v(vdd)-v(out))-abs(@m.xdut.m4[vdsat])
+let margin5 = v(xdut.x)-(v(vb)-0.45)
+wrdata bias-sweep.dat v(out) v(xdut.x) v(xdut.y) i(VDD) margin1 margin2 margin3 margin4 margin5
+quit
+.endc
+.end

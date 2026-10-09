@@ -1,0 +1,29 @@
+Note: can't find init file.
+
+Circuit: 5t ota small open-loop differential step; not a closed-loop settling test
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+vdd                                        1.8
+vb                                        0.65
+diff                                         0
+vinp                                       0.9
+vinn                                       0.9
+xdut.y                                 1.19318
+xdut.x                                0.253977
+out                                    1.19318
+bminus#branch                                0
+bplus#branch                                 0
+vdiff#branch                                 0
+vb#branch                                    0
+vdd#branch                        -3.22438e-05
+
+
+No. of Data Rows : 4020
+ngspice-33 done

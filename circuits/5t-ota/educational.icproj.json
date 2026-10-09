@@ -1,0 +1,1398 @@
+{
+  "schemaVersion": 66,
+  "id": "project-classroom-5t-ota-educational",
+  "name": "Five-transistor OTA — educational LEVEL=1",
+  "topDocumentId": "document-ota5t",
+  "defaults": {
+    "instance": { "mirror": "none", "rotation": 0 },
+    "instancesByType": {
+      "nmos": {
+        "target": { "deviceClass": "mos", "kind": "model", "name": "NMOS_EDU" },
+        "variant": "textbook-3terminal"
+      },
+      "pmos": {
+        "parameters": { "l": "0.5u", "m": "1", "w": "8u" },
+        "target": { "deviceClass": "mos", "kind": "model", "name": "PMOS_EDU" },
+        "variant": "textbook-3terminal"
+      }
+    },
+    "label": { "alignment": "middle", "locked": false, "rotation": 0 },
+    "routeLeg": { "mode": "manual" }
+  },
+  "documents": [
+    {
+      "id": "document-ota5t",
+      "name": "ota_5t",
+      "netlist": {
+        "formalParameters": [],
+        "name": "ota_5t",
+        "terminals": [
+          {
+            "direction": "inout",
+            "id": "cell-terminal-5d21a49701fedf23",
+            "interfaceAnnotationId": "label-agent-rail-0f2efbe2d849447a",
+            "interfaceInstanceIds": [],
+            "name": "VDD",
+            "netId": "net-c802bdb123c8bf22"
+          },
+          {
+            "direction": "input",
+            "id": "terminal-3651fdae202a51ef",
+            "interfaceInstanceIds": ["instance-ba01ade9-9fc8-40ff-a943-d052952c4cdf"],
+            "name": "vinp",
+            "netId": "net-cell-pin-3651fdae202a51ef"
+          },
+          {
+            "direction": "input",
+            "id": "terminal-208b520f9aee7318",
+            "interfaceInstanceIds": ["instance-8721b41f-9422-4f4d-8c1d-b1e7766dd70c"],
+            "name": "vinn",
+            "netId": "net-cell-pin-208b520f9aee7318"
+          },
+          {
+            "direction": "output",
+            "id": "terminal-d205ae954bfaab77",
+            "interfaceInstanceIds": ["instance-d9027b27-fac0-4913-b941-f8aa91634bb8"],
+            "name": "vout",
+            "netId": "net-cell-pin-d205ae954bfaab77"
+          },
+          {
+            "direction": "input",
+            "id": "terminal-1ccf9ce7be5025d9",
+            "interfaceInstanceIds": ["instance-ea3c3338-d494-4f23-a0d6-5cb32d659b19"],
+            "name": "vb",
+            "netId": "net-cell-pin-1ccf9ce7be5025d9"
+          }
+        ]
+      },
+      "presentation": {
+        "cellSymbol": {
+          "pinPlacements": [
+            {
+              "offset": 0,
+              "side": "north",
+              "terminalId": "cell-terminal-5d21a49701fedf23"
+            }
+          ]
+        },
+        "compactness": "normal",
+        "grid": 10,
+        "labelSubscriptAfterFirst": false,
+        "labelSubscriptItalic": false,
+        "styleProfileId": "razavi-textbook-v1"
+      },
+      "instances": [
+        {
+          "type": "pmos",
+          "name": "M3",
+          "id": "instance-06e18862-10a6-48ae-ba9e-fa4e8fc0ba46",
+          "coordinate": [160, -110],
+          "mirror": "horizontal",
+          "labels": [
+            {
+              "alignment": "end",
+              "anchor": { "fallback": [146, -105], "offset": [-14, 5] },
+              "bind": "name",
+              "format": {
+                "runs": [
+                  {
+                    "children": ["M"],
+                    "styles": ["italic", "bold"]
+                  },
+                  {
+                    "children": ["3"],
+                    "styles": ["subscript", "bold"]
+                  }
+                ]
+              },
+              "id": "instance-label-instance-06e18862-10a6-48ae-ba9e-fa4e8fc0ba46",
+              "kind": "instance-label",
+              "order": 1
+            },
+            {
+              "alignment": "end",
+              "anchor": { "fallback": [146, -75], "offset": [-14, 35] },
+              "bind": "value",
+              "id": "instance-value-instance-06e18862-10a6-48ae-ba9e-fa4e8fc0ba46",
+              "kind": "instance-value",
+              "order": 2,
+              "visible": false
+            }
+          ],
+          "mosBulkBinding": { "netId": "net-c802bdb123c8bf22", "origin": "cell-default" }
+        },
+        {
+          "type": "pmos",
+          "name": "M4",
+          "id": "instance-713602bb-4689-4ec7-9806-bc3e00c2f9f5",
+          "coordinate": [240, -110],
+          "labels": [
+            {
+              "alignment": "start",
+              "anchor": { "fallback": [254, -105], "offset": [14, 5] },
+              "bind": "name",
+              "format": {
+                "runs": [
+                  {
+                    "children": ["M"],
+                    "styles": ["italic", "bold"]
+                  },
+                  {
+                    "children": ["4"],
+                    "styles": ["subscript", "bold"]
+                  }
+                ]
+              },
+              "id": "instance-label-instance-713602bb-4689-4ec7-9806-bc3e00c2f9f5",
+              "kind": "instance-label",
+              "order": 3
+            },
+            {
+              "alignment": "start",
+              "anchor": { "fallback": [254, -75], "offset": [14, 35] },
+              "bind": "value",
+              "id": "instance-value-instance-713602bb-4689-4ec7-9806-bc3e00c2f9f5",
+              "kind": "instance-value",
+              "order": 4,
+              "visible": false
+            }
+          ],
+          "mosBulkBinding": { "netId": "net-c802bdb123c8bf22", "origin": "cell-default" }
+        },
+        {
+          "type": "nmos",
+          "name": "M1",
+          "id": "instance-fd4004b0-61af-40f3-a351-2b2205edee44",
+          "coordinate": [140, -20],
+          "parameters": { "l": "0.5u", "m": "1", "w": "4u" },
+          "labels": [
+            {
+              "alignment": "start",
+              "anchor": { "fallback": [155, -15], "offset": [15, 5] },
+              "bind": "name",
+              "format": {
+                "runs": [
+                  {
+                    "children": ["M"],
+                    "styles": ["italic", "bold"]
+                  },
+                  {
+                    "children": ["1"],
+                    "styles": ["subscript", "bold"]
+                  }
+                ]
+              },
+              "id": "instance-label-instance-fd4004b0-61af-40f3-a351-2b2205edee44",
+              "kind": "instance-label",
+              "order": 5
+            },
+            {
+              "alignment": "start",
+              "anchor": { "fallback": [155, 15], "offset": [15, 35] },
+              "bind": "value",
+              "id": "instance-value-instance-fd4004b0-61af-40f3-a351-2b2205edee44",
+              "kind": "instance-value",
+              "order": 6,
+              "visible": false
+            },
+            {
+              "alignment": "start",
+              "anchor": { "fallback": [120, -65], "offset": [-20, -45] },
+              "bind": {
+                "kind": "net-name",
+                "netId": "wire-76286fe2-c675-4954-ae55-49270efdb441-net"
+              },
+              "id": "classroom-node-Y",
+              "kind": "net-label",
+              "netId": "wire-76286fe2-c675-4954-ae55-49270efdb441-net",
+              "order": 16
+            }
+          ],
+          "mosBulkBinding": {
+            "netId": "net-power-instance-8ffa33b2-b269-4dad-8e9f-01139a1eee97",
+            "origin": "cell-default"
+          }
+        },
+        {
+          "type": "nmos",
+          "name": "M2",
+          "id": "instance-eb66ae88-6cb2-4a6f-91eb-a9d9e79e89f8",
+          "coordinate": [260, -20],
+          "mirror": "horizontal",
+          "parameters": { "l": "0.5u", "m": "1", "w": "4u" },
+          "labels": [
+            {
+              "alignment": "end",
+              "anchor": { "fallback": [245, -15], "offset": [-15, 5] },
+              "bind": "name",
+              "format": {
+                "runs": [
+                  {
+                    "children": ["M"],
+                    "styles": ["italic", "bold"]
+                  },
+                  {
+                    "children": ["2"],
+                    "styles": ["subscript", "bold"]
+                  }
+                ]
+              },
+              "id": "instance-label-instance-eb66ae88-6cb2-4a6f-91eb-a9d9e79e89f8",
+              "kind": "instance-label",
+              "order": 7
+            },
+            {
+              "alignment": "end",
+              "anchor": { "fallback": [245, 15], "offset": [-15, 35] },
+              "bind": "value",
+              "id": "instance-value-instance-eb66ae88-6cb2-4a6f-91eb-a9d9e79e89f8",
+              "kind": "instance-value",
+              "order": 8,
+              "visible": false
+            }
+          ],
+          "mosBulkBinding": {
+            "netId": "net-power-instance-8ffa33b2-b269-4dad-8e9f-01139a1eee97",
+            "origin": "cell-default"
+          }
+        },
+        {
+          "type": "nmos",
+          "name": "M5",
+          "id": "instance-88021b47-60d4-43c3-a089-b4458fdf076e",
+          "coordinate": [190, 60],
+          "parameters": { "l": "1u", "m": "1", "w": "8u" },
+          "labels": [
+            {
+              "alignment": "start",
+              "anchor": { "fallback": [205, 65], "offset": [15, 5] },
+              "bind": "name",
+              "format": {
+                "runs": [
+                  {
+                    "children": ["M"],
+                    "styles": ["italic", "bold"]
+                  },
+                  {
+                    "children": ["5"],
+                    "styles": ["subscript", "bold"]
+                  }
+                ]
+              },
+              "id": "instance-label-instance-88021b47-60d4-43c3-a089-b4458fdf076e",
+              "kind": "instance-label",
+              "order": 9
+            },
+            {
+              "alignment": "start",
+              "anchor": { "fallback": [205, 95], "offset": [15, 35] },
+              "bind": "value",
+              "id": "instance-value-instance-88021b47-60d4-43c3-a089-b4458fdf076e",
+              "kind": "instance-value",
+              "order": 10,
+              "visible": false
+            },
+            {
+              "alignment": "start",
+              "anchor": { "fallback": [215, 35], "offset": [25, -25] },
+              "bind": {
+                "kind": "net-name",
+                "netId": "wire-67000a11-d7a1-4c5f-af8e-aca4bccf731c-net"
+              },
+              "id": "classroom-node-X",
+              "kind": "net-label",
+              "netId": "wire-67000a11-d7a1-4c5f-af8e-aca4bccf731c-net",
+              "order": 15
+            }
+          ],
+          "mosBulkBinding": {
+            "netId": "net-power-instance-8ffa33b2-b269-4dad-8e9f-01139a1eee97",
+            "origin": "cell-default"
+          }
+        },
+        {
+          "type": "ground",
+          "id": "instance-8ffa33b2-b269-4dad-8e9f-01139a1eee97",
+          "coordinate": [200, 110]
+        },
+        {
+          "type": "port",
+          "id": "instance-ba01ade9-9fc8-40ff-a943-d052952c4cdf",
+          "coordinate": [100, -20],
+          "labels": [
+            {
+              "alignment": "end",
+              "anchor": { "fallback": [80, -15], "offset": [-20, 5] },
+              "bind": { "kind": "cell-terminal-name", "terminalId": "terminal-3651fdae202a51ef" },
+              "format": {
+                "runs": [
+                  {
+                    "children": ["v"],
+                    "styles": ["italic", "bold"]
+                  },
+                  {
+                    "children": ["inp"],
+                    "styles": ["subscript", "bold"]
+                  }
+                ]
+              },
+              "id": "instance-label-instance-ba01ade9-9fc8-40ff-a943-d052952c4cdf",
+              "kind": "instance-label",
+              "order": 11
+            }
+          ]
+        },
+        {
+          "type": "port",
+          "id": "instance-8721b41f-9422-4f4d-8c1d-b1e7766dd70c",
+          "coordinate": [300, -20],
+          "mirror": "horizontal",
+          "labels": [
+            {
+              "alignment": "start",
+              "anchor": { "fallback": [320, -15], "offset": [20, 5] },
+              "bind": { "kind": "cell-terminal-name", "terminalId": "terminal-208b520f9aee7318" },
+              "format": {
+                "runs": [
+                  {
+                    "children": ["v"],
+                    "styles": ["italic", "bold"]
+                  },
+                  {
+                    "children": ["inn"],
+                    "styles": ["subscript", "bold"]
+                  }
+                ]
+              },
+              "id": "instance-label-instance-8721b41f-9422-4f4d-8c1d-b1e7766dd70c",
+              "kind": "instance-label",
+              "order": 12
+            }
+          ]
+        },
+        {
+          "type": "port",
+          "id": "instance-d9027b27-fac0-4913-b941-f8aa91634bb8",
+          "coordinate": [270, -60],
+          "mirror": "horizontal",
+          "labels": [
+            {
+              "alignment": "start",
+              "anchor": { "fallback": [290, -55], "offset": [20, 5] },
+              "bind": { "kind": "cell-terminal-name", "terminalId": "terminal-d205ae954bfaab77" },
+              "format": {
+                "runs": [
+                  {
+                    "children": ["v"],
+                    "styles": ["italic", "bold"]
+                  },
+                  {
+                    "children": ["out"],
+                    "styles": ["subscript", "bold"]
+                  }
+                ]
+              },
+              "id": "instance-label-instance-d9027b27-fac0-4913-b941-f8aa91634bb8",
+              "kind": "instance-label",
+              "order": 13
+            }
+          ]
+        },
+        {
+          "type": "port",
+          "id": "instance-ea3c3338-d494-4f23-a0d6-5cb32d659b19",
+          "coordinate": [150, 60],
+          "labels": [
+            {
+              "alignment": "end",
+              "anchor": { "fallback": [130, 65], "offset": [-20, 5] },
+              "bind": { "kind": "cell-terminal-name", "terminalId": "terminal-1ccf9ce7be5025d9" },
+              "format": {
+                "runs": [
+                  {
+                    "children": ["v"],
+                    "styles": ["italic", "bold"]
+                  },
+                  {
+                    "children": ["b"],
+                    "styles": ["subscript", "bold"]
+                  }
+                ]
+              },
+              "id": "instance-label-instance-ea3c3338-d494-4f23-a0d6-5cb32d659b19",
+              "kind": "instance-label",
+              "order": 14
+            }
+          ]
+        }
+      ],
+      "routes": [
+        {
+          "end": { "junction": "wire-259b3bc3-07d1-4a96-9919-b71e80e9b182-to-junction" },
+          "id": "route-agent-rail-0f2efbe2d849447a-rail-a-wire-259b3bc3-07d1-4a96-9919-b71e80e9b182-to",
+          "legId": "route-leg-cc1f7b4f7131e69e",
+          "presentation": "power-rail",
+          "start": { "junction": "junction-agent-rail-0f2efbe2d849447a-start" }
+        },
+        {
+          "end": { "junction": "wire-b0dd99b3-39b8-4151-92dc-7cea36cb88a5-to-junction" },
+          "id": "route-agent-rail-0f2efbe2d849447a-rail-b-wire-259b3bc3-07d1-4a96-9919-b71e80e9b182-to-a-wire-b0dd99b3-39b8-4151-92dc-7cea36cb88a5-to",
+          "legId": "route-leg-0b4a10d181cd5145",
+          "presentation": "power-rail",
+          "start": { "junction": "wire-259b3bc3-07d1-4a96-9919-b71e80e9b182-to-junction" }
+        },
+        {
+          "end": { "junction": "junction-agent-rail-0f2efbe2d849447a-end" },
+          "id": "route-agent-rail-0f2efbe2d849447a-rail-b-wire-259b3bc3-07d1-4a96-9919-b71e80e9b182-to-b-wire-b0dd99b3-39b8-4151-92dc-7cea36cb88a5-to",
+          "legId": "route-leg-e6523d34dfd042e0",
+          "presentation": "power-rail",
+          "start": { "junction": "wire-b0dd99b3-39b8-4151-92dc-7cea36cb88a5-to-junction" }
+        },
+        {
+          "end": { "junction": "wire-259b3bc3-07d1-4a96-9919-b71e80e9b182-to-junction" },
+          "id": "wire-259b3bc3-07d1-4a96-9919-b71e80e9b182-route",
+          "legId": "route-leg-1db3e04c69679d14",
+          "start": { "terminal": ["instance-06e18862-10a6-48ae-ba9e-fa4e8fc0ba46", "S"] }
+        },
+        {
+          "end": { "junction": "wire-b0dd99b3-39b8-4151-92dc-7cea36cb88a5-to-junction" },
+          "id": "wire-b0dd99b3-39b8-4151-92dc-7cea36cb88a5-route",
+          "legId": "route-leg-8ea5af8e97297487",
+          "start": { "terminal": ["instance-713602bb-4689-4ec7-9806-bc3e00c2f9f5", "S"] }
+        },
+        {
+          "end": { "junction": "wire-e03b09e2-8ecf-481d-a3b0-01adfb2fa75f-to-junction" },
+          "id": "wire-76286fe2-c675-4954-ae55-49270efdb441-route-a-wire-e03b09e2-8ecf-481d-a3b0-01adfb2fa75f-to",
+          "legId": "route-leg-e00ebfb4caea4986",
+          "start": { "terminal": ["instance-06e18862-10a6-48ae-ba9e-fa4e8fc0ba46", "D"] }
+        },
+        {
+          "end": { "terminal": ["instance-fd4004b0-61af-40f3-a351-2b2205edee44", "D"] },
+          "id": "wire-76286fe2-c675-4954-ae55-49270efdb441-route-b-wire-e03b09e2-8ecf-481d-a3b0-01adfb2fa75f-to",
+          "legId": "route-leg-5daf54331f9d01ac",
+          "start": { "junction": "wire-e03b09e2-8ecf-481d-a3b0-01adfb2fa75f-to-junction" }
+        },
+        {
+          "end": { "junction": "wire-4401dee4-3bd2-4391-88a8-b125cef107cf-from-junction" },
+          "id": "wire-920882ac-1960-4625-a138-468c1ec0c0dc-route-a-wire-4401dee4-3bd2-4391-88a8-b125cef107cf-from",
+          "legId": "route-leg-00bf1254d86dbcf6",
+          "start": { "terminal": ["instance-713602bb-4689-4ec7-9806-bc3e00c2f9f5", "D"] }
+        },
+        {
+          "end": { "terminal": ["instance-eb66ae88-6cb2-4a6f-91eb-a9d9e79e89f8", "D"] },
+          "id": "wire-920882ac-1960-4625-a138-468c1ec0c0dc-route-b-wire-4401dee4-3bd2-4391-88a8-b125cef107cf-from",
+          "legId": "route-leg-3f018605e37b8b60",
+          "start": { "junction": "wire-4401dee4-3bd2-4391-88a8-b125cef107cf-from-junction" }
+        },
+        {
+          "end": { "junction": "wire-e03b09e2-8ecf-481d-a3b0-01adfb2fa75f-from-junction" },
+          "id": "wire-cc310198-ecb1-44ff-a7ce-bf0570f4a1be-route-a-wire-e03b09e2-8ecf-481d-a3b0-01adfb2fa75f-from",
+          "legId": "route-leg-815c319c071c9b0d",
+          "start": { "terminal": ["instance-06e18862-10a6-48ae-ba9e-fa4e8fc0ba46", "G"] }
+        },
+        {
+          "end": { "terminal": ["instance-713602bb-4689-4ec7-9806-bc3e00c2f9f5", "G"] },
+          "id": "wire-cc310198-ecb1-44ff-a7ce-bf0570f4a1be-route-b-wire-e03b09e2-8ecf-481d-a3b0-01adfb2fa75f-from",
+          "legId": "route-leg-aac93394f8915c7e",
+          "start": { "junction": "wire-e03b09e2-8ecf-481d-a3b0-01adfb2fa75f-from-junction" }
+        },
+        {
+          "id": "wire-e03b09e2-8ecf-481d-a3b0-01adfb2fa75f-route",
+          "legs": [
+            {
+              "bend": "route-bend-e1866c56a29ea4a3",
+              "coordinate": [200, -70],
+              "id": "route-leg-e1866c56a29ea4a3"
+            },
+            {
+              "id": "route-leg-e1866b56a29ea2f0",
+              "junction": "wire-e03b09e2-8ecf-481d-a3b0-01adfb2fa75f-to-junction"
+            }
+          ],
+          "start": { "junction": "wire-e03b09e2-8ecf-481d-a3b0-01adfb2fa75f-from-junction" }
+        },
+        {
+          "id": "wire-67000a11-d7a1-4c5f-af8e-aca4bccf731c-route-a-wire-fb9cb4c6-8794-4e91-a211-1d8f1f30d5ec-from",
+          "legs": [
+            {
+              "bend": "route-bend-87ba7ba1d06598d7",
+              "coordinate": [150, 20],
+              "id": "route-leg-87ba7ba1d06598d7"
+            },
+            {
+              "id": "route-leg-87ba7aa1d0659724",
+              "junction": "wire-fb9cb4c6-8794-4e91-a211-1d8f1f30d5ec-from-junction"
+            }
+          ],
+          "start": { "terminal": ["instance-fd4004b0-61af-40f3-a351-2b2205edee44", "S"] }
+        },
+        {
+          "id": "wire-67000a11-d7a1-4c5f-af8e-aca4bccf731c-route-b-wire-fb9cb4c6-8794-4e91-a211-1d8f1f30d5ec-from",
+          "legs": [
+            {
+              "bend": "route-bend-87ba7aa1d0659724",
+              "coordinate": [250, 20],
+              "id": "route-leg-c6adb33e249e5197"
+            },
+            {
+              "id": "route-leg-87ba7da1d0659c3d",
+              "terminal": ["instance-eb66ae88-6cb2-4a6f-91eb-a9d9e79e89f8", "S"]
+            }
+          ],
+          "start": { "junction": "wire-fb9cb4c6-8794-4e91-a211-1d8f1f30d5ec-from-junction" }
+        },
+        {
+          "end": { "terminal": ["instance-88021b47-60d4-43c3-a089-b4458fdf076e", "D"] },
+          "id": "wire-fb9cb4c6-8794-4e91-a211-1d8f1f30d5ec-route",
+          "legId": "route-leg-9dbbffa4ea3e0406",
+          "start": { "junction": "wire-fb9cb4c6-8794-4e91-a211-1d8f1f30d5ec-from-junction" }
+        },
+        {
+          "end": { "terminal": ["instance-8ffa33b2-b269-4dad-8e9f-01139a1eee97", "0"] },
+          "id": "wire-8b1f1b5e-5f8a-430b-95ca-ee6169f6e647-route",
+          "legId": "route-leg-db3e625b2c0bf476",
+          "start": { "terminal": ["instance-88021b47-60d4-43c3-a089-b4458fdf076e", "S"] }
+        },
+        {
+          "end": { "terminal": ["instance-fd4004b0-61af-40f3-a351-2b2205edee44", "G"] },
+          "id": "wire-73cf99eb-6974-4052-9f51-5360c1644ff6-route",
+          "legId": "route-leg-7254141585ab4b21",
+          "start": { "terminal": ["instance-ba01ade9-9fc8-40ff-a943-d052952c4cdf", "P"] }
+        },
+        {
+          "end": { "terminal": ["instance-eb66ae88-6cb2-4a6f-91eb-a9d9e79e89f8", "G"] },
+          "id": "wire-68972447-0601-47a9-8cc8-954bc9dfeb86-route",
+          "legId": "route-leg-3960216505a4b3a7",
+          "start": { "terminal": ["instance-8721b41f-9422-4f4d-8c1d-b1e7766dd70c", "P"] }
+        },
+        {
+          "end": { "terminal": ["instance-d9027b27-fac0-4913-b941-f8aa91634bb8", "P"] },
+          "id": "wire-4401dee4-3bd2-4391-88a8-b125cef107cf-route",
+          "legId": "route-leg-e7ec017b41e22236",
+          "start": { "junction": "wire-4401dee4-3bd2-4391-88a8-b125cef107cf-from-junction" }
+        },
+        {
+          "end": { "terminal": ["instance-88021b47-60d4-43c3-a089-b4458fdf076e", "G"] },
+          "id": "wire-08b6915b-d797-42fd-9f19-33be29708508-route",
+          "legId": "route-leg-05ee19e4e0ec4938",
+          "start": { "terminal": ["instance-ea3c3338-d494-4f23-a0d6-5cb32d659b19", "P"] }
+        }
+      ],
+      "connections": {
+        "contacts": [],
+        "unrouted": [
+          [
+            {
+              "terminal": ["instance-88021b47-60d4-43c3-a089-b4458fdf076e", "B"]
+            },
+            {
+              "terminal": ["instance-88021b47-60d4-43c3-a089-b4458fdf076e", "S"]
+            },
+            {
+              "terminal": ["instance-eb66ae88-6cb2-4a6f-91eb-a9d9e79e89f8", "B"]
+            },
+            {
+              "terminal": ["instance-fd4004b0-61af-40f3-a351-2b2205edee44", "B"]
+            }
+          ],
+          [
+            {
+              "junction": "junction-agent-rail-0f2efbe2d849447a-end"
+            },
+            {
+              "terminal": ["instance-06e18862-10a6-48ae-ba9e-fa4e8fc0ba46", "B"]
+            },
+            {
+              "terminal": ["instance-713602bb-4689-4ec7-9806-bc3e00c2f9f5", "B"]
+            }
+          ]
+        ]
+      },
+      "nets": [
+        {
+          "at": { "terminal": ["instance-88021b47-60d4-43c3-a089-b4458fdf076e", "B"] },
+          "id": "net-power-instance-8ffa33b2-b269-4dad-8e9f-01139a1eee97"
+        },
+        {
+          "at": { "terminal": ["instance-ba01ade9-9fc8-40ff-a943-d052952c4cdf", "P"] },
+          "id": "net-cell-pin-3651fdae202a51ef"
+        },
+        {
+          "at": { "terminal": ["instance-8721b41f-9422-4f4d-8c1d-b1e7766dd70c", "P"] },
+          "id": "net-cell-pin-208b520f9aee7318"
+        },
+        {
+          "at": { "terminal": ["instance-713602bb-4689-4ec7-9806-bc3e00c2f9f5", "D"] },
+          "id": "net-cell-pin-d205ae954bfaab77"
+        },
+        {
+          "at": { "terminal": ["instance-88021b47-60d4-43c3-a089-b4458fdf076e", "G"] },
+          "id": "net-cell-pin-1ccf9ce7be5025d9"
+        },
+        {
+          "at": { "terminal": ["instance-06e18862-10a6-48ae-ba9e-fa4e8fc0ba46", "B"] },
+          "id": "net-c802bdb123c8bf22"
+        },
+        {
+          "at": { "terminal": ["instance-06e18862-10a6-48ae-ba9e-fa4e8fc0ba46", "D"] },
+          "id": "wire-76286fe2-c675-4954-ae55-49270efdb441-net"
+        },
+        {
+          "at": { "terminal": ["instance-88021b47-60d4-43c3-a089-b4458fdf076e", "D"] },
+          "id": "wire-67000a11-d7a1-4c5f-af8e-aca4bccf731c-net"
+        }
+      ],
+      "junctions": [
+        {
+          "coordinate": [130, -160],
+          "id": "junction-agent-rail-0f2efbe2d849447a-start",
+          "role": "route-anchor"
+        },
+        {
+          "coordinate": [270, -160],
+          "id": "junction-agent-rail-0f2efbe2d849447a-end",
+          "role": "route-anchor"
+        },
+        {
+          "coordinate": [150, -160],
+          "id": "wire-259b3bc3-07d1-4a96-9919-b71e80e9b182-to-junction",
+          "role": "branch"
+        },
+        {
+          "coordinate": [250, -160],
+          "id": "wire-b0dd99b3-39b8-4151-92dc-7cea36cb88a5-to-junction",
+          "role": "branch"
+        },
+        {
+          "coordinate": [200, -110],
+          "id": "wire-e03b09e2-8ecf-481d-a3b0-01adfb2fa75f-from-junction",
+          "role": "branch"
+        },
+        {
+          "coordinate": [150, -70],
+          "id": "wire-e03b09e2-8ecf-481d-a3b0-01adfb2fa75f-to-junction",
+          "role": "branch"
+        },
+        {
+          "coordinate": [200, 20],
+          "id": "wire-fb9cb4c6-8794-4e91-a211-1d8f1f30d5ec-from-junction",
+          "role": "branch"
+        },
+        {
+          "coordinate": [250, -60],
+          "id": "wire-4401dee4-3bd2-4391-88a8-b125cef107cf-from-junction",
+          "role": "branch"
+        }
+      ],
+      "annotations": [
+        {
+          "alignment": "start",
+          "anchor": {
+            "fallbackPosition": { "x": 280, "y": -150 },
+            "kind": "object",
+            "localOffset": { "x": 10, "y": 10 },
+            "objectId": "junction-agent-rail-0f2efbe2d849447a-end"
+          },
+          "bind": { "kind": "cell-terminal-name", "terminalId": "cell-terminal-5d21a49701fedf23" },
+          "format": {
+            "runs": [
+              {
+                "children": ["V"],
+                "styles": ["italic", "bold"]
+              },
+              {
+                "children": ["DD"],
+                "styles": ["subscript", "bold"]
+              }
+            ]
+          },
+          "id": "label-agent-rail-0f2efbe2d849447a",
+          "kind": "power-label",
+          "netId": "net-c802bdb123c8bf22",
+          "order": 0
+        }
+      ],
+      "drafting": { "objects": [] },
+      "mosBulkDefaults": {
+        "nmosNetId": "net-power-instance-8ffa33b2-b269-4dad-8e9f-01139a1eee97",
+        "pmosNetId": "net-c802bdb123c8bf22"
+      },
+      "connectivityEvidence": [
+        {
+          "id": "connectivity-evidence-ebe6316895ec50cf",
+          "kind": "name-claim",
+          "name": "VDD",
+          "netId": "net-c802bdb123c8bf22",
+          "owner": { "kind": "power-marker", "objectId": "label-agent-rail-0f2efbe2d849447a" },
+          "powerDomain": "vdd",
+          "scope": "local"
+        },
+        {
+          "id": "connectivity-evidence-df3eb76843976f21",
+          "kind": "name-claim",
+          "name": "0",
+          "netId": "net-power-instance-8ffa33b2-b269-4dad-8e9f-01139a1eee97",
+          "owner": {
+            "kind": "power-marker",
+            "objectId": "instance-8ffa33b2-b269-4dad-8e9f-01139a1eee97"
+          },
+          "powerDomain": "ground",
+          "scope": "global"
+        },
+        {
+          "id": "classroom-node-name-X",
+          "kind": "name-claim",
+          "name": "X",
+          "netId": "wire-67000a11-d7a1-4c5f-af8e-aca4bccf731c-net",
+          "owner": { "annotationId": "classroom-node-X", "kind": "net-label" },
+          "scope": "local"
+        },
+        {
+          "id": "classroom-node-name-Y",
+          "kind": "name-claim",
+          "name": "Y",
+          "netId": "wire-76286fe2-c675-4954-ae55-49270efdb441-net",
+          "owner": { "annotationId": "classroom-node-Y", "kind": "net-label" },
+          "scope": "local"
+        }
+      ],
+      "layoutGroups": [],
+      "constraints": [],
+      "sourceStatus": "connectivity-modified",
+      "revision": 5,
+      "noConnects": []
+    }
+  ],
+  "componentDefinitions": [
+    {
+      "electrical": {
+        "capabilities": {
+          "supportsBulkBinding": false,
+          "supportsModel": false,
+          "supportsValueAnnotation": false
+        },
+        "deviceClass": "net-marker",
+        "dialects": ["spice", "spectre"],
+        "id": "ground",
+        "parameters": [],
+        "pinOrder": ["0"],
+        "referencePrefix": null,
+        "symbolId": "ground",
+        "targetPolicy": "none"
+      },
+      "symbol": {
+        "id": "ground",
+        "labelVisibility": "hidden",
+        "name": "Ground",
+        "pins": [
+          {
+            "at": { "x": 0, "y": -10 },
+            "direction": "north",
+            "name": "0",
+            "presentation": { "leadLength": 10, "visibility": "visible" },
+            "role": "ground"
+          }
+        ],
+        "primitives": [
+          {
+            "from": { "x": 0, "y": -10 },
+            "kind": "line",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" },
+            "to": { "x": 0, "y": 0 }
+          },
+          {
+            "from": { "x": -6.395349, "y": 0 },
+            "kind": "line",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "ground" },
+            "to": { "x": 6.395349, "y": 0 }
+          },
+          {
+            "from": { "x": -4.069767, "y": 5.813953 },
+            "kind": "line",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "ground" },
+            "to": { "x": 4.069767, "y": 5.813953 }
+          },
+          {
+            "from": { "x": -2.325581, "y": 11.046512 },
+            "kind": "line",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "ground" },
+            "to": { "x": 2.325581, "y": 11.046512 }
+          }
+        ],
+        "schemaVersion": 1,
+        "variants": [],
+        "viewBox": { "height": 31, "width": 24, "x": -12, "y": -14 }
+      }
+    },
+    {
+      "electrical": {
+        "capabilities": {
+          "supportsBulkBinding": true,
+          "supportsModel": true,
+          "supportsValueAnnotation": true
+        },
+        "deviceClass": "mos",
+        "dialects": ["spice", "spectre"],
+        "id": "nmos",
+        "mosBulkClass": "nmos",
+        "parameters": [
+          {
+            "defaultValue": "1u",
+            "displayRole": "width",
+            "editor": "text",
+            "help": "Total channel width",
+            "label": "W",
+            "name": "w",
+            "placeholder": "1u",
+            "required": true,
+            "unitHint": "m"
+          },
+          {
+            "defaultValue": "150n",
+            "displayRole": "length",
+            "editor": "text",
+            "help": "Channel length",
+            "label": "L",
+            "name": "l",
+            "placeholder": "150n",
+            "required": true,
+            "unitHint": "m"
+          },
+          {
+            "defaultValue": "1",
+            "displayRole": "finger-count",
+            "editor": "decimal",
+            "help": "Finger count, so finger width is W / NF",
+            "label": "NF",
+            "name": "nf",
+            "placeholder": "1",
+            "required": false
+          },
+          {
+            "defaultValue": "1",
+            "displayRole": "multiplier",
+            "editor": "decimal",
+            "help": "Parallel multiplier",
+            "label": "M",
+            "name": "m",
+            "placeholder": "1",
+            "required": false
+          }
+        ],
+        "pinOrder": ["D", "G", "S", "B"],
+        "referencePrefix": "M",
+        "seriesInsertionPinPair": ["D", "S"],
+        "symbolId": "nmos",
+        "targetPolicy": "required-model"
+      },
+      "symbol": {
+        "defaultVariantId": "textbook-3terminal",
+        "id": "nmos",
+        "name": "NMOS",
+        "pins": [
+          {
+            "at": { "x": 10, "y": -20 },
+            "direction": "north",
+            "name": "D",
+            "presentation": { "leadLength": 10, "visibility": "visible" },
+            "role": "drain"
+          },
+          {
+            "at": { "x": -20, "y": 0 },
+            "direction": "west",
+            "name": "G",
+            "presentation": { "leadLength": 10, "visibility": "visible" },
+            "role": "gate"
+          },
+          {
+            "at": { "x": 10, "y": 20 },
+            "direction": "south",
+            "name": "S",
+            "presentation": { "leadLength": 10, "visibility": "visible" },
+            "role": "source"
+          },
+          {
+            "at": { "x": 20, "y": 0 },
+            "direction": "east",
+            "name": "B",
+            "presentation": { "leadLength": 10, "visibility": "visible" },
+            "role": "bulk"
+          }
+        ],
+        "primitives": [
+          {
+            "kind": "polyline",
+            "points": [
+              [-4.244186, -6.976744],
+              [10, -6.976744],
+              [10, -20]
+            ],
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" }
+          },
+          {
+            "kind": "polyline",
+            "part": "source-arrow-host",
+            "points": [
+              [-4.244186, 6.976744],
+              [10, 6.976744],
+              [10, 20]
+            ],
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" }
+          },
+          {
+            "fill": "foreground",
+            "kind": "polygon",
+            "part": "gate-bar",
+            "points": [
+              [-11.802326, -9.593023],
+              [-11.802326, 9.593023],
+              [-8.895349, 9.593023],
+              [-8.895349, -9.593023]
+            ],
+            "stroke": "none"
+          },
+          {
+            "fill": "foreground",
+            "kind": "polygon",
+            "part": "gate-bar",
+            "points": [
+              [-6.569767, -12.5],
+              [-6.569767, 12.5],
+              [-3.662791, 12.5],
+              [-3.662791, -12.5]
+            ],
+            "stroke": "none"
+          },
+          {
+            "from": { "x": -8.895349, "y": 0 },
+            "kind": "line",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" },
+            "to": { "x": -20, "y": 0 }
+          },
+          {
+            "from": { "x": -3.662791, "y": 0 },
+            "kind": "line",
+            "part": "bulk-lead",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" },
+            "to": { "x": 10, "y": 0 }
+          },
+          {
+            "from": { "x": 16.395349, "y": 0 },
+            "kind": "line",
+            "part": "bulk-lead",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" },
+            "to": { "x": 20, "y": 0 }
+          },
+          {
+            "fill": "foreground",
+            "kind": "polygon",
+            "part": "bulk-lead",
+            "points": [
+              [10, 0],
+              [16.395349, -3.488372],
+              [16.395349, 3.488372]
+            ],
+            "stroke": "none"
+          }
+        ],
+        "schemaVersion": 1,
+        "variants": [
+          {
+            "additionalPrimitives": [
+              {
+                "kind": "polyline",
+                "part": "source-arrow",
+                "points": [
+                  [-3.662791, 6.976744],
+                  [10, 6.976744],
+                  [10, 20]
+                ],
+                "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" }
+              },
+              {
+                "fill": "foreground",
+                "kind": "polygon",
+                "part": "source-arrow",
+                "points": [
+                  [10.581395, 6.976744],
+                  [1.27907, 2.906977],
+                  [1.27907, 11.046512]
+                ],
+                "stroke": "none"
+              }
+            ],
+            "auxiliaryPins": [
+              {
+                "at": { "x": -4, "y": 0 },
+                "direction": "east",
+                "name": "B",
+                "routing": {
+                  "escape": "outward",
+                  "preferredLanding": { "x": 0, "y": 0 }
+                }
+              }
+            ],
+            "hiddenPinNames": ["B"],
+            "hiddenPrimitiveParts": ["bulk-lead", "source-arrow-host"],
+            "id": "textbook-3terminal"
+          }
+        ],
+        "viewBox": { "height": 48, "width": 48, "x": -24, "y": -24 }
+      }
+    },
+    {
+      "electrical": {
+        "capabilities": {
+          "supportsBulkBinding": true,
+          "supportsModel": true,
+          "supportsValueAnnotation": true
+        },
+        "deviceClass": "mos",
+        "dialects": ["spice", "spectre"],
+        "id": "pmos",
+        "mosBulkClass": "pmos",
+        "parameters": [
+          {
+            "defaultValue": "1u",
+            "displayRole": "width",
+            "editor": "text",
+            "help": "Total channel width",
+            "label": "W",
+            "name": "w",
+            "placeholder": "1u",
+            "required": true,
+            "unitHint": "m"
+          },
+          {
+            "defaultValue": "150n",
+            "displayRole": "length",
+            "editor": "text",
+            "help": "Channel length",
+            "label": "L",
+            "name": "l",
+            "placeholder": "150n",
+            "required": true,
+            "unitHint": "m"
+          },
+          {
+            "defaultValue": "1",
+            "displayRole": "finger-count",
+            "editor": "decimal",
+            "help": "Finger count, so finger width is W / NF",
+            "label": "NF",
+            "name": "nf",
+            "placeholder": "1",
+            "required": false
+          },
+          {
+            "defaultValue": "1",
+            "displayRole": "multiplier",
+            "editor": "decimal",
+            "help": "Parallel multiplier",
+            "label": "M",
+            "name": "m",
+            "placeholder": "1",
+            "required": false
+          }
+        ],
+        "pinOrder": ["D", "G", "S", "B"],
+        "referencePrefix": "M",
+        "seriesInsertionPinPair": ["D", "S"],
+        "symbolId": "pmos",
+        "targetPolicy": "required-model"
+      },
+      "symbol": {
+        "defaultVariantId": "textbook-3terminal",
+        "id": "pmos",
+        "name": "PMOS",
+        "pins": [
+          {
+            "at": { "x": 10, "y": 20 },
+            "direction": "south",
+            "name": "D",
+            "presentation": { "leadLength": 10, "visibility": "visible" },
+            "role": "drain"
+          },
+          {
+            "at": { "x": -20, "y": 0 },
+            "direction": "west",
+            "name": "G",
+            "presentation": { "leadLength": 10, "visibility": "visible" },
+            "role": "gate"
+          },
+          {
+            "at": { "x": 10, "y": -20 },
+            "direction": "north",
+            "name": "S",
+            "presentation": { "leadLength": 10, "visibility": "visible" },
+            "role": "source"
+          },
+          {
+            "at": { "x": 20, "y": 0 },
+            "direction": "east",
+            "name": "B",
+            "presentation": { "leadLength": 10, "visibility": "visible" },
+            "role": "bulk"
+          }
+        ],
+        "primitives": [
+          {
+            "kind": "polyline",
+            "points": [
+              [-4.244186, 6.976744],
+              [10, 6.976744],
+              [10, 20]
+            ],
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" }
+          },
+          {
+            "kind": "polyline",
+            "part": "source-arrow-host",
+            "points": [
+              [-4.244186, -6.976744],
+              [10, -6.976744],
+              [10, -20]
+            ],
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" }
+          },
+          {
+            "fill": "foreground",
+            "kind": "polygon",
+            "part": "gate-bar",
+            "points": [
+              [-11.802326, -9.593023],
+              [-11.802326, 9.593023],
+              [-8.895349, 9.593023],
+              [-8.895349, -9.593023]
+            ],
+            "stroke": "none"
+          },
+          {
+            "fill": "foreground",
+            "kind": "polygon",
+            "part": "gate-bar",
+            "points": [
+              [-6.569767, -12.5],
+              [-6.569767, 12.5],
+              [-3.662791, 12.5],
+              [-3.662791, -12.5]
+            ],
+            "stroke": "none"
+          },
+          {
+            "from": { "x": -8.895349, "y": 0 },
+            "kind": "line",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" },
+            "to": { "x": -20, "y": 0 }
+          },
+          {
+            "from": { "x": -3.662791, "y": 0 },
+            "kind": "line",
+            "part": "bulk-lead",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" },
+            "to": { "x": 13.604651, "y": 0 }
+          },
+          {
+            "fill": "foreground",
+            "kind": "polygon",
+            "part": "bulk-lead",
+            "points": [
+              [20, 0],
+              [13.604651, -3.77907],
+              [13.604651, 3.77907]
+            ],
+            "stroke": "none"
+          }
+        ],
+        "schemaVersion": 1,
+        "variants": [
+          {
+            "additionalPrimitives": [
+              {
+                "kind": "polyline",
+                "part": "source-arrow",
+                "points": [
+                  [5.639535, -7.122093],
+                  [10, -7.122093],
+                  [10, -20]
+                ],
+                "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" }
+              },
+              {
+                "fill": "foreground",
+                "kind": "polygon",
+                "part": "source-arrow",
+                "points": [
+                  [-3.662791, -7.122093],
+                  [5.639535, -11.19186],
+                  [5.639535, -3.052326]
+                ],
+                "stroke": "none"
+              }
+            ],
+            "auxiliaryPins": [
+              {
+                "at": { "x": -4, "y": 0 },
+                "direction": "east",
+                "name": "B",
+                "routing": {
+                  "escape": "outward",
+                  "preferredLanding": { "x": 0, "y": 0 }
+                }
+              }
+            ],
+            "hiddenPinNames": ["B"],
+            "hiddenPrimitiveParts": ["bulk-lead", "source-arrow-host"],
+            "id": "textbook-3terminal"
+          }
+        ],
+        "viewBox": { "height": 48, "width": 48, "x": -24, "y": -24 }
+      }
+    },
+    {
+      "symbol": {
+        "id": "port",
+        "name": "Port",
+        "pins": [
+          {
+            "at": { "x": 0, "y": 0 },
+            "direction": "east",
+            "name": "P",
+            "presentation": { "leadLength": 10, "visibility": "visible" },
+            "role": "port"
+          }
+        ],
+        "primitives": [
+          {
+            "center": { "x": -7.086614, "y": 0 },
+            "fill": "none",
+            "kind": "circle",
+            "radius": 2.47907,
+            "stroke": "foreground",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" }
+          },
+          {
+            "from": { "x": 0, "y": 0 },
+            "kind": "line",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" },
+            "to": { "x": -4.607544, "y": 0 }
+          }
+        ],
+        "schemaVersion": 1,
+        "variants": [],
+        "viewBox": { "height": 14, "width": 18, "x": -14, "y": -7 }
+      }
+    }
+  ],
+  "externalSubcircuitDefinitions": [
+    {
+      "formalParameters": [
+        {
+          "defaultValue": "1",
+          "name": "w"
+        },
+        {
+          "defaultValue": "0.15",
+          "name": "l"
+        },
+        {
+          "defaultValue": "1",
+          "name": "nf"
+        },
+        {
+          "defaultValue": "1",
+          "name": "m"
+        }
+      ],
+      "id": "external-subcircuit-27f716b14d59fc10",
+      "interfaceStatus": "declared",
+      "name": "sky130_fd_pr__pfet_01v8",
+      "terminals": [
+        {
+          "direction": "passive",
+          "id": "external-subcircuit-terminal-7921a0096089118d",
+          "name": "D"
+        },
+        {
+          "direction": "passive",
+          "id": "external-subcircuit-terminal-79219f0960890fda",
+          "name": "G"
+        },
+        {
+          "direction": "passive",
+          "id": "external-subcircuit-terminal-79219e0960890e27",
+          "name": "S"
+        },
+        {
+          "direction": "passive",
+          "id": "external-subcircuit-terminal-79219d0960890c74",
+          "name": "B"
+        }
+      ]
+    },
+    {
+      "formalParameters": [
+        {
+          "defaultValue": "1",
+          "name": "w"
+        },
+        {
+          "defaultValue": "0.15",
+          "name": "l"
+        },
+        {
+          "defaultValue": "1",
+          "name": "nf"
+        },
+        {
+          "defaultValue": "1",
+          "name": "m"
+        }
+      ],
+      "id": "external-subcircuit-e5ee3d17d0c7c89a",
+      "interfaceStatus": "declared",
+      "name": "sky130_fd_pr__nfet_01v8",
+      "terminals": [
+        {
+          "direction": "passive",
+          "id": "external-subcircuit-terminal-353df4da271bcc2b",
+          "name": "D"
+        },
+        {
+          "direction": "passive",
+          "id": "external-subcircuit-terminal-353df3da271bca78",
+          "name": "G"
+        },
+        {
+          "direction": "passive",
+          "id": "external-subcircuit-terminal-353df6da271bcf91",
+          "name": "S"
+        },
+        {
+          "direction": "passive",
+          "id": "external-subcircuit-terminal-353df5da271bcdde",
+          "name": "B"
+        }
+      ]
+    }
+  ],
+  "simulationFolders": [],
+  "source": { "dialect": "none", "entry": null, "files": [], "sourcePolicy": "copy" },
+  "symbolLibrary": { "hash": "razavi-reference-v1", "id": "razavi-symbols", "version": "1" },
+  "structureRevision": 1,
+  "modelSources": [
+    {
+      "dependencies": [],
+      "entry": "models.lib",
+      "files": [
+        {
+          "path": "models.lib",
+          "text": "* Educational long-channel models; no PDK or silicon calibration.\n* KP: A/V^2; TOX: m; CGSO/CGDO: F/m; LAMBDA: 1/V.\n.model NMOS_EDU NMOS (LEVEL=1 VTO=0.45 KP=200u LAMBDA=0.03\n+ GAMMA=0.4 PHI=0.7 TOX=20n CGSO=200p CGDO=200p)\n.model PMOS_EDU PMOS (LEVEL=1 VTO=-0.45 KP=80u LAMBDA=0.04\n+ GAMMA=0.4 PHI=0.7 TOX=20n CGSO=200p CGDO=200p)\n"
+        }
+      ],
+      "id": "classroom-educational-mos",
+      "language": "spice",
+      "revision": 0
+    }
+  ]
+}

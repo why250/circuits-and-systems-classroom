@@ -1,0 +1,20 @@
+5T OTA small open-loop differential step; not a closed-loop settling test
+.include models.lib
+.include ota-core.cir
+.temp 27
+VDD vdd 0 1.8
+VB vb 0 0.65
+VDIFF diff 0 DC 0 PULSE(0 100u 5u 10n 10n 20u 50u)
+BPLUS vinp 0 V=0.9+v(diff)/2
+BMINUS vinn 0 V=0.9-v(diff)/2
+XDUT vdd 0 vinp vinn out vb ota_5t
+CL out 0 1p
+.control
+set noaskquit
+set wr_singlescale
+set wr_vecnames
+tran 10n 40u 0 10n
+wrdata transient.dat v(diff) v(out)
+quit
+.endc
+.end

@@ -1,0 +1,20 @@
+5T OTA exact linearized differential voltage transfer poles and zeros
+.include models.lib
+.include ota-core.cir
+.temp 27
+VDD vdd 0 1.8
+VB vb 0 0.65
+VCM cm 0 0.9
+* PZ inserts its own voltage excitation; do not short the input port with VDIFF.
+RDC diff 0 1G
+EPLUS vinp cm diff 0 0.5
+EMINUS vinn cm diff 0 -0.5
+XDUT vdd 0 vinp vinn out vb ota_5t
+CL out 0 1p
+.control
+set noaskquit
+pz diff 0 out 0 vol pz
+print all
+quit
+.endc
+.end

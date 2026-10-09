@@ -4,6 +4,7 @@ import Entry from '../components/Entry.astro';
 import ColumnEntry from '../components/ColumnEntry.astro';
 import { columns } from '../data/columns';
 import { featuredLessons } from '../data/illustrations';
+import { digitalICClassroomURL } from '../data/learning-sites';
 const SIGNAL_W = 240;
 const SIGNAL_H = 180;
 const sineY = (phase: number) => SIGNAL_H / 2 - 58 * Math.sin(2 * Math.PI * phase);
@@ -41,6 +42,10 @@ const digitalPath = `M0 ${SIGNAL_H / 2} ` + Array.from({ length: 32 }, (_, i) =>
       <a class="reading-route" href="/learn/razavi/">
         <div><strong>Razavi 文章学习路线</strong><span>ADC · PLL · 高速链路：按基础和每周时间安排阅读、推导与实验。</span></div>
         <span aria-hidden="true">开始学习 →</span>
+      </a>
+      <a class="reading-route" href={digitalICClassroomURL}>
+        <div><strong>数字 IC 与数模混合设计课堂</strong><span>从单系统时钟 SPI 开始，学习 RTL、STA、CDC、控制校准与 ΔΣ 抽取；讲义、个人记录和 SPI 时序演示。</span></div>
+        <span aria-hidden="true">进入数字课堂 ↗</span>
       </a>
       <section id="lessons" aria-label="Interactive lessons">
         <nav class="filters" aria-label="Filter lessons by topic" hidden>

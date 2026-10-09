@@ -1,0 +1,266 @@
+{
+  "operating_point": {
+    "out_V": 1.19317676,
+    "X_V": 0.253976621,
+    "Y_V": 1.19317676,
+    "supply_current_A": -3.22438208e-05,
+    "power_W": 5.803887744e-05
+  },
+  "device_parameters": {
+    "m1": {
+      "id": 1.6121912e-05,
+      "gm": 0.000230312218,
+      "gds": 4.70403241e-07,
+      "gmbs": 4.71604682e-05,
+      "vgs": 0.646023379,
+      "vds": 0.939200143,
+      "von": 0.506022897,
+      "vdsat": 0.140000482
+    },
+    "m2": {
+      "id": 1.6121912e-05,
+      "gm": 0.000230312218,
+      "gds": 4.70403241e-07,
+      "gmbs": 4.71604682e-05,
+      "vgs": 0.646023379,
+      "vds": 0.939200143,
+      "von": 0.506022897,
+      "vdsat": 0.140000482
+    },
+    "m3": {
+      "id": 1.61219106e-05,
+      "gm": 0.000205606138,
+      "gds": 6.29594301e-07,
+      "gmbs": 4.91492677e-05,
+      "vgs": 0.606823236,
+      "vds": 0.606823236,
+      "von": -0.45,
+      "vdsat": -0.156823236
+    },
+    "m4": {
+      "id": 1.61219106e-05,
+      "gm": 0.000205606138,
+      "gds": 6.29594301e-07,
+      "gmbs": 4.91492677e-05,
+      "vgs": 0.606823236,
+      "vds": 0.606823236,
+      "von": -0.45,
+      "vdsat": -0.156823236
+    },
+    "m5": {
+      "id": 3.22438178e-05,
+      "gm": 0.000322438176,
+      "gds": 9.6e-07,
+      "gmbs": 7.70774664e-05,
+      "vgs": 0.65,
+      "vds": 0.253976621,
+      "von": 0.45,
+      "vdsat": 0.2
+    }
+  },
+  "saturation_margin_V": {
+    "m1": 0.799199661,
+    "m2": 0.799199661,
+    "m3": 0.44999999999999996,
+    "m4": 0.44999999999999996,
+    "m5": 0.053976621
+  },
+  "differential_gain_V_per_V": 209.054831,
+  "differential_gain_dB": 46.40520416041667,
+  "common_mode_gain_V_per_V": -0.00192525694,
+  "cmrr_dB": 100.71543020881323,
+  "common_mode_tail_gain_V_per_V": 0.827199036,
+  "common_mode_mirror_gain_V_per_V": -0.00192525694,
+  "bandwidth_3dB_Hz": 173754.83510948523,
+  "unity_gain_frequency_Hz": 36408703.91325132,
+  "gm_Rout_approximation_V_per_V": 209.3752114947908,
+  "dc_center_slope_V_per_V": 209.0548000000003,
+  "transient_step_gain_V_per_V": 209.0244794999996,
+  "independent_kcl": {
+    "differential_Y_OUT_X": [
+      -0.3199996359435492,
+      209.05521185884726,
+      0.17633185620060413
+    ],
+    "common_mode_Y_OUT_X": [
+      -0.001925250948838845,
+      -0.0019252509488320644,
+      0.8271990402021551
+    ]
+  },
+  "checks": [
+    "five conducting saturated MOS devices",
+    "tail current KCL",
+    "independent small-signal KCL including gmb and gds",
+    "DC center slope vs AC",
+    "small open-loop step vs AC",
+    "matched common-mode formulas",
+    "output current injection vs KCL",
+    "positive/negative supply KCL vs AC",
+    "differential noise referral and uncorrelated source power sum",
+    "MOS1 thermal noise vs independent KCL",
+    "full PZ transfer reconstructs complex AC",
+    "saturated bias-sweep square law",
+    "1% and 0.1% small-step settling vs dominant pole"
+  ],
+  "metrics": {
+    "output_resistance": {
+      "ngspice_ohm": 910126.27,
+      "independent_kcl_ohm": 910127.924429896,
+      "ro2_parallel_ro4_ohm": 909092.940500407
+    },
+    "matched_common_mode_formula": {
+      "Acm_V_per_V": -0.0019252509488391363,
+      "X_gain_V_per_V": 0.8271990402021548
+    },
+    "psrr_reference": "VINP, VINN, VB, output and CL fixed to external ground; excite one rail at a time",
+    "psrr_at_1Hz": {
+      "positive": {
+        "supply_gain_V_per_V": 0.999996063,
+        "independent_kcl_V_per_V": 0.9999960677540547,
+        "psrr_dB": 46.40523835683149
+      },
+      "negative": {
+        "supply_gain_V_per_V": 0.782300809,
+        "independent_kcl_V_per_V": 0.7823008115771687,
+        "psrr_dB": 48.53772857316065
+      }
+    },
+    "noise": {
+      "convention": "one-sided voltage amplitude densities; differential input reference; KF defaults to zero",
+      "input_density_1Hz_V_sqrtHz": 1.34771172e-08,
+      "leading_order_density_V_sqrtHz": 1.3477079178796946e-08,
+      "kcl_density_V_sqrtHz": 1.3477144122187153e-08,
+      "band_Hz": [
+        10,
+        100000
+      ],
+      "integrated_input_rms_V": 4.2616255672423125e-06,
+      "integrated_output_rms_V": 0.0008488318811575432,
+      "white_noise_input_rms_V": 4.2616135444833915e-06,
+      "MOS_output_density_1Hz_V_sqrtHz": [
+        1.44808757e-06,
+        1.4481009e-06,
+        1.36456697e-06,
+        1.3718758e-06,
+        4.56849698e-09
+      ]
+    },
+    "capacitances_F": {
+      "m1": {
+        "cgs": 3.10209587e-15,
+        "cgd": 8e-16,
+        "cgb": 0.0
+      },
+      "m2": {
+        "cgs": 3.10209587e-15,
+        "cgd": 8e-16,
+        "cgb": 0.0
+      },
+      "m3": {
+        "cgs": 6.20419173e-15,
+        "cgd": 1.6e-15,
+        "cgb": 0.0
+      },
+      "m4": {
+        "cgs": 6.20419173e-15,
+        "cgd": 1.6e-15,
+        "cgb": 0.0
+      },
+      "m5": {
+        "cgs": 1.08083835e-14,
+        "cgd": 1.6e-15,
+        "cgb": 0.0
+      }
+    },
+    "pole_zero": {
+      "poles_rad_per_s": [
+        [
+          -1094400.0,
+          0.0
+        ],
+        [
+          -13963200000.0,
+          0.0
+        ],
+        [
+          -71372300000.0,
+          0.0
+        ]
+      ],
+      "zeros_rad_per_s": [
+        [
+          -31152800000.0,
+          0.0
+        ],
+        [
+          -71415300000.0,
+          0.0
+        ],
+        [
+          287890300000.0,
+          0.0
+        ]
+      ],
+      "PZ_AC_max_relative_error": 1.8234847055600422e-06,
+      "scalar_CY_F": 1.480838346e-14,
+      "scalar_CO_F": 1.0023999999999998e-12,
+      "output_pole_approx_Hz": 174650.8840764513,
+      "mirror_pole_approx_Hz": 2209777541.2910857,
+      "mirror_zero_approx_Hz": 4419555082.582171,
+      "dominant_tau_s": 9.137426900584796e-07
+    },
+    "open_loop_small_step_settling": {
+      "reference": "time after 10 ns rising edge completes; relative to DC output movement",
+      "final_OUT_V": 1.2140832499999998,
+      "1_percent": {
+        "ngspice_s": 4.2120000000000005e-06,
+        "dominant_pole_s": 4.207940593921868e-06
+      },
+      "0_1_percent": {
+        "ngspice_s": 6.311999999999999e-06,
+        "dominant_pole_s": 6.311910890882801e-06
+      }
+    },
+    "bias_sweep": {
+      "VB_range_V": [
+        0.55,
+        0.75
+      ],
+      "first_sample_tail_not_saturated_V": 0.685
+    }
+  },
+  "validation_date": "2026-10-09",
+  "model": "Educational LEVEL=1, not a PDK",
+  "conditions": {
+    "VDD_V": 1.8,
+    "VCM_V": 0.9,
+    "VB_V": 0.65,
+    "CL_F": 1e-12,
+    "temperature_C": 27
+  },
+  "simulator_label": "ngspice-33-w7, official experimental Windows package",
+  "simulator_detected_version": [
+    "33"
+  ],
+  "simulator_executable_sha256": "54068911555d46067ff2bdfcd0cf4b1afd3c1330be0586f93911df0a6af88e7c",
+  "source_sha256": {
+    "op.cir": "c79ea4077c91169c84a99218026a79bf5064d06c3aa2d1eb94475cf5a9a6d1d3",
+    "ac-differential.cir": "9451eaaf48b87ccd565c28589543e5b47f8de886d99914e434e9d72157bfe642",
+    "ac-common-mode.cir": "1f702d5686b0d1123a06ce5a9ee07b2abcefc9b4ec1e787c9b35a248ae3d2300",
+    "dc-transfer.cir": "45333e8d4312b34ad0591e3541b5841aa429151b43ce51954b167a3602639f24",
+    "transient.cir": "a7e29d7804a75c49ae62f7bb9bc7945b1d5f4a4ddb2f9c09344df46b14aaab99",
+    "ac-output-resistance.cir": "a2b5ea18c1333d6eb97f4a25d0f0cc1679c824b45e10bb7eb0547564ad5e2039",
+    "ac-psrr-positive.cir": "6f54dfdc8d89714acf2de002c2065d23cb44b37fcc50d1df48fe8b9e12776fca",
+    "ac-psrr-negative.cir": "ef8e6398a992268ded16de3f96153bd48b4fdcca094e0e9ee8846c5940eafd99",
+    "noise.cir": "479a9bbc9385f3cf0be9c57e00760a34f8cb78c0600dbe6011999a391e4fca0a",
+    "bias-sweep.cir": "4270f9d29f2ee7f5573820ca0c474c5012253e199e5283fbb24376fe7b677b7a",
+    "poles-zeros.cir": "1c9093e11618176c88b8b63f15c0e5d882b2d6a3ecf5c22be60586f031afbf09",
+    "ota-core.cir": "e760b71b4403a8577bf079ad3e06a917c40521f5cb40bcb8f279b20039ed2596",
+    "models.lib": "642d74440f4ab95849690ce18d2669e4c15f8c65b21e4e82f0ef807a4a7af58f"
+  },
+  "script_sha256": {
+    "run_5t_ota.py": "9de597446422dec5578c371cd85a698bfaadf71ed1cedbdab6bc2d227a4fb693",
+    "ota_5t_metrics.py": "a86feb15dfc3f108a4793c22b4be143d4de6df97185b3019cf7234552b551b08"
+  }
+}

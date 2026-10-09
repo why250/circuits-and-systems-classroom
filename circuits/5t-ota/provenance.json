@@ -1,0 +1,462 @@
+{
+  "source_url": "https://analog-canvas.tokenzhang.com/g/tckfnzbrkf",
+  "source_file": "Five-transistor OTA.icproj.json",
+  "source_sha256": "4e70aebb62fa2e8f6144fc0dd6c85b2287a37020548a53a25762f7e070b1d96a",
+  "project_id": "project-d860a6b9-e6d7-499c-8427-db1a26ba8239",
+  "document_id": "document-ota5t",
+  "export_status": "ready",
+  "diagnostics": [
+    {
+      "code": "GENERATED_NET_NAME",
+      "severity": "info",
+      "documentId": "document-ota5t",
+      "objectIds": [
+        "wire-67000a11-d7a1-4c5f-af8e-aca4bccf731c-net"
+      ],
+      "primary": {
+        "documentId": "document-ota5t",
+        "hierarchyPath": [],
+        "kind": "net",
+        "objectId": "wire-67000a11-d7a1-4c5f-af8e-aca4bccf731c-net"
+      },
+      "message": "Unnamed logical Net wire-67000a11-d7a1-4c5f-af8e-aca4bccf731c-net exports as net0"
+    },
+    {
+      "code": "GENERATED_NET_NAME",
+      "severity": "info",
+      "documentId": "document-ota5t",
+      "objectIds": [
+        "wire-76286fe2-c675-4954-ae55-49270efdb441-net"
+      ],
+      "primary": {
+        "documentId": "document-ota5t",
+        "hierarchyPath": [],
+        "kind": "net",
+        "objectId": "wire-76286fe2-c675-4954-ae55-49270efdb441-net"
+      },
+      "message": "Unnamed logical Net wire-76286fe2-c675-4954-ae55-49270efdb441-net exports as net1"
+    }
+  ],
+  "structural_verification": {
+    "status": "equal",
+    "topology": "equal",
+    "differences": [],
+    "reasons": [],
+    "comparedCells": 1,
+    "summary": "equal"
+  },
+  "teaching_structural_verification": {
+    "status": "equal",
+    "topology": "equal",
+    "differences": [],
+    "reasons": [],
+    "comparedCells": 1,
+    "summary": "equal"
+  },
+  "node_mapping": {
+    "net0": "X",
+    "net1": "Y",
+    "M5": "M_tail"
+  },
+  "teaching_changes": "SKY130 subcircuit calls replaced by educational MOS1 primitives; X/Y names added; W/L and connectivity preserved",
+  "devices": [
+    {
+      "id": "instance-06e18862-10a6-48ae-ba9e-fa4e8fc0ba46",
+      "name": "M3",
+      "polarity": "pmos",
+      "binding": {
+        "kind": "external-subcircuit",
+        "definitionId": "external-subcircuit-27f716b14d59fc10"
+      },
+      "parameters": {
+        "l": "0.5u",
+        "m": "1",
+        "nf": "1",
+        "w": "8u"
+      },
+      "bulk": {
+        "origin": "cell-default",
+        "netId": "net-c802bdb123c8bf22"
+      }
+    },
+    {
+      "id": "instance-713602bb-4689-4ec7-9806-bc3e00c2f9f5",
+      "name": "M4",
+      "polarity": "pmos",
+      "binding": {
+        "kind": "external-subcircuit",
+        "definitionId": "external-subcircuit-27f716b14d59fc10"
+      },
+      "parameters": {
+        "l": "0.5u",
+        "m": "1",
+        "nf": "1",
+        "w": "8u"
+      },
+      "bulk": {
+        "origin": "cell-default",
+        "netId": "net-c802bdb123c8bf22"
+      }
+    },
+    {
+      "id": "instance-fd4004b0-61af-40f3-a351-2b2205edee44",
+      "name": "M1",
+      "polarity": "nmos",
+      "binding": {
+        "kind": "external-subcircuit",
+        "definitionId": "external-subcircuit-e5ee3d17d0c7c89a"
+      },
+      "parameters": {
+        "l": "0.5u",
+        "m": "1",
+        "nf": "1",
+        "w": "4u"
+      },
+      "bulk": {
+        "origin": "cell-default",
+        "netId": "net-power-instance-8ffa33b2-b269-4dad-8e9f-01139a1eee97"
+      }
+    },
+    {
+      "id": "instance-eb66ae88-6cb2-4a6f-91eb-a9d9e79e89f8",
+      "name": "M2",
+      "polarity": "nmos",
+      "binding": {
+        "kind": "external-subcircuit",
+        "definitionId": "external-subcircuit-e5ee3d17d0c7c89a"
+      },
+      "parameters": {
+        "l": "0.5u",
+        "m": "1",
+        "nf": "1",
+        "w": "4u"
+      },
+      "bulk": {
+        "origin": "cell-default",
+        "netId": "net-power-instance-8ffa33b2-b269-4dad-8e9f-01139a1eee97"
+      }
+    },
+    {
+      "id": "instance-88021b47-60d4-43c3-a089-b4458fdf076e",
+      "name": "M5",
+      "polarity": "nmos",
+      "binding": {
+        "kind": "external-subcircuit",
+        "definitionId": "external-subcircuit-e5ee3d17d0c7c89a"
+      },
+      "parameters": {
+        "l": "1u",
+        "m": "1",
+        "nf": "1",
+        "w": "8u"
+      },
+      "bulk": {
+        "origin": "cell-default",
+        "netId": "net-power-instance-8ffa33b2-b269-4dad-8e9f-01139a1eee97"
+      }
+    }
+  ],
+  "extracted_cells": [
+    {
+      "id": "document-ota5t",
+      "name": "ota_5t",
+      "ports": [
+        {
+          "id": "net-c802bdb123c8bf22",
+          "name": "VDD",
+          "netName": "VDD"
+        },
+        {
+          "id": "net-power-instance-8ffa33b2-b269-4dad-8e9f-01139a1eee97",
+          "name": "VSS",
+          "netName": "VSS"
+        },
+        {
+          "id": "net-cell-pin-3651fdae202a51ef",
+          "name": "vinp",
+          "netName": "vinp"
+        },
+        {
+          "id": "net-cell-pin-208b520f9aee7318",
+          "name": "vinn",
+          "netName": "vinn"
+        },
+        {
+          "id": "net-cell-pin-d205ae954bfaab77",
+          "name": "vout",
+          "netName": "vout"
+        },
+        {
+          "id": "net-cell-pin-1ccf9ce7be5025d9",
+          "name": "vb",
+          "netName": "vb"
+        }
+      ],
+      "nets": [
+        {
+          "id": "net-c802bdb123c8bf22",
+          "name": "VDD",
+          "scope": "local"
+        },
+        {
+          "id": "net-cell-pin-1ccf9ce7be5025d9",
+          "name": "vb",
+          "scope": "local"
+        },
+        {
+          "id": "net-cell-pin-208b520f9aee7318",
+          "name": "vinn",
+          "scope": "local"
+        },
+        {
+          "id": "net-cell-pin-3651fdae202a51ef",
+          "name": "vinp",
+          "scope": "local"
+        },
+        {
+          "id": "net-cell-pin-d205ae954bfaab77",
+          "name": "vout",
+          "scope": "local"
+        },
+        {
+          "id": "net-power-instance-8ffa33b2-b269-4dad-8e9f-01139a1eee97",
+          "name": "VSS",
+          "scope": "local"
+        },
+        {
+          "id": "wire-67000a11-d7a1-4c5f-af8e-aca4bccf731c-net",
+          "name": "net0",
+          "scope": "local"
+        },
+        {
+          "id": "wire-76286fe2-c675-4954-ae55-49270efdb441-net",
+          "name": "net1",
+          "scope": "local"
+        }
+      ],
+      "instances": [
+        {
+          "id": "instance-fd4004b0-61af-40f3-a351-2b2205edee44",
+          "reference": "XM1",
+          "invocationKind": "subcircuit",
+          "reviewedExternalBindingId": "sky130-nfet-01v8",
+          "deviceClass": "hierarchical",
+          "target": "sky130_fd_pr__nfet_01v8",
+          "nodes": [
+            {
+              "pinName": "D",
+              "netName": "net1"
+            },
+            {
+              "pinName": "G",
+              "netName": "vinp"
+            },
+            {
+              "pinName": "S",
+              "netName": "net0"
+            },
+            {
+              "pinName": "B",
+              "netName": "VSS"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "l",
+              "rawValue": "0.5"
+            },
+            {
+              "name": "w",
+              "rawValue": "4"
+            },
+            {
+              "name": "nf",
+              "rawValue": "1"
+            },
+            {
+              "name": "m",
+              "rawValue": "1"
+            }
+          ]
+        },
+        {
+          "id": "instance-eb66ae88-6cb2-4a6f-91eb-a9d9e79e89f8",
+          "reference": "XM2",
+          "invocationKind": "subcircuit",
+          "reviewedExternalBindingId": "sky130-nfet-01v8",
+          "deviceClass": "hierarchical",
+          "target": "sky130_fd_pr__nfet_01v8",
+          "nodes": [
+            {
+              "pinName": "D",
+              "netName": "vout"
+            },
+            {
+              "pinName": "G",
+              "netName": "vinn"
+            },
+            {
+              "pinName": "S",
+              "netName": "net0"
+            },
+            {
+              "pinName": "B",
+              "netName": "VSS"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "l",
+              "rawValue": "0.5"
+            },
+            {
+              "name": "w",
+              "rawValue": "4"
+            },
+            {
+              "name": "nf",
+              "rawValue": "1"
+            },
+            {
+              "name": "m",
+              "rawValue": "1"
+            }
+          ]
+        },
+        {
+          "id": "instance-06e18862-10a6-48ae-ba9e-fa4e8fc0ba46",
+          "reference": "XM3",
+          "invocationKind": "subcircuit",
+          "reviewedExternalBindingId": "sky130-pfet-01v8",
+          "deviceClass": "hierarchical",
+          "target": "sky130_fd_pr__pfet_01v8",
+          "nodes": [
+            {
+              "pinName": "D",
+              "netName": "net1"
+            },
+            {
+              "pinName": "G",
+              "netName": "net1"
+            },
+            {
+              "pinName": "S",
+              "netName": "VDD"
+            },
+            {
+              "pinName": "B",
+              "netName": "VDD"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "l",
+              "rawValue": "0.5"
+            },
+            {
+              "name": "w",
+              "rawValue": "8"
+            },
+            {
+              "name": "nf",
+              "rawValue": "1"
+            },
+            {
+              "name": "m",
+              "rawValue": "1"
+            }
+          ]
+        },
+        {
+          "id": "instance-713602bb-4689-4ec7-9806-bc3e00c2f9f5",
+          "reference": "XM4",
+          "invocationKind": "subcircuit",
+          "reviewedExternalBindingId": "sky130-pfet-01v8",
+          "deviceClass": "hierarchical",
+          "target": "sky130_fd_pr__pfet_01v8",
+          "nodes": [
+            {
+              "pinName": "D",
+              "netName": "vout"
+            },
+            {
+              "pinName": "G",
+              "netName": "net1"
+            },
+            {
+              "pinName": "S",
+              "netName": "VDD"
+            },
+            {
+              "pinName": "B",
+              "netName": "VDD"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "l",
+              "rawValue": "0.5"
+            },
+            {
+              "name": "w",
+              "rawValue": "8"
+            },
+            {
+              "name": "nf",
+              "rawValue": "1"
+            },
+            {
+              "name": "m",
+              "rawValue": "1"
+            }
+          ]
+        },
+        {
+          "id": "instance-88021b47-60d4-43c3-a089-b4458fdf076e",
+          "reference": "XM5",
+          "invocationKind": "subcircuit",
+          "reviewedExternalBindingId": "sky130-nfet-01v8",
+          "deviceClass": "hierarchical",
+          "target": "sky130_fd_pr__nfet_01v8",
+          "nodes": [
+            {
+              "pinName": "D",
+              "netName": "net0"
+            },
+            {
+              "pinName": "G",
+              "netName": "vb"
+            },
+            {
+              "pinName": "S",
+              "netName": "VSS"
+            },
+            {
+              "pinName": "B",
+              "netName": "VSS"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "l",
+              "rawValue": "1"
+            },
+            {
+              "name": "w",
+              "rawValue": "8"
+            },
+            {
+              "name": "nf",
+              "rawValue": "1"
+            },
+            {
+              "name": "m",
+              "rawValue": "1"
+            }
+          ]
+        }
+      ],
+      "formalParameters": []
+    }
+  ]
+}

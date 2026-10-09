@@ -1,0 +1,15 @@
+Note: can't find init file.
+
+Circuit: 5t ota exact linearized differential voltage transfer poles and zeros
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+
+No. of Data Rows : 1
+pole(1) = -7.13723e+10,0.000000e+00
+pole(2) = -1.39632e+10,0.000000e+00
+pole(3) = -1.09440e+06,0.000000e+00
+zero(1) = -7.14153e+10,0.000000e+00
+zero(2) = -3.11528e+10,0.000000e+00
+zero(3) = 2.878903e+11,0.000000e+00
+ngspice-33 done

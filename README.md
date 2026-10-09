@@ -11,6 +11,9 @@ an external Bode-plot tool. The [ADCToolbox](https://github.com/Arcadia-1/ADCToo
 
 The Razavi learning roadmap is available at <https://why250-circuits-classroom.pages.dev/learn/razavi/>.
 
+The home page and shared navigation also link to [Digital IC Classroom](https://why250-digital-ic-classroom.pages.dev/),
+an independent Chinese learning site for RTL, SPI, STA/CDC and mixed-signal digital design. It links back to this classroom.
+
 ## Contents
 
 ### Razavi's Analog Mind Collection
@@ -82,6 +85,9 @@ Reference guide for the three fundamental MOSFET amplifier topologies (Common So
 
 #### `5T-Differential-Amplifier-Analysis.md`
 Complete mathematical analysis of 5-transistor differential amplifiers including differential/common-mode gains, CMRR, PSRR, noise analysis (thermal and flicker), frequency response (poles, zeros, transfer function), and pole-zero doublet settling time analysis.
+
+#### [Five-Transistor OTA: Schematic and Simulation](5T-OTA-Schematic-and-Simulation.md)
+Companion document with an editable Analog Canvas project, SVG schematic, original SKY130 structural netlist and reproducible educational ngspice lab. Pairs derivations with bias, gain, impedance, CMRR, PSRR, thermal noise, pole/zero and small-step settling plots from eleven testbenches, including numerical checks and model limits. [Run the lab](simulations/5t-ota/README.md).
 
 #### `Miller-Compensated-Two-Stage-Amplifier.md`
 Classical two-stage operational amplifier with Miller compensation. Comprehensive reference covering DC gain equations, dominant/non-dominant poles, RHP zero analysis, GBW calculations, phase margin design, slew rate, settling time, noise analysis, CMRR/PSRR, and complete design procedure with sizing equations.

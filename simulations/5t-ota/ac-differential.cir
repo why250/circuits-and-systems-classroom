@@ -1,0 +1,20 @@
+5T OTA differential gain; vinp-vinn has unit AC amplitude
+.include models.lib
+.include ota-core.cir
+.temp 27
+VDD vdd 0 1.8
+VB vb 0 0.65
+VINP vinp 0 DC 0.9 AC 0.5 0
+VINN vinn 0 DC 0.9 AC 0.5 180
+XDUT vdd 0 vinp vinn out vb ota_5t
+CL out 0 1p
+.control
+set noaskquit
+set wr_singlescale
+set wr_vecnames
+ac dec 80 1 100G
+let gain = v(out)/(v(vinp)-v(vinn))
+wrdata ac-differential.dat real(gain) imag(gain)
+quit
+.endc
+.end

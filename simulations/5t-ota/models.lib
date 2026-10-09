@@ -1,0 +1,6 @@
+* Educational long-channel models; no PDK or silicon calibration.
+* KP: A/V^2; TOX: m; CGSO/CGDO: F/m; LAMBDA: 1/V.
+.model NMOS_EDU NMOS (LEVEL=1 VTO=0.45 KP=200u LAMBDA=0.03
++ GAMMA=0.4 PHI=0.7 TOX=20n CGSO=200p CGDO=200p)
+.model PMOS_EDU PMOS (LEVEL=1 VTO=-0.45 KP=80u LAMBDA=0.04
++ GAMMA=0.4 PHI=0.7 TOX=20n CGSO=200p CGDO=200p)
