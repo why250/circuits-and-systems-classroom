@@ -1,0 +1,22 @@
+Cascode load-10k: noise; teaching LEVEL=1, not SKY130
+.include models.lib
+.include cascode-core.cir
+.temp 27
+.options reltol=1e-8 abstol=1e-15 vntol=1e-12
+VDD vdd 0 DC 1.8
+VSS vss 0 DC 0
+VB vb 0 DC 1.25
+VIN vin 0 DC 0.75 AC 1
+XDUT vdd vss vin out vb cascode RLVAL=10000 REVAL=50
+CL out 0 1p
+.control
+set noaskquit
+set wr_singlescale
+set wr_vecnames
+set numdgt=15
+noise v(out) VIN dec 100 1 100T 1
+setplot noise1
+wrdata load-10k-noise.dat onoise_spectrum inoise_spectrum onoise_m.xdut.m1 onoise_m.xdut.m2 onoise_r.xdut.re onoise_r.xdut.rl
+quit
+.endc
+.end

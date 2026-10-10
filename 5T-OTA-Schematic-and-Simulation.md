@@ -1,5 +1,5 @@
 <!--
-Input: user-exported Analog Canvas OTA and eleven ngspice testbenches | Output: schematic, metric derivations, simulation plots and independent checks | Position: Companion technical document
+Input: user-exported Analog Canvas OTA and twelve ngspice testbenches | Output: schematic, metric derivations, simulation plots and independent checks | Position: Companion technical document
 -->
 # Five-Transistor OTA: Schematic and Simulation
 
@@ -7,7 +7,7 @@ This companion document records the schematic, netlists, simulation results and 
 
 This note studies an NMOS-input, PMOS-current-mirror-loaded operational transconductance amplifier (OTA) with a **single-ended output**. The source is the [Analog Canvas Gallery circuit](https://analog-canvas.tokenzhang.com/g/tckfnzbrkf), using the project exported by the user on 2026-10-07.
 
-**Verification status:** the original project and its structural netlist match the five-transistor reference, including connections and device parameters. A separate educational LEVEL=1 model version preserves the topology and W/L dimensions. Eleven testbenches were executed on 2026-10-09: OP, bias sweep, differential/common-mode AC, output impedance, positive/negative supply AC, noise, pole-zero extraction, differential DC and transient. Each metric below has its equation, test method, plot and comparison. These numerical results verify the stated educational model; they are not SKY130 process predictions. Flicker noise, mismatch, closed-loop stability/settling and large-signal slew rate require further models or testbenches. The original analysis file is unchanged.
+**Verification status:** the original project and its structural netlist match the five-transistor reference, including connections and device parameters. A separate educational LEVEL=1 model version preserves the topology and W/L dimensions. Twelve testbenches were rerun locally on 2026-10-10: OP, bias sweep, differential/common-mode AC, output impedance, positive/negative supply AC, thermal noise, thermal plus illustrative 1/f noise, pole-zero extraction, differential DC and transient. All automated numerical checks passed. Each metric below has its equation, test method, plot and comparison. These numerical results verify the stated educational model; they are not SKY130 process predictions. Process-calibrated flicker noise, mismatch, closed-loop stability/settling and large-signal slew rate require further models or testbenches. The original analysis file is unchanged.
 
 ## Circuit and Downloadable Files
 
@@ -20,7 +20,7 @@ The drawing names X and Y in a teaching copy of the exported project. The origin
 | [Original editable project](circuits/5t-ota/Five-transistor%20OTA.icproj.json) | Gallery circuit; original SKY130 bindings retained |
 | [Educational editable project](circuits/5t-ota/educational.icproj.json) | Same geometry, connectivity and W/L; named X/Y; educational models |
 | [Original structural netlist](simulations/5t-ota/gallery-original.cir) | SKY130 calls; requires its PDK and a testbench; not run here |
-| [Educational core](simulations/5t-ota/ota-core.cir) and [models](simulations/5t-ota/models.lib) | Generated core; all eleven testbenches exercised; no external PDK |
+| [Educational core](simulations/5t-ota/ota-core.cir) and [models](simulations/5t-ota/models.lib) | Generated core; all twelve testbenches exercised; no external PDK; the flicker deck overrides KF/AF for its own run |
 | [Run instructions](simulations/5t-ota/README.md) | Commands, stimuli and model distinctions |
 | [Source and structural verification](circuits/5t-ota/provenance.json) | Gallery URL, source SHA-256 and comparison results |
 
@@ -352,9 +352,79 @@ For an independent low-frequency check, solve $Gh_j=q_j$, where $q_j$ injects a 
 | Input RMS, 10 Hz–100 kHz | White approximation: 4.26161 uV | Integrated input PSD: 4.26163 uV |
 | Output RMS, 10 Hz–100 kHz | $\sqrt{\int e_{n,o}^2df}$ | 848.832 uV |
 
-M1–M4 dominate at this matched bias; M5's contribution is small but finite. Agreement of the thermal approximation does not establish flicker noise or mismatch behavior. Flicker coefficients, bias-circuit noise and correlations must follow the selected model and actual circuit when those are added.
+M1–M4 dominate at this matched bias; M5's contribution is small but finite. This thermal-only baseline remains useful for comparison with the separate illustrative flicker-noise run below. Process-calibrated flicker coefficients, bias-circuit noise, correlations and mismatch are outside these teaching models.
 
 Raw evidence: [noise densities and source contributions CSV](simulations/5t-ota/results/noise.csv), [noise log](simulations/5t-ota/results/noise.log).
+
+## Thermal Plus 1/f Noise: Equation to Plot
+
+ngspice MOS1 supports flicker noise. The baseline `models.lib` omits KF, whose default is zero. The separate [flicker-noise deck](simulations/5t-ota/noise-flicker.cir) uses `altermod` to set **NMOS KF = 2e-33, PMOS KF = 1e-33 and AF = 1** for its own execution. The runner checks that the operating point and thermal spectra remain identical to the baseline.
+
+These coefficients place the nominal input-referred flicker/thermal PSD crossover on the order of 1 kHz, making low-frequency dominance and the white-noise floor visible in one plot. The different NMOS/PMOS values are an illustrative choice, not a universal device-type ordering. They are **not fitted SKY130 parameters**. Their magnitude belongs to the specific MOS1 equation and SI dimensions below; do not transfer KF values between different compact-model conventions.
+
+For unit multiplicity, the [ngspice MOS1 implementation](https://github.com/ngspice/ngspice/blob/master/src/spicelib/devices/mos1/mos1noi.c) uses the drain-source current PSD
+
+$$
+S_{i,j}^{1/f}(f)=\frac{K_{F,j}|I_{D,j}|^{A_{F,j}}}{f W_j L_{\mathrm{eff},j} C_{\mathrm{ox},j}^{2}},
+\quad L_{\mathrm{eff}}=L-2L_D,
+\quad C_{\mathrm{ox}}=\frac{\epsilon_{\mathrm{ox}}}{T_{\mathrm{ox}}}.
+$$
+
+Here $L_D=0$, $T_{\mathrm{ox}}=20$ nm and $C_{\mathrm{ox}}=1.72657$ mF/m$^2$. AF is the **drain-current exponent**, not the frequency exponent. The PSD varies as $1/f$, and its amplitude density as $1/\sqrt f$, before transfer-function effects.
+
+With $h_{j,o}(f)$ the output transimpedance of each independent drain-source noise current, powers add:
+
+$$
+S_{v,\mathrm{in}}^{1/f}(f)=\frac{\sum_j |h_{j,o}(f)|^2 S_{i,j}^{1/f}(f)}{|A_{\mathrm{dm}}(f)|^2},
+\qquad S_{v,\mathrm{in}}^{\mathrm{total}}=S_{v,\mathrm{in}}^{\mathrm{thermal}}+S_{v,\mathrm{in}}^{1/f}.
+$$
+
+At low frequency, $h_{j,o}(0)$ comes from the same independent three-node KCL used for thermal noise. Define
+
+$$
+S_{v,\mathrm{in}}^{\mathrm{total}}(f)\approx S_w+\frac{B}{f},
+\quad B=\frac{\sum_j |h_{j,o}(0)|^2 K_{F,j}|I_{D,j}|^{A_{F,j}}/(W_j L_{\mathrm{eff},j}C_{\mathrm{ox},j}^2)}{|A_{\mathrm{dm}}(0)|^2},
+\quad f_c\approx\frac{B}{S_w}.
+$$
+
+The independent calculation gives $S_w=1.81633\times10^{-16}$ V$^2$/Hz and $B=2.54892\times10^{-13}$ V$^2$. Both KCL and SPICE give $f_c\approx1.40333$ kHz, where **flicker PSD equals thermal PSD**; total amplitude density there is $\sqrt2$ times the thermal floor.
+
+For a band where the low-frequency approximation applies,
+
+$$
+v_{n,\mathrm{in,rms}}^2\approx S_w(f_2-f_1)+B\ln\frac{f_2}{f_1},
+\qquad v_{n,\mathrm{total,rms}}=\sqrt{v_{n,\mathrm{thermal,rms}}^2+v_{n,1/f,\mathrm{rms}}^2}.
+$$
+
+RMS amplitudes do not add directly. A finite lower cutoff $f_1>0$ must be declared: integrating an ideal $1/f$ PSD down to zero diverges.
+
+**Test:** the new deck uses the same balanced differential source and 1 Hz–100 GHz grid as AC. It records total input/output densities, each MOS total contribution and its separate `_1overf` and `_id` sources, plus OP and parameter snapshots. ngspice-33 MOS1 cannot query KF/AF through `@model`; these inputs are recorded from the executed deck, while TOX, LD, W and L are read from ngspice. The independent source equation checks their effect.
+
+![Thermal and flicker noise, per-device powers and integration-limit sensitivity](figures/5t-ota/noise-flicker.png)
+
+| Frequency | Thermal input density | Flicker input density | Total input density |
+|---|---:|---:|---:|
+| 1 Hz | 13.4771 | 504.867 | 505.047 |
+| 10 Hz | 13.4771 | 159.653 | 160.221 |
+| 100 Hz | 13.4771 | 50.4867 | 52.2546 |
+| 1 kHz | 13.4771 | 15.9653 | 20.8931 |
+| 10 kHz | 13.4771 | 5.04867 | 14.3917 |
+| 100 kHz | 13.4771 | 1.59653 | 13.5714 |
+
+All densities are in nV/$\sqrt{\mathrm{Hz}}$, referred to the differential input.
+
+| Integration band | Thermal input RMS | Flicker input RMS | Total input RMS | $S_w+B/f$ prediction |
+|---|---:|---:|---:|---:|
+| 1 Hz–1 kHz | 0.425971 | 1.32701 | 1.39371 | 1.39362 |
+| 10 Hz–1 kHz | 0.424048 | 1.08350 | 1.16353 | 1.16346 |
+| 1 Hz–100 kHz | 4.26182 | 1.71317 | 4.59326 | 4.59322 |
+| 10 Hz–100 kHz | 4.26163 | 1.53230 | 4.52873 | 4.52870 |
+
+All RMS values are in uV. Narrow low-frequency bands show a stronger relative effect: lowering the cutoff from 10 Hz to 1 Hz increases total 1 kHz-band RMS from 1.16353 to 1.39371 uV. In the wider 10 Hz–100 kHz band, thermal noise still contributes most variance; total RMS increases from the baseline 4.26163 to 4.52873 uV.
+
+**Checks:** MOS thermal/flicker powers add to each device total; device powers sum to the output total; input referral agrees with differential AC; thermal spectra match the baseline over the whole sweep. Independent low-frequency KCL matches every flicker source. Both mechanisms inject drain-source current, so their transfer cancels in their per-device PSD ratio: the full-sweep $1/f$ check has maximum relative error $3.66\times10^{-7}$. Integrated variances add, and the analytic integral agrees within 0.05% for the 1 Hz–1 kHz and 10 Hz–1 kHz bands. Small differences in the table reflect sampled quadrature and the low-frequency approximation.
+
+Raw evidence: [complete noise CSV](simulations/5t-ota/results/noise-flicker.csv), [log](simulations/5t-ota/results/noise-flicker.log), [OP](simulations/5t-ota/results/flicker-op.dat), [model data](simulations/5t-ota/results/flicker-models.dat), [geometry](simulations/5t-ota/results/flicker-geometry.dat) and `metrics.noise_flicker` in the [summary](simulations/5t-ota/results/summary.json).
 
 ## Reproducible Simulation Results
 
@@ -376,6 +446,9 @@ Conditions: VDD = 1.8 V, VSS = 0 V, input common mode = 0.9 V, VB = 0.65 V, $C_L
 | PSRR+ / PSRR− at 1 Hz | 46.4052 / 48.5377 dB, declared ground reference |
 | Input thermal noise at 1 Hz | 13.4771 nV/$\sqrt{\mathrm{Hz}}$ |
 | Integrated input noise, 10 Hz–100 kHz | 4.26163 uV RMS |
+| Illustrative thermal + 1/f input noise at 1 Hz | 505.047 nV/$\sqrt{\mathrm{Hz}}$ |
+| Illustrative flicker/thermal input PSD crossover | 1.40333 kHz |
+| Illustrative thermal + 1/f input RMS, 10 Hz–100 kHz | 4.52873 uV RMS |
 | Open-loop 1% / 0.1% settling | 4.212 / 6.312 us, 100 uV differential step |
 
 ![Educational ngspice AC, DC and transient results](figures/5t-ota/simulation.png)

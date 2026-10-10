@@ -1,0 +1,14 @@
+Note: can't find init file.
+
+Circuit: cascode load-10k: poles-zeros; teaching level=1, not sky130
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+
+No. of Data Rows : 1
+pole(1) = -5.50028824274055e+13,0.000000000000000e+00
+pole(2) = -8.41339295873007e+11,0.000000000000000e+00
+pole(3) = -9.99859756489179e+07,0.000000000000000e+00
+zero(1) = -5.73600487599982e+13,0.000000000000000e+00
+zero(2) = 1.871360119593890e+12,0.000000000000000e+00
+ngspice-33 done

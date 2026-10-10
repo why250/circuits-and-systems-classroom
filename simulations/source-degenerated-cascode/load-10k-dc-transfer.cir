@@ -1,0 +1,24 @@
+Cascode load-10k: dc-transfer; teaching LEVEL=1, not SKY130
+.include models.lib
+.include cascode-core.cir
+.temp 27
+.options reltol=1e-8 abstol=1e-15 vntol=1e-12
+VDD vdd 0 DC 1.8
+VSS vss 0 DC 0
+VB vb 0 DC 1.25
+VIN vin 0 DC 0.75
+XDUT vdd vss vin out vb cascode RLVAL=10000 REVAL=50
+CL out 0 1p
+.control
+set noaskquit
+set wr_singlescale
+set wr_vecnames
+set numdgt=15
+save all @m.xdut.m1[vdsat] @m.xdut.m2[vdsat] @m.xdut.m1[gm] @m.xdut.m2[gm]
+dc VIN 0.45 1.05 0.0005
+let margin1=v(xdut.x)-v(xdut.e)-@m.xdut.m1[vdsat]
+let margin2=v(out)-v(xdut.x)-@m.xdut.m2[vdsat]
+wrdata load-10k-dc-transfer.dat v(out) v(xdut.e) v(xdut.x) i(VDD) margin1 margin2 @m.xdut.m1[gm] @m.xdut.m2[gm]
+quit
+.endc
+.end

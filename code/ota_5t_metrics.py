@@ -7,12 +7,14 @@ import re
 import matplotlib.pyplot as plt
 import numpy as np
 
-EXTRA_DECKS = ("ac-output-resistance", "ac-psrr-positive", "ac-psrr-negative", "noise", "bias-sweep", "poles-zeros")
+EXTRA_DECKS = ("ac-output-resistance", "ac-psrr-positive", "ac-psrr-negative", "noise", "noise-flicker", "bias-sweep", "poles-zeros")
 HEADERS = {
     "ac-output-resistance": "frequency_Hz,Zout_real_ohm,Zout_imag_ohm",
     "ac-psrr-positive": "frequency_Hz,Asplus_real,Asplus_imag",
     "ac-psrr-negative": "frequency_Hz,Asminus_real,Asminus_imag",
     "noise": "frequency_Hz,output_V_sqrtHz,input_V_sqrtHz,M1_output_V_sqrtHz,M2_output_V_sqrtHz,M3_output_V_sqrtHz,M4_output_V_sqrtHz,M5_output_V_sqrtHz",
+    "noise-flicker": "frequency_Hz,output_V_sqrtHz,input_V_sqrtHz," + ",".join(
+        f"M{i}_{kind}_output_V_sqrtHz" for kind in ("total", "flicker", "thermal") for i in range(1, 6)),
     "bias-sweep": "VB_V,OUT_V,X_V,Y_V,I_VDD_A,M1_margin_V,M2_margin_V,M3_margin_V,M4_margin_V,M5_margin_V",
 }
 
@@ -53,7 +55,102 @@ def cumulative_variance(f, density):
     return np.r_[0, np.cumsum(np.diff(f)*(power[1:]+power[:-1])/2)]
 
 
-def check_metrics(data, logs, summary, capacitances):
+def check_flicker_noise(data, summary, parameters):
+    """Check MOS1 flicker sources against device physics and the thermal baseline."""
+    thermal, total = data["noise"], data["noise-flicker"]
+    f = thermal[:, 0]
+    adm = complex_gain(data["ac-differential"])
+    if total.shape != (len(f), 18) or not np.array_equal(total[:, 0], f) or np.any(total[:, 1:] <= 0):
+        raise ValueError("Flicker-noise acquisition is incomplete")
+    if not np.allclose(total[:, 1]/abs(adm), total[:, 2], rtol=2e-5):
+        raise ValueError("Flicker-noise differential input referral failed")
+    device_total, flicker, channel = (total[:, a:b]**2 for a, b in ((3, 8), (8, 13), (13, 18)))
+    if not np.allclose(device_total, flicker+channel, rtol=2e-5, atol=0):
+        raise ValueError("MOS thermal/flicker powers do not add to device totals")
+    if not np.allclose(device_total.sum(axis=1), total[:, 1]**2, rtol=2e-5, atol=0):
+        raise ValueError("MOS powers do not add to total flicker-deck output noise")
+    if not np.allclose(channel, thermal[:, 3:8]**2, rtol=2e-5, atol=0):
+        raise ValueError("Flicker deck changed the thermal baseline")
+
+    devices = summary["device_parameters"]
+    names = [f"m{i}" for i in range(1, 6)]
+    # MOS1, unit multiplicity: Si,1/f = KF |Id|^AF / (f W Leff Cox^2).
+    # Match ngspice's SiO2 permittivity; TOX/LD/W/L come from SPICE;
+    # KF/AF come from the executed deck (legacy MOS1 cannot query them).
+    flicker_current_coefficients = []
+    for name in names:
+        model = parameters["models"]["PMOS_EDU" if name in ("m3", "m4") else "NMOS_EDU"]
+        geometry = parameters["geometry"][name]
+        leff = geometry["L_m"]-2*model["LD_m"]
+        if model["KF"] <= 0 or model["AF"] != 1 or model["TOX_m"] <= 0 or leff <= 0 or geometry["W_m"] <= 0:
+            raise ValueError("Invalid educational flicker model or geometry")
+        cox = 3.9*8.854214871e-12/model["TOX_m"]
+        flicker_current_coefficients.append(model["KF"]*abs(devices[name]["id"])**model["AF"] /
+                                            (geometry["W_m"]*leff*cox**2))
+    flicker_current_coefficients = np.array(flicker_current_coefficients)
+    channel_psd = 4*1.380649e-23*300.15*(2/3)*np.array([devices[n]["gm"] for n in names])
+    injections = np.array([[1, 0, -1], [0, 1, -1], [1, 0, 0], [0, 1, 0], [0, 0, 1]])
+    h = np.linalg.solve(kcl_matrix(devices), injections.T)[1]
+    expected_lf = h**2*flicker_current_coefficients/f[0]
+    if not np.allclose(flicker[0], expected_lf, rtol=2e-4, atol=0):
+        raise ValueError("MOS1 flicker source equation disagrees with low-frequency KCL")
+    # Both noise mechanisms inject drain-source current, so their transfer
+    # cancels in the ratio at every frequency, including the capacitive region.
+    expected_ratio = flicker_current_coefficients[None, :]/(f[:, None]*channel_psd[None, :])
+    ratio_error = float(np.max(abs(flicker/channel/expected_ratio-1)))
+    if ratio_error > 2e-4:
+        raise ValueError("Flicker/channel ratio does not follow the MOS1 1/f law")
+    input_flicker_psd = flicker.sum(axis=1)/abs(adm)**2
+    white_psd = float(np.sum(h**2*channel_psd)/abs(adm[0])**2)
+    b = float(np.sum(h**2*flicker_current_coefficients)/abs(adm[0])**2)
+    log_ratio = np.log10(input_flicker_psd/thermal[:, 2]**2)
+    crossings = np.flatnonzero((log_ratio[:-1] >= 0) & (log_ratio[1:] < 0))
+    if not len(crossings):
+        raise ValueError("No flicker/thermal crossover within the sweep")
+    i = crossings[0]
+    corner = float(10**np.interp(0, log_ratio[i:i+2][::-1], np.log10(f[i:i+2])[::-1]))
+    bands = []
+    for low, high in ((1, 1000), (10, 1000), (1, 100000), (10, 100000)):
+        mask = (f >= low) & (f <= high)
+        thermal_var = float(cumulative_variance(f[mask], thermal[mask, 2])[-1])
+        flicker_var = float(cumulative_variance(f[mask], np.sqrt(input_flicker_psd[mask]))[-1])
+        total_var = float(cumulative_variance(f[mask], total[mask, 2])[-1])
+        predicted_var = white_psd*(high-low)+b*np.log(high/low)
+        if not np.isclose(total_var, thermal_var+flicker_var, rtol=2e-5, atol=0):
+            raise ValueError("Integrated thermal/flicker variances do not add")
+        # Check the LF analytic integral where the approximation applies.
+        if high == 1000 and not np.isclose(total_var, predicted_var, rtol=5e-4, atol=0):
+            raise ValueError("Low-frequency Swhite+B/f integral disagrees with SPICE")
+        bands.append({"band_Hz": [low, high], "thermal_input_rms_V": float(np.sqrt(thermal_var)),
+                      "flicker_input_rms_V": float(np.sqrt(flicker_var)),
+                      "total_input_rms_V": float(np.sqrt(total_var)),
+                      "total_output_rms_V": float(np.sqrt(cumulative_variance(f[mask], total[mask, 1])[-1])),
+                      "lf_formula_total_input_rms_V": float(np.sqrt(predicted_var))})
+    samples = []
+    for frequency in (1, 10, 100, 1000, 10000, 100000):
+        j = int(np.argmin(abs(f-frequency)))
+        samples.append({"frequency_Hz": float(f[j]), "thermal_input_V_sqrtHz": float(thermal[j, 2]),
+                        "flicker_input_V_sqrtHz": float(np.sqrt(input_flicker_psd[j])),
+                        "total_input_V_sqrtHz": float(total[j, 2])})
+    summary["checks"].extend(["flicker coefficients preserve OP and thermal baseline",
+        "MOS thermal/flicker and device power sums; differential input referral",
+        "MOS1 flicker source equation vs independent LF KCL",
+        "per-device flicker/thermal ratio follows 1/f over full sweep",
+        "integrated noise variances add; LF analytic integral agrees"])
+    return {"convention": "one-sided PSD; independent thermal and flicker sources; differential input reference",
+            "coefficient_selection": (
+                f"Illustrative only: NMOS KF={parameters['models']['NMOS_EDU']['KF']:g}, "
+                f"PMOS KF={parameters['models']['PMOS_EDU']['KF']:g}, AF=1; "
+                "nominal coefficients chosen for an input PSD crossover near 1 kHz; not a PDK fit"),
+            "source_equation_reference": "https://github.com/ngspice/ngspice/blob/master/src/spicelib/devices/mos1/mos1noi.c",
+            **parameters, "lf_white_input_PSD_V2_per_Hz": white_psd, "lf_flicker_B_V2": b,
+            "corner_Hz": corner, "lf_corner_prediction_Hz": b/white_psd,
+            "source_ratio_max_relative_error": ratio_error, "density_samples": samples,
+            "integrated_bands": bands,
+            "MOS_flicker_output_density_1Hz_V_sqrtHz": np.sqrt(flicker[0]).tolist()}
+
+
+def check_metrics(data, logs, summary, capacitances, flicker_parameters):
     """Reject inconsistent acquisition; record approximations without forcing agreement."""
     dm, cm = data["ac-differential"], data["ac-common-mode"]
     f, adm, acm = dm[:, 0], complex_gain(dm), complex_gain(cm)
@@ -166,6 +263,7 @@ def check_metrics(data, logs, summary, capacitances):
                   "integrated_output_rms_V": float(np.sqrt(output_variance)),
                   "white_noise_input_rms_V": float(np.sqrt(approximate_psd*(100000-10))),
                   "MOS_output_density_1Hz_V_sqrtHz": noise[0, 3:].tolist()},
+        "noise_flicker": check_flicker_noise(data, summary, flicker_parameters),
         "capacitances_F": caps,
         "pole_zero": {"poles_rad_per_s": [[float(z.real), float(z.imag)] for z in poles],
                       "zeros_rad_per_s": [[float(z.real), float(z.imag)] for z in zeros],
@@ -296,6 +394,45 @@ def plot_metrics(data, summary, folder):
     axes[2].semilogx(f[band], np.sqrt(metrics["noise"]["leading_order_density_V_sqrtHz"]**2*(f[band]-10))*1e6, "--", label="sqrt(Svin x bandwidth)")
     axes[2].set(xlabel="Upper integration limit (Hz); lower = 10 Hz", ylabel="Input RMS (uV)", title="10 Hz-100 kHz input noise"); axes[2].legend(fontsize=8)
     save(fig, "noise")
+
+    total = data["noise-flicker"]
+    flicker = metrics["noise_flicker"]
+    input_flicker_psd = np.sum(total[:, 8:13]**2, axis=1)/abs(adm)**2
+    sw, b = flicker["lf_white_input_PSD_V2_per_Hz"], flicker["lf_flicker_B_V2"]
+    fig, grid = plt.subplots(2, 2, figsize=(12, 8), constrained_layout=True)
+    axes = grid.ravel()
+    visible = f <= 1e6
+    axes[0].loglog(f[visible], total[visible, 2]*1e9, label="Thermal + flicker")
+    axes[0].loglog(f[visible], noise[visible, 2]*1e9, label="Thermal baseline")
+    axes[0].loglog(f[visible], np.sqrt(input_flicker_psd[visible])*1e9, label="Flicker component")
+    axes[0].loglog(f[visible], np.sqrt(sw+b/f[visible])*1e9, "k:", label="LF sqrt(Swhite + B/f)")
+    axes[0].axvline(flicker["corner_Hz"], color="grey", ls="--", label=f"PSD crossover: {flicker['corner_Hz']/1e3:.3f} kHz")
+    axes[0].set(xlabel="Frequency (Hz)", ylabel="Input density (nV / sqrt(Hz))",
+                xlim=(1, 1e6), title="Illustrative MOS1 coefficients; AF = 1")
+    axes[0].legend(fontsize=8)
+    ix = np.arange(5)
+    for offset, section, label in ((-.18, slice(13, 18), "Thermal"), (.18, slice(8, 13), "Flicker")):
+        axes[1].bar(ix+offset, total[0, section]**2/abs(adm[0])**2*1e18, width=.36, label=label)
+    axes[1].set(yscale="log", xticks=ix, xticklabels=[n.upper() for n in names],
+                ylabel="Input-referred PSD (nV^2/Hz)", title="Independent device contributions at 1 Hz")
+    axes[1].legend()
+    band = (f >= 10) & (f <= 100e3)
+    for density, label in ((total[:, 2], "Thermal + flicker"), (noise[:, 2], "Thermal baseline")):
+        axes[2].semilogx(f[band], np.sqrt(cumulative_variance(f[band], density[band]))*1e6, label=label)
+    axes[2].semilogx(f[band], np.sqrt(sw*(f[band]-10)+b*np.log(f[band]/10))*1e6, "k:", label="LF analytic integral")
+    axes[2].set(xlabel="Upper limit (Hz); lower limit = 10 Hz", ylabel="Input RMS (uV)",
+                title="Powers add before taking the square root")
+    axes[2].legend(fontsize=8)
+    integration = f <= 100e3
+    lower = f[integration] <= 1e4
+    for density, label in ((total[:, 2], "Thermal + flicker"), (noise[:, 2], "Thermal baseline"),
+                           (np.sqrt(input_flicker_psd), "Flicker component")):
+        cumulative = cumulative_variance(f[integration], density[integration])
+        axes[3].semilogx(f[integration][lower], np.sqrt(cumulative[-1]-cumulative[lower])*1e6, label=label)
+    axes[3].set(xlabel="Lower limit (Hz); upper limit = 100 kHz", ylabel="Input RMS (uV)",
+                title="Lower-frequency cutoff controls integrated 1/f noise")
+    axes[3].legend(fontsize=8)
+    save(fig, "noise-flicker")
 
     poles = np.array([complex(*z) for z in pz["poles_rad_per_s"]])
     zeros = np.array([complex(*z) for z in pz["zeros_rad_per_s"]])

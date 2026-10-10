@@ -1,0 +1,806 @@
+{
+  "run_at": "2026-10-10T18:55:31.911687+08:00",
+  "environment": {
+    "python": "3.13.7",
+    "numpy": "2.2.6",
+    "matplotlib": "3.10.6"
+  },
+  "simulator": {
+    "path": "D:/Users/Documents/GitHub/circuits-and-systems-classroom/.tools/ngspice/ngspice-33-w7\\ngspice.exe",
+    "sha256": "54068911555d46067ff2bdfcd0cf4b1afd3c1330be0586f93911df0a6af88e7c",
+    "detected_version": "ngspice-33"
+  },
+  "model_scope": "Educational MOS1 coefficients; no SKY130 PDK simulated; CL=1p; junction C defaults to zero; 150nm dimensions do not establish short-channel accuracy",
+  "executed_testbenches": [
+    "baseline-op",
+    "baseline-ac-input",
+    "baseline-ac-bias",
+    "baseline-ac-output",
+    "baseline-ac-psrr-positive",
+    "baseline-ac-psrr-negative",
+    "baseline-noise",
+    "baseline-noise-flicker",
+    "baseline-poles-zeros",
+    "baseline-dc-transfer",
+    "baseline-bias-sweep",
+    "baseline-transient",
+    "load-10k-op",
+    "load-10k-ac-input",
+    "load-10k-ac-bias",
+    "load-10k-ac-output",
+    "load-10k-ac-psrr-positive",
+    "load-10k-ac-psrr-negative",
+    "load-10k-noise",
+    "load-10k-noise-flicker",
+    "load-10k-poles-zeros",
+    "load-10k-dc-transfer",
+    "load-10k-bias-sweep",
+    "load-10k-transient",
+    "load-sweep",
+    "degeneration-sweep"
+  ],
+  "input_sha256": {
+    "simulations\\source-degenerated-cascode\\baseline-op.cir": "e915e3acfe3ba49db67cb529867befcc2e3677cd3b7cbeaca32b86afa48300eb",
+    "simulations\\source-degenerated-cascode\\baseline-ac-input.cir": "ae76a65ce8dcf058f4f51ad33035d28019f6b32329709c19a0e57f27228ac61c",
+    "simulations\\source-degenerated-cascode\\baseline-ac-bias.cir": "a025c1ef4707c1680f4ae00f1873a2673d0f36e9fa639f8fe9bc47db86034dce",
+    "simulations\\source-degenerated-cascode\\baseline-ac-output.cir": "bbca045ed1cf05f5df1a92facabf5e57d2e016c5ab280a3a5ae94e76378cf209",
+    "simulations\\source-degenerated-cascode\\baseline-ac-psrr-positive.cir": "87cb78e6aba3437a54eeb19cc959ba507cb0e9433e772d4724982e9d147eaa6b",
+    "simulations\\source-degenerated-cascode\\baseline-ac-psrr-negative.cir": "fff0ca05e76f321e00ff08ad3305d9ffd75eaefa32bd0726df67ec2d4f5da9bc",
+    "simulations\\source-degenerated-cascode\\baseline-noise.cir": "1284b8c3e64e2984d17006761cb94c523d847b3cb260790e9b19ed2240ee6ec2",
+    "simulations\\source-degenerated-cascode\\baseline-noise-flicker.cir": "c541cab1a29505e50c6cb5bf892019ddba7638aa17cd805c6a479ca8800ee99f",
+    "simulations\\source-degenerated-cascode\\baseline-poles-zeros.cir": "3d7af5cd446a292a3cca298bac12869ac24b595ee7e17a3c31530a88b6f2479f",
+    "simulations\\source-degenerated-cascode\\baseline-dc-transfer.cir": "6d0864edd3fcadf3365b91bec2c6c11eb1fb1b78f4fe79b73c34a483705509d8",
+    "simulations\\source-degenerated-cascode\\baseline-bias-sweep.cir": "28b0e3ae363bc8714c1576d3b3b7b37439b2f58545031fff49779f9d448e1e3d",
+    "simulations\\source-degenerated-cascode\\baseline-transient.cir": "df2fc5df32b2a66fc142f3c2a4c6a553ba148d485e82c2b51ef8bf004a760551",
+    "simulations\\source-degenerated-cascode\\load-10k-op.cir": "2df0feb2603153038319f446610c176c2e8b2498e40761f37fd830563fd4d7e8",
+    "simulations\\source-degenerated-cascode\\load-10k-ac-input.cir": "43e7eaf531d12c0f47e73c58d4a9d76cc8117cc8c653899f0ab5242e113c3342",
+    "simulations\\source-degenerated-cascode\\load-10k-ac-bias.cir": "443a9cd2491bb0947c836451ac3c12047ce7e23283fa955ba8a481c22c88b091",
+    "simulations\\source-degenerated-cascode\\load-10k-ac-output.cir": "12024bb91d051453bea490931b2fd0ab6368f5a82c15eaadc81f5a7433978134",
+    "simulations\\source-degenerated-cascode\\load-10k-ac-psrr-positive.cir": "a15ff249f209c1644f8d54e9f16676b214a863b733c82768bed93b47d619468c",
+    "simulations\\source-degenerated-cascode\\load-10k-ac-psrr-negative.cir": "8c40779c7ee1a7192ddd1a23e8c37c4f6d7d377b5c43bb31bbd1fca3088b66c3",
+    "simulations\\source-degenerated-cascode\\load-10k-noise.cir": "a049d69e40e33674988c7e1fb2ab4a5fa2061de6553d58046d90883b85a9a075",
+    "simulations\\source-degenerated-cascode\\load-10k-noise-flicker.cir": "017f6cd313539794fbd9fdd91dd54ca331dda147f414057c3f0aaca91174e085",
+    "simulations\\source-degenerated-cascode\\load-10k-poles-zeros.cir": "7929fe56a5d1f16619a57c1e33701833e68049eb0dd201c8ba1296972c901201",
+    "simulations\\source-degenerated-cascode\\load-10k-dc-transfer.cir": "a7e264766965583b3cedf4c5964eeac653972396100a10aa31d683aa30e9c245",
+    "simulations\\source-degenerated-cascode\\load-10k-bias-sweep.cir": "b1bb9aab51dc553ca3760370a5c2644e20da8dd6c7ed73cdc8a0fbf7f6681d93",
+    "simulations\\source-degenerated-cascode\\load-10k-transient.cir": "05ca80cf4be2b50ed555dba51687c46405e4423d8baae3fb4e5196158710fcb1",
+    "simulations\\source-degenerated-cascode\\load-sweep.cir": "77b36c2c8631748084eee98417b1a9aca2923e4ab9e6f1f826f9600c4a3c4aaf",
+    "simulations\\source-degenerated-cascode\\degeneration-sweep.cir": "9772f964b109062fefd390bb35b9b0acab3178e7291c9a58559a64d2c02315c2",
+    "simulations\\source-degenerated-cascode\\cascode-core.cir": "a880e64a42bec968324fe2224543e5d3bdf444f0b58ad3c598734001c95c4edd",
+    "simulations\\source-degenerated-cascode\\models.lib": "5149172598bf25e6fd664fc18b5817b0942a488e321a4dbca3ecdcccb317d895",
+    "code\\run_cascode.py": "1b36b11cad7fae9926c736cd66e6b2cdb3cfca6a6b7bfac7a7075050ecbb204a",
+    "code\\export_cascode.py": "7bdc8324634caf5ed9aad3c7c6e57d214cb533e4871d8ea07b56bd5d8150b51e",
+    "circuits\\source-degenerated-cascode\\Source-degenerated cascode amplifier.icproj.json": "2e2e384fed4a815848f7ce88dd76f572399efde0a626dafb312d1e36e33071ea",
+    "circuits\\source-degenerated-cascode\\educational.icproj.json": "326daf32cb0877e1650998c8a29178cb894a95bdb617549cd1f9e1a80aa61dc8"
+  },
+  "cases": {
+    "baseline": {
+      "conditions": {
+        "VDD_V": 1.8,
+        "VSS_V": 0.0,
+        "VIN_V": 0.75,
+        "VB_V": 1.25,
+        "CL_F": 1e-12,
+        "RL_ohm": 50.0,
+        "RE_ohm": 50.0,
+        "temperature_C": 27.0
+      },
+      "operating_point": {
+        "OUT_V": 1.797036418555402,
+        "E_V": 0.002963581311115202,
+        "X_V": 0.4192832395301553,
+        "I_VDD_A": -5.927162889195897e-05
+      },
+      "current_A": 5.927162665563328e-05,
+      "power_W": 0.00010668893200552615,
+      "devices": {
+        "M1": {
+          "id": 5.927162665563328e-05,
+          "gm": 0.0004000396797703257,
+          "gds": 1.756214389557898e-06,
+          "gmbs": 9.542598547283657e-05,
+          "vgs": 0.7470364186888849,
+          "vds": 0.4163196582190402,
+          "von": 0.4507076831975477,
+          "vdsat": 0.2963287354913372,
+          "cgs": 3.726571899845005e-16,
+          "cgd": 2.000000000000004e-16,
+          "cgb": 0.0
+        },
+        "M2": {
+          "id": 5.927162889195306e-05,
+          "gm": 0.0004056976781272279,
+          "gds": 1.707570492321336e-06,
+          "gmbs": 7.669419927509468e-05,
+          "vgs": 0.8307167604698449,
+          "vds": 1.377753179025247,
+          "von": 0.5385207224815334,
+          "vdsat": 0.2921960379883115,
+          "cgs": 3.726571899845005e-16,
+          "cgd": 2.000000000000004e-16,
+          "cgb": 0.0
+        }
+      },
+      "saturation_margin_V": {
+        "M1": 0.11999092272770301,
+        "M2": 1.0855571410369356
+      },
+      "analytic": {
+        "gain": -0.019447928067687213,
+        "E_gain": 0.019447928067687213,
+        "X_gain": -0.8035369008446109,
+        "bias_gain": -7.15510044088246e-05,
+        "r1_ohm": 583562.6333978679,
+        "rstack_ohm": 166026732.08205214,
+        "rout_ohm": 49.999984942188426,
+        "gm_short_S": 0.00038895867849107405,
+        "gain_approx": -0.01951844794864677,
+        "psrr_positive_transfer": 0.9999996988437686,
+        "k1_S": 0.0004972218796327201,
+        "k2_S": 0.0004840994478946439
+      },
+      "gain_V_per_V": -0.01944792798667622,
+      "gain_dB": -34.222533246033045,
+      "input_capacitance_F": 7.261171592676708e-16,
+      "bandwidth_3dB_Hz": 3173403516.875633,
+      "unity_crossing_Hz": null,
+      "scalar_output_pole_Hz": 3182463327.7826967,
+      "internal_X_pole_estimate_Hz": 135030750742.53433,
+      "input_source_E_pole_estimate_Hz": 8753981593460.145,
+      "bias_gain_V_per_V": -7.155108761976124e-05,
+      "bias_center_dc_slope": -7.155108494583111e-05,
+      "input_center_dc_slope": -0.019447927191997758,
+      "bias_sweep_sampled_saturation_VB_V": [
+        1.106,
+        1.700000000000001
+      ],
+      "supply_transfer_V_per_V": {
+        "positive": 0.9999996987934183,
+        "negative": 0.01951978028087758
+      },
+      "PSRR_dB": {
+        "positive": -34.222530629785524,
+        "negative": -0.03203174283145917
+      },
+      "MNA_max_relative_error": {
+        "ac-input": 4.1655339178506885e-09,
+        "ac-bias": 1.1629598277871003e-06,
+        "ac-output": 5.0349058258335826e-11,
+        "ac-psrr-positive": 5.035073549394201e-11,
+        "ac-psrr-negative": 1.3029156794045442e-08
+      },
+      "PZ_max_relative_error": 4.165535694156122e-09,
+      "poles_rad_s": [
+        [
+          -55002964090385.8,
+          0.0
+        ],
+        [
+          -848349415420.745,
+          0.0
+        ],
+        [
+          -19995965756.5427,
+          0.0
+        ]
+      ],
+      "zeros_rad_s": [
+        [
+          -57360267498293.5,
+          0.0
+        ],
+        [
+          1871467968023.731,
+          0.0
+        ]
+      ],
+      "noise": {
+        "thermal_input_V_sqrtHz": 4.711919381124618e-08,
+        "thermal_output_V_sqrtHz": 9.163706880313557e-10,
+        "thermal_source_fraction": {
+          "M1": 0.01244203555845328,
+          "M2": 1.6606487806721946e-07,
+          "RE": 0.000576700187393889,
+          "RL": 0.9869810981892749
+        },
+        "thermal_formula_PSD_V2_per_Hz": 2.2202191792729153e-15,
+        "KF": 2e-33,
+        "AF": 1.0,
+        "Cox_F_per_m2": 0.001726571899844998,
+        "total_input_1Hz_V_sqrtHz": 1.287949226533023e-06,
+        "flicker_B_V2": 1.6565929917015894e-12,
+        "corner_Hz": 746.1396467723137,
+        "corner_LF_Hz": 746.1393934287587,
+        "integrated_bands": [
+          {
+            "band_Hz": [
+              1.0,
+              1000.0
+            ],
+            "thermal_input_rms_V": 1.4892945333265541e-06,
+            "flicker_input_rms_V": 3.3829499258261057e-06,
+            "total_input_rms_V": 3.6962614095384556e-06,
+            "thermal_output_rms_V": 2.896369283508492e-08,
+            "lf_formula_total_input_rms_V": 3.696124719709159e-06
+          },
+          {
+            "band_Hz": [
+              10.0,
+              1000.0
+            ],
+            "thermal_input_rms_V": 1.4825708216363773e-06,
+            "flicker_input_rms_V": 2.7621670478867194e-06,
+            "total_input_rms_V": 3.1348976126181215e-06,
+            "thermal_output_rms_V": 2.8832930574331185e-08,
+            "lf_formula_total_input_rms_V": 3.134790207203851e-06
+          },
+          {
+            "band_Hz": [
+              1.0,
+              100000.0
+            ],
+            "thermal_input_rms_V": 1.4900322893272647e-05,
+            "flicker_input_rms_V": 4.367369574592752e-06,
+            "total_input_rms_V": 1.552718710278405e-05,
+            "thermal_output_rms_V": 2.8978040655887756e-07,
+            "lf_formula_total_input_rms_V": 1.5527135258873887e-05
+          },
+          {
+            "band_Hz": [
+              10.0,
+              100000.0
+            ],
+            "thermal_input_rms_V": 1.4899652356949678e-05,
+            "flicker_input_rms_V": 3.906294100661503e-06,
+            "total_input_rms_V": 1.5403206612871846e-05,
+            "thermal_output_rms_V": 2.897673660167539e-07,
+            "lf_formula_total_input_rms_V": 1.5403165293111048e-05
+          }
+        ]
+      },
+      "transient": {
+        "step_V": 0.0001,
+        "delay_s": 5e-10,
+        "rise_s": 1e-12,
+        "final_movement_V": -1.9451016834981516e-06,
+        "dominant_tau_s": 5.001008764344372e-11,
+        "settling": {
+          "0.01": {
+            "measured_s": 2.315279604537417e-10,
+            "dominant_pole_s": 2.303049646142385e-10
+          },
+          "0.001": {
+            "measured_s": 3.466761623434598e-10,
+            "dominant_pole_s": 3.454574469213577e-10
+          }
+        }
+      },
+      "checks": [
+        "nominal conducting saturation; series and resistor DC KCL",
+        "independent square-law DC currents and body thresholds",
+        "closed-form signal/bias gains, node movements and loaded output resistance; unloaded-matrix intrinsic resistance",
+        "full-frequency E/X/OUT MNA for signal, bias, impedance and both supplies",
+        "input admittance from capacitor currents; DC derivatives vs AC",
+        "C/G eigenvalue poles, independent numerator zeros and full complex PZ reconstruction",
+        "full-frequency per-source thermal and flicker MNA; power sums and input referral",
+        "KF preserves OP and resistor/channel thermal baseline; finite-band noise integrals",
+        "small-step gain and last-exit 1%/0.1% open-loop settling"
+      ]
+    },
+    "load-10k": {
+      "conditions": {
+        "VDD_V": 1.8,
+        "VSS_V": 0.0,
+        "VIN_V": 0.75,
+        "VB_V": 1.25,
+        "CL_F": 1e-12,
+        "RL_ohm": 10000.0,
+        "RE_ohm": 50.0,
+        "temperature_C": 27.0
+      },
+      "operating_point": {
+        "OUT_V": 1.207319688507828,
+        "E_V": 0.002963401453674172,
+        "X_V": 0.41718408102761,
+        "I_VDD_A": -5.926803114921712e-05
+      },
+      "current_A": 5.926802950471334e-05,
+      "power_W": 0.00010668245606859082,
+      "devices": {
+        "M1": {
+          "id": 5.926802950471334e-05,
+          "gm": 0.0004000151009681987,
+          "gds": 1.756217029976789e-06,
+          "gmbs": 9.54201346203191e-05,
+          "vgs": 0.747036598546326,
+          "vds": 0.4142206795739358,
+          "von": 0.450707640294117,
+          "vdsat": 0.296328958252209,
+          "cgs": 3.726571899845005e-16,
+          "cgd": 2.000000000000004e-16,
+          "cgb": 0.0
+        },
+        "M2": {
+          "id": 5.926803114921715e-05,
+          "gm": 0.0004022368236314832,
+          "gds": 1.736870012679445e-06,
+          "gmbs": 7.611135484306246e-05,
+          "vgs": 0.8328159189723903,
+          "vds": 0.7901356074802179,
+          "von": 0.5381237055802272,
+          "vdsat": 0.2946922133921631,
+          "cgs": 3.726571899845005e-16,
+          "cgd": 2.000000000000004e-16,
+          "cgb": 0.0
+        }
+      },
+      "saturation_margin_V": {
+        "M1": 0.11789172132172682,
+        "M2": 0.4954433940880548
+      },
+      "analytic": {
+        "gain": -3.888998580531482,
+        "E_gain": 0.019444992902657412,
+        "X_gain": -0.8241342743619195,
+        "bias_gain": -0.014305506132937362,
+        "r1_ohm": 583560.8897634193,
+        "rstack_ohm": 161876741.49752837,
+        "rout_ohm": 9999.382284187852,
+        "gm_short_S": 0.00038892388249634223,
+        "gain_approx": -3.903455538954427,
+        "psrr_positive_transfer": 0.9999382284187853,
+        "k1_S": 0.0004971914526184946,
+        "k2_S": 0.0004800850484872251
+      },
+      "gain_V_per_V": -3.888998525227163,
+      "gain_dB": 11.796755569116215,
+      "input_capacitance_F": 7.302377277190468e-16,
+      "bandwidth_3dB_Hz": 15875239.364661768,
+      "unity_crossing_Hz": 59805267.24853853,
+      "scalar_output_pole_Hz": 15913294.836204542,
+      "internal_X_pole_estimate_Hz": 133915055174.27043,
+      "input_source_E_pole_estimate_Hz": 8753968598649.236,
+      "bias_gain_V_per_V": -0.01430552262577019,
+      "bias_center_dc_slope": -0.014305522091750943,
+      "input_center_dc_slope": -3.8889983632495024,
+      "bias_sweep_sampled_saturation_VB_V": [
+        1.11,
+        1.700000000000001
+      ],
+      "supply_transfer_V_per_V": {
+        "positive": 0.9999382183481826,
+        "negative": 3.903365829504746
+      },
+      "PSRR_dB": {
+        "positive": 11.797292214303141,
+        "negative": -0.032029549718404965
+      },
+      "MNA_max_relative_error": {
+        "ac-input": 1.4220706190510989e-08,
+        "ac-bias": 1.1620276057852996e-06,
+        "ac-output": 1.0071219636508986e-08,
+        "ac-psrr-positive": 1.0071221190891893e-08,
+        "ac-psrr-negative": 1.3128937138661419e-08
+      },
+      "PZ_max_relative_error": 1.4220706390233318e-08,
+      "poles_rad_s": [
+        [
+          -55002882427405.5,
+          0.0
+        ],
+        [
+          -841339295873.007,
+          0.0
+        ],
+        [
+          -99985975.6489179,
+          0.0
+        ]
+      ],
+      "zeros_rad_s": [
+        [
+          -57360048759998.2,
+          0.0
+        ],
+        [
+          1871360119593.89,
+          0.0
+        ]
+      ],
+      "noise": {
+        "thermal_input_V_sqrtHz": 6.313876416248622e-09,
+        "thermal_output_V_sqrtHz": 2.45546560712575e-08,
+        "thermal_source_fraction": {
+          "M1": 0.6929815481139832,
+          "M2": 9.324984773128626e-06,
+          "RE": 0.03211839651944497,
+          "RL": 0.27489073038179873
+        },
+        "thermal_formula_PSD_V2_per_Hz": 3.9865049167606513e-17,
+        "KF": 2e-33,
+        "AF": 1.0,
+        "Cox_F_per_m2": 0.001726571899844998,
+        "total_input_1Hz_V_sqrtHz": 1.287142671631811e-06,
+        "flicker_B_V2": 1.6566963921000761e-12,
+        "corner_Hz": 41557.63002568884,
+        "corner_LF_Hz": 41557.615673186534,
+        "integrated_bands": [
+          {
+            "band_Hz": [
+              1.0,
+              1000.0
+            ],
+            "thermal_input_rms_V": 1.9956244727969457e-07,
+            "flicker_input_rms_V": 3.383055501822723e-06,
+            "total_input_rms_V": 3.3889363668822787e-06,
+            "thermal_output_rms_V": 7.760980626501067e-07,
+            "lf_formula_total_input_rms_V": 3.3887871624400373e-06
+          },
+          {
+            "band_Hz": [
+              10.0,
+              1000.0
+            ],
+            "thermal_input_rms_V": 1.9866148354843204e-07,
+            "flicker_input_rms_V": 2.762253250326986e-06,
+            "total_input_rms_V": 2.7693879114323553e-06,
+            "thermal_output_rms_V": 7.72594216025625e-07,
+            "lf_formula_total_input_rms_V": 2.769266189951634e-06
+          },
+          {
+            "band_Hz": [
+              1.0,
+              100000.0
+            ],
+            "thermal_input_rms_V": 1.9966130508767225e-06,
+            "flicker_input_rms_V": 4.367505872618306e-06,
+            "total_input_rms_V": 4.802246476628063e-06,
+            "thermal_output_rms_V": 7.764774101489954e-06,
+            "lf_formula_total_input_rms_V": 4.8020711294237155e-06
+          },
+          {
+            "band_Hz": [
+              10.0,
+              100000.0
+            ],
+            "thermal_input_rms_V": 1.9965232003692464e-06,
+            "flicker_input_rms_V": 3.906416009321637e-06,
+            "total_input_rms_V": 4.387048088122245e-06,
+            "thermal_output_rms_V": 7.764424670698798e-06,
+            "lf_formula_total_input_rms_V": 4.386894565696285e-06
+          }
+        ]
+      },
+      "transient": {
+        "step_V": 0.0001,
+        "delay_s": 1e-07,
+        "rise_s": 2e-10,
+        "final_movement_V": -0.0003889615964793869,
+        "dominant_tau_s": 1.0001402631818221e-08,
+        "settling": {
+          "0.01": {
+            "measured_s": 4.595942552900547e-08,
+            "dominant_pole_s": 4.6058161218112105e-08
+          },
+          "0.001": {
+            "measured_s": 6.898770350749363e-08,
+            "dominant_pole_s": 6.908724182716815e-08
+          }
+        }
+      },
+      "checks": [
+        "nominal conducting saturation; series and resistor DC KCL",
+        "independent square-law DC currents and body thresholds",
+        "closed-form signal/bias gains, node movements and loaded output resistance; unloaded-matrix intrinsic resistance",
+        "full-frequency E/X/OUT MNA for signal, bias, impedance and both supplies",
+        "input admittance from capacitor currents; DC derivatives vs AC",
+        "C/G eigenvalue poles, independent numerator zeros and full complex PZ reconstruction",
+        "full-frequency per-source thermal and flicker MNA; power sums and input referral",
+        "KF preserves OP and resistor/channel thermal baseline; finite-band noise integrals",
+        "small-step gain and last-exit 1%/0.1% open-loop settling"
+      ]
+    }
+  },
+  "sweeps": {
+    "load-sweep": [
+      {
+        "resistance_ohm": 50,
+        "OUT_V": 1.797036418555402,
+        "E_V": 0.002963581311115202,
+        "X_V": 0.4192832395301554,
+        "current_A": 5.927162665563328e-05,
+        "gain_V_per_V": -0.01944792798667619,
+        "closed_form_gain": -0.019447928067687213,
+        "saturation_margins_V": [
+          0.11999092272770301,
+          1.0855571410369356
+        ],
+        "conducting_saturation": true
+      },
+      {
+        "resistance_ohm": 100,
+        "OUT_V": 1.794072838896217,
+        "E_V": 0.002963580418558155,
+        "X_V": 0.4192728222714465,
+        "current_A": 5.927160880448198e-05,
+        "gain_V_per_V": -0.03889582698518372,
+        "closed_form_gain": -0.03889582714917069,
+        "saturation_margins_V": [
+          0.11998050525608234,
+          1.0825915920660751
+        ],
+        "conducting_saturation": true
+      },
+      {
+        "resistance_ohm": 200,
+        "OUT_V": 1.78814568493543,
+        "E_V": 0.002963578633107825,
+        "X_V": 0.4192519838301088,
+        "current_A": 5.92715730954545e-05,
+        "gain_V_per_V": -0.07779153798714857,
+        "closed_form_gain": -0.07779153832298216,
+        "saturation_margins_V": [
+          0.11995966638884087,
+          1.076660498712644
+        ],
+        "conducting_saturation": true
+      },
+      {
+        "resistance_ohm": 500,
+        "OUT_V": 1.770364265937954,
+        "E_V": 0.002963573274065198,
+        "X_V": 0.4191894370951184,
+        "current_A": 5.927146591453945e-05,
+        "gain_V_per_V": -0.1944779744823544,
+        "closed_form_gain": -0.19447797538088593,
+        "saturation_margins_V": [
+          0.11989711837549738,
+          1.0588672553789336
+        ],
+        "conducting_saturation": true
+      },
+      {
+        "resistance_ohm": 1000,
+        "OUT_V": 1.740728710720172,
+        "E_V": 0.002963564333344161,
+        "X_V": 0.4190850877025684,
+        "current_A": 5.927128710001434e-05,
+        "gain_V_per_V": -0.3889530432639328,
+        "closed_form_gain": -0.38895304525748786,
+        "saturation_margins_V": [
+          0.11979276685021639,
+          1.0292119723799327
+        ],
+        "conducting_saturation": true
+      },
+      {
+        "resistance_ohm": 2000,
+        "OUT_V": 1.681458138168279,
+        "E_V": 0.002963546418130216,
+        "X_V": 0.4188759948040573,
+        "current_A": 5.927092879552629e-05,
+        "gain_V_per_V": -0.7778944330082876,
+        "closed_form_gain": -0.7778944377813666,
+        "saturation_margins_V": [
+          0.11958366967818679,
+          0.9699018669882937
+        ],
+        "conducting_saturation": true
+      },
+      {
+        "resistance_ohm": 5000,
+        "OUT_V": 1.503650748067745,
+        "E_V": 0.002963492400613153,
+        "X_V": 0.4182455433622408,
+        "current_A": 5.92698484445546e-05,
+        "gain_V_per_V": -1.944648061822984,
+        "closed_form_gain": -1.944648079650461,
+        "saturation_margins_V": [
+          0.11895320535096082,
+          0.7919752561374934
+        ],
+        "conducting_saturation": true
+      },
+      {
+        "resistance_ohm": 10000,
+        "OUT_V": 1.207319688507829,
+        "E_V": 0.002963401453674172,
+        "X_V": 0.41718408102761,
+        "current_A": 5.926802950471334e-05,
+        "gain_V_per_V": -3.888998525227156,
+        "closed_form_gain": -3.888998580531482,
+        "saturation_margins_V": [
+          0.11789172132172682,
+          0.4954433940880564
+        ],
+        "conducting_saturation": true
+      },
+      {
+        "resistance_ohm": 15000,
+        "OUT_V": 0.9110071718292089,
+        "E_V": 0.002963309338372428,
+        "X_V": 0.4161089841012259,
+        "current_A": 5.926618719760326e-05,
+        "gain_V_per_V": -5.833043335293037,
+        "closed_form_gain": -5.833043447723772,
+        "saturation_margins_V": [
+          0.1168166024220354,
+          0.19892739832836548
+        ],
+        "conducting_saturation": true
+      },
+      {
+        "resistance_ohm": 20000,
+        "OUT_V": 0.6151788427038237,
+        "E_V": 0.002962052820634892,
+        "X_V": 0.4014440674227784,
+        "current_A": 5.924105682818591e-05,
+        "gain_V_per_V": -7.700082941782495,
+        "closed_form_gain": -7.700083212517315,
+        "saturation_margins_V": [
+          0.10215138601202067,
+          -0.09968634610626168
+        ],
+        "conducting_saturation": false
+      },
+      {
+        "resistance_ohm": 25000,
+        "OUT_V": 0.3552390923375092,
+        "E_V": 0.002889521770217169,
+        "X_V": 0.2564853280390885,
+        "current_A": 5.779043567477518e-05,
+        "gain_V_per_V": -3.792258239530316,
+        "closed_form_gain": -3.792258357746589,
+        "saturation_margins_V": [
+          -0.042824655487890106,
+          -0.38822464669357976
+        ],
+        "conducting_saturation": false
+      },
+      {
+        "resistance_ohm": 30000,
+        "OUT_V": 0.2635115008944183,
+        "E_V": 0.002560814131209699,
+        "X_V": 0.1911552769322349,
+        "current_A": 5.121628282885259e-05,
+        "gain_V_per_V": -1.53302864530746,
+        "closed_form_gain": -1.533028673531775,
+        "saturation_margins_V": [
+          -0.10823313024297998,
+          -0.49354842564548596
+        ],
+        "conducting_saturation": false
+      },
+      {
+        "resistance_ohm": 40000,
+        "OUT_V": 0.1814840050266959,
+        "E_V": 0.002023144969798303,
+        "X_V": 0.1320535222477208,
+        "current_A": 4.046289954079505e-05,
+        "gain_V_per_V": -0.7359426300100343,
+        "closed_form_gain": -0.7359426399529189,
+        "saturation_margins_V": [
+          -0.16746320254194863,
+          -0.5883121342147961
+        ],
+        "conducting_saturation": false
+      }
+    ],
+    "degeneration-sweep": [
+      {
+        "resistance_ohm": 0.1,
+        "OUT_V": 1.192577152572763,
+        "E_V": 6.074228269198093e-06,
+        "X_V": 0.4140786009199581,
+        "current_A": 6.074228311606797e-05,
+        "gain_V_per_V": -4.034179278280544,
+        "closed_form_gain": -4.034179335451139,
+        "saturation_margins_V": [
+          0.11408005293508955,
+          0.48011282948529954
+        ],
+        "conducting_saturation": true
+      },
+      {
+        "resistance_ohm": 10,
+        "OUT_V": 1.195575075051282,
+        "E_V": 0.0006044249043904707,
+        "X_V": 0.4147071110342997,
+        "current_A": 6.044249086458954e-05,
+        "gain_V_per_V": -4.004415980053087,
+        "closed_form_gain": -4.004416036842359,
+        "saturation_margins_V": [
+          0.11485156504589727,
+          0.4832298276550677
+        ],
+        "conducting_saturation": true
+      },
+      {
+        "resistance_ohm": 50,
+        "OUT_V": 1.207319688507829,
+        "E_V": 0.002963401453674167,
+        "X_V": 0.41718408102761,
+        "current_A": 5.926802950471334e-05,
+        "gain_V_per_V": -3.888998525227163,
+        "closed_form_gain": -3.888998580531482,
+        "saturation_margins_V": [
+          0.11789172132172682,
+          0.4954433940880555
+        ],
+        "conducting_saturation": true
+      },
+      {
+        "resistance_ohm": 100,
+        "OUT_V": 1.221224861437091,
+        "E_V": 0.005787751175697765,
+        "X_V": 0.4201478109670847,
+        "current_A": 5.787751219491822e-05,
+        "gain_V_per_V": -3.754749353370169,
+        "closed_form_gain": -3.7547494069350402,
+        "saturation_margins_V": [
+          0.12152850004102833,
+          0.5099089933193658
+        ],
+        "conducting_saturation": true
+      },
+      {
+        "resistance_ohm": 500,
+        "OUT_V": 1.309233708252117,
+        "E_V": 0.02453831346267092,
+        "X_V": 0.4397733824296526,
+        "current_A": 4.907662740578117e-05,
+        "gain_V_per_V": -2.962120505387791,
+        "closed_form_gain": -2.962120548423405,
+        "saturation_margins_V": [
+          0.1455886371964964,
+          0.6016103762497218
+        ],
+        "conducting_saturation": true
+      },
+      {
+        "resistance_ohm": 1000,
+        "OUT_V": 1.383185040479984,
+        "E_V": 0.04168149357384155,
+        "X_V": 0.4576446773384127,
+        "current_A": 4.168149409117189e-05,
+        "gain_V_per_V": -2.36624413629051,
+        "closed_form_gain": -2.366244171095413,
+        "saturation_margins_V": [
+          0.167464394891752,
+          0.6788966197574927
+        ],
+        "conducting_saturation": true
+      },
+      {
+        "resistance_ohm": 2000,
+        "OUT_V": 1.474347202071422,
+        "E_V": 0.06513055450041508,
+        "X_V": 0.4819892613166377,
+        "current_A": 3.256527781652122e-05,
+        "gain_V_per_V": -1.710730834366894,
+        "closed_form_gain": -1.7107308597007873,
+        "saturation_margins_V": [
+          0.19721221633629082,
+          0.7745605095725242
+        ],
+        "conducting_saturation": true
+      },
+      {
+        "resistance_ohm": 5000,
+        "OUT_V": 1.595417358508955,
+        "E_V": 0.1022913068533404,
+        "X_V": 0.5203638576542262,
+        "current_A": 2.045826201332324e-05,
+        "gain_V_per_V": -0.962156007621326,
+        "closed_form_gain": -0.9621560212917221,
+        "saturation_margins_V": [
+          0.2439827088921426,
+          0.9026336679195099
+        ],
+        "conducting_saturation": true
+      }
+    ]
+  },
+  "all_checks_passed": true,
+  "approximation_policy": "Full MNA and exact scalar formulas are asserted; simple pole/gmRL estimates are comparisons, not forced equalities"
+}

@@ -1,0 +1,4 @@
+* Explicit teaching model; not calibrated to SKY130 or short-channel silicon.
+* SI W/L; never apply scale=1u. Junction capacitances default to zero.
+.model NMOS_EDU NMOS (LEVEL=1 VTO=0.45 KP=200u LAMBDA=0.03
++ GAMMA=0.4 PHI=0.7 TOX=20n CGSO=200p CGDO=200p KF=0 AF=1)

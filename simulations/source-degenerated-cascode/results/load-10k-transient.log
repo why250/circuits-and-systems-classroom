@@ -1,0 +1,28 @@
+Note: can't find init file.
+
+Circuit: cascode load-10k: transient; teaching level=1, not sky130
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Warning: vin: no DC value, transient time 0 value used
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+vdd                                        1.8
+vss                                          0
+vb                                        1.25
+vin                                       0.75
+xdut.x                                0.417184
+xdut.e                               0.0029634
+out                                    1.20732
+vin#branch                                   0
+vb#branch                                    0
+vss#branch                          5.9268e-05
+vdd#branch                         -5.9268e-05
+
+
+No. of Data Rows : 4020
+ngspice-33 done

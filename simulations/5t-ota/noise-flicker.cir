@@ -1,0 +1,33 @@
+5T OTA thermal plus educational flicker noise; balanced differential reference
+.include models.lib
+.include ota-core.cir
+.temp 27
+VDD vdd 0 1.8
+VB vb 0 0.65
+VCM cm 0 0.9
+VDIFF diff 0 DC 0 AC 1
+EPLUS vinp cm diff 0 0.5
+EMINUS vinn cm diff 0 -0.5
+XDUT vdd 0 vinp vinn out vb ota_5t
+CL out 0 1p
+.control
+set noaskquit
+set wr_singlescale
+set wr_vecnames
+* Illustrative coefficients: place the input PSD corner near 1 kHz at this OP.
+* These are ngspice MOS1 coefficients, not fitted SKY130 parameters.
+altermod NMOS_EDU kf=2e-33
+altermod PMOS_EDU kf=1e-33
+altermod NMOS_EDU af=1
+altermod PMOS_EDU af=1
+op
+wrdata flicker-op.dat v(out) v(xdut.x) v(xdut.y) i(VDD)
+* ngspice-33 MOS1 cannot query KF/AF; the runner records them from altermod.
+wrdata flicker-models.dat @nmos_edu[tox] @nmos_edu[ld] @pmos_edu[tox] @pmos_edu[ld]
+wrdata flicker-geometry.dat @m.xdut.m1[w] @m.xdut.m1[l] @m.xdut.m2[w] @m.xdut.m2[l] @m.xdut.m3[w] @m.xdut.m3[l] @m.xdut.m4[w] @m.xdut.m4[l] @m.xdut.m5[w] @m.xdut.m5[l]
+noise v(out) VDIFF dec 80 1 100G 1
+setplot noise1
+wrdata noise-flicker.dat onoise_spectrum inoise_spectrum onoise_m.xdut.m1 onoise_m.xdut.m2 onoise_m.xdut.m3 onoise_m.xdut.m4 onoise_m.xdut.m5 onoise_m.xdut.m1_1overf onoise_m.xdut.m2_1overf onoise_m.xdut.m3_1overf onoise_m.xdut.m4_1overf onoise_m.xdut.m5_1overf onoise_m.xdut.m1_id onoise_m.xdut.m2_id onoise_m.xdut.m3_id onoise_m.xdut.m4_id onoise_m.xdut.m5_id
+quit
+.endc
+.end

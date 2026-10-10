@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="285 188 320 375" width="800" height="938">
+<rect x="285" y="188" width="320" height="375" fill="white"/>
+<g stroke="#172b46" stroke-width="1.7" fill="none" stroke-linejoin="round">
+<line x1="410" y1="390" x2="410" y2="370"/>
+<line x1="410" y1="490" x2="410" y2="480"/>
+<line x1="410" y1="440" x2="410" y2="430"/>
+<line x1="410" y1="330" x2="410" y2="310"/>
+<line x1="410" y1="310" x2="430" y2="310"/>
+<line x1="410" y1="290" x2="410" y2="310"/>
+<g transform="translate(400 410)">
+<polyline points="-4.244186,-6.976744 10,-6.976744 10,-20" fill="none"/>
+<polygon points="-11.802326,-9.593023 -11.802326,9.593023 -8.895349,9.593023 -8.895349,-9.593023" fill="#172b46"/>
+<polygon points="-6.569767,-12.5 -6.569767,12.5 -3.662791,12.5 -3.662791,-12.5" fill="#172b46"/>
+<line x1="-8.895349" y1="0" x2="-20" y2="0"/>
+<polyline points="-3.662791,6.976744 10,6.976744 10,20" fill="none"/>
+<polygon points="10.581395,6.976744 1.27907,2.906977 1.27907,11.046512" fill="#172b46"/>
+</g>
+<g transform="translate(400 350)">
+<polyline points="-4.244186,-6.976744 10,-6.976744 10,-20" fill="none"/>
+<polygon points="-11.802326,-9.593023 -11.802326,9.593023 -8.895349,9.593023 -8.895349,-9.593023" fill="#172b46"/>
+<polygon points="-6.569767,-12.5 -6.569767,12.5 -3.662791,12.5 -3.662791,-12.5" fill="#172b46"/>
+<line x1="-8.895349" y1="0" x2="-20" y2="0"/>
+<polyline points="-3.662791,6.976744 10,6.976744 10,20" fill="none"/>
+<polygon points="10.581395,6.976744 1.27907,2.906977 1.27907,11.046512" fill="#172b46"/>
+</g>
+<g transform="translate(380 350)">
+<circle cx="-7.086614" cy="0" r="2.47907" fill="#172b46"/>
+<line x1="0" y1="0" x2="-4.607544" y2="0"/>
+</g>
+<g transform="translate(380 410)">
+<circle cx="-7.086614" cy="0" r="2.47907" fill="none"/>
+<line x1="0" y1="0" x2="-4.607544" y2="0"/>
+</g>
+<g transform="translate(430 310) scale(-1 1)">
+<circle cx="-7.086614" cy="0" r="2.47907" fill="none"/>
+<line x1="0" y1="0" x2="-4.607544" y2="0"/>
+</g>
+<g transform="translate(410 500)">
+<line x1="0" y1="-10" x2="0" y2="0"/>
+<line x1="-6.395349" y1="0" x2="6.395349" y2="0"/>
+<line x1="-4.069767" y1="5.813953" x2="4.069767" y2="5.813953"/>
+<line x1="-2.325581" y1="11.046512" x2="2.325581" y2="11.046512"/>
+</g>
+<g transform="translate(410 230)">
+<line x1="0" y1="20" x2="0" y2="1.5"/>
+<polygon points="-10,-0.88 10,-0.88 10,2.36 -10,2.36" fill="#172b46"/>
+</g>
+<g transform="translate(410 460)">
+<path d="M 0 -20 L 0 -8.72093 L 5.372093 -6.395349 L -4.604651 -4.069767 L 5.372093 -1.162791 L -4.988372 1.744186 L 5.372093 4.651163 L -4.604651 7.55814 L 0 8.72093 L 0 20"/>
+</g>
+<g transform="translate(410 270)">
+<path d="M 0 -20 L 0 -8.72093 L 5.372093 -6.395349 L -4.604651 -4.069767 L 5.372093 -1.162791 L -4.988372 1.744186 L 5.372093 4.651163 L -4.604651 7.55814 L 0 8.72093 L 0 20"/>
+</g>
+<circle cx="410" cy="310" r="2.5" fill="#172b46"/></g>
+<g fill="#172b46" font-family="Arial, sans-serif" font-size="12">
+<text x="420" y="240">VDD</text>
+<text x="420" y="278">RL = 50 ohm</text>
+<text x="452" y="314">OUT</text>
+<text x="420" y="356">M2 (common gate)</text>
+<text x="325" y="354">VB</text>
+<text x="320" y="414">VIN</text>
+<text x="420" y="416">M1 (common source)</text>
+<text x="420" y="466">RE = 50 ohm</text>
+<text x="420" y="390">X</text>
+<text x="420" y="442">E</text>
+<text x="293" y="208">Source-degenerated NMOS cascode</text>
+<text x="293" y="539">M1/M2: W = 1 um, L = 0.15 um</text>
+<text x="293" y="554">Both bodies: VSS; CL added in benches</text>
+</g></svg>

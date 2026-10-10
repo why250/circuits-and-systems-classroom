@@ -1,0 +1,87 @@
+{
+  "original_filename": "(a1) Folded-cascode amplifiers..icproj.json",
+  "original_folder": "circuits/folded-cascode-amp",
+  "source_file": "circuits\\source-degenerated-cascode\\Source-degenerated cascode amplifier.icproj.json",
+  "source_sha256": "2e2e384fed4a815848f7ce88dd76f572399efde0a626dafb312d1e36e33071ea",
+  "original_bytes_preserved": true,
+  "original_metadata_title": "(a1)  Folded-cascode amplifiers.",
+  "topology": "resistor-loaded source-degenerated NMOS cascode; single input/output",
+  "structural_check": "Four device tuples and inherited W/L/R/nf/m checked against independent reference",
+  "teaching_structural_check": "Teaching project re-extracted: same four terminal tuples, net mapping, W/L/R and effective unit multiplicity",
+  "extractor_scope": "Supplied flat schema-68 routes, contacts and bulk-net bindings; no general Canvas compiler used",
+  "editable_teaching_status": "Generated using schema-68 model binding; not round-tripped by Canvas in this checkout",
+  "node_mapping": {
+    "net-contact-p1": "VB",
+    "net-contact-p2": "VIN",
+    "net-ui-16": "X",
+    "net-ui-17": "OUT",
+    "net-contact-gnd1": "VSS",
+    "net-contact-vdd1": "VDD",
+    "net-33a1cf6718f790c4": "E"
+  },
+  "devices": [
+    {
+      "name": "M1",
+      "nodes": [
+        "X",
+        "VIN",
+        "E",
+        "VSS"
+      ],
+      "kind": "mos",
+      "parameters": {
+        "l": "150n",
+        "m": "1",
+        "nf": "1",
+        "w": "1u"
+      },
+      "target": {
+        "definitionId": "external-subcircuit-e5ee3d17d0c7c89a",
+        "kind": "external-subcircuit"
+      }
+    },
+    {
+      "name": "M2",
+      "nodes": [
+        "OUT",
+        "VB",
+        "X",
+        "VSS"
+      ],
+      "kind": "mos",
+      "parameters": {
+        "l": "150n",
+        "m": "1",
+        "nf": "1",
+        "w": "1u"
+      },
+      "target": {
+        "definitionId": "external-subcircuit-e5ee3d17d0c7c89a",
+        "kind": "external-subcircuit"
+      }
+    },
+    {
+      "name": "RE",
+      "nodes": [
+        "E",
+        "VSS"
+      ],
+      "kind": "resistor",
+      "parameters": {
+        "value": "50"
+      }
+    },
+    {
+      "name": "RL",
+      "nodes": [
+        "VDD",
+        "OUT"
+      ],
+      "kind": "resistor",
+      "parameters": {
+        "value": "50"
+      }
+    }
+  ],
+  "teaching_changes": "Primitive LEVEL=1 model replaces SKY130 binding; unit wrapper NF omitted, total W and m=1 preserved; external VSS port only in core; original dimensions and 50-ohm resistors preserved"
+}

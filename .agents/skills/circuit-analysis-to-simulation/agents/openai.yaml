@@ -1,0 +1,4 @@
+interface:
+  display_name: "电路分析与仿真验证"
+  short_description: "把电路初步分析转化为公式推导、独立计算、仿真对照与可复现学习文档"
+  default_prompt: "使用 $circuit-analysis-to-simulation 将已有电路分析扩展为从公式到仿真的学习文档，明确拓扑与假设，保留关键推导，运行本机仿真并与独立计算对照。"

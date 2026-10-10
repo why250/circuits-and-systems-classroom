@@ -89,6 +89,12 @@ Complete mathematical analysis of 5-transistor differential amplifiers including
 #### [Five-Transistor OTA: Schematic and Simulation](5T-OTA-Schematic-and-Simulation.md)
 Companion document with an editable Analog Canvas project, SVG schematic, original SKY130 structural netlist and reproducible educational ngspice lab. Pairs derivations with bias, gain, impedance, CMRR, PSRR, thermal noise, pole/zero and small-step settling plots from eleven testbenches, including numerical checks and model limits. [Run the lab](simulations/5t-ota/README.md).
 
+#### [Source-Degenerated Cascode Amplifier: Analysis](Source-Degenerated-Cascode-Analysis.md)
+Topology-specific analysis of the supplied resistor-loaded two-NMOS cascode: inherited parameters, bias/headroom, gain and output resistance with body effect, internal nodes, bias/supply coupling, thermal/flicker noise and transfer-function roots. The original folded-cascode filename is corrected from actual connectivity.
+
+#### [Source-Degenerated Cascode: Schematic and Simulation](Source-Degenerated-Cascode-Schematic-and-Simulation.md)
+Companion derivations and eight plot pairs from 26 actual ngspice testbenches, with independent KCL/noise/PZ/DC/transient checks. Preserves original 50-ohm loads, separately compares a 10-kohm experiment, and marks load/degeneration limits. [Run the lab](simulations/source-degenerated-cascode/README.md).
+
 #### `Miller-Compensated-Two-Stage-Amplifier.md`
 Classical two-stage operational amplifier with Miller compensation. Comprehensive reference covering DC gain equations, dominant/non-dominant poles, RHP zero analysis, GBW calculations, phase margin design, slew rate, settling time, noise analysis, CMRR/PSRR, and complete design procedure with sizing equations.
 
@@ -154,6 +160,9 @@ Focused current noise analysis for source-degenerated circuits. Derives output c
 Charging time comparison between RC charging and constant-current source degeneration. Includes time-to-Vdd/2 derivations, equivalence conditions for matched speed, design tables mapping gₘ/Rₛ/Rₗ values, effective transconductance calculations, and output resistance boosting analysis.
 
 ## Directories
+
+### `.agents/skills/circuit-analysis-to-simulation/`
+Project skill for turning an initial circuit analysis into a reproducible formula-to-simulation study: explicit topology and assumptions, key derivations, independent calculations, actual simulator runs, nearby plots and comparisons, and explained limits. The 5T OTA case links to maintained evidence rather than duplicating its formulas and results. Example invocation: `Use $circuit-analysis-to-simulation to verify an existing OTA analysis with local SPICE simulations and write a companion learning document.`
 
 ### `skills/analog-circuit-research/`
 Reusable circuit research workflow for building technical notes with explicit topology, assumptions, derivations, sources, and validation status. Includes optional PDF/Marker ingestion, original-page checks, and separate source/conversion/research progress; topic research can extend beyond the initial papers. Project conventions and source-ingestion guidance are kept in separate references. Example invocation: `Use $analog-circuit-research to research a bootstrapped sampling switch and write a technical note.`

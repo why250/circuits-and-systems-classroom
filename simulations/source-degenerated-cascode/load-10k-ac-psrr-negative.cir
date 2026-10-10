@@ -1,0 +1,21 @@
+Cascode load-10k: ac-psrr-negative; teaching LEVEL=1, not SKY130
+.include models.lib
+.include cascode-core.cir
+.temp 27
+.options reltol=1e-8 abstol=1e-15 vntol=1e-12
+VDD vdd 0 DC 1.8
+VSS vss 0 DC 0 AC 1
+VB vb 0 DC 1.25
+VIN vin 0 DC 0.75
+XDUT vdd vss vin out vb cascode RLVAL=10000 REVAL=50
+CL out 0 1p
+.control
+set noaskquit
+set wr_singlescale
+set wr_vecnames
+set numdgt=15
+ac dec 100 1 100T
+wrdata load-10k-ac-psrr-negative.dat v(out) v(xdut.e) v(xdut.x) i(VIN)
+quit
+.endc
+.end

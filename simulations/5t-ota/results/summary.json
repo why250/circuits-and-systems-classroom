@@ -94,6 +94,11 @@
     "independent small-signal KCL including gmb and gds",
     "DC center slope vs AC",
     "small open-loop step vs AC",
+    "flicker coefficients preserve OP and thermal baseline",
+    "MOS thermal/flicker and device power sums; differential input referral",
+    "MOS1 flicker source equation vs independent LF KCL",
+    "per-device flicker/thermal ratio follows 1/f over full sweep",
+    "integrated noise variances add; LF analytic integral agrees",
     "matched common-mode formulas",
     "output current injection vs KCL",
     "positive/negative supply KCL vs AC",
@@ -144,6 +149,144 @@
         1.36456697e-06,
         1.3718758e-06,
         4.56849698e-09
+      ]
+    },
+    "noise_flicker": {
+      "convention": "one-sided PSD; independent thermal and flicker sources; differential input reference",
+      "coefficient_selection": "Illustrative only: NMOS KF=2e-33, PMOS KF=1e-33, AF=1; nominal coefficients chosen for an input PSD crossover near 1 kHz; not a PDK fit",
+      "source_equation_reference": "https://github.com/ngspice/ngspice/blob/master/src/spicelib/devices/mos1/mos1noi.c",
+      "parameter_origin": "KF/AF from executed deck; TOX/LD and device W/L captured from ngspice OP",
+      "models": {
+        "NMOS_EDU": {
+          "KF": 2e-33,
+          "AF": 1.0,
+          "TOX_m": 2e-08,
+          "LD_m": 0.0
+        },
+        "PMOS_EDU": {
+          "KF": 1e-33,
+          "AF": 1.0,
+          "TOX_m": 2e-08,
+          "LD_m": 0.0
+        }
+      },
+      "geometry": {
+        "m1": {
+          "W_m": 4e-06,
+          "L_m": 5e-07
+        },
+        "m2": {
+          "W_m": 4e-06,
+          "L_m": 5e-07
+        },
+        "m3": {
+          "W_m": 8e-06,
+          "L_m": 5e-07
+        },
+        "m4": {
+          "W_m": 8e-06,
+          "L_m": 5e-07
+        },
+        "m5": {
+          "W_m": 8e-06,
+          "L_m": 1e-06
+        }
+      },
+      "lf_white_input_PSD_V2_per_Hz": 1.8163341369020373e-16,
+      "lf_flicker_B_V2": 2.5489192340923463e-13,
+      "corner_Hz": 1403.3321599070412,
+      "lf_corner_prediction_Hz": 1403.3316790707988,
+      "source_ratio_max_relative_error": 3.661021388268182e-07,
+      "density_samples": [
+        {
+          "frequency_Hz": 1.0,
+          "thermal_input_V_sqrtHz": 1.34771172e-08,
+          "flicker_input_V_sqrtHz": 5.048673041185953e-07,
+          "total_input_V_sqrtHz": 5.05047153e-07
+        },
+        {
+          "frequency_Hz": 10.0,
+          "thermal_input_V_sqrtHz": 1.34771172e-08,
+          "flicker_input_V_sqrtHz": 1.5965306020039043e-07,
+          "total_input_V_sqrtHz": 1.60220885e-07
+        },
+        {
+          "frequency_Hz": 100.0,
+          "thermal_input_V_sqrtHz": 1.34771172e-08,
+          "flicker_input_V_sqrtHz": 5.048673043521205e-08,
+          "total_input_V_sqrtHz": 5.22545943e-08
+        },
+        {
+          "frequency_Hz": 1000.0,
+          "thermal_input_V_sqrtHz": 1.34771172e-08,
+          "flicker_input_V_sqrtHz": 1.596530596778607e-08,
+          "total_input_V_sqrtHz": 2.08931492e-08
+        },
+        {
+          "frequency_Hz": 10000.0,
+          "thermal_input_V_sqrtHz": 1.34771172e-08,
+          "flicker_input_V_sqrtHz": 5.0486730411992725e-09,
+          "total_input_V_sqrtHz": 1.43917264e-08
+        },
+        {
+          "frequency_Hz": 100000.0,
+          "thermal_input_V_sqrtHz": 1.34771172e-08,
+          "flicker_input_V_sqrtHz": 1.59653060047751e-09,
+          "total_input_V_sqrtHz": 1.35713521e-08
+        }
+      ],
+      "integrated_bands": [
+        {
+          "band_Hz": [
+            1,
+            1000
+          ],
+          "thermal_input_rms_V": 4.259707212174485e-07,
+          "flicker_input_rms_V": 1.327014591052597e-06,
+          "total_input_rms_V": 1.3937068487983817e-06,
+          "total_output_rms_V": 0.0002913606852325561,
+          "lf_formula_total_input_rms_V": 1.3936221904722112e-06
+        },
+        {
+          "band_Hz": [
+            10,
+            1000
+          ],
+          "thermal_input_rms_V": 4.240475930155841e-07,
+          "flicker_input_rms_V": 1.08350287640184e-06,
+          "total_input_rms_V": 1.1635268989483177e-06,
+          "total_output_rms_V": 0.00024324036280185988,
+          "lf_formula_total_input_rms_V": 1.1634593958908361e-06
+        },
+        {
+          "band_Hz": [
+            1,
+            100000
+          ],
+          "thermal_input_rms_V": 4.261817355256506e-06,
+          "flicker_input_rms_V": 1.7131684704614531e-06,
+          "total_input_rms_V": 4.593259564135754e-06,
+          "total_output_rms_V": 0.0009204721263530418,
+          "lf_formula_total_input_rms_V": 4.5932245156796e-06
+        },
+        {
+          "band_Hz": [
+            10,
+            100000
+          ],
+          "thermal_input_rms_V": 4.2616255672423125e-06,
+          "flicker_input_rms_V": 1.5323044627252788e-06,
+          "total_input_rms_V": 4.528731553946795e-06,
+          "total_output_rms_V": 0.0009063905121909021,
+          "lf_formula_total_input_rms_V": 4.528704716312404e-06
+        }
+      ],
+      "MOS_flicker_output_density_1Hz_V_sqrtHz": [
+        6.6752085e-05,
+        6.67526997e-05,
+        3.32870495e-05,
+        3.34653399e-05,
+        1.25853001e-07
       ]
     },
     "capacitances_F": {
@@ -230,7 +373,7 @@
       "first_sample_tail_not_saturated_V": 0.685
     }
   },
-  "validation_date": "2026-10-09",
+  "validation_date": "2026-10-10",
   "model": "Educational LEVEL=1, not a PDK",
   "conditions": {
     "VDD_V": 1.8,
@@ -239,28 +382,29 @@
     "CL_F": 1e-12,
     "temperature_C": 27
   },
-  "simulator_label": "ngspice-33-w7, official experimental Windows package",
+  "simulator_label": "Official ngspice-33-w7 Windows package",
   "simulator_detected_version": [
     "33"
   ],
   "simulator_executable_sha256": "54068911555d46067ff2bdfcd0cf4b1afd3c1330be0586f93911df0a6af88e7c",
   "source_sha256": {
-    "op.cir": "c79ea4077c91169c84a99218026a79bf5064d06c3aa2d1eb94475cf5a9a6d1d3",
-    "ac-differential.cir": "9451eaaf48b87ccd565c28589543e5b47f8de886d99914e434e9d72157bfe642",
-    "ac-common-mode.cir": "1f702d5686b0d1123a06ce5a9ee07b2abcefc9b4ec1e787c9b35a248ae3d2300",
-    "dc-transfer.cir": "45333e8d4312b34ad0591e3541b5841aa429151b43ce51954b167a3602639f24",
-    "transient.cir": "a7e29d7804a75c49ae62f7bb9bc7945b1d5f4a4ddb2f9c09344df46b14aaab99",
-    "ac-output-resistance.cir": "a2b5ea18c1333d6eb97f4a25d0f0cc1679c824b45e10bb7eb0547564ad5e2039",
-    "ac-psrr-positive.cir": "6f54dfdc8d89714acf2de002c2065d23cb44b37fcc50d1df48fe8b9e12776fca",
-    "ac-psrr-negative.cir": "ef8e6398a992268ded16de3f96153bd48b4fdcca094e0e9ee8846c5940eafd99",
-    "noise.cir": "479a9bbc9385f3cf0be9c57e00760a34f8cb78c0600dbe6011999a391e4fca0a",
-    "bias-sweep.cir": "4270f9d29f2ee7f5573820ca0c474c5012253e199e5283fbb24376fe7b677b7a",
-    "poles-zeros.cir": "1c9093e11618176c88b8b63f15c0e5d882b2d6a3ecf5c22be60586f031afbf09",
-    "ota-core.cir": "e760b71b4403a8577bf079ad3e06a917c40521f5cb40bcb8f279b20039ed2596",
-    "models.lib": "642d74440f4ab95849690ce18d2669e4c15f8c65b21e4e82f0ef807a4a7af58f"
+    "op.cir": "03d86dfd35b0cf67fd5e068fad2d7fae67793d9ae32dcb1fd0b9012fbab45e08",
+    "ac-differential.cir": "e355ff6c41ca64e15396c18e904289289bd92369da5173bd8d223fcba39c0c45",
+    "ac-common-mode.cir": "e3c0dfa04e57fdb11a329a99b1e4ceece859da096a1104355ba2b290898ba9c7",
+    "dc-transfer.cir": "d166330fc9370abe7c4ab26629acec3646a2fc2faca706d2cb46426300ae924c",
+    "transient.cir": "d3257d8366d1161eaf9b9dc4210bef0807e2c19f48c7241a2db1d914a65010ef",
+    "ac-output-resistance.cir": "f8af5b91e7ad68e149c64fb412458afb6e8b9ee9aaa5f862059ff40d89c90ca7",
+    "ac-psrr-positive.cir": "d7371fdc1b140c22652ccbe37df343dbbbcb22accfc19c1255d436dc50bdd9f3",
+    "ac-psrr-negative.cir": "9ffc988d1c937a3c9fe09beb0c2b64837fcf0ecf92fe6e7d75a59306cefd4bd8",
+    "noise.cir": "eced49cdafabe73cc1a5506b14672a22efa733f7d355f1097078e435a55e8e0e",
+    "noise-flicker.cir": "a97c2310ad40eded385fa9daa0fdd10b601be3c1e30c9223427ccd198b609f29",
+    "bias-sweep.cir": "9f3bebe2af672bcac815d6b6bf8d91223c6377650ac4b71a8b4b05d44d0ed988",
+    "poles-zeros.cir": "40605a7910a75d5bdcca0ece0c04d59ef0f1fae19a745a20a0a7c1e93977a981",
+    "ota-core.cir": "17bdbfc67ff1a8f86f40e7ab3c8efae8af1ed83aea28c1e44543d9f8a6cd648a",
+    "models.lib": "a4ffdee61617842398a0979850c739983279a5a9b844787fbb3b94494ccc4b50"
   },
   "script_sha256": {
-    "run_5t_ota.py": "9de597446422dec5578c371cd85a698bfaadf71ed1cedbdab6bc2d227a4fb693",
-    "ota_5t_metrics.py": "a86feb15dfc3f108a4793c22b4be143d4de6df97185b3019cf7234552b551b08"
+    "run_5t_ota.py": "b8d863ce4dfe43544640d32240e6d0cfa1724ed376384de0668bddeb881becf1",
+    "ota_5t_metrics.py": "4bef7df432deaf1a4d21d22799dfe4519faee79e457430d2addc9986611cf01e"
   }
 }

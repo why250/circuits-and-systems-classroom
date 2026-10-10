@@ -15,3 +15,7 @@ Thumbs.db
 *.swp
 *.swo
 *~
+
+# Local simulator binaries and Python caches
+.tools/
+__pycache__/

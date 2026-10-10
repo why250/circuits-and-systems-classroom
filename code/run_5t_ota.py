@@ -195,7 +195,28 @@ def main():
             raise ValueError("Device capacitance capture is incomplete")
         caps = {name: dict(zip(("cgs", "cgd", "cgb"), map(float, cap_data[i*3:(i+1)*3])))
                 for i, name in enumerate(DEVICE_NAMES)}
-        summary["metrics"] = check_metrics(data, logs, summary, caps)
+        flicker_op = load(work / "flicker-op.dat")
+        if not np.allclose(flicker_op, data["op"], rtol=1e-8, atol=1e-12):
+            raise ValueError("Flicker coefficients changed the operating point")
+        model_data = load(work / "flicker-models.dat")[0, 1:]
+        geometry_data = load(work / "flicker-geometry.dat")[0, 1:]
+        if len(model_data) != 4 or len(geometry_data) != 10:
+            raise ValueError("Flicker model/geometry capture is incomplete")
+        # MOS1 in ngspice-33 accepts KF/AF but does not expose them via @model.
+        # Read the executed deck; the independent source-PSD checks verify them.
+        coefficients = {(name.upper(), parameter.upper()): float(value)
+                        for name, parameter, value in re.findall(
+                            r"(?im)^\s*altermod\s+(\w+)\s+(kf|af)\s*=\s*([-+\d.eE]+)\s*$",
+                            (work / "noise-flicker.cir").read_text())}
+        flicker_parameters = {
+            "parameter_origin": "KF/AF from executed deck; TOX/LD and device W/L captured from ngspice OP",
+            "models": {name: {"KF": coefficients[(name, "KF")], "AF": coefficients[(name, "AF")],
+                              **dict(zip(("TOX_m", "LD_m"), map(float, model_data[i*2:(i+1)*2])))}
+                       for i, name in enumerate(("NMOS_EDU", "PMOS_EDU"))},
+            "geometry": {name: dict(zip(("W_m", "L_m"), map(float, geometry_data[i*2:(i+1)*2])))
+                         for i, name in enumerate(DEVICE_NAMES)},
+        }
+        summary["metrics"] = check_metrics(data, logs, summary, caps, flicker_parameters)
         summary.update({
             "validation_date": datetime.now(timezone(timedelta(hours=8))).date().isoformat(),
             "model": "Educational LEVEL=1, not a PDK",
@@ -225,6 +246,8 @@ def main():
             (results / f"{deck}.log").write_text(logs[deck], encoding="utf-8")
         shutil.copy2(work / "devices.dat", results / "devices.dat")
         shutil.copy2(work / "capacitances.dat", results / "capacitances.dat")
+        for name in ("flicker-op", "flicker-models", "flicker-geometry"):
+            shutil.copy2(work / f"{name}.dat", results / f"{name}.dat")
         roots = summary["metrics"]["pole_zero"]
         root_rows = [[kind, i+1, *root, np.hypot(*root)/(2*np.pi)]
                      for kind in ("poles", "zeros")
@@ -236,6 +259,10 @@ def main():
         (results / "summary.json").write_text(json.dumps(summary, indent=2)+"\n", encoding="utf-8")
         plot(data)
         plot_metrics(data, summary, FIGURES)
+        # Matplotlib SVG path formatting contains trailing spaces by default.
+        for path in FIGURES.glob("*.svg"):
+            if path.stem not in ("schematic", "gallery-original"):
+                path.write_text("\n".join(line.rstrip() for line in path.read_text(encoding="utf-8").splitlines())+"\n", encoding="utf-8")
         print(json.dumps({key: summary[key] for key in (
             "differential_gain_dB", "common_mode_gain_V_per_V", "cmrr_dB",
             "common_mode_tail_gain_V_per_V", "bandwidth_3dB_Hz", "unity_gain_frequency_Hz", "checks")}, indent=2))

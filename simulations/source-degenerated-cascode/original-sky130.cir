@@ -1,0 +1,8 @@
+* Extracted from original schema-68 JSON; requires SKY130 PDK.
+* Original global ground remains node 0; port order matches JSON.
+.subckt dut VB VIN OUT VDD
+XM1 X VIN E 0 sky130_fd_pr__nfet_01v8 w=1 l=0.15 nf=1 m=1
+XM2 OUT VB X 0 sky130_fd_pr__nfet_01v8 w=1 l=0.15 nf=1 m=1
+RE E 0 50
+RL VDD OUT 50
+.ends dut

@@ -1,0 +1,21 @@
+Cascode baseline: transient; teaching LEVEL=1, not SKY130
+.include models.lib
+.include cascode-core.cir
+.temp 27
+.options reltol=1e-8 abstol=1e-15 vntol=1e-12
+VDD vdd 0 DC 1.8
+VSS vss 0 DC 0
+VB vb 0 DC 1.25
+VIN vin 0 PULSE(0.75 0.7501 5e-10 1e-12 1e-12 1e-09 2.5e-09)
+XDUT vdd vss vin out vb cascode RLVAL=50 REVAL=50
+CL out 0 1p
+.control
+set noaskquit
+set wr_singlescale
+set wr_vecnames
+set numdgt=15
+tran 5e-13 2e-09 0 5e-13
+wrdata baseline-transient.dat v(out) v(vin) v(xdut.e) v(xdut.x)
+quit
+.endc
+.end
