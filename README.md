@@ -22,6 +22,8 @@ an independent Chinese learning site for RTL, SPI, STA/CDC and mixed-signal digi
 
 The [educational LEVEL=1 MOS library](simulations/models/edu-mos-level1/README.md) provides versioned NMOS/PMOS models for compatible circuit derivation-to-simulation lessons. It documents included nonidealities, model limits, reuse conventions, and an executed common-source example with independent calculations. Existing circuit labs retain their frozen model snapshots.
 
+The [educational Gummel–Poon BJT library](simulations/models/edu-bjt-gummel-poon/README.md) provides the versioned `NPN_EDU` model exercised in the emitter-degenerated differential pair. It documents terminal mapping, finite-beta/Early/charge/noise mechanisms, local flicker extensions and process limits. Six paired ngspice checks verify reuse against the preserved circuit-local snapshot.
+
 ## Contents
 
 ### Razavi's Analog Mind Collection

@@ -1,0 +1,35 @@
+BJT differential-pair teaching study: op
+.include models.lib
+* Teaching reconstruction of source topology. No PDK performance claim.
+* voutn is Q1 collector; voutp is Q2 collector; X is Q3 collector.
+Q1 voutn vinp e1 NPN_EDU
+Q2 voutp vinn e2 NPN_EDU
+Q3 x vb e3 NPN_EDU
+RD1 vdd voutn 1k
+RD2 vdd voutp 1k
+R3 e1 x 50
+R2 e2 x 50
+R1 e3 vss 50
+* Added equal per-output teaching loads, absent from the supplied schematic.
+CL1 voutn vss 10p
+CL2 voutp vss 10p
+
+.temp 27
+.options reltol=1e-7 abstol=1e-14 vntol=1e-10
+VDD vdd 0 DC 3.3 AC 0
+VSS vss 0 DC 0 AC 0
+VB vb 0 DC 0.85 AC 0
+VCM vcm 0 DC 1.8 AC 0
+VDM dm 0 DC 0 AC 1
+EINP vinp vcm dm 0 0.5
+EINN vinn vcm dm 0 -0.5
+
+.control
+set noaskquit
+set wr_vecnames
+set wr_singlescale
+op
+wrdata op.dat v(voutn) v(voutp) v(e1) v(e2) v(x) v(e3) @q1[ic] @q1[ib] @q1[gm] @q1[gpi] @q1[gmu] @q1[go] @q1[cpi] @q1[cmu] @q1[cexbc] @q1[vbe] @q1[vbc] @q2[ic] @q2[ib] @q2[gm] @q2[gpi] @q2[gmu] @q2[go] @q2[cpi] @q2[cmu] @q2[cexbc] @q2[vbe] @q2[vbc] @q3[ic] @q3[ib] @q3[gm] @q3[gpi] @q3[gmu] @q3[go] @q3[cpi] @q3[cmu] @q3[cexbc] @q3[vbe] @q3[vbc]
+quit
+.endc
+.end

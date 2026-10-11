@@ -1,0 +1,8 @@
+* Educational Gummel-Poon NPN, v1.0.0. Not a SKY130 model.
+* Moderate beta/Early effect; finite diffusion and junction capacitances.
+* Intrinsic RB/RC/RE=0 allows explicit hybrid-pi and noise reconstruction.
+* TF=200 ps is an illustrative charge-storage parameter, not process data.
+.model NPN_EDU NPN (IS=1e-15 BF=100 NF=1 VAF=100
++ BR=1 NR=1 VAR=100 RB=0 RC=0 RE=0
++ CJE=1p VJE=0.75 MJE=0.33 CJC=0.3p VJC=0.75 MJC=0.33
++ TF=200p TR=1n KF=0 AF=1 TNOM=27)

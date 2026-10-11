@@ -1,0 +1,81 @@
+{
+  "executed_UTC": "2026-10-11T12:18:02.059098+00:00",
+  "library_version": "1.0.0",
+  "model_name": "NPN_EDU",
+  "simulator_detected_version": [
+    "33"
+  ],
+  "simulator_executable_sha256": "54068911555d46067ff2bdfcd0cf4b1afd3c1330be0586f93911df0a6af88e7c",
+  "input_sha256": {
+    "simulations/models/edu-bjt-gummel-poon/v1.lib": "68738c2f2da61269687ceef68d5feea3b99537c1b2b1ae894a2619bc1f44261e",
+    "simulations/bjt-degenerated-differential-pair/models.lib": "68738c2f2da61269687ceef68d5feea3b99537c1b2b1ae894a2619bc1f44261e",
+    "code/check_educational_bjt.py": "76340f726c424a1f9b69cd55e695caf0dcc1b63740823e020d05a0838955c711",
+    "simulations/bjt-degenerated-differential-pair/testbenches/op.cir": "2ba9ddd005fb6ae54d5ff8e2337ce2f8e6bd1f2db36dbb859b80480b99e1c35d",
+    "simulations/bjt-degenerated-differential-pair/testbenches/ac-dm.cir": "23b0df34e620488678a8e550af003cc81b59c6906d997440866dafcb1ca03365",
+    "simulations/bjt-degenerated-differential-pair/testbenches/ac-cm.cir": "2c2a8956539113ee9edb484e15fcad01dc7f00147c40a8d7ac9b62b28d4e85d5",
+    "simulations/bjt-degenerated-differential-pair/testbenches/noise-white.cir": "d9368e22727bd5247d1f609a5af3b3d0b0f8579a8e61b149401a275c3093742f",
+    "simulations/bjt-degenerated-differential-pair/testbenches/noise-flicker.cir": "a6c69cd80013af4edabd507cf161f52c398796fdf9948cf11519bf72663e5d95",
+    "simulations/bjt-degenerated-differential-pair/testbenches/transient.cir": "a85ed6aa30fb44eb018d68dd83c175e0e003b4a6ec173bc1fc38d361c2cf9a22"
+  },
+  "shared_model_matches_snapshot_bytes": true,
+  "executed_decks": 12,
+  "comparison_rtol": 1e-08,
+  "comparison_atol": 0,
+  "comparisons": [
+    {
+      "deck": "op",
+      "shape": [
+        1,
+        40
+      ],
+      "max_relative_error": 0.0,
+      "passed": true
+    },
+    {
+      "deck": "ac-dm",
+      "shape": [
+        1001,
+        17
+      ],
+      "max_relative_error": 0.0,
+      "passed": true
+    },
+    {
+      "deck": "ac-cm",
+      "shape": [
+        1001,
+        17
+      ],
+      "max_relative_error": 0.0,
+      "passed": true
+    },
+    {
+      "deck": "noise-white",
+      "shape": [
+        1001,
+        3
+      ],
+      "max_relative_error": 0.0,
+      "passed": true
+    },
+    {
+      "deck": "noise-flicker",
+      "shape": [
+        1001,
+        3
+      ],
+      "max_relative_error": 0.0,
+      "passed": true
+    },
+    {
+      "deck": "transient",
+      "shape": [
+        5015,
+        4
+      ],
+      "max_relative_error": 0.0,
+      "passed": true
+    }
+  ],
+  "scope": "Snapshot/shared model reuse consistency; not independent equations or PDK performance."
+}

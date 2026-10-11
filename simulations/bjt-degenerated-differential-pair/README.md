@@ -8,6 +8,7 @@ Read [the schematic, metric derivations and simulation comparisons](../../BJT-De
 - Added bias: VDD = 3.3 V, lower rail = 0 V, input common mode = 1.8 V, bias = 0.85 V, temperature = 27 °C.
 - Added loads: 10 pF from **each** output to the lower rail.
 - [Model v1.0.0](models.lib): educational Gummel–Poon NPN with IS = 1e-15 A, BF = 100, VAF = 100 V, TF = 200 ps, CJE = 1 pF, CJC = 0.3 pF. Intrinsic RB/RC/RE = 0. The model is not a process characterization.
+- The same model card is available in the [versioned shared BJT library](../models/edu-bjt-gummel-poon/README.md) for new studies. This lab retains its original frozen snapshot and results; shared-library promotion does not change its executed model.
 - White baseline KF = 0. An independent extension uses KF = 1e-14, AF = 1; the coefficient follows the BJT base-current noise convention and yields a roughly 249 Hz input-noise corner in this example.
 - Differential input is `vinp - vinn`; differential output is `voutp - voutn`. Single-ended metrics use `voutp`.
 

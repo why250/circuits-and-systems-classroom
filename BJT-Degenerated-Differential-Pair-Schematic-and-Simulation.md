@@ -114,6 +114,8 @@ Currents and junction voltages vary with common mode, so solve the bias and chec
 
 [Model v1.0.0](simulations/bjt-degenerated-differential-pair/models.lib): IS = $10^{-15}$ A, BF = 100, VAF = 100 V, TF = 200 ps, CJE = 1 pF, CJC = 0.3 pF, and intrinsic RB/RC/RE = 0. Finite beta, Early effect, diffusion charge, junction capacitance, and shot noise are included. The white-noise baseline uses KF = 0; a separate experiment adds KF = $10^{-14}$, AF = 1. These are illustrative parameters, not fitted process data.
 
+For new NPN studies, the same frozen card is maintained in the [shared educational BJT library](simulations/models/edu-bjt-gummel-poon/README.md), with version/hash, terminal mapping, scope and reuse checks. The local snapshot remains the model executed for this document.
+
 **Added conditions:** VDD = 3.3 V, lower rail = 0 V, $V_{CM}=1.8$ V, $V_b=0.85$ V, 27 °C, and $C_L=10$ pF on **each** output. All five saved resistors retain their original values.
 
 | Quantity | Executed ngspice OP |
