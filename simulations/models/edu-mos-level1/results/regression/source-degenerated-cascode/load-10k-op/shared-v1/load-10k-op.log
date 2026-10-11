@@ -1,0 +1,86 @@
+Note: can't find init file.
+
+Circuit: cascode load-10k: op; teaching level=1, not sky130
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+
+No. of Data Rows : 1
+ Capacitor: Fixed capacitor
+     device                    cl
+      model                     C
+capacitance                 1e-12
+      dtemp                     0
+     bv_max                 1e+99
+          i                     0
+          p                     0
+
+ Mos1: Level 1 MOSfet model with Meyer capacitance model
+     device             m.xdut.m2             m.xdut.m1
+      model              nmos_edu              nmos_edu
+         id            5.9268e-05            5.9268e-05
+         is           -5.9268e-05           -5.9268e-05
+         ig                     0                     0
+         ib           -1.6445e-12           -4.3123e-13
+        vgs              0.832816              0.747037
+        vds              0.790136              0.414221
+        vbs             -0.417184            -0.0029634
+        von              0.538124              0.450708
+      vdsat              0.294692              0.296329
+         rs                     0                     0
+         rd                     0                     0
+         gm           0.000402237           0.000400015
+        gds           1.73687e-06           1.75622e-06
+        gmb           7.61114e-05           9.54201e-05
+        cbd                     0                     0
+        cbs                     0                     0
+        cgs           3.72657e-16           3.72657e-16
+        cgd                 2e-16                 2e-16
+        cgb                     0                     0
+       cbd0                     0                     0
+     cbdsw0                     0                     0
+       cbs0                     0                     0
+     cbssw0                     0                     0
+
+ Resistor: Simple linear resistor
+     device             r.xdut.rl             r.xdut.re
+      model                     R                     R
+ resistance                 10000                    50
+         ac                 10000                    50
+      dtemp                     0                     0
+     bv_max                 1e+99                 1e+99
+      noisy                     1                     1
+          i            5.9268e-05            5.9268e-05
+          p            3.5127e-05           1.75635e-07
+
+ Vsource: Independent voltage source
+     device                   vin                    vb                   vss
+         dc                  0.75                  1.25                     0
+      acmag                     0                     0                     0
+      pulse         -         -         -
+        sin         -         -         -
+        exp         -         -         -
+        pwl         -         -         -
+       sffm         -         -         -
+         am         -         -         -
+    trnoise         -         -         -
+   trrandom         -         -         -
+          i                     0                     0            5.9268e-05
+          p                     0                     0                     0
+
+ Vsource: Independent voltage source
+     device                   vdd
+         dc                   1.8
+      acmag                     0
+      pulse         -
+        sin         -
+        exp         -
+        pwl         -
+       sffm         -
+         am         -
+    trnoise         -
+   trrandom         -
+          i           -5.9268e-05
+          p          -0.000106682
+
+ngspice-33 done

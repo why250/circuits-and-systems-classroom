@@ -1,0 +1,25 @@
+.title KiCad schematic
+.include "../models.lib"
+.temp 27
+.options reltol=1e-8 abstol=1e-15 vntol=1e-12
+V3 /VB 0 DC 1.4 
+V1 /VDD 0 DC 1.8 
+V4 /VSS 0 DC 0 
+V2 /VIN 0 SIN(0.85 0.05 1k)
+M1 /X /VIN /E /VSS NMOS_EDU m=10 l=150n w=1u
+R2 /E /VSS 50
+R1 /VDD /OUT 1000
+C1 /OUT 0 1p
+M2 /OUT /VB /X /VSS NMOS_EDU m=10 l=150n w=1u
+.control
+set wr_singlescale
+set wr_vecnames
+set numdgt=15
+save all @m1[vdsat] @m2[vdsat]
+tran 1u 10m 0 1u
+let margin1=v(/X)-v(/E)-@m1[vdsat]
+let margin2=v(/OUT)-v(/X)-@m2[vdsat]
+wrdata sine-50mV.dat v(/VIN) v(/OUT) margin1 margin2
+quit
+.endc
+.end

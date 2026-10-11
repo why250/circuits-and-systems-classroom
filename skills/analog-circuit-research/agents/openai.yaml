@@ -1,4 +1,4 @@
 interface:
-  display_name: "模拟与混合信号电路研究"
-  short_description: "研究电路拓扑、推导与验证关键公式，形成可追溯且可用于设计的技术知识笔记"
-  default_prompt: "使用 $analog-circuit-research 研究自举开关，明确拓扑、假设、推导、设计取舍与验证状态，并整理为项目知识文档。"
+  display_name: "Analog and Mixed-Signal Circuit Research"
+  short_description: "Research circuit mechanisms and derive traceable technical design notes"
+  default_prompt: "Use $analog-circuit-research to study a bootstrapped switch. Define topology, assumptions, derivations, design tradeoffs, and verification status, and organize the results as a project knowledge document."

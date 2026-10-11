@@ -1,0 +1,171 @@
+{
+  "validation_date": "2026-10-11",
+  "library": "Classroom educational MOS v1; not process-calibrated",
+  "simulator_detected_version": [
+    "33"
+  ],
+  "simulator_executable_sha256": "54068911555d46067ff2bdfcd0cf4b1afd3c1330be0586f93911df0a6af88e7c",
+  "source_sha256": {
+    "v1.lib": "ad46d35dc71247990243d14dd620c0b432487b584041543fac0861290caeadfc",
+    "examples/common-source.cir": "0aa10f037c6de032eff2d4592d3bf12c5582fee3f9f695e53fdf7e003e5ce360",
+    "code/check_educational_mos.py": "08bd67343574bdab964c3b14fd2a86efb58c8f4f954f56981f4315a4d6d9c9e7"
+  },
+  "conditions": {
+    "VDD_V": 1.8,
+    "NMOS_VG_V": 0.6,
+    "PMOS_VG_V": 1.2,
+    "Rload_ohm": 20000,
+    "CL_F": 1e-12,
+    "temperature_C": 27
+  },
+  "common_source": {
+    "NMOS_EDU": {
+      "predicted_OUT_V": 1.4246141669964385,
+      "observed_OUT_V": 1.42461414,
+      "predicted_ID_A": 1.8769291650178078e-05,
+      "observed_ID_A": 1.87692931e-05,
+      "predicted_gm_S": 0.00025025722200237437,
+      "predicted_gds_S": 5.4e-07,
+      "predicted_gmb_S": 5.982291828595731e-05,
+      "gain_1Hz_V_per_V": -4.95166634,
+      "input_noise_1Hz_V_sqrtHz": 7.57568592e-09,
+      "saturation_margin_V": 1.2746141669964386
+    },
+    "PMOS_EDU": {
+      "predicted_OUT_V": 0.3052198671306549,
+      "observed_OUT_V": 0.305219897,
+      "predicted_ID_A": 1.5260993356532745e-05,
+      "observed_ID_A": 1.52609948e-05,
+      "predicted_gm_S": 0.0002034799114204366,
+      "predicted_gds_S": 5.760000000000001e-07,
+      "predicted_gmb_S": 4.8641002310906814e-05,
+      "gain_1Hz_V_per_V": -4.0232503,
+      "input_noise_1Hz_V_sqrtHz": 8.62125523e-09,
+      "saturation_margin_V": 1.3447801328693452
+    }
+  },
+  "checks": [
+    "NMOS/PMOS bias from square law and resistor KCL",
+    "NMOS/PMOS gm, gds, gmb and overlap capacitance",
+    "NMOS/PMOS full complex AC transfer including Cgd",
+    "NMOS/PMOS one-sided channel and load thermal noise",
+    "representative OTA/cascode snapshot vs shared-v1 waveforms"
+  ],
+  "legacy_source_sha256": {
+    "simulations/5t-ota/ota-core.cir": "e760b71b4403a8577bf079ad3e06a917c40521f5cb40bcb8f279b20039ed2596",
+    "simulations/5t-ota/models.lib": "642d74440f4ab95849690ce18d2669e4c15f8c65b21e4e82f0ef807a4a7af58f",
+    "simulations/5t-ota/op.cir": "c79ea4077c91169c84a99218026a79bf5064d06c3aa2d1eb94475cf5a9a6d1d3",
+    "simulations/5t-ota/ac-differential.cir": "9451eaaf48b87ccd565c28589543e5b47f8de886d99914e434e9d72157bfe642",
+    "simulations/5t-ota/ac-common-mode.cir": "1f702d5686b0d1123a06ce5a9ee07b2abcefc9b4ec1e787c9b35a248ae3d2300",
+    "simulations/5t-ota/noise.cir": "479a9bbc9385f3cf0be9c57e00760a34f8cb78c0600dbe6011999a391e4fca0a",
+    "simulations/5t-ota/noise-flicker.cir": "9dcd1257a3fe47d13ce06b9a904adf87c09fe108cb0bcec396d5a4efd3db682a",
+    "simulations/source-degenerated-cascode/cascode-core.cir": "a880e64a42bec968324fe2224543e5d3bdf444f0b58ad3c598734001c95c4edd",
+    "simulations/source-degenerated-cascode/models.lib": "3d3187031879ab71f912e237729b55cadf8f30143283dea990d1dd422f4e1e9e",
+    "simulations/source-degenerated-cascode/baseline-op.cir": "e915e3acfe3ba49db67cb529867befcc2e3677cd3b7cbeaca32b86afa48300eb",
+    "simulations/source-degenerated-cascode/baseline-ac-input.cir": "ae76a65ce8dcf058f4f51ad33035d28019f6b32329709c19a0e57f27228ac61c",
+    "simulations/source-degenerated-cascode/baseline-noise.cir": "1284b8c3e64e2984d17006761cb94c523d847b3cb260790e9b19ed2240ee6ec2",
+    "simulations/source-degenerated-cascode/load-10k-op.cir": "2df0feb2603153038319f446610c176c2e8b2498e40761f37fd830563fd4d7e8",
+    "simulations/source-degenerated-cascode/load-10k-ac-input.cir": "43e7eaf531d12c0f47e73c58d4a9d76cc8117cc8c653899f0ab5242e113c3342",
+    "simulations/source-degenerated-cascode/load-10k-noise.cir": "a049d69e40e33674988c7e1fb2ab4a5fa2061de6553d58046d90883b85a9a075"
+  },
+  "regression_comparisons": [
+    {
+      "lab": "5t-ota",
+      "deck": "op",
+      "max_relative_error_by_output": {
+        "capacitances.dat": 0.0,
+        "devices.dat": 0.0,
+        "op.dat": 0.0
+      },
+      "passed": true
+    },
+    {
+      "lab": "5t-ota",
+      "deck": "ac-differential",
+      "max_relative_error_by_output": {
+        "ac-differential.dat": 0.0
+      },
+      "passed": true
+    },
+    {
+      "lab": "5t-ota",
+      "deck": "ac-common-mode",
+      "max_relative_error_by_output": {
+        "ac-common-mode.dat": 0.0
+      },
+      "passed": true
+    },
+    {
+      "lab": "5t-ota",
+      "deck": "noise",
+      "max_relative_error_by_output": {
+        "noise.dat": 0.0
+      },
+      "passed": true
+    },
+    {
+      "lab": "5t-ota",
+      "deck": "noise-flicker",
+      "max_relative_error_by_output": {
+        "flicker-geometry.dat": 0.0,
+        "flicker-models.dat": 0.0,
+        "flicker-op.dat": 0.0,
+        "noise-flicker.dat": 0.0
+      },
+      "passed": true
+    },
+    {
+      "lab": "source-degenerated-cascode",
+      "deck": "baseline-op",
+      "max_relative_error_by_output": {
+        "baseline-devices.dat": 0.0,
+        "baseline-model.dat": 0.0,
+        "baseline-op.dat": 0.0
+      },
+      "passed": true
+    },
+    {
+      "lab": "source-degenerated-cascode",
+      "deck": "baseline-ac-input",
+      "max_relative_error_by_output": {
+        "baseline-ac-input.dat": 0.0
+      },
+      "passed": true
+    },
+    {
+      "lab": "source-degenerated-cascode",
+      "deck": "baseline-noise",
+      "max_relative_error_by_output": {
+        "baseline-noise.dat": 0.0
+      },
+      "passed": true
+    },
+    {
+      "lab": "source-degenerated-cascode",
+      "deck": "load-10k-op",
+      "max_relative_error_by_output": {
+        "load-10k-devices.dat": 0.0,
+        "load-10k-model.dat": 0.0,
+        "load-10k-op.dat": 0.0
+      },
+      "passed": true
+    },
+    {
+      "lab": "source-degenerated-cascode",
+      "deck": "load-10k-ac-input",
+      "max_relative_error_by_output": {
+        "load-10k-ac-input.dat": 0.0
+      },
+      "passed": true
+    },
+    {
+      "lab": "source-degenerated-cascode",
+      "deck": "load-10k-noise",
+      "max_relative_error_by_output": {
+        "load-10k-noise.dat": 0.0
+      },
+      "passed": true
+    }
+  ],
+  "all_checks_passed": true
+}

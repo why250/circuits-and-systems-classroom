@@ -18,6 +18,11 @@ coefficients, not fitted SKY130 models. Ideal sources supply VDD, common mode
 and VB. The lab has no transistor bias generator, mismatch, extracted wires
 or calibrated flicker noise.
 
+For new circuits, these baseline coefficients are available in the
+[shared educational MOS v1 library](../models/edu-mos-level1/README.md).
+This lab retains its existing `models.lib` as a frozen snapshot so its
+published results and embedded editable project remain reproducible.
+
 ## Testbenches
 
 Nominal conditions are VDD = 1.8 V, VSS = 0 V, common mode = 0.9 V,

@@ -1,0 +1,13 @@
+* Teaching reconstruction of source topology. No PDK performance claim.
+* voutn is Q1 collector; voutp is Q2 collector; X is Q3 collector.
+Q1 voutn vinp e1 NPN_EDU
+Q2 voutp vinn e2 NPN_EDU
+Q3 x vb e3 NPN_EDU
+RD1 vdd voutn 1k
+RD2 vdd voutp 1k
+R3 e1 x 50
+R2 e2 x 50
+R1 e3 vss 50
+* Added equal per-output teaching loads, absent from the supplied schematic.
+CL1 voutn vss 10p
+CL2 voutp vss 10p

@@ -105,16 +105,15 @@ def main(dist: Path) -> None:
     print("\n".join(lines))
 
     for page, keys in RUNS.items():
-        for base in (doc, doc / "zh_CN"):
-            f = base / f"{page}.html"
-            if not f.exists():
-                print(f"  no {f.relative_to(dist)}, skipped")
-                continue
-            text = f.read_text(encoding="utf-8")
-            if ANCHOR not in text:
-                raise SystemExit(f"{f}: no {ANCHOR} to insert after; the theme's markup changed")
-            f.write_text(text.replace(ANCHOR, ANCHOR + "\n" + panel(keys), 1), encoding="utf-8")
-            print(f"  linked {f.relative_to(dist)} to {len(keys)} page(s)")
+        f = doc / f"{page}.html"
+        if not f.exists():
+            print(f"  no {f.relative_to(dist)}, skipped")
+            continue
+        text = f.read_text(encoding="utf-8")
+        if ANCHOR not in text:
+            raise SystemExit(f"{f}: no {ANCHOR} to insert after; the theme's markup changed")
+        f.write_text(text.replace(ANCHOR, ANCHOR + "\n" + panel(keys), 1), encoding="utf-8")
+        print(f"  linked {f.relative_to(dist)} to {len(keys)} page(s)")
 
     check_links(dist, doc)
 

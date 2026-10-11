@@ -1,143 +1,143 @@
-# 主站科学性与计算核查
+# Main-site scientific and computational audit
 
-日期：2026-09-20。核查基线：`2ac7385`。核查期间交织 ADC 的独立界面更新 `a111081` 已进入主分支；最终验证保留该界面更新及修正后的计算模型。
+Date: 2026-09-20. Audit baseline: `2ac7385`. During the audit, the independent interleaved-ADC UI update `a111081` entered the main branch. Final verification retained that UI update and the corrected computational models.
 
-核查对象是 [Circuits & Systems Classroom](https://circuits-and-systems.tokenzhang.com/) 当时首页列出的课程与外部 Bode 工具。旧域名的教程已重定向到这里。未列入首页的实验页和整套 ADCToolbox Python 库不在本次全面核查范围内。
+The scope was the lessons listed on the [Circuits & Systems Classroom](https://circuits-and-systems.tokenzhang.com/) homepage at the time, plus the external Bode tool. Tutorials on the old domain redirect here. Experimental pages absent from the homepage and the complete ADCToolbox Python library were outside the comprehensive audit scope.
 
-结论：基础理论大体正确，但原版本不能认定为全部计算正确、表述严谨。发现了会显著改变读数的计算错误，也发现了把简化模型或经验指标说成严格结论的问题。下列站内问题已经在本次修订中处理；外部工具的临界稳定判断仍有已知问题。
+Conclusion: the basic theory was largely correct, but the original version could not be considered entirely computationally correct or rigorously worded. Errors significantly changed readings, and some simplified models or empirical metrics were presented as rigorous conclusions. The on-site issues below were addressed in this revision. The external tool still has a known marginal-stability classification issue.
 
-## 逐项结论
+## Findings by entry
 
-| 首页入口 | 核查结论 | 本次处理 |
-| --- | --- | --- |
-| Aliasing and Nyquist zones | 频率折叠、实际保留采样时刻及相干采样计算正确 | 限定实信号相位镜像、理想正弦采样等价、谐波位置与杂散的区别；说明噪声每 bin 上升的比较基准 |
-| Binary vs redundant SAR | 理想逐次逼近、权重重构、独立训练/测试和失配基本模型成立；“不可恢复比例”的解释不成立 | 改为“模拟 DAC 误差超过 1 LSB 的输入比例”；修正逐步剩余范围和满量程理想码；说明冗余的单向恢复条件 |
-| Analog output analysis panel | 原谐波相位计算有错误，另有会误导诊断的显示问题；浏览器版并非 Python 仪表盘的逐项等价复现 | 修正相位符号、Nyquist 镜像、线性建立过程初始瞬态；PDF 保留毛刺；残差谱不再虚构新基波的谐波标签；明确码单位与模型来源 |
-| Time-interleaved ADCs | 原任意倍数降采样会把分析记录缩短到 `ceil(4096/D)`，造成严重泄漏和过低频率分辨率；杂散标记也曾按错误的通道序列计算 | 每个输出率固定分析 4096 个实际保留样本；按实际访问的通道序列重新求杂散，并逐点验证预测标记与 FFT 对齐 |
-| Integer-N vs fractional-N | 频率公式、环路基本实现、噪声量纲成立；原 dBc 分母不严格，页面缺少重要模型条件 | 谱归一化改为实际载波；说明有限字长、参考率行为模型、噪声假设、抖动读数及杂散检测阈值 |
-| Bode plots & stability（外链） | 抽查的幅相和时域响应正确；临界稳定判断不严谨 | 保留外链并限定主页说明；外部源代码未改，反例如下 |
+| Homepage entry | Audit finding | Revision |
+|---|---|---|
+| Aliasing and Nyquist zones | Frequency folding, actual retained sample times, and coherent-sampling calculations were correct | Qualified real-signal phase mirroring, ideal sinusoidal sample equivalence, harmonic locations versus spurs, and the baseline for per-bin noise increase |
+| Binary vs redundant SAR | Ideal successive approximation, weight reconstruction, independent training/testing, and the basic mismatch model were valid; the "unrecoverable fraction" interpretation was invalid | Renamed it "fraction of inputs with analog DAC error exceeding 1 LSB"; corrected remaining ranges and full-scale ideal codes; explained one-sided redundancy recovery |
+| Analog output analysis panel | Harmonic phase calculation was wrong, with other misleading diagnostic displays; the browser version was not numerically equivalent to every Python dashboard case | Corrected phase signs, Nyquist mirroring, and initial transients in linear settling; retained glitches in the PDF; removed invented harmonic labels for a new residual fundamental; clarified code units and model origins |
+| Time-interleaved ADCs | Arbitrary-factor decimation shortened the record to `ceil(4096/D)`, causing severe leakage and poor frequency resolution; spur markers used the wrong channel sequence | Analyze 4096 retained samples at each output rate; recompute spurs from the actual visited channel sequence and verify predicted markers against FFT lines |
+| Integer-N vs fractional-N | Frequency equations, basic loop implementation, and noise dimensions were valid; the dBc denominator was inexact and important model conditions were missing | Normalize spectra to the actual carrier; state finite word length, reference-rate behavioral model, noise assumptions, jitter readings, and spur thresholds |
+| Bode plots & stability (external link) | Sampled magnitude/phase and time responses were correct; marginal-stability classification was not rigorous | Retained the link with qualified homepage wording; external source code was not changed; counterexamples follow |
 
-## 1. 交织 ADC：降采样后的记录长度与杂散
+## 1. Interleaved ADC: record length and spurs after decimation
 
-4096 点、12 bit、0.4 V 峰值正弦、1 GS/s、目标约 100 MHz、无通道失配，仅保留量化和 0.3 LSB rms 热噪声：
+For a 4096-point, 12-bit, 0.4 V peak sinusoid at 1 GS/s, targeting about 100 MHz, with no channel mismatch and only quantization plus 0.3 LSB rms thermal noise:
 
-| 降采样倍数 | 原输出点数 | 原 SNDR | 修正后的输出点数与 SNDR |
-| --- | ---: | ---: | ---: |
-| 1 | 4096 | 68.786 dB | 4096 点，约 68.9 dB |
-| 3 | 1366 | **8.477 dB** | 4096 点，约 68.9 dB |
-| 5 | 820 | **4.695 dB** | 4096 点，约 68.9 dB |
-| 17 | 241 | **14.774 dB** | 4096 点，约 68.9 dB |
+| Decimation factor | Original output points | Original SNDR | Corrected output points and SNDR |
+|---|---|---|---|
+| 1 | 4096 | 68.786 dB | 4096 points, about 68.9 dB |
+| 3 | 1366 | **8.477 dB** | 4096 points, about 68.9 dB |
+| 5 | 820 | **4.695 dB** | 4096 points, about 68.9 dB |
+| 17 | 241 | **14.774 dB** | 4096 points, about 68.9 dB |
 
-独立噪声预算为
+The independent noise budget is
 
-`SNR = 10 log10[(0.4²/2) / ((1/12 + 0.3²)/4096²)] ≈ 68.9 dB`。
+`SNR = 10 log10[(0.4²/2) / ((1/12 + 0.3²)/4096²)] ≈ 68.9 dB`.
 
-原实现只生成 4096 个高速样本，再从中每 D 点取一个，因此输出 FFT 只剩 `ceil(4096/D)` 点。D 不整除 4096 时，截断后的记录不再相干；载波、交织杂散和谐波都会被窗函数摊开。虽然正弦拟合可以恢复接近正确的 SNDR 数字，这种几十点的频谱仍缺乏分辨率，预测标记也无法与谱线直观对齐。
+The original implementation generated only 4096 high-rate samples and retained every Dth sample, leaving `ceil(4096/D)` points for the output FFT. When D did not divide 4096, the truncated record was no longer coherent; the window spread carrier, interleaving spurs, and harmonics. Although sinusoidal fitting could recover nearly correct SNDR values, a spectrum with only a few dozen points lacked resolution and could not visually align prediction markers with lines.
 
-修订后每个 D 都分析 4096 个输出样本，即高速 ADC 的第 `0, D, 2D, …, 4095D` 个样本。对于本页的无记忆转换器模型，直接计算这些样本与先生成 `4096D` 点再丢弃中间样本严格等价，同时避免 D=255 时在每次滑动中生成一百多万个无用点。输入在该记录上保持相干，因此统一使用 4096 点矩形窗 FFT；输出采样率仍为 `fs/D`，所有输入、谐波、交织杂散和宽带噪声均按无抗混叠滤波的直接降采样折叠。
+The revision analyzes 4096 output samples for every D: high-rate ADC samples `0, D, 2D, …, 4095D`. For this memoryless converter model, computing those samples directly is exactly equivalent to generating `4096D` points and discarding intermediate ones. It also avoids generating more than a million unused points during each slider update at D=255. The input is coherent within that record, so a 4096-point rectangular-window FFT is used throughout. Output rate remains `fs/D`; inputs, harmonics, interleaving spurs, and broadband noise all fold through direct decimation without an antialias filter.
 
-新增断言覆盖 D=1、2、3、17、53、63、127、255：FFT 点数恒为 4096，基波 bin 等于 `fold(KD,4096)`。D=53、M=8 的逐条检查还验证了预测交织杂散的频点和 dBFS 与实际 FFT 谱线一致。
+New assertions cover D=1, 2, 3, 17, 53, 63, 127, 255: FFT length stays 4096 and the fundamental bin is `fold(KD,4096)`. Line-by-line checks at D=53, M=8 also verify predicted interleaving-spur frequencies and dBFS against actual FFT lines.
 
-另一问题是降采样后的通道选择。保留样本来自 `c = kD mod M`，只访问 `M/gcd(M,D)` 个通道。原实现只折叠杂散频率，未先相加复振幅，因此 D=M 时仍画出失配杂散。修订先构造实际访问的通道序列，再作其 DFT。只保留一个通道时，静态失配变成固定增益、相位与 DC，不再产生交织杂散。
+Another issue was channel selection after decimation. Retained samples come from `c = kD mod M`, visiting only `M/gcd(M,D)` channels. The original implementation folded spur frequencies without first adding complex amplitudes, so it still drew mismatch spurs when D=M. The revision forms the actual visited channel sequence and takes its DFT. With only one channel retained, static mismatch becomes fixed gain, phase, and DC rather than interleaving spurs.
 
-新增测试直接对解析失配波形作 FFT，验证 D=1、2、3、4、5、8 的杂散频率、功率和载波比；包括 Nyquist 点相同峰值具有两倍均方功率的处理。
+New tests take FFTs of analytical mismatch waveforms directly and verify spur frequencies, powers, and carrier ratios for D=1, 2, 3, 4, 5, 8, including the doubled mean-square power at Nyquist for the same peak amplitude.
 
-## 2. 模拟分析面板：谐波相位与诊断范围
+## 2. Analog analysis panel: harmonic phase and diagnostic scope
 
-统一使用 `A cos(ωt + φ)` 相位约定。若拟合结果为 `a cos(ωt) + b sin(ωt)`，则 `φ = atan2(-b,a)`，不是 `atan2(b,a)`。相对谐波相位定义为 `φh − hφ1`。
+The phase convention is `A cos(ωt + φ)`. For a fit `a cos(ωt) + b sin(ωt)`, use `φ = atan2(-b,a)`, not `atan2(b,a)`. Relative harmonic phase is `φh − hφ1`.
 
-采用 φ1=0.37 rad、φh=0.81 rad 的已知双音：
+For a known two-tone signal with φ1=0.37 rad and φh=0.81 rad:
 
-| 分量 | 正确相对相位 | 原分解图 | 原 FFT 极坐标图 | 修正后两图 |
-| --- | ---: | ---: | ---: | ---: |
+| Component | Correct relative phase | Original decomposition plot | Original FFT polar plot | Both corrected plots |
+|---|---|---|---|---|
 | H2 | 0.07 rad | −0.07 | 0.07 | 0.07 |
-| H5（超过 Nyquist） | −1.04 rad | 1.04 | −2.66 | −1.04 |
+| H5 (above Nyquist) | −1.04 rad | 1.04 | −2.66 | −1.04 |
 
-H5 的镜像谱系数需要先共轭，再计算相对相位。现在只在极坐标图中显示具有明确谐波阶数的相位，避免将原始噪声 bin 的绝对相位混入同一坐标约定。
+Conjugate the mirrored H5 spectral coefficient before calculating relative phase. The polar plot now shows phases only for clearly identified harmonic orders, avoiding a mixture of absolute noise-bin phases and relative harmonic phases.
 
-同时处理：
+Other changes:
 
-- 线性建立模型先预热，避免启动瞬态被称为稳态失真；所有独立误差控制归零时，正弦拟合残差小于 1e−8 LSB。
-- PDF 横轴覆盖全部误差样本。原 ±3.5 rms 范围会漏掉稀有的大毛刺；新增断言确保全部 4096 个样本计入直方图。
-- 相平面保留全部采样点，避免等步长稀疏显示刚好跳过毛刺。大误差下的坐标刻度按实际跨度调整。
-- 残差与包络的最高谱峰不再被称为“输入”，也不以它虚构 H2–H5。
-- “Resolution” 改为 “Code scale”：该控件只将 1 V 满量程换算成 LSB，不会给所有模型自动加上所选位数的量化器。
-- 页面明确它是 4096 点、已知频率拟合的浏览器改编版。漂移、AM 的非相干性、固定量化级、简化诊断图等都不能据此称为与 Python 65536 点批量案例逐项数值相同。
+- Warm up the linear settling model so startup transients are not called steady-state distortion. With all independent error controls at zero, sinusoidal-fit residuals are below 1e−8 LSB.
+- Extend the PDF x-axis over all error samples. The old ±3.5 rms range omitted rare large glitches; new assertions ensure all 4096 samples enter the histogram.
+- Retain all sampled points in the phase plane to prevent uniformly spaced display subsampling from skipping glitches. Axis ticks adapt to the actual range under large errors.
+- Stop calling the largest residual/envelope spectral peak the "input" or inventing H2–H5 from it.
+- Rename "Resolution" to "Code scale": this control converts a 1 V full-scale range to LSBs; it does not automatically add a quantizer with that bit depth to every model.
+- State that the page is a 4096-point browser adaptation using known-frequency fitting. Drift, noncoherent AM, fixed quantization levels, and simplified diagnostic plots prevent claims of case-by-case numerical equivalence to Python's 65536-point batch examples.
 
-仍需注意：这些是故障特征示例，不能从一幅误差图唯一反推电路故障；AM/PM 方差分解也不是对任意非线性和混合噪声的唯一辨识。
+These are fault-signature examples. One error plot cannot uniquely identify a circuit fault, and AM/PM variance decomposition is not a unique identification method for arbitrary nonlinearities and mixed noise.
 
-## 3. SAR：误差阈值不等于不可恢复的信息
+## 3. SAR: an error threshold is not unrecoverable information
 
-原 `lostInputs` 测量的是 `|x − Σ(actual_weight × decision)| > 1 LSB`，这不证明“任何数字权重都无法修复”。
+The original `lostInputs` measured `|x − Σ(actual_weight × decision)| > 1 LSB`. This does not prove that "no digital weights can repair the result."
 
-反例：两级实际权重 `[2.8,1]`，决策偏置 +0.5 LSB。位串 `01` 对应输入区间 `[0.5,2.3)`。输入 2.125 时模拟 DAC 重构为 1，误差 1.125 LSB；把该位串的数字重构值设为 1.4，误差变为 0.725 LSB，且整个区间最大误差不超过 0.9 LSB。
+Counterexample: two actual weights `[2.8,1]` and a decision bias of +0.5 LSB. Bit string `01` corresponds to inputs in `[0.5,2.3)`. At input 2.125, analog DAC reconstruction is 1, an error of 1.125 LSB. Assigning digital reconstruction 1.4 to this bit string reduces the error to 0.725 LSB, with maximum error across the entire interval no greater than 0.9 LSB.
 
-正确的限制是：相同决策码对应的输入区间内部，数字后处理不能创造新的观测信息。区间过宽会限制可恢复分辨率；“模拟重构误差 >1 LSB 的比例”本身不是这个信息论限制的测量。
+The actual limitation is that digital postprocessing cannot create new observations inside an input interval sharing the same decision code. Excessively wide intervals limit recoverable resolution; the "fraction with analog reconstruction error >1 LSB" alone does not measure that information limit.
 
-本次修订：
+This revision:
 
-- 改正比例、阴影、总结和代码注释的含义。
-- 剩余 DAC 范围改为当前决策完成后的上下界，并明确它只是外包络，不保证内部没有间隙。
-- 最后一位误判也能在范围图中体现；满量程理想码按 `2^N−1` 饱和。
-- 指出本页单极性、只累加正权重的搜索主要容忍误拒绝，不能把已误接受的权重再减掉；末级没有后续权重用于恢复。
+- Corrected the meaning of the fraction, shading, summaries, and comments.
+- Changed remaining DAC ranges to bounds after the current decision and clarified that they are only an outer envelope, not a guarantee of no internal gaps.
+- Made final-bit decision errors visible in range plots and saturated full-scale ideal codes at `2^N−1`.
+- Explained that this unipolar, positive-weight accumulation search mainly tolerates false rejections; it cannot subtract an already falsely accepted weight. The final stage has no later weights for recovery.
 
-另验证了两种理想阵列的逐点舍入、独立训练/测试记录、相干测试频率、jitter 的 `−20 log10(2πfinσt)` 近似。对 5 种位数、3 种训练长度、3 种失配、5 个芯片实例、2 种阵列共 450 个无噪声组合检查，校准权重均为有限值；这不是对任意秩亏训练数据都可辨识的保证。ENOB 使用页面所示 `(SNDR−1.76)/6.02`，没有补偿 −0.5 dBFS 输入幅度。
+Also verified point-by-point rounding for both ideal arrays, independent training/test records, coherent test frequencies, and the jitter approximation `−20 log10(2πfinσt)`. Across 450 noiseless combinations of 5 bit depths, 3 training lengths, 3 mismatch levels, 5 chip instances, and 2 arrays, calibrated weights were finite. This does not guarantee identifiability for arbitrary rank-deficient training data. ENOB uses the displayed `(SNDR−1.76)/6.02` without compensation for the −0.5 dBFS input amplitude.
 
-## 4. PLL：整形阶数正确，dBc 分母需要修正
+## 4. PLL: correct shaping order, incorrect dBc denominator
 
-用独立闭式余数关系验证 MASH，未沿用同一份 carry 更新代码作为参照。令 `M=2^24`、输入字 F，从零状态开始：
+MASH was checked using independent closed-form remainder relationships rather than the same carry-update code. With `M=2^24`, input word F, and zero initial state:
 
-`r3[k] = F (k+1)(k+2)(k+3)/6 mod M`，`e3[k] = −r3[k]/M`。
+`r3[k] = F (k+1)(k+2)(k+3)/6 mod M`, `e3[k] = −r3[k]/M`.
 
-逐样本验证：
+Verified sample by sample:
 
-- `y[k]−α = Δ³e3[k]`：分频字三阶整形。
-- `Σ(y[k]−α) = Δ²e3[k]`：累积相位二阶整形。
-- 一阶累加器的累积误差为 `−r1[k]/M`，有界但不再带差分整形因子。
+- `y[k]−α = Δ³e3[k]`: third-order shaping of the divider word.
+- `Σ(y[k]−α) = Δ²e3[k]`: second-order shaping of accumulated phase.
+- A first-order accumulator has accumulated error `−r1[k]/M`, bounded but without a remaining difference-shaping factor.
 
-因此 accumulator 不是与 delta-sigma 平行、互不相关的概念，它本身就是一阶实现。无 dither 的有理数控制字产生确定性序列，不能保证每个频点的杂散都比一阶小。
+An accumulator is therefore a first-order delta-sigma implementation, not a parallel unrelated concept. Rational control words without dither produce deterministic sequences; they do not guarantee smaller spurs at every frequency than a first-order implementation.
 
-原 PLL 频谱将 `exp(jφ)` 的边带功率除以单位总功率，却标成相对实际载波的 dBc。强相位调制时载波会衰减，两者可差很多。现改为除以实测载波功率 `|Σw exp(jφ)/Σw|²`；Python 对照脚本作同一修正，抖动数值不因此改变。
+The old PLL spectrum divided `exp(jφ)` sideband power by unit total power but labeled the result dBc relative to the actual carrier. Strong phase modulation attenuates the carrier, making the difference substantial. The denominator is now measured carrier power `|Σw exp(jφ)/Σw|²`. The Python comparison script received the same correction; jitter values do not change as a result.
 
-独立解析验证：φ(t)=βcos(ωmt) 时载波幅度为 J0(β)，第一边带为 J1(β)。β=0.8 rad 的测试验证载波功率、`20log10|J1/J0|` 和 `β/(2πfout√2)` 抖动。白相位噪声另与 `L=σφ²/fref` 比较，检查单边相位噪声没有多/少一倍功率。
+Independent analytical verification: for φ(t)=βcos(ωmt), carrier amplitude is J0(β) and the first sideband is J1(β). A β=0.8 rad test checks carrier power, `20log10|J1/J0|`, and jitter `β/(2πfout√2)`. White phase noise is compared against `L=σφ²/fref` to check for factor-of-two errors in one-sided phase-noise power.
 
-典型输出：5.005 GHz、40 MHz 参考、1 MHz 带宽下，浏览器整数模式 jitter=188.30 fs，MASH=2682.42 fs；独立 Python 随机序列分别为 188.1 fs 和 2681.7 fs。剩余差别符合噪声抽样差异。隐藏的强调制 accumulator 测例中，原 −4.68 dB 的“边带/总功率”改成约 +12.48 dBc 的“边带/剩余载波”，正值并不表示产生了额外总功率。
+Typical output at 5.005 GHz, 40 MHz reference, and 1 MHz bandwidth: browser integer-mode jitter=188.30 fs and MASH=2682.42 fs; independent Python random sequences give 188.1 fs and 2681.7 fs. Differences are consistent with random noise sampling. In a hidden strong-modulation accumulator test, the old −4.68 dB "sideband/total power" becomes about +12.48 dBc "sideband/remaining carrier." A positive value does not imply extra total power.
 
-页面补充：24-bit 频率步进、线性相位检测/行为环路、白参考噪声和 VCO 1/f² 假设、无 DTC/CP 失配、有限记录去趋势 jitter，以及杂散检测阈值。它不是晶体管级 PLL 仿真，也不提供某颗芯片的精度保证。
+The page now states 24-bit frequency steps, linear phase detection/behavioral loop, white reference noise and VCO 1/f² assumptions, no DTC/CP mismatch, finite-record detrended jitter, and spur detection thresholds. It is not a transistor-level PLL simulation and does not guarantee a chip's accuracy.
 
-## 5. Aliasing：数值成立，说明需限定比较条件
+## 5. Aliasing: correct values require qualified comparisons
 
-- 检查 `|f − fs round(f/fs)|` 与实际保留时刻，谐波 2、3 的折叠一致。
-- `f` 与 `−f` 的实信号谱幅相联系需要共轭；理想混叠正弦的采样等价不意味着带量化、失真和热噪声的点也精确落在线上。
-- 这里输出 FFT 一直是 4096 点。相对于同一捕获的原始 `D×4096` 点 FFT，每 bin 噪声上升约 `10log10(D)`；跨不同 D 比较 4096 点输出谱时，白噪声每 bin 应大致不变。已分别验证这两种比较。
-- H2/H3 控件设的是相对于未失真正弦幅度的多项式系数；三次项也改变基波，故测量 dBc 可略有差异。频率重合时必须复振幅相加。
+- Checked `|f − fs round(f/fs)|`, actual retained times, and consistent folding of harmonics 2 and 3.
+- Real-signal spectra at `f` and `−f` require conjugation. Sampling equivalence of ideal aliased sinusoids does not mean samples containing quantization, distortion, and thermal noise lie exactly on the ideal curve.
+- The output FFT here is always 4096 points. Relative to the original `D×4096`-point FFT of the same capture, per-bin noise rises by about `10log10(D)`. Across different D values with 4096-point output spectra, white-noise power per bin should remain roughly unchanged. Both comparisons were verified.
+- H2/H3 controls set polynomial coefficients relative to the undistorted sinusoidal amplitude. The cubic term also changes the fundamental, so measured dBc may differ slightly. Coincident frequencies require complex-amplitude addition.
 
-## 6. 外部 Bode 工具：已知未修复问题
+## 6. External Bode tool: known unresolved issue
 
-检查对象：[many-question/bode-sketch v1.5](https://many-question.github.io/bode-sketch/)。2026-09-20 抓取的 HTML SHA-256：`07cbc4f501573909d3a5ad39cd216c540b2765121be6d098554a3df06ea28da7`。结论限于这个版本。
+Target: [many-question/bode-sketch v1.5](https://many-question.github.io/bode-sketch/). HTML retrieved on 2026-09-20 had SHA-256 `07cbc4f501573909d3a5ad39cd216c540b2765121be6d098554a3df06ea28da7`. Conclusions apply to that version.
 
-对实际线上脚本的计算函数抽查：
+Spot checks of calculation functions in the actual online script:
 
-| 传递函数/测试 | 结果 |
-| --- | --- |
-| `H(s)=1/(s+1)`，ω=1 rad/s | −3.010300 dB、−45°，正确 |
-| 同一系统阶跃响应 t=1、2 s | 0.632120559、0.864664717，与 `1−exp(−t)` 一致 |
-| `H(s)=1/(s+1)²` 阶跃 | 与 `1−(1+t)exp(−t)` 一致 |
-| `H(s)=(s−1)/(s+1)` | 幅度恒为 0 dB，RHP 零点相位正确 |
-| 单位负反馈开环 `L(s)=10/(s+1)³` | 判得两个 RHP 闭环极点，正确 |
-| 单位负反馈开环 `L(s)=2/(s−1)` | 判得闭环稳定，正确 |
-| **`L(s)=8/(s+1)³`** | **错误标为稳定**；闭环特征多项式为 `(s+3)(s²+3)`，有 ±j√3 极点，是临界情况，不能称为渐近/BIBO 稳定 |
-| **`L(s)=1/s²`** | **错误标为稳定**；闭环 `1/(s²+1)` 有 ±j 极点 |
+| Transfer function / test | Result |
+|---|---|
+| `H(s)=1/(s+1)`, ω=1 rad/s | −3.010300 dB, −45°; correct |
+| Step response of the same system at t=1, 2 s | 0.632120559, 0.864664717; matches `1−exp(−t)` |
+| Step response of `H(s)=1/(s+1)²` | Matches `1−(1+t)exp(−t)` |
+| `H(s)=(s−1)/(s+1)` | Constant 0 dB magnitude and correct RHP-zero phase |
+| Unity negative-feedback open loop `L(s)=10/(s+1)³` | Correctly identifies two RHP closed-loop poles |
+| Unity negative-feedback open loop `L(s)=2/(s−1)` | Correctly identifies a stable closed loop |
+| **`L(s)=8/(s+1)³`** | **Incorrectly labeled stable**; characteristic polynomial `(s+3)(s²+3)` has poles ±j√3. This marginal case is not asymptotically/BIBO stable |
+| **`L(s)=1/s²`** | **Incorrectly labeled stable**; closed loop `1/(s²+1)` has poles ±j |
 
-其判断主要是 `Z=N+P` 后直接用 `Z===0` 显示稳定，没有可靠识别曲线经过 −1/闭环存在虚轴极点的边界情况。有限 420 点频率采样也不能作为任意高阶或窄共振系统的严格稳定性证明。
+The classification primarily computes `Z=N+P` and displays stable when `Z===0`, without reliably detecting boundary cases where the curve passes through −1 or closed-loop poles lie on the imaginary axis. A finite 420-point frequency sample is also not rigorous proof of stability for arbitrary high-order or narrow-resonance systems.
 
-本次没有修改或向第三方仓库提交内容。首页外链说明已加上临界稳定需要独立复核的限定；该工具目前适合幅相、极零点和响应探索，不应作为稳定性签核工具。
+No third-party repository was changed or received a submission. The homepage link now notes that marginal stability requires independent checking. The tool remains suitable for exploring magnitude, phase, poles, zeros, and responses, but should not be used for stability sign-off.
 
-## 验证与边界
+## Verification and boundaries
 
-- `tests/scientific-audit.test.ts` 新增 26 项解析/物理不变量检查，覆盖上述六个站内入口。
-- 242 项模型测试、Astro/Svelte/Worker 类型检查以及静态构建通过。
-- `python .github/toolbox-drift.py` 的 15 个参考脚本通过；仅在解释并验证 PLL 的载波归一化变化后更新其预期输出。
-- 用实际浏览器检查六个站内页面、降采样控件、异常样本显示和生产构建；保留原访问统计、MIT License 和导航。
+- Added 26 analytical/physical-invariant checks in `tests/scientific-audit.test.ts` covering the six on-site entries above.
+- Passed 242 model tests, Astro/Svelte/Worker type checks, and static build.
+- Passed the 15 reference scripts in `python .github/toolbox-drift.py`. Expected output was updated only after explaining and verifying the PLL carrier-normalization change.
+- Used an actual browser to inspect six on-site pages, decimation controls, abnormal-sample displays, and the production build. Preserved visitor analytics, MIT License, and navigation.
 
-这是对公开教学模型及重点边界条件的核查，不是对无限输入空间的形式化证明。教学模型成立的条件已写回课程说明；实际 ADC 的非线性、时变误差、混叠碰撞、校准可辨识性及实际 PLL 器件噪声仍需按具体测量条件验证。
+This is an audit of public teaching models and important boundary conditions, not a formal proof over an infinite input space. Model validity conditions were added to the lessons. Actual ADC nonlinearity, time-varying errors, alias collisions, calibration identifiability, and actual PLL device noise still need verification under specific measurement conditions.

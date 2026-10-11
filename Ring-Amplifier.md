@@ -1,7 +1,7 @@
 # Ring Amplifier
 
 <!--
-Input: reference/笔记_RingAmp_20230611.pdf, reference/詹明韬Design Report.pdf, reference/ringamp/
+Input: reference/%E7%AC%94%E8%AE%B0_RingAmp_20230611.pdf, reference/%E8%A9%B9%E6%98%8E%E9%9F%ACDesign%20Report.pdf, reference/ringamp/
 Output: Ring amplifier working principle and design equations
 Position: Dynamic amplifier for switched-capacitor circuits
 ⚠️ Updated: Complete rewrite based on dead-zone stabilization mechanism

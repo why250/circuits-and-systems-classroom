@@ -2,6 +2,10 @@
 
 An interactive classroom and knowledge base for analog and mixed-signal circuits and systems, spanning amplifiers, data converters, PLLs, noise, feedback, and signal analysis.
 
+## Language
+
+Project documentation and teaching content are maintained in English. Each document has one English version; Chinese versions are added only on explicit request.
+
 ## Interactive illustrations
 
 The `web/` folder holds **Circuits & Systems Classroom**, published at
@@ -13,6 +17,10 @@ The Razavi learning roadmap is available at <https://why250-circuits-classroom.p
 
 The home page and shared navigation also link to [Digital IC Classroom](https://why250-digital-ic-classroom.pages.dev/),
 an independent Chinese learning site for RTL, SPI, STA/CDC and mixed-signal digital design. It links back to this classroom.
+
+## Shared simulation models
+
+The [educational LEVEL=1 MOS library](simulations/models/edu-mos-level1/README.md) provides versioned NMOS/PMOS models for compatible circuit derivation-to-simulation lessons. It documents included nonidealities, model limits, reuse conventions, and an executed common-source example with independent calculations. Existing circuit labs retain their frozen model snapshots.
 
 ## Contents
 
@@ -89,11 +97,17 @@ Complete mathematical analysis of 5-transistor differential amplifiers including
 #### [Five-Transistor OTA: Schematic and Simulation](5T-OTA-Schematic-and-Simulation.md)
 Companion document with an editable Analog Canvas project, SVG schematic, original SKY130 structural netlist and reproducible educational ngspice lab. Pairs derivations with bias, gain, impedance, CMRR, PSRR, thermal noise, pole/zero and small-step settling plots from eleven testbenches, including numerical checks and model limits. [Run the lab](simulations/5t-ota/README.md).
 
+#### [BJT Emitter-Degenerated Differential Pair: Analysis](BJT-Degenerated-Differential-Pair-Analysis.md)
+Analytical reference for the supplied resistor-loaded BJT differential pair with input and tail emitter degeneration. Covers topology, symbolic derivations, signed single-ended/differential gains, finite-beta/Early-effect common-mode response, impedance, bias-reference-dependent PSRR, shot/thermal/flicker noise, charge-model poles/zeros, and settling assumptions.
+
+#### [BJT Emitter-Degenerated Differential Pair: Schematic and Simulation](BJT-Degenerated-Differential-Pair-Schematic-and-Simulation.md)
+Companion document with the connectivity-checked schematic, source netlist, explicit educational model and bias, and 16 executed ngspice testbenches. Places metric derivations beside simulation curves, numerical comparisons and raw evidence, including mismatch leakage, bias-reference-dependent PSRR, noise-source propagation, and small-step settling. [Run the lab](simulations/bjt-degenerated-differential-pair/README.md).
+
 #### [Source-Degenerated Cascode Amplifier: Analysis](Source-Degenerated-Cascode-Analysis.md)
 Topology-specific analysis of the supplied resistor-loaded two-NMOS cascode: inherited parameters, bias/headroom, gain and output resistance with body effect, internal nodes, bias/supply coupling, thermal/flicker noise and transfer-function roots. The original folded-cascode filename is corrected from actual connectivity.
 
 #### [Source-Degenerated Cascode: Schematic and Simulation](Source-Degenerated-Cascode-Schematic-and-Simulation.md)
-Companion derivations and eight plot pairs from 26 actual ngspice testbenches, with independent KCL/noise/PZ/DC/transient checks. Preserves original 50-ohm loads, separately compares a 10-kohm experiment, and marks load/degeneration limits. [Run the lab](simulations/source-degenerated-cascode/README.md).
+Structure-focused derivations and six plot pairs from 16 ngspice-46 testbenches derived from the adjusted KiCad circuit (RL=1 kohm, RE=50 ohm, m=10, VIN=0.85 V, VB=1.4 V). Connects source feedback, cascode resistance, per-source thermal noise and signal distortion to independently checked simulations. [Run the current lab](simulations/source-degenerated-cascode/current-study/README.md); [historical load and degeneration experiments](Source-Degenerated-Cascode-Historical-Baseline.md) remain available.
 
 #### `Miller-Compensated-Two-Stage-Amplifier.md`
 Classical two-stage operational amplifier with Miller compensation. Comprehensive reference covering DC gain equations, dominant/non-dominant poles, RHP zero analysis, GBW calculations, phase margin design, slew rate, settling time, noise analysis, CMRR/PSRR, and complete design procedure with sizing equations.

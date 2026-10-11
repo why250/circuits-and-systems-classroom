@@ -30,7 +30,7 @@
   const r = $derived(read(m, inputMHz * 1e6, mm, bits, 'off', { ...options, jitter: active && stage === 4 && jitterMode ? skewPs * 1e-12 : 0 }));
   // read() already returns outputSpurs in the FFT's power convention, including Nyquist.
   const relevantSpur = $derived(r.spurs.filter(s => s.kind === (stage === 1 ? 'offset' : 'image')).reduce((best, s) => s.dbc > best.dbc ? s : best, { freq: 0, dbc: -Infinity }));
-  const spurText = $derived(Number.isFinite(relevantSpur.dbc) ? `${freqText(relevantSpur.freq)} · ${nf(relevantSpur.dbc, 1)} dBc` : '当前无失配杂散');
+  const spurText = $derived(Number.isFinite(relevantSpur.dbc) ? `${freqText(relevantSpur.freq)} · ${nf(relevantSpur.dbc, 1)} dBc` : 'No mismatch spur');
   const jitterSnr = $derived(jitterOnlySnr(r.fin, active && stage === 4 && jitterMode ? skewPs * 1e-12 : 0));
   const completed = $derived(checks.filter((answer, i) => answer === lessonSteps[i].checkAnswer).length);
 
@@ -49,13 +49,13 @@
   }
 </script>
 
-<main class="guided" lang="zh-CN">
+<main class="guided" lang="en">
   <header class="intro">
-    <div><p class="eyebrow">入门实验 / TIME-INTERLEAVED ADC</p><h1>让多路 ADC 轮流采样</h1><p>你已经了解普通 ADC 和频谱。接下来每次只改变一个条件，把采样时刻、误差和频谱连起来。</p></div>
-    <div class="progress"><strong>{completed} / {lessonSteps.length}</strong><span>理解检查通过</span></div>
+    <div><p class="eyebrow">INTRODUCTORY EXPERIMENTS / TIME-INTERLEAVED ADC</p><h1>Let multiple ADCs take turns sampling</h1><p>You know ordinary ADCs and spectra. Change one condition at a time to connect sampling times, errors, and spectral features.</p></div>
+    <div class="progress"><strong>{completed} / {lessonSteps.length}</strong><span>comprehension checks passed</span></div>
   </header>
 
-  <nav class="steps" aria-label="实验步骤">
+  <nav class="steps" aria-label="Experiment steps">
     {#each lessonSteps as item, i}
       <button type="button" aria-current={stage === i ? 'step' : undefined} onclick={() => go(i)}>
         <span class="step-index">{checks[i] === item.checkAnswer ? '✓' : i + 1}</span>{item.title}
@@ -65,113 +65,113 @@
 
   <div class="experiment">
     <section class="guide" aria-labelledby="step-heading">
-      <div class="step-heading"><p class="eyebrow">实验 {stage + 1} / {lessonSteps.length}</p><h2 id="step-heading">{step.title}</h2><p>{step.aim}</p></div>
+      <div class="step-heading"><p class="eyebrow">Experiment {stage + 1} / {lessonSteps.length}</p><h2 id="step-heading">{step.title}</h2><p>{step.aim}</p></div>
       <fieldset class="prediction">
-        <legend>① 先预测</legend>
+        <legend>① Predict first</legend>
         <p>{step.question}</p>
         <div class="choices">
           {#each step.choices as choice, i}
             <button type="button" aria-pressed={predictions[stage] === i} onclick={() => predict(i)}>{choice}</button>
           {/each}
-          <button class="unsure" type="button" aria-pressed={predictions[stage] === -1} onclick={() => predict(-1)}>还不确定，先做实验</button>
+          <button class="unsure" type="button" aria-pressed={predictions[stage] === -1} onclick={() => predict(-1)}>Not sure yet; let me experiment</button>
         </div>
       </fieldset>
 
       <section class="operate" aria-labelledby="operate-heading">
-        <h3 id="operate-heading">② 做实验</h3>
-        {#if started}<p>{step.task}</p>{:else}<p class="hint">先选一个预测，或选择“还不确定”，即可查看实验操作。图表目前是无失配的基线。</p>{/if}
+        <h3 id="operate-heading">② Run the experiment</h3>
+        {#if started}<p>{step.task}</p>{:else}<p class="hint">Choose a prediction or “Not sure yet” to enable the controls. The plots currently show a baseline without mismatch.</p>{/if}
         <fieldset class="controls" disabled={!started}>
-          <legend class="sr-only">本步实验参数</legend>
+          <legend class="sr-only">Parameters for this step</legend>
           {#if stage === 0}
-            <div class="switches" aria-label="通道数">
-              <button type="button" aria-pressed={m === 2} onclick={() => m = 2}>两路</button>
-              <button type="button" aria-pressed={m === 4} onclick={() => m = 4}>四路</button>
+            <div class="switches" aria-label="Channel count">
+              <button type="button" aria-pressed={m === 2} onclick={() => m = 2}>Two channels</button>
+              <button type="button" aria-pressed={m === 4} onclick={() => m = 4}>Four channels</button>
             </div>
           {:else}
-            <div class="switches" aria-label="误差开关">
-              <button type="button" aria-pressed={!enabled} onclick={() => enabled = false}>关闭误差 · 对照</button>
-              <button type="button" aria-pressed={enabled} onclick={() => enabled = true}>开启当前误差</button>
+            <div class="switches" aria-label="Error switch">
+              <button type="button" aria-pressed={!enabled} onclick={() => enabled = false}>Disable error · Baseline</button>
+              <button type="button" aria-pressed={enabled} onclick={() => enabled = true}>Enable current error</button>
             </div>
-            {#if stage === 1}<EditableRange id="guided-offset" min={0} max={5} step={0.1} digits={1} unit="mV" bind:value={offsetMv}>失调 RMS</EditableRange>{/if}
-            {#if stage === 2}<EditableRange id="guided-gain" min={0} max={1} step={0.05} digits={2} unit="%" bind:value={gainPct}>增益误差 RMS</EditableRange>{/if}
-            {#if stage === 3 || stage === 4}<EditableRange id="guided-skew" min={0} max={10} step={0.1} digits={1} unit="ps" bind:value={skewPs}>时间误差 RMS</EditableRange>{/if}
+            {#if stage === 1}<EditableRange id="guided-offset" min={0} max={5} step={0.1} digits={1} unit="mV" bind:value={offsetMv}>Offset RMS</EditableRange>{/if}
+            {#if stage === 2}<EditableRange id="guided-gain" min={0} max={1} step={0.05} digits={2} unit="%" bind:value={gainPct}>Gain error RMS</EditableRange>{/if}
+            {#if stage === 3 || stage === 4}<EditableRange id="guided-skew" min={0} max={10} step={0.1} digits={1} unit="ps" bind:value={skewPs}>Timing error RMS</EditableRange>{/if}
             {#if stage === 4}
-              <div class="switches" aria-label="时间误差类型">
-                <button type="button" aria-pressed={!jitterMode} onclick={() => jitterMode = false}>固定 skew</button>
-                <button type="button" aria-pressed={jitterMode} onclick={() => jitterMode = true}>随机 jitter</button>
+              <div class="switches" aria-label="Timing error type">
+                <button type="button" aria-pressed={!jitterMode} onclick={() => jitterMode = false}>Fixed skew</button>
+                <button type="button" aria-pressed={jitterMode} onclick={() => jitterMode = true}>Random jitter</button>
               </div>
             {/if}
-            <div class="switches" aria-label="输入频率">
-              <button type="button" aria-pressed={inputMHz === 125} onclick={() => inputMHz = 125}>输入 ≈125 MHz</button>
-              <button type="button" aria-pressed={inputMHz === 250} onclick={() => inputMHz = 250}>输入 ≈250 MHz</button>
+            <div class="switches" aria-label="Input frequency">
+              <button type="button" aria-pressed={inputMHz === 125} onclick={() => inputMHz = 125}>Input ≈125 MHz</button>
+              <button type="button" aria-pressed={inputMHz === 250} onclick={() => inputMHz = 250}>Input ≈250 MHz</button>
             </div>
           {/if}
-          <button class="reset" type="button" onclick={resetExperiment}>恢复本步参数</button>
+          <button class="reset" type="button" onclick={resetExperiment}>Restore this step</button>
         </fieldset>
-        <a class="mobile-jump" href="#guided-observations">查看波形与频谱 ↓</a>
+        <a class="mobile-jump" href="#guided-observations">View waveforms and spectrum ↓</a>
       </section>
 
       {#if started}
-        <button class="reveal" type="button" aria-expanded={revealed[stage]} onclick={() => revealed[stage] = !revealed[stage]}>{revealed[stage] ? '收起解释，继续观察' : '我已观察，查看解释'}</button>
+        <button class="reveal" type="button" aria-expanded={revealed[stage]} onclick={() => revealed[stage] = !revealed[stage]}>{revealed[stage] ? 'Hide explanation and keep observing' : 'Show explanation after observing'}</button>
       {/if}
       {#if started && revealed[stage]}
         <section class="explain" aria-labelledby="explain-heading">
-          <h3 id="explain-heading">③ 解释结果</h3>
-          <p class="feedback">{predictions[stage] === -1 ? '把实验结果与下面的解释对照。' : predictions[stage] === step.answer ? '你的预测与这个模型一致。' : '可以回看你的预测：'} {step.reason}</p>
+          <h3 id="explain-heading">③ Explain the results</h3>
+          <p class="feedback">{predictions[stage] === -1 ? 'Compare your observations with the explanation below.' : predictions[stage] === step.answer ? 'Your prediction matches this model.' : 'Revisit your prediction:'} {step.reason}</p>
           <p>{step.explanation}</p><p class="equation">{step.formula}</p>
         </section>
         <fieldset class="understanding">
-          <legend>④ 换个条件，检验理解</legend><p>{step.check}</p>
+          <legend>④ Change a condition and check understanding</legend><p>{step.check}</p>
           <div class="choices">{#each step.checkChoices as choice, i}<button type="button" aria-pressed={checks[stage] === i} onclick={() => checks[stage] = i}>{choice}</button>{/each}</div>
-          {#if checks[stage] !== null}<p class="feedback" role="status">{checks[stage] === step.checkAnswer ? '答对了。' : '再想一想。'} {step.checkReason}</p>{/if}
+          {#if checks[stage] !== null}<p class="feedback" role="status">{checks[stage] === step.checkAnswer ? 'Correct.' : 'Think again.'} {step.checkReason}</p>{/if}
         </fieldset>
       {/if}
       <div class="step-actions">
-        <button type="button" disabled={stage === 0} onclick={() => go(stage - 1)}>上一步</button>
-        {#if stage < lessonSteps.length - 1}<button type="button" onclick={() => go(stage + 1)}>下一步 →</button>{:else}<span>下一阶段：M 路失配、带宽与校准</span>{/if}
+        <button type="button" disabled={stage === 0} onclick={() => go(stage - 1)}>Previous</button>
+        {#if stage < lessonSteps.length - 1}<button type="button" onclick={() => go(stage + 1)}>Next →</button>{:else}<span>Next topics: M-channel mismatch, bandwidth, and calibration</span>{/if}
       </div>
     </section>
 
-    <section class="observations" id="guided-observations" aria-label="实验观察">
+    <section class="observations" id="guided-observations" aria-label="Observations">
       <div class="rates">
-        <div><span>总采样率 f_s</span><strong>2 GS/s</strong></div>
-        <div><span>每路 f_s / M</span><strong>{m === 2 ? '1' : '0.5'} GS/s</strong></div>
-        <div><span>相邻 / 同路间隔</span><strong>0.5 / {m / 2} ns</strong></div>
+        <div><span>Total rate f_s</span><strong>2 GS/s</strong></div>
+        <div><span>Per channel f_s / M</span><strong>{m === 2 ? '1' : '0.5'} GS/s</strong></div>
+        <div><span>Adjacent / same-channel spacing</span><strong>0.5 / {m / 2} ns</strong></div>
       </div>
-      <div class="timing-strip" aria-label="前八个理想采样时刻">
+      <div class="timing-strip" aria-label="First eight ideal sampling instants">
         {#each Array.from({ length: 8 }, (_, i) => i) as i}
           <div class="tick" class:channel-b={i % m === 1} class:channel-c={i % m === 2} class:channel-d={i % m === 3}>
             <span>{String.fromCharCode(65 + i % m)}</span><b>{nf(i / 2, 1)}</b><small>ns</small>
           </div>
         {/each}
       </div>
-      <p class="timing-note">上方是无误差的采样时刻表；颜色对应通道 A、B{m === 4 ? '、C、D' : ''}。波形图用通道 0、1{m === 4 ? '、2、3' : ''} 标记。</p>
+      <p class="timing-note">The schedule above shows ideal sample times. Colors identify channels A, B{m === 4 ? ', C, D' : ''}; the waveform uses channel labels 0, 1{m === 4 ? ', 2, 3' : ''}.</p>
       <div class="chart time-view">
-        <div class="cap"><span>时域 · 通道样本与输入</span><span>实际输入 {freqText(r.fin)}</span></div>
-        <SampleTimingChart samples={r.rawData} truth={r.truth} fin={r.fin} {fs} harmonics={{}} decimation={1} hover={hoverSample} onhover={i => hoverSample = i} channelColors={['var(--s1)', 'var(--s2)', 'var(--brand)', 'var(--bad)']} label="引导实验时域图：各通道样本与理想输入" />
+        <div class="cap"><span>Time domain · Channel samples and input</span><span>Actual input {freqText(r.fin)}</span></div>
+        <SampleTimingChart samples={r.rawData} truth={r.truth} fin={r.fin} {fs} harmonics={{}} decimation={1} hover={hoverSample} onhover={i => hoverSample = i} channelColors={['var(--s1)', 'var(--s2)', 'var(--brand)', 'var(--bad)']} label="Guided time-domain plot: channel samples and ideal input" />
       </div>
       <div class="chart spectrum-view">
-        <div class="cap"><span>输出频谱 · 0 到 f_s/2</span><span>SNDR <b>{nf(r.raw.sndr, 1)} dB</b></span></div>
-        <SpurSpectrum spectrum={r.raw} spurs={r.spurs} harmonics={[]} {bits} fs={r.fsOut} points={r.fftPoints} hover={hoverBin} onhover={b => hoverBin = b} label="引导实验输出频谱：载波、杂散与噪声底" />
+        <div class="cap"><span>Output spectrum · 0 to f_s/2</span><span>SNDR <b>{nf(r.raw.sndr, 1)} dB</b></span></div>
+        <SpurSpectrum spectrum={r.raw} spurs={r.spurs} harmonics={[]} {bits} fs={r.fsOut} points={r.fftPoints} hover={hoverBin} onhover={b => hoverBin = b} label="Guided output spectrum: carrier, spurs, and noise floor" />
       </div>
       <div class="observation-readout" aria-live="polite">
-        <span>{!started ? '无失配基线 · 先做预测' : stage === 0 ? '理想交织 · 量化仍然存在' : !enabled ? '当前误差已关闭 · 量化仍然存在' : stage === 4 && jitterMode ? '随机 jitter · 观察噪声底' : '单一失配已开启 · 观察离散杂散'}</span>
+        <span>{!started ? 'No-mismatch baseline · Make a prediction' : stage === 0 ? 'Ideal interleaving · Quantization remains' : !enabled ? 'Current error disabled · Quantization remains' : stage === 4 && jitterMode ? 'Random jitter · Observe the noise floor' : 'One mismatch enabled · Observe discrete spurs'}</span>
         {#if started && stage > 0}
-          <strong>{stage === 4 && jitterMode ? `Jitter-only SNR ${Number.isFinite(jitterSnr) ? nf(jitterSnr, 1) + ' dB' : '∞'}` : `预测杂散 ${spurText}`}</strong>
+          <strong>{stage === 4 && jitterMode ? `Jitter-only SNR ${Number.isFinite(jitterSnr) ? nf(jitterSnr, 1) + ' dB' : '∞'}` : `Predicted spur ${spurText}`}</strong>
         {/if}
       </div>
-      <details class="model-notes"><summary>实验假设与读图提示</summary>
-        <p>模型沿用本项目经 Python 参考对照的时间交织 ADC 仿真。输入是幅度 {AMP} V 的正弦；总采样率 2 GS/s；ADC 为 {bits} 位、±0.5 V 范围。保留量化；关闭热噪声、源谐波和带宽失配；所有通道共享 20 GHz 单极点模拟带宽。本课不执行抽取或校准。</p>
-        <p>失配控制表示通道间 RMS，并去除了通道均值。两路时相对误差等幅反号；共同增益、共同失调与共同延时的作用不同。预测杂散是解析计算，图上实测 FFT 会受到量化和有限记录的影响。</p>
-        <p>FFT 使用 {r.fftPoints} 点相干采样，输入会微调至相邻的奇数频点，所以“125 / 250 MHz”是目标值。请以图上实际输入为准。dBc 表示相对于载波的功率比，以电压幅度计算时用 20 log₁₀。</p>
-        <p>f_s/2 处的交替序列 RMS 等于其峰值，普通正弦的 RMS 为峰值 / √2。本课将奈奎斯特端点的解析峰值换算为功率，再与 FFT 比较，避免 3 dB 的读图偏差。</p>
-        <p>随机 jitter 使用固定种子的独立高斯序列，便于重复比较。时域图在标称时刻显示 jitter 引起的电压变化，不展示逐样本随机时间位移；固定 skew 的时间位移则会显示。</p>
-        <p>通道采样率限制单路数字序列的奈奎斯特区；模拟输入带宽是另一项约束。各通道可单独混叠，完整的理想交织序列仍按总采样率判定混叠。</p>
+      <details class="model-notes"><summary>Experiment assumptions and plot guidance</summary>
+        <p>The model reuses the project time-interleaved ADC simulation verified against a Python reference. The input is a sinusoid with amplitude {AMP} V; total rate is 2 GS/s; the ADC has {bits} bits and a ±0.5 V range. Quantization remains enabled. Thermal noise, source harmonics, and bandwidth mismatch are disabled; all channels share a 20 GHz single-pole analog bandwidth. This lesson performs neither decimation nor calibration.</p>
+        <p>Mismatch controls represent RMS across channels with the channel mean removed. Two-channel relative errors have equal magnitude and opposite signs. Common gain, offset, and delay have different effects. Spur predictions are analytical; measured FFTs are affected by quantization and finite records.</p>
+        <p>The FFT uses {r.fftPoints} coherently sampled points. Inputs are adjusted to nearby odd bins, so “125 / 250 MHz” are target values. Use the actual input shown in the plots. dBc is a power ratio relative to the carrier; use 20 log₁₀ for voltage-amplitude ratios.</p>
+        <p>An alternating sequence at f_s/2 has RMS equal to its peak, while an ordinary sinusoid has RMS equal to peak / √2. The lesson converts analytical Nyquist-endpoint peaks to power before comparison with the FFT to avoid a 3 dB interpretation error.</p>
+        <p>Random jitter uses independent Gaussian sequences with a fixed seed for repeatable comparisons. The time plot shows jitter-induced voltage changes at nominal times, rather than individual random time shifts. Fixed-skew time shifts are displayed.</p>
+        <p>Each channel rate determines the Nyquist zone of its own digital sequence; analog input bandwidth is a separate constraint. Individual channels may alias, while the complete ideal interleaved sequence is evaluated using the total sampling rate.</p>
       </details>
-      <a class="mobile-jump" href="#step-heading">返回实验操作 ↑</a>
+      <a class="mobile-jump" href="#step-heading">Back to the controls ↑</a>
     </section>
   </div>
-  {#if completed === lessonSteps.length}<p class="completion" role="status">你已通过五个理解检查。现在可以进入完整实验台，尝试多路交织与多种误差叠加；校准会作为后续实验单独讲解。</p>{/if}
+  {#if completed === lessonSteps.length}<p class="completion" role="status">You passed all five comprehension checks. Open the full workbench to try more channels and combined errors. Calibration will be covered separately in a later experiment.</p>{/if}
 </main>
 
 <style>
@@ -241,6 +241,8 @@
   .mobile-jump { display: none; }
   @media (max-width: 1000px) { .experiment { grid-template-columns: minmax(320px, 360px) minmax(0, 1fr); gap: 20px; } .rates { padding: 10px; } .rates strong { font-size: 12px; } }
   @media (max-width: 760px) {
+    .intro { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .progress { display: flex; align-items: baseline; gap: 10px; text-align: left; }
     .guided { padding: 20px 20px 28px; }
     .intro { align-items: start; gap: 12px; }
     .progress strong { font-size: 16px; }

@@ -1,0 +1,12 @@
+* Connectivity extracted from the supplied schema-68 project.
+* Structural export only: external SKY130 model is not supplied.
+.subckt cml_buffer VDD vinp vinn voutn voutp vb
+RD1 VDD voutn 1k
+RD2 VDD voutp 1k
+XQ1 voutn vinp e1 0 sky130_fd_pr__npn_05v5_W1p00L1p00 m=1
+XQ3 x vb e3 0 sky130_fd_pr__npn_05v5_W1p00L1p00 m=1
+R1 e3 0 50
+R2 e2 x 50
+R3 e1 x 50
+XQ2 voutp vinn e2 0 sky130_fd_pr__npn_05v5_W1p00L1p00 m=1
+.ends cml_buffer

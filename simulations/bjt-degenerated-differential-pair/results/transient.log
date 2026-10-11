@@ -1,0 +1,37 @@
+Note: can't find init file.
+
+Circuit: bjt differential-pair teaching study: transient
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Warning: vdm: no DC value, transient time 0 value used
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+voutn                                  2.18159
+vinp                                       1.8
+e1                                     1.08234
+voutp                                  2.18159
+vinn                                       1.8
+e2                                     1.08234
+x                                      1.02586
+vb                                        0.85
+e3                                      0.1141
+vdd                                        3.3
+vss                                          0
+vcm                                        1.8
+dm                                           0
+einn#branch                       -1.12219e-05
+einp#branch                       -1.12219e-05
+vdm#branch                                   0
+vcm#branch                        -2.24437e-05
+vb#branch                           -2.272e-05
+vss#branch                          0.00228199
+vdd#branch                         -0.00223683
+
+
+No. of Data Rows : 5015
+ngspice-33 done

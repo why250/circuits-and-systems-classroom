@@ -1,0 +1,234 @@
+{
+  "run_at": "2026-10-11T19:41:01.120415+08:00",
+  "kicad_version": "10.0.6",
+  "ngspice_version_log": "stderr Warning: can't find the initialization file spinit.\nstdout ******\nstdout ** ngspice-46 shared library\nstdout ** Creation Date: Apr 14 2026   05:15:29\nstdout ******\nstdout ******\nstdout ** ngspice-46 : Circuit level simulation program\nstdout ** Compiled with KLU Direct Linear Solver\nstdout ** The U. C. Berkeley CAD Group\nstdout ** Copyright 1985-1994, Regents of the University of California.\nstdout ** Copyright 2001-2025, The ngspice team.\nstdout ** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html\nstdout ** Please file your bug-reports at https://ngspice.sourceforge.io/bugrep.html\nstdout ** Creation Date: Apr 14 2026   05:15:29\nstdout ******",
+  "ngspice_dll_sha256": "3238d82f02b6d08d8703a28ea894bcfdf59906dd4a59ad2e93eeec532a0454a3",
+  "schematic_sha256": "bb4b96c3ee4a0b04d258de956307b73a1791852dc3b00d3bac5bbf06bbccf8e3",
+  "models_sha256": "3d3187031879ab71f912e237729b55cadf8f30143283dea990d1dd422f4e1e9e",
+  "script_sha256": "15b36291ab05d989121a07ca7e3194945d8ae31a90384352277aed83c495eb64",
+  "parameters": {
+    "VDD_V": 1.8,
+    "VSS_V": 0,
+    "VIN_V": 0.85,
+    "VB_V": 1.4,
+    "RL_ohm": 1000.0,
+    "RE_ohm": 50.0,
+    "CL_F": 1e-12
+  },
+  "devices": {
+    "M1": {
+      "id": 0.0008236640144623434,
+      "gm": 0.004718612238739009,
+      "gmbs": 0.0010961790605980366,
+      "gds": 2.437595229391341e-05,
+      "vgs": 0.8088167993128184,
+      "vds": 0.45669070072812157,
+      "von": 0.45970397876684205,
+      "vdsat": 0.3491128205459763,
+      "cgs": 3.726571899845e-15,
+      "cgd": 2e-15,
+      "cgb": 0.0,
+      "w": 1e-06,
+      "l": 1.5000000000000002e-07,
+      "m": 10.0,
+      "saturation_margin_V": 0.10757788018214526
+    },
+    "M2": {
+      "id": 0.0008236640161365527,
+      "gm": 0.004720132131079146,
+      "gmbs": 0.0008625387205950279,
+      "gds": 2.436025667763788e-05,
+      "vgs": 0.902126098584697,
+      "vds": 0.47846208244814425,
+      "von": 0.5531256925846617,
+      "vdsat": 0.34900040600003523,
+      "cgs": 3.726571899845e-15,
+      "cgd": 2e-15,
+      "cgb": 0.0,
+      "w": 1e-06,
+      "l": 1.5000000000000002e-07,
+      "m": 10.0,
+      "saturation_margin_V": 0.12946167644810902
+    }
+  },
+  "op": {
+    "OUT": 0.9763359838634474,
+    "E": 0.04118320068718164,
+    "X": 0.4978739014153032
+  },
+  "current_A": 0.0008236640161365527,
+  "power_W": 0.0014825952290457949,
+  "theory": {
+    "gain": -3.639748389789164,
+    "E_gain": 0.18198741948945818,
+    "X_gain": -0.6649532565019808,
+    "bias_gain": -0.015828503422546453,
+    "r1_ohm": 53001.34932181278,
+    "rstack_ohm": 12240438.119264463,
+    "rout_ohm": 999.9183102516014,
+    "gm_short_S": 0.0036400457442101676,
+    "gain_approx": -3.6557430846711427,
+    "psrr_positive_transfer": 0.9999183102516014,
+    "k1_S": 0.005839167251630959,
+    "k2_S": 0.005607031108351811
+  },
+  "measured_gain_V_V": -3.6397483848976,
+  "DC_slope_V_V": -3.6397479914700006,
+  "degeneration": {
+    "factor_approx": 1.2907395649668523,
+    "bypass_gain_at_10kHz_real_V_V": -4.697674428710489,
+    "bypass_gain_at_10kHz_imag_V_V": -0.004050132832651045
+  },
+  "input_capacitance_F": 6.378289209254242e-15,
+  "full_AC_relative_errors": {
+    "ac-input": 1.343929772899439e-09,
+    "ac-bypass": 1.3662672465182703e-09,
+    "ac-bias": 1.0502204821618582e-07,
+    "ac-output": 1.0085505342473207e-09
+  },
+  "noise": {
+    "input_V_sqrtHz": 2.205039616271446e-09,
+    "output_V_sqrtHz": 8.02578938195922e-09,
+    "sources": {
+      "M1": {
+        "output_V_sqrtHz": 5.570052940221773e-09,
+        "input_V_sqrtHz": 1.5303401090398395e-09,
+        "PSD_percent": 48.16628253347609
+      },
+      "M2": {
+        "output_V_sqrtHz": 2.421909594723256e-11,
+        "input_V_sqrtHz": 6.654057749630387e-12,
+        "PSD_percent": 0.000910626613104484
+      },
+      "RE": {
+        "output_V_sqrtHz": 4.100470809934571e-09,
+        "input_V_sqrtHz": 1.1265808446948272e-09,
+        "PSD_percent": 26.103090689565857
+      },
+      "RL": {
+        "output_V_sqrtHz": 4.071038936065601e-09,
+        "input_V_sqrtHz": 1.1184946060990243e-09,
+        "PSD_percent": 25.729716150344938
+      }
+    },
+    "M2_to_M1_PSD_ratio": 1.8905893608699996e-05,
+    "input_RMS_10Hz_100kHz_V": 6.972598862229196e-07
+  },
+  "poles_rad_s": [
+    -6934883921660.93,
+    -982285457713.811,
+    -998060882.059635
+  ],
+  "zeros_rad_s": [
+    -8914440800072.9,
+    1420400052807.027
+  ],
+  "bandwidth_minus3dB_Hz": 158469219.17624992,
+  "unity_Hz": 555901099.0506976,
+  "sine": {
+    "sine-5mV": {
+      "DC_V": 0.9762973753101958,
+      "fundamental_peak_V": 0.018198594393127442,
+      "H2_percent": 0.2121684781466605,
+      "THD_2_to_8_percent": 0.21216865028587634,
+      "input_peak_V": 0.005,
+      "fundamental_gain_magnitude": 3.6397188786254886,
+      "minimum_M1_margin_V": 0.0994687698331278,
+      "minimum_M2_margin_V": 0.1105785900490693,
+      "small_amplitude_H2_prediction_percent": 0.21215666462676436,
+      "independent_quasistatic_THD_percent": 0.21216027910044863
+    },
+    "sine-10mV": {
+      "DC_V": 0.9761815425942746,
+      "fundamental_peak_V": 0.036396303402214676,
+      "H2_percent": 0.42433968102986325,
+      "THD_2_to_8_percent": 0.42434105649199694,
+      "input_peak_V": 0.01,
+      "fundamental_gain_magnitude": 3.6396303402214674,
+      "minimum_M1_margin_V": 0.09136810677243029,
+      "minimum_M2_margin_V": 0.09154263726270628,
+      "small_amplitude_H2_prediction_percent": 0.4243133292535287,
+      "independent_quasistatic_THD_percent": 0.42434249110444255
+    },
+    "sine-20mV": {
+      "DC_V": 0.9757181656206597,
+      "fundamental_peak_V": 0.0727855237627296,
+      "H2_percent": 0.8488478324039145,
+      "THD_2_to_8_percent": 0.8488588527032034,
+      "input_peak_V": 0.02,
+      "fundamental_gain_magnitude": 3.6392761881364804,
+      "minimum_M1_margin_V": 0.07519170118864094,
+      "minimum_M2_margin_V": 0.053016612023978,
+      "small_amplitude_H2_prediction_percent": 0.8486266585070574,
+      "independent_quasistatic_THD_percent": 0.84886049829708
+    },
+    "sine-50mV": {
+      "DC_V": 0.9724876238421615,
+      "fundamental_peak_V": 0.1818110967690434,
+      "H2_percent": 2.111813094884216,
+      "THD_2_to_8_percent": 2.1121619283674686,
+      "input_peak_V": 0.05,
+      "fundamental_gain_magnitude": 3.636221935380868,
+      "minimum_M1_margin_V": 0.02206652093058459,
+      "minimum_M2_margin_V": -0.06689275801624744,
+      "small_amplitude_H2_prediction_percent": 2.1215666462676435,
+      "independent_quasistatic_THD_percent": 2.1121620432293144
+    },
+    "sine-clamped-10mV": {
+      "DC_V": 0.9760041299301191,
+      "fundamental_peak_V": 0.04697678546023555,
+      "H2_percent": 0.7064205420641649,
+      "THD_2_to_8_percent": 0.7064205485307891,
+      "input_peak_V": 0.01,
+      "fundamental_gain_magnitude": 4.697678546023555,
+      "minimum_M1_margin_V": 0.08899117912846921,
+      "minimum_M2_margin_V": 0.08024934359952757,
+      "small_amplitude_H2_prediction_percent": 0.7064215845694778,
+      "independent_quasistatic_THD_percent": 0.7064234016257931
+    }
+  },
+  "step": {
+    "predicted_change_V": -0.00036397483897891643,
+    "measured_change_V": -0.00036400569636940716,
+    "slow_tau_s": 1.0019428854243475e-09,
+    "settling_s": {
+      "0.01": 4.605829462031709e-09,
+      "0.001": 6.912800537669366e-09
+    }
+  },
+  "sampled_VIN_both_saturated_V": [
+    0.76,
+    0.8834999999999864
+  ],
+  "checks": [
+    "Saved topology and source hash",
+    "DC KCL and conducting saturation",
+    "Unchanged DC bias with AC bypass and ideal source-clamp control",
+    "Independent complex KCL for OUT/E/X and input current",
+    "Loaded output injection and intrinsic resistance closed form vs KCL",
+    "Independent per-source thermal current injections and PSD sum/input referral",
+    "C/G poles, numerator zeros, and full complex PZ reconstruction",
+    "Independent nonlinear DC equations and local DC slope vs AC",
+    "Independent quasistatic sinusoid fundamentals and harmonic distortion",
+    "Small-step plateau and dominant-pole settling"
+  ],
+  "all_checks_passed": true,
+  "deck_sha256": {
+    "op": "c05327c6e4135783832cafea532f8f9ee9355103c6246e66979d389b5fc2c72d",
+    "ac-input": "998d7a55daededbf8c20cb69dc64a347d6877410267ea79cf12569c5bd7c8c43",
+    "ac-bypass": "e74ffb1a28ced4a397bdc1a34b64b1459b1edac06cf5ddec56671aa1311acde8",
+    "ac-bias": "5baf16a069d0c752a38e02303c3d24c5b4916d3dbe1541646c218fa23f7add4c",
+    "ac-output": "8b95215e915937e606bd5617dc8d56adf129ac58450d61a514b884254426d26f",
+    "bypass-op": "96a9b0040548b71f2fa6a85ed76d2b89a052fa66edc2e17d8a144e0ecf4c1b5e",
+    "noise": "a3f124da8f24dac1bc421b0bfaf0b3e5ba0d488430f74fc012038d4c77f0d10a",
+    "poles-zeros": "a58d176727e2d69b937e322fb80ff354f37929936e39dbe01f1a61fa37e049a6",
+    "dc-transfer": "c7ad2969638f97259e9449b3e7cee01e718e4e10488c9bcceaee112f33bfd546",
+    "clamp-op": "d30b84ff7827c86e7bacd10c42b52ba62944423551d96e7f44efede29ce0bccd",
+    "sine-5mV": "b1cdbb1bd8efed3aa780fa37e23fe2be66181a8ebe215a393af399610f4dd743",
+    "sine-10mV": "d3e81d4ab74cc28539e829c1687086079da1b21bfb277dbf1aa4e91943f8ce8c",
+    "sine-20mV": "7c44c532e60cf9324597ed695aeab1d0c2d64dca59f7ce4991dfca693a70e55d",
+    "sine-50mV": "7dd8d4c9c46f7a5fc2970fabe58c651ca334a28924b46c41c8720f6214f694ea",
+    "sine-clamped-10mV": "3096aeea8a6a3210bbc4dbadfc4b39a1b01435c1667dec8191712c53130b7863",
+    "step": "f36ca4fd4afd43e64062902f1beeb2870e0b82005f1048eaca872d63c8d68cee"
+  }
+}

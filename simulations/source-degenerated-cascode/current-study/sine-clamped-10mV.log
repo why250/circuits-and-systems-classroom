@@ -1,0 +1,24 @@
+stdout Note: No compatibility mode selected!
+stdout Circuit: KiCad schematic
+stdout Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+stdout Using SPARSE 1.3 as Direct Linear Solver
+stderr Note: Starting dynamic gmin stepping
+stderr Note: Dynamic gmin stepping completed
+stdout Initial Transient Solution
+stdout --------------------------
+stdout Node                                   Voltage
+stdout ----                                   -------
+stdout /vb                                        1.4
+stdout /vdd                                       1.8
+stdout /vss                                         0
+stdout /vin                                      0.85
+stdout /x                                    0.497874
+stdout /e                                   0.0411832
+stdout /out                                  0.976336
+stdout vfix#branch                        0.000823664
+stdout v2#branch                                    0
+stdout v4#branch                          0.000823664
+stdout v1#branch                         -0.000823664
+stdout v3#branch                                    0
+ Reference value :  0.00000e+00
+stdout No. of Data Rows : 10008

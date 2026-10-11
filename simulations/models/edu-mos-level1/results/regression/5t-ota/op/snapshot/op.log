@@ -1,0 +1,106 @@
+Note: can't find init file.
+
+Circuit: 5t ota operating point and device parameters
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+
+No. of Data Rows : 1
+v(out) = 1.193177e+00
+v(xdut.x) = 2.539766e-01
+v(xdut.y) = 1.193177e+00
+i(vdd) = -3.22438e-05
+ Capacitor: Fixed capacitor
+     device                    cl
+      model                     C
+capacitance                 1e-12
+      dtemp                     0
+     bv_max                 1e+99
+          i                     0
+          p                     0
+
+ Mos1: Level 1 MOSfet model with Meyer capacitance model
+     device             m.xdut.m4             m.xdut.m3             m.xdut.m5
+      model              pmos_edu              pmos_edu              nmos_edu
+         id           1.61219e-05           1.61219e-05           3.22438e-05
+         is          -1.61219e-05          -1.61219e-05          -3.22438e-05
+         ig                     0                     0                     0
+         ib          -6.16823e-13          -6.16823e-13          -2.63977e-13
+        vgs              0.606823              0.606823                  0.65
+        vds              0.606823              0.606823              0.253977
+        vbs                    -0                    -0                     0
+        von                 -0.45                 -0.45                  0.45
+      vdsat             -0.156823             -0.156823                   0.2
+         rs                     0                     0                     0
+         rd                     0                     0                     0
+         gm           0.000205606           0.000205606           0.000322438
+        gds           6.29594e-07           6.29594e-07               9.6e-07
+        gmb           4.91493e-05           4.91493e-05           7.70775e-05
+        cbd                     0                     0                     0
+        cbs                     0                     0                     0
+        cgs           6.20419e-15           6.20419e-15           1.08084e-14
+        cgd               1.6e-15               1.6e-15               1.6e-15
+        cgb                     0                     0                     0
+       cbd0                     0                     0                     0
+     cbdsw0                     0                     0                     0
+       cbs0                     0                     0                     0
+     cbssw0                     0                     0                     0
+
+ Mos1: Level 1 MOSfet model with Meyer capacitance model
+     device             m.xdut.m2             m.xdut.m1
+      model              nmos_edu              nmos_edu
+         id           1.61219e-05           1.61219e-05
+         is          -1.61219e-05          -1.61219e-05
+         ig                     0                     0
+         ib          -1.46715e-12          -1.46715e-12
+        vgs              0.646023              0.646023
+        vds                0.9392                0.9392
+        vbs             -0.253977             -0.253977
+        von              0.506023              0.506023
+      vdsat                  0.14                  0.14
+         rs                     0                     0
+         rd                     0                     0
+         gm           0.000230312           0.000230312
+        gds           4.70403e-07           4.70403e-07
+        gmb           4.71605e-05           4.71605e-05
+        cbd                     0                     0
+        cbs                     0                     0
+        cgs            3.1021e-15            3.1021e-15
+        cgd                 8e-16                 8e-16
+        cgb                     0                     0
+       cbd0                     0                     0
+     cbdsw0                     0                     0
+       cbs0                     0                     0
+     cbssw0                     0                     0
+
+ Vsource: Independent voltage source
+     device                  vinn                  vinp                    vb
+         dc                   0.9                   0.9                  0.65
+      acmag                     0                     0                     0
+      pulse         -         -         -
+        sin         -         -         -
+        exp         -         -         -
+        pwl         -         -         -
+       sffm         -         -         -
+         am         -         -         -
+    trnoise         -         -         -
+   trrandom         -         -         -
+          i                     0                     0                     0
+          p                     0                     0                     0
+
+ Vsource: Independent voltage source
+     device                   vdd
+         dc                   1.8
+      acmag                     0
+      pulse         -
+        sin         -
+        exp         -
+        pwl         -
+       sffm         -
+         am         -
+    trnoise         -
+   trrandom         -
+          i          -3.22438e-05
+          p          -5.80389e-05
+
+ngspice-33 done

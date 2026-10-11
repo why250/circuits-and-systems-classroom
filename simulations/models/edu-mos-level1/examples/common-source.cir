@@ -1,0 +1,29 @@
+Shared teaching MOS v1: independent NMOS and PMOS common-source stages
+.include "../v1.lib"
+.temp 27
+VDD vdd 0 1.8
+VINN inn 0 DC 0.6 AC 1
+VINP inp 0 DC 1.2 AC 1
+MN outn inn 0 0 NMOS_EDU w=4u l=0.5u
+MP outp inp vdd vdd PMOS_EDU w=8u l=0.5u
+RN vdd outn 20k
+RP outp 0 20k
+CN outn 0 1p
+CP outp 0 1p
+.control
+set noaskquit
+set wr_singlescale
+set wr_vecnames
+op
+wrdata common-source-op.dat v(outn) v(outp) @mn[id] @mp[id] @mn[gm] @mp[gm] @mn[gds] @mp[gds] @mn[gmbs] @mp[gmbs] @mn[cgs] @mp[cgs] @mn[cgd] @mp[cgd]
+ac dec 40 1 100Meg
+wrdata common-source-ac.dat real(v(outn)) imag(v(outn)) real(v(outp)) imag(v(outp))
+noise v(outn) VINN dec 40 1 100Meg
+setplot noise1
+wrdata common-source-noise-n.dat onoise_spectrum inoise_spectrum
+noise v(outp) VINP dec 40 1 100Meg
+setplot noise3
+wrdata common-source-noise-p.dat onoise_spectrum inoise_spectrum
+quit
+.endc
+.end

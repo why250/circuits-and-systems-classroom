@@ -12,11 +12,11 @@ const notes = import.meta.glob('../../../../../../*.md', { query: '?raw', import
 const content = Object.entries(notes).find(([path]) => path.endsWith(`/${note}`))?.[1] as string | undefined;
 if (!content) throw new Error(`Missing research note: ${note}`);
 ---
-<Base title={item.title} description="已有原文核验与独立推导的研究笔记；包含模型假设、来源与待验证项。">
-  <main lang="zh-CN">
-    <nav><a href="/learn/razavi/">← 返回学习路线</a><a href={item.url} target="_blank" rel="noreferrer">原始 PDF ↗</a></nav>
+<Base title={item.title} description="Research notes with source checks and independent derivations, including model assumptions, references, and open verification items.">
+  <main lang="en">
+    <nav><a href="/learn/razavi/">← Back to the roadmap</a><a href={item.url} target="_blank" rel="noreferrer">Original PDF ↗</a></nav>
     <h1>{item.title}</h1>
-    <p>研究笔记 · Markdown 原文。公式保留 LaTeX 记法，图像路径对应仓库材料。</p>
+    <p>Research note · Markdown source. Equations use LaTeX notation; image paths refer to repository materials.</p>
     <pre>{content}</pre>
   </main>
 </Base>

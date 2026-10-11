@@ -1,67 +1,82 @@
 ---
 name: circuit-analysis-to-simulation
-description: 将电路的初步分析、原理图或技术笔记扩展为从公式推导到实际仿真验证的可复现学习文档。适用于核对电路公式、建立 SPICE 测试平台、对照独立计算与仿真、解释差异和补充噪声等分析；纯知识问答、仅整理文献或制作教学网页不属于此流程。
+description: Extend preliminary circuit analysis, schematics, or technical notes into reproducible learning documents that connect derivations to actual simulation. Use for checking circuit equations, building SPICE testbenches, enabling graphical circuit debugging with a shared schematic and netlist export, comparing independent calculations with simulation, explaining discrepancies, and extending noise analysis. General knowledge questions, literature organization alone, and teaching website creation are outside this workflow.
 ---
 
-# 电路分析与仿真验证
+# Circuit analysis and simulation verification
 
-把学习过程组织成：理解机理 → 建立方程 → 得到预测 → 运行实验 → 对照解释 → 改变条件认识边界。交付可阅读的技术文档、真实仿真数据和可复跑脚本；重点是让学习者能追溯每个结论的来由。
+Use **derivation → testbench → simulation curves → numerical comparison** as the per-metric reading path. Explain the mechanism and assumptions before deriving; make a prediction before running; explain discrepancies and explore applicability boundaries afterward. Deliver readable technical documents, actual simulation data, and rerunnable scripts so learners can trace every conclusion to its basis.
 
-## 确定对象与分析深度
+## Define the circuit and analysis depth
 
-- 读取用户指定的初步分析、原理图、模型和已有仿真。旧笔记是待核对材料；根据实际拓扑修订错误，记录修订原因，不以吻合旧公式为目标。
-- 按用户范围选择指标。局部噪声验证不扩展为完整放大器设计；完整课题可分阶段推进，先建立可靠基线，再增加相关非理想因素。
-- 明确器件连接、体端、输入/输出极性、单端或差分定义、内部节点、负载及偏置。图、模型绑定和网表应对应同一电路；来源可编辑项目与教学模型分别保留身份。
-- 确定解析/行为模型、教学器件模型或指定 PDK 的层级。缺少工艺模型时可采用明确声明的教学模型；给出参数选择目的，不能据此声称获得工艺性能。
-- 项目已有研究文档约定见 [classroom-conventions.md](../../../skills/analog-circuit-research/references/classroom-conventions.md)。此 skill 负责推导与实际仿真的衔接；研究笔记和教学网页按各自目标维护。
+- Read the user's preliminary analysis, schematic, models, and existing simulations. Treat older notes as material to verify; correct errors using the actual topology and record why. Do not aim merely to match old equations.
+- Select metrics within the user's scope. Local noise verification need not become a complete amplifier design. For a full topic, establish a reliable baseline before adding relevant nonidealities.
+- Define device connections, body terminals, input/output polarity, single-ended or differential conventions, internal nodes, load, and bias. Diagrams, model bindings, and netlists must describe the same circuit. Preserve separate identities for source editable projects and teaching models.
+- Establish whether the analysis uses an analytical/behavioral model, educational device models, or a specified PDK. For compatible MOS teaching studies, default to the project's [versioned LEVEL=1 library and reuse guide](../../../simulations/models/edu-mos-level1/README.md). Pin its version/hash and choose circuit-specific dimensions, bias and load; preserve existing local model snapshots. A requested PDK or a required mechanism absent from LEVEL=1 takes precedence. Explain parameter choices without claiming process performance.
+- Existing research-document conventions are in [classroom-conventions.md](../../../skills/analog-circuit-research/references/classroom-conventions.md). This skill connects derivation to actual simulation; maintain research notes and teaching pages according to their own goals.
 
-## 从机理建立公式
+## Enable graphical debugging from a shared schematic
 
-- 先解释电流、电荷、反馈或时序，再从 KCL/KVL、电荷守恒、状态方程推导。保留能复核符号、系数和节点耦合的关键中间步骤；矩阵模型注明未知量顺序和激励向量。
-- 为符号列出定义和单位，注明器件工作区、匹配、体效应、输出电阻、寄生、电容、参考地和负载假设。时变电路还需初始条件和各阶段边界。
-- 分开给出模型内的精确关系、工程近似及其条件。用精确模型评估近似误差，避免把近似式当成全频段或全扫描范围的等式。
-- 检查量纲、极性、极限情况及数量级。相同电路名称不能保证不同输出端、偏置参考或激励定义采用相同公式。
+When the user needs to edit and simulate a circuit graphically, provide a native editable schematic as the common circuit source for the user and LLM. Prefer the open-source **KiCad schematic → SPICE export → ngspice** path unless the user chooses another tool. A netlist-only workflow remains suitable for script-only studies; do not migrate unrelated circuits automatically.
 
-## 设计能区分机制的测试平台
+- Keep component connections, models, geometry and nominal values in the schematic. Derive the circuit netlist from the saved schematic for both GUI and scripted runs; analysis commands may live in a workbook or generated testbench. Label analysis-specific bias overrides so they are distinguishable from nominal component values.
+- Treat exported netlists as derived artifacts. Editing a `.cir` file does not update the schematic. Apply intended circuit changes to the common source, then regenerate and rerun. Scripts cannot see unsaved GUI changes; coordinate with the user before editing a schematic that has pending GUI edits.
+- Make sources, passives and device dimensions individually editable. For simple circuits, avoid hiding the topology behind a single subcircuit block. Check whether simulation fields override visible Value fields; a user-facing value must control the intended simulation parameter. Document where MOS geometry and model bindings are edited.
+- Reuse the selected model library and explicit terminal mappings, including bulk pins and reference ground. Resolve model paths relative to the project, and preserve device units and scaling. Do not replace an educational model with a PDK or change its physical scope merely to add a GUI.
+- Configure a useful OP run and, when relevant, bias sweeps. In KiCad use **Inspect > Simulator**, select OP and run; node voltage/current overlays show the last solved point and require rerunning after edits. OP has no parameter-tuner sliders; edit symbol properties and rerun. DC sweeps can support plotted tuning, but swept sources override their nominal values during that analysis.
+- Validate schematic export against the established circuit using terminal connections, models, effective parameters and aligned OP conditions. Reference names, node prefixes, card ordering and flat versus hierarchical representation may differ; byte-identical text is not required. Prefer the same ngspice engine for GUI/script parity checks, and distinguish these consistency checks from independent analytical verification.
+- Exercise at least one meaningful parameter change through the GUI: edit, save, run and observe the expected OP change. Restore the intended delivery settings and rerun. Report actual verification separately from untested instructions; a generated schematic must be opened and saved in the target editor before claiming GUI compatibility.
+- Keep a scripted export/run entry point for LLM use, with logs and parameter reports appropriate to the study. Preserve existing validated decks as separate baselines unless migration is requested. Structural changes require reviewing any topology-specific checks in the bridge.
 
-先明确某指标要检验的公式，再确定偏置、激励、采集量、后处理定义和判据；允许一个测试平台支撑多个相容指标。
+For the validated KiCad example and concrete UI/model details, read the [cascode graphical lab guide](../../../circuits/source-degenerated-cascode/kicad/README.md). Its [bridge runner](../../../code/run_cascode_kicad.py) exports the saved schematic and runs KiCad's bundled ngspice DLL; it is a Windows, cascode-specific implementation, not a general netlist importer. Adapt the installation discovery, terminal checks and analyses for another circuit or platform. If reliable native schematic generation is unavailable, let the user draw it manually and assist with model bindings, export and verification; do not describe an image as an editable circuit.
 
-- 先跑工作点并检查电流平衡、工作区和余量。扫描中离开假设区域时标出边界；基线满足饱和不证明整个扫描都满足。
-- 根据指标选择 AC、DC、瞬态、噪声、输出电流注入、供电扰动或 PZ 等分析，不要求每个课题都复制 5T OTA 的全部测试。
-- 统一比较条件和输入归一化。差模/共模及供电传递函数应有各自的激励；CMRR/PSRR 计算前核对频率轴。说明 AC 单位激励是线性化归一化。
-- PSRR 声明哪些输入、偏置、输出和负载参考随电源移动。PZ 输入不能被额外理想电压源短路。瞬态区分小信号建立、闭环建立和大信号压摆。
-- 按当前模型/仿真器文档确认单位、缩放、参数默认值和噪声机制。发现工具能力不足时说明具体影响，继续独立可完成的部分；不要把没有运行的测试标为完成。
+## Derive equations from mechanisms
 
-## 独立计算与真实执行
+- Explain current, charge, feedback, or timing first, then derive from KCL/KVL, charge conservation, or state equations. Keep the intermediate steps needed to check signs, coefficients, and node coupling. State the unknown ordering and excitation vector for matrix models.
+- Define symbols and units, device operating regions, matching, body effect, output resistance, parasitics, capacitance, reference ground, and load assumptions. Time-varying circuits also require initial conditions and phase boundaries.
+- Separate exact relationships within the model from engineering approximations and their conditions. Evaluate approximation errors using the exact model; do not present approximations as equalities across all frequencies or sweep ranges.
+- Check dimensions, polarity, limiting cases, and order of magnitude. Identical circuit names do not ensure identical equations for different output terminals, bias references, or excitation definitions.
 
-- 保留两条路径：按推导方程编写的预测计算，以及仿真器按网表获得的数据。直接从仿真波形算出指标是测量后处理，不能充当该指标的独立预测。
-- 可以用仿真 OP 的 gm、gmb、gds、器件电流或电容作为解析计算输入，但明确说明独立性仅在电路方程/传递函数的构建与求解，不包括器件参数和偏置本身。
-- 可用矩阵求解、闭式关系、局部 DC 导数、时域/频域交叉检查或 PZ 重构；按指标挑选能发现接线、符号、归一化或近似问题的检查，不写仅复述同一实现的测试。
-- 实际在本机运行。复用已验证脚本与工具，脚本从自身位置定位输入，适配当前系统；Windows 后台仿真隐藏窗口，日志写文件。使用临时工作目录，检查成功后发布结果。
-- 核对退出状态、日志、数据完整性、有限值及坐标轴。为比较选择有物理意义的容差：极小噪声功率等量不能被过大的默认绝对容差掩盖。
-- 保留模型/网表、刺激条件、原始数据、日志、检查结果、执行日期、实际版本和输入/脚本哈希；不要只保留图片或以已有图片代替本次运行。
-- 已通过的验证不无故反复扩大。新修改、失败或未解决的疑点才需要重跑相应检查。
+## Design testbenches that distinguish mechanisms
 
-## 噪声分析的条件分支
+Specify the equation a metric should test before choosing bias, excitation, measured quantities, postprocessing definitions, and acceptance criteria. One testbench may support several compatible metrics.
 
-在研究噪声时使用以下约定；其他课题无需额外开展噪声分析。
+- Run the operating point first and check current balance, operating regions, and headroom. Mark sweep boundaries where assumptions fail; baseline saturation does not prove saturation throughout a sweep.
+- Choose AC, DC, transient, noise, output-current injection, supply perturbation, PZ, or other analyses according to the metric. Not every topic needs all 5T OTA tests.
+- Align comparison conditions and input normalization. Use separate excitations for differential, common-mode, and supply transfer functions, and align frequency axes before calculating CMRR/PSRR. Explain unit AC excitation as a linearized normalization.
+- For PSRR, state which input, bias, output, and load references move with the supply. Do not short the PZ input with an additional ideal voltage source. Distinguish small-signal settling, closed-loop settling, and large-signal slew in transient analysis.
+- Consult current model/simulator documentation for units, scaling, defaults, and noise mechanisms. Explain the specific effect of missing tool capabilities and continue independent work. Never mark unrun tests complete.
 
-- 区分单边/双边 PSD、V²/Hz、V/√Hz 和积分 RMS。输入参考点必须与信号增益一致；源间独立性或相关性要进入功率计算。
-- 先建立可核对的热噪声基线，再按需要增加 1/f 噪声。分开导出两种机制或保留对照测试，按 PSD/方差相加后开方；RMS 幅度不能直接相加。
-- 采用所选模型的确切 1/f 参数定义。教学系数可按希望观察的拐点反推，但需记录依据、实际数值与验证结果；不把教材经验系数直接当成 SPICE 的 KF，也不宣称 NMOS/PMOS 排序具有普适性。
-- 声明有限的积分上下限，展示频谱和积分带宽的关系；理想 1/f PSD 不能积分到零。按研究目标区分偏置源噪声、失配、采样折叠等已包含与未包含机制。
-- 使用 5T OTA 实例或 ngspice MOS1 的 1/f 分析时，读取 [已验证案例与工具细节](references/5t-ota-case.md)；不要将案例数值套用到新拓扑。
+## Calculate independently and execute actual simulations
 
-## 形成学习文档
+- Keep two paths: predictions implemented from derived equations, and data produced by the simulator from the netlist. Measuring a metric from simulation waveforms is postprocessing, not an independent prediction.
+- Simulation OP values such as gm, gmb, gds, device currents, or capacitances may feed analytical calculations. State that independence then applies to construction and solution of the circuit equations/transfer functions, not to device parameters or bias.
+- Use matrix solutions, closed-form relationships, local DC derivatives, time/frequency-domain cross-checks, or PZ reconstruction. Select checks that expose wiring, sign, normalization, or approximation errors; avoid tests that only repeat the same implementation.
+- Run locally. Reuse validated scripts and tools, resolve inputs relative to the script, and adapt to the current system. Hide background simulation windows on Windows and write logs to files. Work in a temporary directory and publish results after checks pass.
+- Check exit status, logs, data completeness, finite values, and axes. Use physically meaningful tolerances; overly large default absolute tolerances must not hide errors in tiny quantities such as noise power.
+- Keep models/netlists, stimuli, raw data, logs, check results, execution date, actual tool versions, and input/script hashes. Images alone are insufficient, and existing images do not replace a current run.
+- Do not repeatedly broaden completed verification without reason. Rerun relevant checks for new changes, failures, or unresolved concerns.
 
-每个选定指标尽量在同一段阅读路径中呈现：物理机理 → 假设和推导 → 预测 → 测试方法 → 实测图 → 对照数值 → 差异与适用边界。公式和验证图相邻，不把所有方程与所有图分隔成两份互不对应的材料。
+## Conditional noise analysis
 
-- 图从实际数据生成，解析曲线标明来源；注明坐标、单位、激励和负载，保留 PNG 阅读版及适合导出的格式，并实际查看布局。
-- 对照表写明公式/独立计算、仿真测量、必要的误差及条件。参数改变后解释改变的是增益、极点、噪声底、拐点还是积分值。
-- 差异先查拓扑、极性、偏置、单位、工作区、参考点和近似条件；不能为追求一致而任意调参、放宽判据或隐藏失败。
-- 用户要求保留初步笔记时，在伴随文档说明修正与验证状态；否则可按授权修订原文。新扩展应保留有用基线和比较对象。
-- 交付说明实际跑通的范围、复跑入口和影响结论的限制。自动校验通过说明模型与实现的一致性，不等同于工艺准确性或已经证明学习效果。
+Use these conventions when studying noise; other topics need no additional noise analysis.
 
-示例请求：
+- Distinguish one-sided/two-sided PSD, V²/Hz, V/√Hz, and integrated RMS. Refer noise to the same input used for signal gain. Include source independence or correlation in power calculations.
+- Establish a verifiable thermal-noise baseline before adding 1/f noise as needed. Export mechanisms separately or retain comparison tests. Add PSDs/variances before taking the square root; RMS amplitudes cannot be added directly.
+- Use the chosen model's exact 1/f parameter definition. Educational coefficients may be selected from a desired corner frequency, but record the basis, actual values, and validation results. Do not equate textbook empirical coefficients with SPICE KF or claim universal NMOS/PMOS ordering.
+- State finite integration limits and relate the spectrum to integrated bandwidth; ideal 1/f PSD cannot be integrated down to zero. Distinguish included and excluded mechanisms such as bias-source noise, mismatch, and sampling aliases according to the research goal.
+- For the 5T OTA example or ngspice MOS1 1/f analysis, read the [validated case and tool details](references/5t-ota-case.md). Do not reuse case-specific numbers for a different topology.
 
-> 使用 $circuit-analysis-to-simulation 将已有 OTA 初步分析扩展为从公式到仿真的学习文档，核对拓扑和符号，保留关键推导，建立教学模型，在本机运行并逐项对照；先做可靠基线，再增加相关的非理想因素。
+## Produce the learning document
+
+Keep each metric's derivation, testbench, simulation curves and numerical comparison together, with its prediction and applicability limits. When creating or reorganizing a learning note, use the [per-metric learning template](references/metric-learning-template.md). Scale it to the question rather than adding empty sections or requiring every metric in the OTA example. Keep equations beside their verification plots rather than separating all equations from all figures.
+
+- Generate plots from actual data and label the source of analytical curves. State axes, units, excitation, and load. Keep a PNG reading version and an export-friendly format, and inspect the actual layout.
+- Comparison tables should include equations/independent calculations, simulation measurements, necessary errors, and conditions. Explain whether parameter changes affect gain, poles, noise floor, corner frequency, or integrated values.
+- Investigate topology, polarity, bias, units, operating regions, reference points, and approximations first when results differ. Do not arbitrarily tune parameters, relax criteria, or hide failures to obtain agreement.
+- If the user asks to retain preliminary notes, explain corrections and verification status in a companion document. Otherwise, revise the original within authorization. Preserve useful baselines and comparison cases in new extensions.
+- State the executed scope, rerun entry point, and limitations that affect conclusions. Automated checks establish consistency of model and implementation, not process accuracy or proven learning effectiveness.
+
+Example request:
+
+> Use $circuit-analysis-to-simulation to extend the preliminary OTA analysis into a learning document connecting equations to simulation. Check topology and signs, preserve key derivations, build a teaching model, run locally, and compare each metric. Establish a reliable baseline before adding relevant nonidealities.

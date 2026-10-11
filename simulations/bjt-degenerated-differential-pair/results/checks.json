@@ -1,0 +1,170 @@
+{
+  "operating_point_V": {
+    "voutn": 2.18158535,
+    "voutp": 2.18158535,
+    "e1": 1.08234426,
+    "e2": 1.08234426,
+    "x": 1.02586244,
+    "e3": 0.11409965
+  },
+  "devices": {
+    "Q1": {
+      "ic": 0.00111841465,
+      "ib": 1.12218602e-05,
+      "gm": 0.0432181609,
+      "gpi": 0.000433864137,
+      "gmu": 1.00000329e-12,
+      "go": 1.12218599e-05,
+      "cpi": 1.0281926e-11,
+      "cmu": 2.61923616e-13,
+      "cexbc": -2.24437197e-15,
+      "vbe": 0.717655738,
+      "vbc": -0.381585347
+    },
+    "Q2": {
+      "ic": 0.00111841465,
+      "ib": 1.12218602e-05,
+      "gm": 0.0432181609,
+      "gpi": 0.000433864137,
+      "gmu": 1.00000329e-12,
+      "go": 1.12218599e-05,
+      "cpi": 1.0281926e-11,
+      "cmu": 2.61923616e-13,
+      "cexbc": -2.24437197e-15,
+      "vbe": 0.717655738,
+      "vbc": -0.381585347
+    },
+    "Q3": {
+      "ic": 0.00225927302,
+      "ib": 2.27199712e-05,
+      "gm": 0.0873034977,
+      "gpi": 0.000878408799,
+      "gmu": 1.00007295e-12,
+      "go": 2.27199707e-05,
+      "cpi": 1.91214747e-11,
+      "cmu": 2.79853755e-13,
+      "cexbc": -4.54399413e-15,
+      "vbe": 0.73590035,
+      "vbc": -0.175862436
+    }
+  },
+  "differential_gain_V_per_V": 13.5283114,
+  "single_ended_gain_V_per_V": 6.76415568,
+  "common_mode_single_ended_gain_V_per_V": -0.00205752036,
+  "single_ended_cmrr_dB": 70.3373890618422,
+  "tail_output_resistance_ohm": 228108.0785975546,
+  "output_resistance_single_ended_ohm": 998.149507,
+  "input_resistance_differential_ohm": 14554.895263350621,
+  "differential_gain_approximation": 13.5795085466261,
+  "common_mode_gain_approximation": -0.0021698105915336167,
+  "common_mode_gain_closed_form": -0.0020575208673495743,
+  "differential_gain_closed_form": 13.528311369335174,
+  "internal_common_mode_X_E1_E3": [
+    0.99958273,
+    0.999692282,
+    0.000209884652
+  ],
+  "supply_single_ended_transfers": {
+    "vdd": 0.999887947,
+    "vss": 7.98810502,
+    "vb": -7.98593545
+  },
+  "single_ended_psrr_dB": {
+    "vdd": 16.605245224886932,
+    "vss": -1.444603428170041
+  },
+  "VSS_tracking_bias_single_ended_transfer": 0.00216957358,
+  "VSS_tracking_bias_single_ended_psrr_dB": 69.87678421474418,
+  "matched_differential_leakage_max_V_per_V": {
+    "cm": 0.0,
+    "vdd": 0.0,
+    "vss": 0.0,
+    "vb": 0.0
+  },
+  "mismatch_RD2_1percent": {
+    "common_to_differential_V_per_V": -2.00658452e-05,
+    "VDD_to_differential_V_per_V": -1.52454489e-06
+  },
+  "bandwidth_3dB_Hz": 15525397.184130428,
+  "bandwidth_3dB_reduced_transfer_Hz": 15525397.24991059,
+  "reduced_transfer_max_relative_complex_error": 7.158519430347722e-09,
+  "poles_rad_per_s": [
+    -6191582968.417174,
+    -97801449.71981911
+  ],
+  "zeros_rad_per_s": [
+    -21280626857.413128,
+    15082046763.646137
+  ],
+  "dc_center_slope": 13.528298439999999,
+  "strict_forward_active_common_mode_sample_range_V": [
+    1.625,
+    2.18
+  ],
+  "white_input_noise_nV_per_sqrt_Hz": 1.50229788,
+  "flicker_corner_Hz": 248.74430589060674,
+  "noise_input_rms_V_10Hz_to_10MHz": {
+    "noise-white": 4.750806986189334e-06,
+    "noise-flicker": 4.7516232604058165e-06
+  },
+  "white_noise_terms_V2_per_Hz_at_1Hz": {
+    "Q1 collector shot": 2.0028875953568695e-19,
+    "Q1 base shot": 8.994471497798009e-21,
+    "Q2 collector shot": 2.0028875953568695e-19,
+    "Q2 base shot": 8.994471497798009e-21,
+    "Q3 collector shot": 0.0,
+    "Q3 base shot": 0.0,
+    "RD1 thermal": 8.992315328701209e-20,
+    "RD2 thermal": 8.992315328701209e-20,
+    "R3 thermal": 8.292434004044879e-19,
+    "R2 thermal": 8.292434004044879e-19,
+    "R1 thermal": 0.0
+  },
+  "step_final_V": 0.0013528310799999998,
+  "settling_s_after_edge": {
+    "0.01": 4.728637220000001e-08,
+    "0.001": 7.08363722e-08
+  },
+  "checks": [
+    "three conducting NPNs with reverse-biased BC junctions",
+    "emitter/tail current KCL",
+    "ac-dm: full complex hybrid-pi sweep",
+    "ac-cm: full complex hybrid-pi sweep",
+    "ac-vdd: full complex hybrid-pi sweep",
+    "ac-vss: full complex hybrid-pi sweep",
+    "ac-vb: full complex hybrid-pi sweep",
+    "output-resistance: full complex hybrid-pi sweep",
+    "ac-vss-tracking-bias: supply/bias reference superposition",
+    "mismatch-cm: independent KCL at its own bias",
+    "mismatch-vdd: independent KCL at its own bias",
+    "DC differential center slope versus AC",
+    "closed-form common/differential gains with beta and Early effect",
+    "differential half-circuit rational transfer versus AC",
+    "noise-white: independent resistor/base/collector PSD sum",
+    "noise-flicker: independent resistor/base/collector PSD sum",
+    "100 uV open-loop differential step versus AC and last-exit settling"
+  ],
+  "analytical_parameter_origin": "SPICE OP device parameters; independent nodal assembly/solution, reduced formulas and noise propagation",
+  "conditions": {
+    "VDD_V": 3.3,
+    "Vcm_V": 1.8,
+    "Vb_V": 0.85,
+    "temperature_C": 27,
+    "load_per_output_F": 1e-11,
+    "noise_input": "VDM differential source via +/-0.5 controlled sources",
+    "noise_PSD": "one-sided"
+  },
+  "executed_UTC": "2026-10-11T11:34:09.168778+00:00",
+  "simulator_detected_version": [
+    "33"
+  ],
+  "simulator_executable_sha256": "54068911555d46067ff2bdfcd0cf4b1afd3c1330be0586f93911df0a6af88e7c",
+  "source_sha256": "44873e304462d4d3ca8c12d11d4b0df248128e019de6fd97764ff55c44198d0d",
+  "input_sha256": {
+    "simulations/bjt-degenerated-differential-pair/models.lib": "68738c2f2da61269687ceef68d5feea3b99537c1b2b1ae894a2619bc1f44261e",
+    "simulations/bjt-degenerated-differential-pair/core.cir": "c5c0e086af29a4eb608bdaf960b1e6ae3feb166599670b288faf6eed3adb54ff",
+    "code/run_bjt_differential_pair.py": "cd2706ad938f2a9c50f2831b5bdab8a0fde0bc59e4e84ed853be354c9de92fbe",
+    "code/bjt_differential_pair_source.py": "0c1d9e7e688208b0dd58012e09998964c6830bb9368f836411fe7918af6acc32"
+  },
+  "testbench_count": 16
+}

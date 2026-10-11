@@ -3,7 +3,7 @@ Input: user-exported schema-68 Analog Canvas circuit and inherited parameters | 
 -->
 # Source-Degenerated Cascode Amplifier: Analysis
 
-This note follows the topics of [the five-transistor differential-amplifier analysis](5T-Differential-Amplifier-Analysis.md), with equations independently derived for the uploaded circuit. [The companion schematic and simulation note](Source-Degenerated-Cascode-Schematic-and-Simulation.md) supplies intermediate derivations, actual ngspice plots, numerical comparisons and reproducible execution evidence. The declared educational model passed all checks across 26 testbenches on 2026-10-10; the original SKY130 bindings were structurally extracted, not process-simulated.
+This note follows the topics of [the five-transistor differential-amplifier analysis](5T-Differential-Amplifier-Analysis.md), with equations independently derived for the uploaded circuit and numerical examples at its original parameters. [The companion schematic and simulation note](Source-Degenerated-Cascode-Schematic-and-Simulation.md) now studies the adjusted saved KiCad circuit (RL=1 kohm, m=10, VIN=0.85 V, VB=1.4 V) through 16 structure-specific testbenches. The original 26-deck experiments from 2026-10-10 are retained in [the historical companion](Source-Degenerated-Cascode-Historical-Baseline.md). The original SKY130 bindings were structurally extracted, not process-simulated.
 
 ## Circuit Topology and Identity
 

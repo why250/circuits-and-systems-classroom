@@ -1,7 +1,7 @@
 # Current Integration Sampling
 
 <!--
-Input: Internet research, technical papers, reference/积分采样JItter问题.pdf
+Input: Internet research, technical papers, reference/%E7%A7%AF%E5%88%86%E9%87%87%E6%A0%B7JItter%E9%97%AE%E9%A2%98.pdf
 Output: Formulas and techniques for current integration sampling, jitter analysis
 Position: Current-mode signal processing, integrating ADCs, jitter performance
 ⚠️ Updated: Added jitter performance analysis comparing voltage vs current integration sampling

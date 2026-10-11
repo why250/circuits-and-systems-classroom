@@ -1,26 +1,26 @@
-# 资料入库与全文核对
+# Source ingestion and full-text verification
 
-用于论文系列整理和 PDF 辅助研究。单篇局部问题不必建立完整资料库。
+Use for organizing article series and PDF-assisted research. A local question about one paper does not require a complete source library.
 
-## 三类产物
+## Three artifact types
 
-- 原始资料：保留 PDF 原字节，记录来源 URL、获取日期、DOI、文件名和 SHA256。书目信息可先从网页取得，再由原页核对；网站标签、PDF 文件名及 DOI 年份不能单独确定发表期次。
-- 转换结果：文本、Marker Markdown、提取图片、元数据和页预览属于研究辅助资料，与正式笔记分开存放。转换记录包含输入校验和、工具版本、页范围及是否使用 LLM；转换失败不能标记成功。
-- 研究笔记：按知识问题重新组织，用自己的表述推导机理和设计取舍。注明哪些结论来自原文、哪些是独立扩展；独立扩展可以超出该系列，但新增外部依据仍须可追溯。
+- Original sources: preserve original PDF bytes and record source URL, retrieval date, DOI, filename, and SHA256. Bibliographic details may first come from a webpage, then be checked against original pages. Website labels, PDF filenames, and DOI years alone do not determine publication issues.
+- Conversion outputs: text, Marker Markdown, extracted images, metadata, and page previews are research aids and belong separately from formal notes. Conversion records include input checksum, tool version, page range, and whether an LLM was used. Do not mark a failed conversion successful.
+- Research notes: reorganize material around knowledge questions and derive mechanisms and tradeoffs in your own words. State which conclusions come from the source and which are independent extensions. Extensions may go beyond the series, but new external evidence must remain traceable.
 
-在本项目，原始资料及转换产物放入被忽略的 `reference/`；可复核的来源清单和核对记录放入 `sources/`，技术笔记放根目录。不要让必要引用仅依赖未跟踪的本地文件。
+In this project, keep original sources and conversions in ignored `reference/`, verifiable source manifests and checking records in `sources/`, and technical notes in the root. Required citations must not rely solely on untracked local files.
 
-## 转换与原页核对
+## Conversion and original-page checks
 
-- 可复用已安装的 Marker 环境。其 API 可采用 `ConfigParser → PdfConverter(create_model_dict()) → save_output`，批处理时模型只加载一次，明确选择输出目录。Marker 不是研究必需依赖；无法转换时继续读取原 PDF。
-- Marker 页范围是从零开始的闭区间；文档引用中的 PDF 页通常从一开始。另记录杂志印刷页码，三者不能混用。
-- 多栏、跨页续文和共享版面可能包含其他文章。保留真实 PDF 页数和不连续的印刷页码；正文整理只纳入目标文章。页码无法确认时留待核对，不根据网页跨度补造。
-- 关键公式对照原页核对上下标、分子分母、正负号和变量定义；电路图核对端点连接、器件类型、节点及阶段。为正式笔记记录页码、图号或公式号。
-- 转换器可能把公式留成图片、漏掉编号、打乱阅读顺序或错误重建数学表达式。转换成功后仍须回查原图；不要把转换出的 Markdown 当成正确性的证据。
-- 原文疑似错误时先确认原页，再用量纲、状态方程或极限情况独立核对。分别记录“原文表达”和“本笔记推导”，不要默默修改原始资料。
+- Reuse an installed Marker environment when available. Its API may follow `ConfigParser → PdfConverter(create_model_dict()) → save_output`. Load models once for batch processing and explicitly select output directories. Marker is not a required research dependency; continue reading original PDFs if conversion is unavailable.
+- Marker page ranges are zero-based and inclusive; cited PDF pages are usually one-based. Record printed magazine page numbers separately. Do not mix these three conventions.
+- Multiple columns, continuation pages, and shared layouts may contain other articles. Preserve actual PDF page counts and discontinuous printed page numbers; include only the target article in organized text. Leave uncertain page numbers unverified instead of inventing them from webpage spans.
+- Check key equations against original pages for subscripts, superscripts, numerators, denominators, signs, and variable definitions. Check circuit diagrams for terminal connections, device types, nodes, and phases. Record pages, figures, or equations for formal notes.
+- Converters may leave equations as images, omit numbering, reorder reading flow, or reconstruct mathematics incorrectly. Recheck original images even after successful conversion. Converted Markdown is not evidence of correctness.
+- For suspected source errors, confirm the original page first, then check independently using dimensions, state equations, or limiting cases. Record "source expression" and "this note's derivation" separately; do not silently alter original sources.
 
-## 系列文章的进度
+## Progress through an article series
 
-分别记录已获取、已转换、全文已读、原图/公式已核对、笔记已整理及验证方式。为同一电路建立主题笔记，可由多篇文章共同支持；不要求每份 PDF 对应一个文件。
+Track retrieval, conversion, full-text reading, original diagram/equation checking, note preparation, and verification method separately. A topic note may be supported by multiple papers; one PDF need not correspond to one note.
 
-源文件校验和变化后重新评估旧核对状态。交付时区分完成的专题和待研究的材料；解析计算、晶体管级仿真和实测继续分别标注。
+Reassess previous checking status when source checksums change. Distinguish completed topics from materials awaiting research at delivery, and continue to label analytical calculations, transistor-level simulations, and measurements separately.

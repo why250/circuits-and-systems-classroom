@@ -46,14 +46,14 @@ Run these in `web/` with Node 22.12 or newer and pnpm 11.
 ## Illustrations
 
 - **Razavi reading roadmap** at `/learn/razavi/`, linked from the home page and shared navigation.
-  Chinese plans cover ADC/mixed-signal, PLL/RF clocking, and high-speed links/CDR, with selectable background and
+  English plans cover ADC/mixed-signal, PLL/RF clocking, and high-speed links/CDR, with selectable background and
   weekly time budget, per-stage tasks and self-checks, local progress/notes, and Markdown export. The searchable
   source catalog contains 148 PDF links checked against the UCLA journal directory on 2026-10-05, including 22
   PDF-confirmed Analog Mind articles. Seven existing research notes are available under `/learn/razavi/notes/`.
   Durations are study estimates; source verification status is distinct from learner completion. Planner tests
   verify prerequisite order, catalog references, hour conservation and week/date boundaries.
 
-- **Time-interleaved ADCs** at `/adc/time-interleaved-adcs/`. Opens with a Chinese introductory guided course for readers
+- **Time-interleaved ADCs** at `/adc/time-interleaved-adcs/`. Opens with an English introductory guided course for readers
   who know ordinary ADCs and spectra. Five experiments cover ideal interleaving, offset, gain, skew and independent
   aperture jitter. Each asks for a prediction, enables a controlled experiment, reveals an explanation on request,
   and offers a transfer question. The complete original lab remains available through the mode switch. Both modes keep
@@ -213,7 +213,7 @@ the ADCToolbox manual; its home page and tutorial paths redirect to the matching
 The upstream workflow deploys only after both numerical verification and the browser regressions succeed.
 
 The numerical drift job resolves ADCToolbox's upstream revision once; the manual checkout uses that exact SHA. The raw
-English and Chinese Sphinx outputs are cached by that SHA, Python and installed dependency versions, and build/postprocess
+English Sphinx output is cached by that SHA, Python and installed dependency versions, and build/postprocess
 configuration. Dependency resolution still runs before lookup so newly selected tooling invalidates the cache. Each run
 copies the raw cache into `dist/doc` and applies the current site postprocessing there, leaving the cached manual untouched.
 

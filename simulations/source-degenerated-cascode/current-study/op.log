@@ -1,0 +1,91 @@
+stdout Note: No compatibility mode selected!
+stdout Circuit: KiCad schematic
+stdout Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+stdout Using SPARSE 1.3 as Direct Linear Solver
+stderr Note: Starting dynamic gmin stepping
+stderr Note: Dynamic gmin stepping completed
+stdout No. of Data Rows : 1
+stdout Capacitor: Fixed capacitor
+stdout device                    c1
+stdout model                     C
+stdout capacitance                 1e-12
+stdout dtemp                     0
+stdout bv_max                 1e+99
+stdout i                     0
+stdout p                     0
+stdout Mos1: Level 1 MOSfet model with Meyer capacitance model
+stdout device                    m2                    m1
+stdout model              nmos_edu              nmos_edu
+stdout id           0.000823664           0.000823664
+stdout is          -0.000823664          -0.000823664
+stdout ig                     0                     0
+stdout ib          -1.67421e-12           -7.1871e-13
+stdout vgs              0.902126              0.808817
+stdout vds              0.478462              0.456691
+stdout vbs             -0.497874            -0.0411832
+stdout von              0.553126              0.459704
+stdout vdsat                 0.349              0.349113
+stdout rs                     0                     0
+stdout rd                     0                     0
+stdout gm            0.00472013            0.00471861
+stdout gds           2.43603e-05            2.4376e-05
+stdout gmb           0.000862539            0.00109618
+stdout cbd                     0                     0
+stdout cbs                     0                     0
+stdout cgs           3.72657e-15           3.72657e-15
+stdout cgd                 2e-15                 2e-15
+stdout cgb                     0                     0
+stdout cbd0                     0                     0
+stdout cbdsw0                     0                     0
+stdout cbs0                     0                     0
+stdout cbssw0                     0                     0
+stdout Resistor: Simple linear resistor
+stdout device                    r1                    r2
+stdout model                     R                     R
+stdout resistance                  1000                    50
+stdout ac                  1000                    50
+stdout dtemp                     0                     0
+stdout bv_max                 1e+99                 1e+99
+stdout noisy                     1                     1
+stdout i           0.000823664           0.000823664
+stdout p           0.000678422           3.39211e-05
+stdout Vsource: Independent voltage source
+stdout device                    v2                    v4                    v1
+stdout dc                  0.85                     0                   1.8
+stdout acmag                     0                     0                     0
+stdout pulse         -         -         -
+stdout sin         -         -         -
+stdout exp         -         -         -
+stdout pwl         -         -         -
+stdout sffm         -         -         -
+stdout am         -         -         -
+stdout trnoise         -         -         -
+stdout trrandom         -         -         -
+stdout external                (null)                (null)                (null)
+stdout portnum                     0                     0                     0
+stdout z0                     0                     0                     0
+stdout pwr                     0                     0                     0
+stdout freq                     0                     0                     0
+stdout phase                     0                     0                     0
+stdout i                     0           0.000823664          -0.000823664
+stdout p                     0                     0            -0.0014826
+stdout Vsource: Independent voltage source
+stdout device                    v3
+stdout dc                   1.4
+stdout acmag                     0
+stdout pulse         -
+stdout sin         -
+stdout exp         -
+stdout pwl         -
+stdout sffm         -
+stdout am         -
+stdout trnoise         -
+stdout trrandom         -
+stdout external                (null)
+stdout portnum                     0
+stdout z0                     0
+stdout pwr                     0
+stdout freq                     0
+stdout phase                     0
+stdout i                     0
+stdout p                     0

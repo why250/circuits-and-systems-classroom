@@ -16,7 +16,7 @@
   let tab = $state<'map' | 'weeks' | 'library'>('map');
   let answerOpen = $state(false);
   let detailHeading = $state<HTMLHeadingElement>();
-  const checkLabels = ['已阅读并重画电路', '已完成推导与预算', '已验证并回答自查'];
+  const checkLabels = ['Read and redrew the circuit', 'Derived equations and budgets', 'Verified and answered the self-check'];
   const selected = $derived(route(track, level));
   const active = $derived(selected.find(stage => stage.id === selectedId) ?? selected[0]);
   const total = $derived(selected.reduce((sum, stage) => sum + stage.hours, 0));
@@ -38,14 +38,14 @@
         if (saved.checks && typeof saved.checks === 'object') checks = Object.fromEntries(Object.entries(saved.checks).filter(([, value]) => typeof value === 'boolean')) as Record<string, boolean>;
         if (saved.notes && typeof saved.notes === 'object') notes = Object.fromEntries(Object.entries(saved.notes).filter(([, value]) => typeof value === 'string')) as Record<string, string>;
       }
-    } catch { storageMessage = '本地记录不可读取；你仍可使用网页并导出计划。'; }
+    } catch { storageMessage = 'Local records could not be read; you can still use the page and export your plan.'; }
     ready = true;
   });
   $effect(() => {
     const saved = { track, level, hours, start, checks, notes };
     if (ready) {
       try { localStorage.setItem('circuits-razavi-roadmap-v1', JSON.stringify(saved)); }
-      catch { storageMessage = '浏览器未允许保存；请导出计划以保留记录。'; }
+      catch { storageMessage = 'The browser blocked saving; export your plan to keep a record.'; }
     }
   });
   function choose(id: string) { selectedId = id; answerOpen = false; }
@@ -58,89 +58,89 @@
     });
   }
   function exportPlan() {
-    const lines = ['# Razavi 文章学习路线', '', `方向：${tracks[track].title}；基础：${level === 'beginner' ? '入门' : '已有模拟基础'}；每周 ${hours} 小时；估算 ${total} 小时 / ${weeks.length} 周。`, '目录核对：2026-10-05；时长为规划估算，不代表掌握保证。', '', '来源：https://www.seas.ucla.edu/brweb/journal.html', ''];
+    const lines = ['# Razavi article roadmap', '', `Track: ${tracks[track].title}; background: ${level === 'beginner' ? 'beginner' : 'analog foundation'}; ${hours} hours/week; estimated ${total} hours / ${weeks.length} weeks.`, 'Catalog checked: 2026-10-05. Durations are planning estimates, not guarantees of mastery.', '', 'Source: https://www.seas.ucla.edu/brweb/journal.html', ''];
     for (const stage of selected) {
-      lines.push(`## ${stage.title}（${stage.hours} 小时）`, '', stage.goal, '', ...stage.tasks.map(task => `- ${task}`), '', ...stage.articles.map(id => `- [${article(id).title}](${article(id).url})`), '', ...checkLabels.map((label, i) => `- [${checks[`${stage.id}:${i}`] ? 'x' : ' '}] ${label}`), '', `自查：${stage.checkpoint}`, `参考思路：${stage.hints}`, '', `笔记：${notes[stage.id] ?? ''}`, '');
+      lines.push(`## ${stage.title} (${stage.hours} hours)`, '', stage.goal, '', ...stage.tasks.map(task => `- ${task}`), '', ...stage.articles.map(id => `- [${article(id).title}](${article(id).url})`), '', ...checkLabels.map((label, i) => `- [${checks[`${stage.id}:${i}`] ? 'x' : ' '}] ${label}`), '', `Self-check: ${stage.checkpoint}`, `Suggested reasoning: ${stage.hints}`, '', `Notes: ${notes[stage.id] ?? ''}`, '');
     }
-    lines.push('## 每周安排', '');
-    for (const week of weeks) lines.push(`- 第 ${week.number} 周${start ? `（${weekDate(start, week.number)} 起）` : ''}：${week.tasks.map(task => `${task.stage.title} ${task.hours}h`).join('；')}`);
+    lines.push('## Weekly schedule', '');
+    for (const week of weeks) lines.push(`- Week ${week.number}${start ? ` (from ${weekDate(start, week.number)})` : ''}: ${week.tasks.map(task => `${task.stage.title} ${task.hours}h`).join('; ')}`);
     const url = URL.createObjectURL(new Blob([lines.join('\n')], { type: 'text/markdown;charset=utf-8' }));
     const link = document.createElement('a'); link.href = url; link.download = `razavi-${track}-plan.md`; link.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
 </script>
 
-<main lang="zh-CN" class="roadmap">
+<main lang="en" class="roadmap">
   <header class="intro">
     <div class="eyebrow mono">READ → DERIVE → VERIFY</div>
-    <h1>把文章目录，变成你的学习路线。</h1>
-    <p>从 Razavi 的经典电路专栏建立直觉，经设计文章走向研究论文。沿先修关系阅读，每一步都留下可检查的产出。</p>
-    <div class="source-line"><a href="https://www.seas.ucla.edu/brweb/journal.html" target="_blank" rel="noreferrer">UCLA 原始目录 ↗</a><span>2026-10-05 核对 · {articles.length} 个 PDF 链接 · 22 篇 Analog Mind</span></div>
+    <h1>Turn an article catalog into your learning roadmap.</h1>
+    <p>Build intuition with Razavi circuit columns, then move through design articles to research papers. Follow prerequisites and produce something verifiable at every step.</p>
+    <div class="source-line"><a href="https://www.seas.ucla.edu/brweb/journal.html" target="_blank" rel="noreferrer">Original UCLA catalog ↗</a><span>Checked 2026-10-05 · {articles.length} PDF links · 22 Analog Mind articles</span></div>
   </header>
 
-  <section class="settings" aria-label="定制学习路线">
-    <div class="track-options"><span class="label">选择方向</span><div class="track-buttons">
+  <section class="settings" aria-label="Customize your roadmap">
+    <div class="track-options"><span class="label">Choose a track</span><div class="track-buttons">
       {#each Object.entries(tracks) as [id, value]}
         <button class:chosen={track === id} aria-pressed={track === id} onclick={() => changeTrack(id as Track)}>{value.title}<span>{value.description}</span></button>
       {/each}
     </div></div>
     <div class="inputs">
-      <label>起点<select bind:value={level}><option value="foundation">已有模拟电路基础</option><option value="beginner">从器件与小信号入门</option></select></label>
-      <label>每周投入<select bind:value={hours}><option value={3}>3 小时 · 轻量</option><option value={6}>6 小时 · 稳步</option><option value={10}>10 小时 · 集中</option><option value={15}>15 小时 · 深入</option></select></label>
-      <label>开始日期（可选）<input type="date" bind:value={start} /></label>
-      <button class="export" onclick={exportPlan}>导出 Markdown ↓</button>
+      <label>Starting point<select bind:value={level}><option value="foundation">Analog-circuit foundation</option><option value="beginner">Start with devices and small signals</option></select></label>
+      <label>Weekly study time<select bind:value={hours}><option value={3}>3 hours · Light</option><option value={6}>6 hours · Steady</option><option value={10}>10 hours · Focused</option><option value={15}>15 hours · Intensive</option></select></label>
+      <label>Start date (optional)<input type="date" bind:value={start} /></label>
+      <button class="export" onclick={exportPlan}>Export Markdown ↓</button>
     </div>
   </section>
 
-  <section class="overview" aria-label="计划摘要">
-    <div><strong class="mono">{weeks.length}<small>周</small></strong><span>按 {hours} 小时 / 周估算</span></div>
-    <div><strong class="mono">{total}<small>小时</small></strong><span>阅读 + 推导 + 验证</span></div>
-    <div class="progress-block"><strong class="mono">{completed} / {selected.length}<small>阶段</small></strong><progress value={completed} max={selected.length} aria-label="阶段完成进度"></progress></div>
-    <button class="next" onclick={() => { if (next) choose(next.id); tab = 'map'; }} disabled={!next}>{next ? `下一步：${next.title} →` : '本路线已全部勾选完成'}</button>
+  <section class="overview" aria-label="Plan overview">
+    <div><strong class="mono">{weeks.length}<small>weeks</small></strong><span>Estimated at {hours} h/week</span></div>
+    <div><strong class="mono">{total}<small>hours</small></strong><span>Read + derive + verify</span></div>
+    <div class="progress-block"><strong class="mono">{completed} / {selected.length}<small>stages</small></strong><progress value={completed} max={selected.length} aria-label="Stage completion progress"></progress></div>
+    <button class="next" onclick={() => { if (next) choose(next.id); tab = 'map'; }} disabled={!next}>{next ? `Next: ${next.title} →` : 'All stages in this track are checked off'}</button>
   </section>
-  <p class="save-message" aria-live="polite">{storageMessage || '进度与笔记保存在当前浏览器；切换路线会保留共同阶段记录。勾选完成是自我记录，不代表能力认证。'}</p>
-  <nav class="view-tabs" aria-label="路线视图">
-    <button aria-pressed={tab === 'map'} onclick={() => tab = 'map'}>学习路线</button>
-    <button aria-pressed={tab === 'weeks'} onclick={() => tab = 'weeks'}>每周计划</button>
-    <button aria-pressed={tab === 'library'} onclick={() => tab = 'library'}>文章目录 <span class="mono">{articles.length}</span></button>
+  <p class="save-message" aria-live="polite">{storageMessage || 'Progress and notes stay in this browser; shared-stage records remain when switching tracks. Completion is a personal record, not a proficiency certification.'}</p>
+  <nav class="view-tabs" aria-label="Roadmap views">
+    <button aria-pressed={tab === 'map'} onclick={() => tab = 'map'}>Learning roadmap</button>
+    <button aria-pressed={tab === 'weeks'} onclick={() => tab = 'weeks'}>Weekly plan</button>
+    <button aria-pressed={tab === 'library'} onclick={() => tab = 'library'}>Article catalog <span class="mono">{articles.length}</span></button>
   </nav>
 
   {#if tab === 'map'}
     <RouteGraph {track} {level} {hours} activeId={active.id} completed={completedIds} started={startedIds} onChoose={chooseFromGraph} />
     <div class="map-layout">
-      <article class="detail" aria-label="阶段详情">
-        <div class="detail-top"><span class="label">{active.subtitle} · ~ {active.hours} h</span><a href="#route-graph">返回路线图 ↑</a></div>
+      <article class="detail" aria-label="Stage details">
+        <div class="detail-top"><span class="label">{active.subtitle} · ~ {active.hours} h</span><a href="#route-graph">Back to the graph ↑</a></div>
         <h2 class="detail-heading" tabindex="-1" bind:this={detailHeading}>{active.title}</h2><p class="goal">{active.goal}</p>
-        <div class="prerequisite"><span>先修</span>{active.prerequisites.length ? active.prerequisites.map(id => route(track, level).find(stage => stage.id === id)?.title ?? '反馈与基础电路').join(' → ') : active.id === 'entry' ? '基本代数；同时配合模拟电路教材' : 'MOS 小信号、差分对、基本频域分析'}</div>
-        <h3>建议阅读顺序</h3>
+        <div class="prerequisite"><span>Prerequisites</span>{active.prerequisites.length ? active.prerequisites.map(id => route(track, level).find(stage => stage.id === id)?.title ?? 'Feedback and circuit fundamentals').join(' → ') : active.id === 'entry' ? 'Basic algebra; use an analog-circuit textbook alongside the readings' : 'MOS small signals, differential pairs, and basic frequency-domain analysis'}</div>
+        <h3>Suggested reading order</h3>
         {#if active.articles.length}
           <ol class="reading">
             {#each active.articles as id}
               {@const item = article(id)}
-              <li><a href={item.url} target="_blank" rel="noreferrer">{item.title} ↗</a><div class="metadata"><span>{item.group}{'issue' in item ? ` · ${item.issue}` : ''}</span><span class:reviewed={item.reviewed}>{item.reviewed ? '原文与推导已核验' : '目录已核对 · 深读待核验'}</span></div>
-                {#if 'note' in item && item.note}<a class="note-link" href={`/learn/razavi/notes/${item.note.replace('.md', '').toLowerCase()}/`}>阅读已有研究笔记 →</a>{/if}
+              <li><a href={item.url} target="_blank" rel="noreferrer">{item.title} ↗</a><div class="metadata"><span>{item.group}{'issue' in item ? ` · ${item.issue}` : ''}</span><span class:reviewed={item.reviewed}>{item.reviewed ? 'Source and derivations verified' : 'Catalog checked · Full-text verification pending'}</span></div>
+                {#if 'note' in item && item.note}<a class="note-link" href={`/learn/razavi/notes/${item.note.replace('.md', '').toLowerCase()}/`}>Read the research note →</a>{/if}
               </li>
             {/each}
           </ol>
-        {:else}<p class="muted">先用模拟电路教材复习本阶段，再进入专栏。下面的实验可用于检查直觉。</p>{/if}
-        {#if active.lab}<a class="lab-link" href={active.lab.href}>{active.lab.title} <span>打开互动实验 →</span></a>{/if}
-        <h3>本阶段要做什么</h3><ol class="tasks">{#each active.tasks as task}<li>{task}</li>{/each}</ol>
-        <div class="checkpoint"><h3>读完后，试着回答</h3><p>{active.checkpoint}</p><button aria-expanded={answerOpen} onclick={() => answerOpen = !answerOpen}>{answerOpen ? '收起参考思路 −' : '展开参考思路 +'}</button>{#if answerOpen}<p class="hint">{active.hints}</p>{/if}</div>
-        <fieldset><legend>我的阶段记录</legend>{#each checkLabels as label, i}<label><input type="checkbox" bind:checked={checks[`${active.id}:${i}`]} />{label}</label>{/each}</fieldset>
-        <label class="notes-label" for="learning-notes">学习笔记 · 关键公式、假设与疑问</label><textarea id="learning-notes" rows="4" bind:value={notes[active.id]} placeholder="例如：这一公式固定了哪些参数？我还需要验证什么？"></textarea>
+        {:else}<p class="muted">Review this stage with an analog-circuit textbook before entering the columns. Use the experiment below to check your intuition.</p>{/if}
+        {#if active.lab}<a class="lab-link" href={active.lab.href}>{active.lab.title} <span>Open the interactive experiment →</span></a>{/if}
+        <h3>Stage tasks</h3><ol class="tasks">{#each active.tasks as task}<li>{task}</li>{/each}</ol>
+        <div class="checkpoint"><h3>After reading, try to answer</h3><p>{active.checkpoint}</p><button aria-expanded={answerOpen} onclick={() => answerOpen = !answerOpen}>{answerOpen ? 'Hide suggested reasoning −' : 'Show suggested reasoning +'}</button>{#if answerOpen}<p class="hint">{active.hints}</p>{/if}</div>
+        <fieldset><legend>My stage record</legend>{#each checkLabels as label, i}<label><input type="checkbox" bind:checked={checks[`${active.id}:${i}`]} />{label}</label>{/each}</fieldset>
+        <label class="notes-label" for="learning-notes">Learning notes · Key equations, assumptions, and questions</label><textarea id="learning-notes" rows="4" bind:value={notes[active.id]} placeholder="For example: Which parameters does this equation hold fixed? What do I still need to verify?"></textarea>
       </article>
     </div>
   {:else if tab === 'weeks'}
-    <section class="weekly" aria-label="每周学习计划"><h2>每周 {hours} 小时，把阅读落到产出上。</h2><p class="muted">阶段可以跨周。建议每周约 40% 阅读、40% 推导或实验、20% 复盘。时间包含精选拓展阅读，可按实际难度延长。</p>
-      {#each weeks as week}<div class="week"><div><strong class="mono">W{String(week.number).padStart(2, '0')}</strong>{#if start}<small>{weekDate(start, week.number)} 起</small>{/if}</div><div>{#each week.tasks as task}<button onclick={() => { choose(task.stage.id); tab = 'map'; }}><span>{task.stage.title}</span><span class="mono">{task.hours} h →</span></button>{/each}</div></div>{/each}
+    <section class="weekly" aria-label="Weekly study plan"><h2>Turn {hours} hours per week into tangible learning outputs.</h2><p class="muted">Stages may span weeks. Aim for about 40% reading, 40% derivation or experiments, and 20% review. Estimates include selected extension readings; allow more time as needed.</p>
+      {#each weeks as week}<div class="week"><div><strong class="mono">W{String(week.number).padStart(2, '0')}</strong>{#if start}<small>From {weekDate(start, week.number)}</small>{/if}</div><div>{#each week.tasks as task}<button onclick={() => { choose(task.stage.id); tab = 'map'; }}><span>{task.stage.title}</span><span class="mono">{task.hours} h →</span></button>{/each}</div></div>{/each}
     </section>
   {:else}
-    <section class="library" aria-label="完整文章目录"><h2>按问题找文章，按路线读文章。</h2><p class="muted">完整目录含教学专栏、研究论文及其他文章。精选路线不会要求读完全部 148 篇。长系列可留作工具箱：反相器应用 Part 1–5 按功能回查，AI 设计实验放在独立验证之后。</p><div class="search"><label>搜索标题、作者或年份<input type="search" bind:value={query} placeholder="例如 comparator、PLL、2023" /></label><label>文章类型<select bind:value={group}><option value="all">全部</option><option>Analog Mind</option><option>A Circuit for All Seasons</option><option>研究与其他文章</option></select></label></div><p class="result-count" aria-live="polite">找到 {matches.length} 篇</p>
-      {#each matches as item}<article class="library-row"><a href={item.url} target="_blank" rel="noreferrer">{item.title} ↗</a><span class="metadata">{item.group} · {item.reviewed ? '原文与推导已核验' : '深读待核验'}</span><details><summary>来源引用</summary><p>{item.citation}</p></details></article>{/each}
-      {#if !matches.length}<p>没有匹配文章，请缩短关键词或切换文章类型。</p>{/if}
+    <section class="library" aria-label="Complete article catalog"><h2>Find articles by question; read them along a track.</h2><p class="muted">The full catalog includes teaching columns, research papers, and other articles. Selected tracks do not require all 148 articles. Use Inverter Applications Part 1–5 as a toolbox by function, and read the AI design experiments after learning independent verification.</p><div class="search"><label>Search title, author, or year<input type="search" bind:value={query} placeholder="For example: comparator, PLL, 2023" /></label><label>Article type<select bind:value={group}><option value="all">All</option><option>Analog Mind</option><option>A Circuit for All Seasons</option><option>Research and other articles</option></select></label></div><p class="result-count" aria-live="polite">{matches.length} articles found</p>
+      {#each matches as item}<article class="library-row"><a href={item.url} target="_blank" rel="noreferrer">{item.title} ↗</a><span class="metadata">{item.group} · {item.reviewed ? 'Source and derivations verified' : 'Full-text verification pending'}</span><details><summary>Source citation</summary><p>{item.citation}</p></details></article>{/each}
+      {#if !matches.length}<p>No matching articles. Try a shorter keyword or another article type.</p>{/if}
     </section>
   {/if}
-  <footer class="scope"><strong>怎样使用这张路线</strong><p>优先按依赖关系学习，再按兴趣拓展。每篇读三遍：识别问题与拓扑 → 独立推导关键关系 → 检查假设与验证条件。经典专栏帮助理解机制，Analog Mind 展示设计取舍，研究论文用于专题精读。</p><p>目录与原始链接核对于 2026-10-05；7 篇已有核验笔记，其余阅读任务是学习建议，未声称完成全文研究。时长是自学估算，包含简化模型验证，不包含流片或完整 PDK 设计。网站引用存在日期/页码差异时，以原始 PDF 为准。</p></footer>
+  <footer class="scope"><strong>How to use this roadmap</strong><p>Follow dependencies first, then extend by interest. Read each article in three passes: identify the problem and topology → derive key relationships independently → check assumptions and verification conditions. Classic columns explain mechanisms, Analog Mind demonstrates design tradeoffs, and research papers support close topic study.</p><p>The catalog and original links were checked on 2026-10-05. Seven articles have verified notes; other reading tasks are study suggestions, not claims of completed full-text research. Durations estimate self-study with simplified-model verification, excluding fabrication and full PDK design. Use the original PDF when website citations disagree on dates or pages.</p></footer>
 </main>
 
 <style>

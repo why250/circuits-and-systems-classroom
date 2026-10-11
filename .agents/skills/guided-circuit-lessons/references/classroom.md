@@ -1,40 +1,40 @@
-# 当前课堂项目的实现参考
+# Implementation reference for this classroom
 
-此文件是项目适配指南，数值和实现以链接目标为准。修改前按需读取相关代码，避免复制另一份模型或完整操作说明。
+This is a project adaptation guide. Linked files are authoritative for numerical values and implementation details. Read relevant code before making changes instead of duplicating models or complete operating instructions.
 
-## 项目约定与位置
+## Project conventions and locations
 
-- [web/README.md](../../../../web/README.md)：架构、开发命令、添加课题、发布目录、数值验证与访客统计要求的权威说明。
-- [package.json](../../../../web/package.json)：当前命令和依赖。`pnpm check` 的 `/dev/null` 重定向在 Windows 默认命令解释器下不可用；必要时分别运行其现有检查项，保持失败可见。不要将检查失败说成通过。
-- [Base.astro](../../../../web/src/layouts/Base.astro)：共享主题、导航和页脚；各课题通过 Astro 路由挂载 Svelte 交互组件。
-- `web/src/illustrations/<topic>/`：纯计算模型和课题组件；`web/src/components/ui/`、`chart/`：共享控件与图表。
-- `web/python/` 与 `web/tests/`：参考模型与数值测试；新增科学模型采用 README 中的 Python 参考约定。已有验证充分的模型可直接复用，增补检查只针对新教学结论或未覆盖条件。
+- [web/README.md](../../../../web/README.md): authoritative architecture, development commands, topic creation, public catalog, numerical verification, and visitor analytics requirements.
+- [package.json](../../../../web/package.json): current commands and dependencies. The `/dev/null` redirection in `pnpm check` does not work in the default Windows command interpreter. Run its existing checks individually when necessary and keep failures visible. Never report failed checks as passed.
+- [Base.astro](../../../../web/src/layouts/Base.astro): shared theme, navigation, and footer. Astro routes mount each topic's interactive Svelte components.
+- `web/src/illustrations/<topic>/`: pure computational models and topic components. `web/src/components/ui/` and `chart/`: shared controls and plots.
+- `web/python/` and `web/tests/`: reference models and numerical tests. Follow the README's Python reference conventions for new scientific models. Reuse sufficiently validated models directly; add checks for new teaching conclusions or uncovered conditions.
 
-## 用户自己的免费静态托管
+## The user's own free static hosting
 
-- [CLOUDFLARE-PAGES.md](../../../../web/CLOUDFLARE-PAGES.md) 是独立部署的权威操作说明，默认项目 `why250-circuits-classroom`，正式 origin 为 `https://why250-circuits-classroom.pages.dev`。
-- 用户请求发布课程时，在 `web/` 中执行 `node scripts/deploy-pages.mjs`；发布前完成相关检查。脚本设置自身的 `SITE_URL`，构建并从独立静态目录上传。先确认已登录用户账号和已有项目，避免重复创建。
-- [deploy-pages.mjs](../../../../web/scripts/deploy-pages.mjs) 与 [pages-assets.mjs](../../../../web/scripts/pages-assets.mjs) 负责构建、静态资源整理及上传；不运行上游域名绑定或统计 Worker 部署。未配置独立统计服务时保留访客占位符。
-- 验证目标课题的线上 HTTP 响应、实际交互和 canonical origin。若目标课题已经上线且满足本次要求，可核实后直接交付，不必再上传一份相同的部署。
+- [CLOUDFLARE-PAGES.md](../../../../web/CLOUDFLARE-PAGES.md) is the authoritative independent deployment guide. The default project is `why250-circuits-classroom`, with production origin `https://why250-circuits-classroom.pages.dev`.
+- When the user requests publication, run `node scripts/deploy-pages.mjs` in `web/` after the relevant checks pass. The script sets its own `SITE_URL`, builds, and uploads from an isolated static directory. Confirm the signed-in user account and existing project first to avoid duplicate creation.
+- [deploy-pages.mjs](../../../../web/scripts/deploy-pages.mjs) and [pages-assets.mjs](../../../../web/scripts/pages-assets.mjs) handle builds, static asset preparation, and uploads. They do not run upstream domain binding or analytics Worker deployment. Keep visitor placeholders when no independent analytics service is configured.
+- Verify the live lesson's HTTP response, actual interactions, and canonical origin. If the lesson is already live and satisfies the current request, verify and deliver it without uploading an identical deployment.
 
-## 已实现的入门样板：时间交织 ADC
+## Implemented introductory example: time-interleaved ADCs
 
-入口是 `/adc/time-interleaved-adcs/`，受众了解普通 ADC 和频谱，时间交织从头学。
+The entry point is `/adc/time-interleaved-adcs/`. Learners know ordinary ADCs and spectra but are new to time interleaving.
 
-- [lesson.ts](../../../../web/src/illustrations/timeinterleave/lesson.ts)：学习目标、预测、操作、解释和迁移检查；可参考字段组织内容，无需把每门课强制塞进同一模式。
-- [GuidedInterleaving.svelte](../../../../web/src/illustrations/timeinterleave/GuidedInterleaving.svelte)：分步开放控件、预测基线、误差开关、恢复参数、解释展开和理解检查。
-- [TimeInterleaveLesson.svelte](../../../../web/src/illustrations/timeinterleave/TimeInterleaveLesson.svelte)：引导模式与原完整实验台的切换；保持组件挂载以保留会话中的状态。当前进度不跨刷新保存。
-- [model.ts](../../../../web/src/illustrations/timeinterleave/model.ts)：已有时间交织模型。`read()` 的输出杂散已通过 `outputSpurs()` 转成 FFT 功率约定；不要再对奈奎斯特杂散重复增加 3 dB。
-- [timeinterleave-lesson.test.ts](../../../../web/tests/timeinterleave-lesson.test.ts)：独立投影采样数据，验证失调位置、增益幅度、时间失配与频率的乘积规律，以及随机 jitter 的总误差功率。
+- [lesson.ts](../../../../web/src/illustrations/timeinterleave/lesson.ts): objectives, predictions, operations, explanations, and transfer checks. Use its field organization as a reference without forcing every lesson into the same pattern.
+- [GuidedInterleaving.svelte](../../../../web/src/illustrations/timeinterleave/GuidedInterleaving.svelte): progressively available controls, prediction baselines, error switches, parameter restoration, expandable explanations, and comprehension checks.
+- [TimeInterleaveLesson.svelte](../../../../web/src/illustrations/timeinterleave/TimeInterleaveLesson.svelte): switches between guided mode and the original full workbench. Components remain mounted to preserve session state. Progress currently does not survive a refresh.
+- [model.ts](../../../../web/src/illustrations/timeinterleave/model.ts): existing time-interleaving model. Output spurs from `read()` already use the FFT power convention through `outputSpurs()`. Do not add another 3 dB to Nyquist spurs.
+- [timeinterleave-lesson.test.ts](../../../../web/tests/timeinterleave-lesson.test.ts): independently projects sampled data to verify offset spur locations, gain amplitudes, the frequency-times-timing-error relationship, and total error power from random jitter.
 
-课程从理想两路到四路，再分别观察失调、增益、固定 skew 和独立随机 jitter。所有入门实验固定总采样率 2 GS/s、14 位量化和公共模拟带宽；只开启当前机制。约 125/250 MHz 的输入会微调到相干频点，翻倍关系须按实际输入频率计算。
+The lesson moves from two ideal channels to four, then examines offset, gain, fixed skew, and independent random jitter separately. Introductory experiments hold the total sampling rate at 2 GS/s, use 14-bit quantization and a shared analog bandwidth, and enable only the current mechanism. Inputs near 125/250 MHz are adjusted to coherent bins; use actual input frequencies when evaluating doubling relationships.
 
-可迁移经验：
+Transferable lessons:
 
-- “固定总采样率”与“固定每路采样率”的问题刻意分开；迁移题检验学习者是否注意固定条件。
-- 比较增益与 skew 时保持误差值不变，用输入频率扫描区分幅度规律；二者的镜像位置可以相同。
-- “jitter 形成噪声底”只在本实验独立随机 jitter 模型下使用。周期抖动也会产生边带，不能将课题中的模型特例扩展为普遍规律。
-- 通道采样率、总采样率和模拟带宽分别说明。这里复用的正弦前景校准有其适用范围；入门课程尚未执行校准，不因模型包含校准函数就声称已教完校准。
-- 窄屏提供实验与图表之间的锚点跳转；通道时刻表与波形颜色对应；解析频点与实测谱线共用实际频率轴。
+- Separate questions that hold the total sampling rate fixed from those that hold each channel's rate fixed. Transfer checks test whether learners notice the fixed condition.
+- Hold error values fixed when comparing gain and skew; sweep input frequency to distinguish amplitude relationships. Their image locations can coincide.
+- Say "jitter produces a noise floor" only for this experiment's independent random jitter model. Periodic jitter can also create sidebands; do not generalize a model-specific result into a universal rule.
+- Explain channel rate, total rate, and analog bandwidth separately. The reused sinusoidal foreground calibration has a limited scope. Introductory lessons do not run calibration; having a calibration function in the model does not mean calibration has been taught.
+- Provide anchor links between controls and plots on narrow screens. Match channel timing-table colors to waveform colors and use the actual frequency axis for both analytical locations and measured spectrum lines.
 
-这个样板经过程序和浏览器验证；其教学效果仍需学习者反馈。后续课题用于检验流程的可迁移性。
+This example has passed programmatic and browser verification. Educational effectiveness still requires learner feedback. Later topics should test whether the workflow transfers successfully.

@@ -179,7 +179,7 @@ $$\boxed{\omega_z \approx 2 \omega_{p2} = \frac{2g_{\mathrm{m3}}}{C_{\mathrm{X}}
 
 **Impact on settling time:**
 
-Since $\omega_z \approx 2\omega_{p2}$, the zero and non-dominant pole form a **pole-zero doublet** (靠近的极-零点对). In the time-domain step response, this doublet produces a **slow-settling tail** (长拖尾) with:
+Since $\omega_z \approx 2\omega_{p2}$, the zero and non-dominant pole form a **pole-zero doublet**. In the time-domain step response, this doublet produces a **slow-settling tail** with:
 - Small amplitude but long duration
 - Settling accuracy limited by doublet residue
 - Critical issue for high-precision switched-capacitor circuits requiring fast settling

@@ -5,6 +5,13 @@ and [the equation-to-simulation companion](../../Source-Degenerated-Cascode-Sche
 The circuit is a two-NMOS, resistor-loaded cascode with source degeneration,
 not the folded topology implied by its original filename.
 
+The main companion now follows the adjusted saved KiCad circuit: RL=1 kohm,
+RE=50 ohm, m=10, VIN=0.85 V and VB=1.4 V. Use the
+[current structure-study lab](current-study/README.md) and
+`python code/run_cascode_structure.py` for its 16 experiments.
+The sections below document the original m=1, 26-deck study, retained in
+[the historical companion](../../Source-Degenerated-Cascode-Historical-Baseline.md).
+
 ## Model identity and conditions
 
 `cascode-core.cir` is extracted from the user's actual connections and
@@ -17,6 +24,12 @@ KP=200 uA/V^2, LAMBDA=0.03/V, GAMMA=0.4 sqrt(V), PHI=0.7 V,
 TOX=20 nm, CGSO=CGDO=200 pF/m, KF=0, AF=1. Junction capacitances
 default to zero. This is not a SKY130 fit or a valid short-channel
 prediction merely because the original length is retained.
+
+The same NMOS coefficients are available in the
+[shared educational MOS v1 library](../models/edu-mos-level1/README.md),
+which also provides PMOS for new circuits. This lab keeps its existing
+`models.lib` snapshot and published results; the shared-library checker
+separately compares representative baseline and 10-kohm-load decks.
 
 Nominal supplies/bias are VDD=1.8 V, VSS=0, VIN=0.75 V, VB=1.25 V,
 CL=1 pF and 27 C. CL is a testbench addition. The two cases are:

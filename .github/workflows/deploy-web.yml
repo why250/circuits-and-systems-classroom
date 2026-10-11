@@ -115,26 +115,24 @@ jobs:
           PY
 
       # Cache only raw Sphinx output. Exact keys prevent stale-source or cross-toolchain fallback restores.
-      - name: Restore the raw English and Chinese manual
+      - name: Restore the raw English manual
         id: reference-cache
         uses: actions/cache/restore@v4
         with:
           path: .cache/reference-manual
           key: reference-manual-v1-${{ runner.os }}-${{ runner.arch }}-${{ needs.toolbox-drift.outputs.toolbox-sha }}-${{ steps.reference-environment.outputs.identity }}-${{ hashFiles('.github/workflows/deploy-web.yml', '.github/doc-postprocess.py') }}
 
-      - name: Build the raw English and Chinese manual
+      - name: Build the raw English manual
         if: steps.reference-cache.outputs.cache-hit != 'true'
         working-directory: .
         run: |
-          python -m sphinx -b html toolbox/python/docs/source .cache/reference-manual
-          python -m sphinx -b html -D language=zh_CN toolbox/python/docs/source .cache/reference-manual/zh_CN
+          python -m sphinx -b html -D language=en toolbox/python/docs/source .cache/reference-manual
           touch .cache/reference-manual/.nojekyll
 
       - name: Validate the raw manual tree
         working-directory: .
         run: |
           test -f .cache/reference-manual/index.html
-          test -f .cache/reference-manual/zh_CN/index.html
 
       - name: Cache the raw manual before site postprocessing
         if: steps.reference-cache.outputs.cache-hit != 'true'

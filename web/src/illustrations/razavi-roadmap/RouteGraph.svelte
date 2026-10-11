@@ -9,7 +9,7 @@
   const shared = $derived(route(track, level).filter(stage => ['entry', 'feedback', 'regeneration'].includes(stage.id)));
   const tail = $derived(route(track, level).filter(stage => ['supplies', 'capstone'].includes(stage.id)));
   const weeks = $derived(Object.fromEntries(trackIds.map(id => [id, stageWeeks(id, level, hours)])));
-  function state(id: string) { return completed.includes(id) ? '已完成' : started.includes(id) ? '学习中' : '待学习'; }
+  function state(id: string) { return completed.includes(id) ? 'Complete' : started.includes(id) ? 'In progress' : 'Not started'; }
   function download(format: 'svg' | 'excalidraw') {
     const options = { track, level, hours, completed, started };
     const content = format === 'svg' ? svgDiagram(options) : excalidrawDiagram(options);
@@ -21,33 +21,33 @@
 
 {#snippet node(stage: Stage, direction: Track)}
   <button class="node" class:active={activeId === stage.id} class:done={completed.includes(stage.id)} class:started={started.includes(stage.id) && !completed.includes(stage.id)}
-    aria-label={`${stageNames[stage.id]}，${stage.hours} 小时，${weeks[direction][stage.id]}，${state(stage.id)}，查看阶段详情`}
+    aria-label={`${stageNames[stage.id]}, ${stage.hours} hours, ${weeks[direction][stage.id]}, ${state(stage.id)}, view stage details`}
     aria-current={activeId === stage.id && track === direction ? 'step' : undefined} onclick={() => onChoose(direction, stage.id)}>
     <span class="node-top"><span class="state"><i aria-hidden="true"></i>{state(stage.id)}</span><span class="mono">{stage.hours} h</span></span>
     <strong>{stageNames[stage.id]}</strong>
-    <span class="node-bottom"><span>{weeks[direction][stage.id]}</span><span aria-hidden="true">查看任务 ↗</span></span>
+    <span class="node-bottom"><span>{weeks[direction][stage.id]}</span><span aria-hidden="true">View tasks ↗</span></span>
   </button>
 {/snippet}
 
 <section class="route-graph" id="route-graph" aria-labelledby="graph-title">
   <header class="graph-header">
-    <div><span class="eyebrow mono">THE BIG PICTURE</span><h2 id="graph-title">先看全局，再走好每一步。</h2><p>点击节点查看文章与任务。箭头表示建议阅读顺序，具体先修见阶段详情。</p></div>
-    <div class="downloads"><button onclick={() => download('svg')}>下载 SVG ↓</button><button onclick={() => download('excalidraw')}>下载 Excalidraw ↓</button></div>
+    <div><span class="eyebrow mono">THE BIG PICTURE</span><h2 id="graph-title">See the whole route, then take it step by step.</h2><p>Select a node for readings and tasks. Arrows suggest reading order; stage details specify prerequisites.</p></div>
+    <div class="downloads"><button onclick={() => download('svg')}>Download SVG ↓</button><button onclick={() => download('excalidraw')}>Download Excalidraw ↓</button></div>
   </header>
-  <div class="legend"><span><i class="selected-dot"></i>当前选择</span><span><i class="done-dot"></i>已完成</span><span><i class="started-dot"></i>学习中</span><span class="week-note">每周 {hours} 小时 · 各方向独立估算周次</span></div>
+  <div class="legend"><span><i class="selected-dot"></i>Selected</span><span><i class="done-dot"></i>Complete</span><span><i class="started-dot"></i>In progress</span><span class="week-note">{hours} h/week · Weeks estimated separately per track</span></div>
 
   <div class="common-section">
-    <div class="section-label"><span class="mono">01</span> 共同基础 <small>三条路线共享这些知识</small></div>
+    <div class="section-label"><span class="mono">01</span> Shared foundations <small>Shared by all three tracks</small></div>
     <div class="shared-nodes">{#each shared as stage, index}{#if index}<span class="across-arrow" aria-hidden="true">→</span>{/if}{@render node(stage, track)}{/each}</div>
   </div>
   <div class="branch-fan" aria-hidden="true"><svg viewBox="0 0 100 18" preserveAspectRatio="none"><path d="M50 0 V9 M16.667 18 V9 H83.333 V18 M50 9 V18" /></svg></div>
-  <div class="mobile-switch" aria-label="路线图方向">
-    {#each trackIds as direction}<button aria-pressed={track === direction} onclick={() => onChoose(direction, branch(direction, level)[0].id, false)}>{direction === 'adc' ? 'ADC' : direction === 'pll' ? 'PLL' : '高速链路'}</button>{/each}
+  <div class="mobile-switch" aria-label="Roadmap track">
+    {#each trackIds as direction}<button aria-pressed={track === direction} onclick={() => onChoose(direction, branch(direction, level)[0].id, false)}>{direction === 'adc' ? 'ADC' : direction === 'pll' ? 'PLL' : 'High-speed links'}</button>{/each}
   </div>
   <div class="lanes">
     {#each trackIds as direction}
       <div class="lane" class:chosen={track === direction}>
-        <button class="lane-heading" aria-pressed={track === direction} onclick={() => onChoose(direction, branch(direction, level)[0].id, false)}><span><span class="mono">02 / {direction.toUpperCase()}</span><strong>{tracks[direction].title}</strong></span><span class="lane-hint">{track === direction ? '当前方向' : '切换方向 →'}</span></button>
+        <button class="lane-heading" aria-pressed={track === direction} onclick={() => onChoose(direction, branch(direction, level)[0].id, false)}><span><span class="mono">02 / {direction.toUpperCase()}</span><strong>{tracks[direction].title}</strong></span><span class="lane-hint">{track === direction ? 'Current track' : 'Switch track →'}</span></button>
         <div class="branch-nodes">
           {#each branch(direction, level) as stage, index}
             {#if index}<span class="down-arrow" aria-hidden="true">↓</span>{/if}
@@ -59,10 +59,10 @@
   </div>
   <div class="branch-fan merge" aria-hidden="true"><svg viewBox="0 0 100 18" preserveAspectRatio="none"><path d="M16.667 0 V9 H83.333 V0 M50 0 V18" /></svg></div>
   <div class="common-section finish-section">
-    <div class="section-label"><span class="mono">03</span> 补齐系统，交付设计 <small>参考、电源与滤波可在反馈之后穿插学习</small></div>
+    <div class="section-label"><span class="mono">03</span> Complete the system and deliver a design <small>Study references, supplies, and filters any time after feedback</small></div>
     <div class="shared-nodes">{#each tail as stage, index}{#if index}<span class="across-arrow" aria-hidden="true">→</span>{/if}{@render node(stage, track)}{/each}</div>
   </div>
-  <p class="export-note">导出包含全部方向与当前进度快照。SVG 可直接查看或打印；.excalidraw 文件可在 <a href="https://excalidraw.com/" target="_blank" rel="noreferrer">Excalidraw ↗</a> 中打开编辑，图中修改不会回写网页。</p>
+  <p class="export-note">Exports include all tracks and a snapshot of current progress. View or print SVG directly; open .excalidraw files in <a href="https://excalidraw.com/" target="_blank" rel="noreferrer">Excalidraw ↗</a> to edit them. Changes to the diagram do not update the webpage.</p>
 </section>
 
 <style>

@@ -1,248 +1,194 @@
 <!--
-Input: user-exported cascode project, explicit teaching models and 26 ngspice testbenches | Output: schematic, derivations, measured plots and independent numerical checks | Position: Companion to Source-Degenerated-Cascode-Analysis.md
+Input: saved KiCad schematic, existing LEVEL=1 model and structure-specific testbenches | Output: derivations, measured plots and independent checks at the adjusted bias | Position: Companion to Source-Degenerated-Cascode-Analysis.md
 -->
 # Source-Degenerated Cascode Amplifier: Schematic and Simulation
 
-This companion to [the circuit analysis](Source-Degenerated-Cascode-Analysis.md) follows the equation-to-experiment organization of [the 5T OTA study](5T-OTA-Schematic-and-Simulation.md). It studies the **actual uploaded topology**: two stacked NMOS devices, a resistor load, a source-degeneration resistor and a single input/output. The original “Folded-cascode” filename described a topology absent from its connections.
+This study follows the **current saved KiCad circuit** and asks four structural questions: how RE creates feedback, what M2 contributes as a cascode, how each noise source reaches the output, and where small-signal amplification stops describing a finite input. Each section connects a mechanism and derivation to a specific experiment, measured curves and numerical checks. RL and RE remain fixed throughout the main study.
 
-**Verification status:** 26 testbenches ran locally on 2026-10-10 using ngspice-33. Both nominal cases pass conducting-saturation and current-balance checks; independent KCL, closed forms, full-frequency capacitance matrices, noise-source transfers, pole/zero reconstruction, DC derivatives and small-step settling agree with the simulated data. Original geometry, connectivity, W/L and 50 Ω resistors are preserved in the baseline. A separate **RL=10 kΩ experiment** changes only load resistance and recomputes bias. The results establish consistency of the specified educational LEVEL=1 model, **not SKY130 performance**. In particular, retaining 0.15 µm geometry does not make this long-channel model accurate for short-channel silicon.
+**Verification status:** 16 testbenches ran on 2026-10-11 with KiCad 10.0.6's bundled **ngspice-46**. The baseline has both MOSFETs conducting in saturation. Complex KCL, per-source thermal noise, nonlinear DC equations, poles/zeros, sinusoidal distortion and small-step settling were independently checked. Predictions that use simulated gm/gmb/gds/capacitances are independent circuit calculations, not independently calibrated device parameters. The model is **educational LEVEL=1, not a SKY130 PDK or a prediction of 150-nm silicon**.
 
-## Circuit and Downloadable Assets
+The original m=1, RL=50 ohm / 10 kohm experiments, flicker illustration, supply tests and resistor scans are retained in [the historical companion](Source-Degenerated-Cascode-Historical-Baseline.md). They describe a different bias and geometry and are not numerical evidence for the current circuit.
 
-![Actual cascode topology; teaching labels E and X](figures/source-degenerated-cascode/schematic.svg)
+## Current Circuit and Reproducible Assets
 
-The drawing renders the supplied project's embedded symbol primitives, placements and routes. E and X and effective parameter values are added as teaching labels. [PNG](figures/source-degenerated-cascode/schematic.png) is also available. Both transistor bodies connect to VSS; their hidden body leads are not separate floating terminals.
+![Actual saved KiCad circuit with the adjusted bias and multiplicity](figures/source-degenerated-cascode/current/cascode-dc.svg)
 
-| File | Purpose and execution status |
-|---|---|
-| [Original editable project](circuits/source-degenerated-cascode/Source-degenerated%20cascode%20amplifier.icproj.json) | Renamed file/directory, unchanged source bytes and SKY130 bindings; historical internal title retained |
-| [Educational editable project](circuits/source-degenerated-cascode/educational.icproj.json) | Same schema-68 geometry, connections, W/L and R; declared primitive teaching-model binding |
-| [Source provenance](circuits/source-degenerated-cascode/provenance.json) | Source SHA-256, inherited parameters, independently checked terminal tuples and node mapping |
-| [Original structural netlist](simulations/source-degenerated-cascode/original-sky130.cir) | SKY130 calls, original port order/global ground; extracted but not simulated with a PDK |
-| [Educational core](simulations/source-degenerated-cascode/cascode-core.cir) and [models](simulations/source-degenerated-cascode/models.lib) | Actual inputs to all 26 testbenches; no external PDK required |
-| [Lab instructions](simulations/source-degenerated-cascode/README.md) | Test methods, source references and reproduction commands |
-| [Execution report](simulations/source-degenerated-cascode/results/summary.json) | Conditions, metrics, checks, executable/script/input hashes and actual run date |
+The drawing is exported from the saved schematic; only page whitespace is cropped. [PNG preview](figures/source-degenerated-cascode/current/cascode-dc.png) is also available. Both bulk terminals connect to VSS. VIN, VB, VDD, CL and OUT are referenced to external ground; VSS is held at 0 V.
 
-The [exporter](code/export_cascode.py) resolves per-type defaults, route/contact equivalence and explicit bulk-net bindings, then checks all four device tuples against a separately declared reference. It re-extracts the teaching copy to verify unchanged connections, net mapping and effective parameters. A unit wrapper NF is omitted from the primitive binding; total W and m=1 remain identical. It supports this flat schema-68 circuit, not arbitrary Analog Canvas projects. The sibling Canvas checkout has no built packages, so the generated educational editable project has **not been reopened/round-tripped through Canvas**. Its model-binding format follows the local schema source; the extracted and executed SPICE core is the validated simulation artifact. This qualification does not affect preservation of the original source.
-
-### Devices, Nodes and Test Conditions
-
-| Element | D / G / S / B, or resistor terminals | Original effective parameters |
+| Element | Connections or condition | Current value |
 |---|---|---|
-| M1 | X / VIN / E / VSS | W=1 µm, L=0.15 µm, nf=m=1 |
-| M2 | OUT / VB / X / VSS | W=1 µm, L=0.15 µm, nf=m=1 |
-| RE | E / VSS | 50 Ω |
-| RL | VDD / OUT | 50 Ω |
+| M1 | D=X, G=VIN, S=E, B=VSS | W=1 um, L=150 nm, **m=10** |
+| M2 | D=OUT, G=VB, S=X, B=VSS | W=1 um, L=150 nm, **m=10** |
+| R1 / RL | VDD to OUT | **1 kohm** |
+| R2 / RE | E to VSS | **50 ohm** |
+| C1 / CL | OUT to external ground | 1 pF |
+| V1 / VDD | Supply | 1.8 V |
+| V2 / VIN | Input DC bias | **0.85 V** |
+| V3 / VB | M2 gate bias | **1.40 V** |
+| V4 / VSS | Body and source-return rail | 0 V |
 
-The original values reside in `defaults.instancesByType`. Reading only instance fields would miss them. The original wrapper port order is `VB VIN OUT VDD`, with global ground `0`. The educational core exposes `VDD VSS VIN OUT VB`; promoting ground to a VSS port permits a separately excited negative rail. Generated names X and E map to the original anonymous net identifiers in provenance.
+Multiplicity m=10 represents ten parallel devices of the stated per-device W/L. In this model, queried gm, gmb, gds and capacitances already include multiplicity; they must not be multiplied by ten again.
 
-| Condition | Baseline | Load experiment |
-|---|---:|---:|
-| VDD / VSS | 1.8 / 0 V | Same |
-| VIN / VB | 0.75 / 1.25 V | Same |
-| M1/M2 W/L | 1 / 0.15 µm | Same |
-| RE | 50 Ω | Same |
-| RL | **50 Ω, from original** | **10 kΩ, explicit override** |
-| CL | 1 pF, added by testbench | Same |
-| Temperature | 27 °C | Same |
+| Asset | Role |
+|---|---|
+| [Saved KiCad schematic](circuits/source-degenerated-cascode/kicad/cascode-dc.kicad_sch) and [GUI guide](circuits/source-degenerated-cascode/kicad/README.md) | Shared editable source; the runner does not edit it |
+| [Model snapshot](simulations/source-degenerated-cascode/models.lib) | Existing NMOS_EDU model, unchanged |
+| [Structure-study runner](code/run_cascode_structure.py) | Exports the saved schematic, runs experiments and performs independent checks |
+| [Executed decks, methods and raw data](simulations/source-degenerated-cascode/current-study/README.md) | Separate directory for this study |
+| [Execution report](simulations/source-degenerated-cascode/current-study/summary.json) | Actual tool identity, parameters, hashes, measured metrics and checks |
+| [Original Canvas source and provenance](circuits/source-degenerated-cascode/provenance.json) | Preserved historical source; the Canvas teaching copy has not been updated to this KiCad bias |
 
-The authored NMOS model uses LEVEL=1, VTO=0.45 V, KP=200 µA/V², LAMBDA=0.03 V$^{-1}$, GAMMA=0.4 V$^{1/2}$, PHI=0.7 V, TOX=20 nm and CGSO=CGDO=200 pF/m. These simple coefficients match the educational NMOS baseline used in the 5T example so differences can be attributed to circuit structure and load. They are not a fit to a foundry process. Junction capacitances default to zero; no source/drain series resistance is specified. The baseline has KF=0; a separate noise run uses KF=2e−33, AF=1.
+The model has VTO=0.45 V, KP=200 uA/V², LAMBDA=0.03 V⁻¹, GAMMA=0.4 V½, PHI=0.7 V, TOX=20 nm and CGSO=CGDO=200 pF/m. Temperature is 27 °C. KF=0 in this study; junction capacitances and source/drain series resistance are absent. All bias and supply sources are ideal and noiseless. No additional external low-impedance load is connected.
 
-Supplies, input and bias are ideal sources. CL, VIN, VB and OUT are referenced to **fixed external ground**, including when VSS is excited. AC amplitudes of 1 select linearized transfer functions; they are not large-signal 1 V swings. The broad 1 Hz–100 THz frequency sweep exposes the compact model's complete mathematical roots; it is not a physical frequency-validity claim.
+## 1. Establish the Bias and Voltage Budget
 
-## Bias and Saturation: Equations to Plot
-
-The current mechanism is simple: M1 controls the series current; RE converts it to a source voltage; M2 provides a common-gate path; RL converts the same current to an output voltage. With VSS=0,
+The current path is VDD → RL → M2 → M1 → RE → VSS. M1 controls the branch current; RE develops a source voltage; M2's gate bias sets the internal-node voltage X. At VSS=0,
 
 $$
-V_E=I_DR_E,\quad V_O=V_{DD}-I_DR_L,\quad
-I_{D1}=I_{D2},\quad P_{DC}=V_{DD}|I_{VDD}|.
+V_E=I_DR_E,\qquad V_O=V_{DD}-I_DR_L,\qquad I_{D1}=I_{D2}.
 $$
 
-Both bodies are grounded, so
+For grounded bodies, the threshold and saturated current equations are
 
 $$
 V_{Ti}=0.45+0.4\left(\sqrt{0.7+V_{Si}}-\sqrt{0.7}\right),
 $$
 
 $$
-I_{Di}=\frac{200\ \mathrm{\mu A/V^2}}{2}\frac{W_i}{L_i}
-(V_{GSi}-V_{Ti})^2(1+0.03V_{DSi})
+I_{Di}=m_i\frac{200\,\mathrm{\mu A/V^2}}{2}\frac{W_i}{L_i}
+(V_{GSi}-V_{Ti})^2(1+0.03V_{DSi}).
 $$
 
-in saturation. Define $m_i=V_{DSi}-V_{DSsat,i}$. A positive margin identifies saturation in this model.
+Use the conducting-saturation margin $V_{DS}-V_{DSsat}$, rather than output voltage alone, to assess headroom. Raising VB raises X and redistributes voltage from M2 to M1; it does not provide a second cascaded voltage-gain factor.
 
-**Test:** the `baseline-op.cir` and `load-10k-op.cir` decks record currents, node voltages, gm, gmb, gds, thresholds, overdrives and capacitances. Each `bias-sweep` changes VB from 0.9 to 1.7 V in 2 mV steps. Each `dc-transfer` changes VIN from 0.45 to 1.05 V in 0.5 mV steps, holding VB fixed. The runner separately evaluates the saturated square law and body-effect threshold at the nominal OP, using simulated terminal voltages. This checks the device equation; it is not an independent prediction of the complete bias solution.
+**Testbench:** [OP](simulations/source-degenerated-cascode/current-study/op.cir) exports the actual saved values and queries each device. An independent nonlinear implementation solves branch current and X using the declared device equations; its solution also predicts the DC transfer in Section 5.
 
-![DC transfer, bias coupling, saturation margins and supply current](figures/source-degenerated-cascode/bias-and-dc.png)
+| Quantity | Measured OP |
+|---|---:|
+| Branch current / supply power | 0.823664 mA / 1.48260 mW |
+| OUT / X / E | 0.976336 V / 0.497874 V / 0.0411832 V |
+| M1 gm / gmb / gds | 4.71861 mS / 1.09618 mS / 24.3760 uS |
+| M2 gm / gmb / gds | 4.72013 mS / 0.862539 mS / 24.3603 uS |
+| M1 VDS / VDSsat / margin | 0.456691 V / 0.349113 V / **+107.578 mV** |
+| M2 VDS / VDSsat / margin | 0.478462 V / 0.349000 V / **+129.462 mV** |
 
-| Nominal OP metric | Original RL=50 Ω | Experimental RL=10 kΩ |
-|---|---:|---:|
-| OUT | 1.797036 V | 1.207320 V |
-| E | 2.963581 mV | 2.963401 mV |
-| X | 0.419283 V | 0.417184 V |
-| Series current | 59.2716 µA | 59.2680 µA |
-| Supply power | 106.689 µW | 106.682 µW |
-| M1 saturation margin | 0.119991 V | 0.117892 V |
-| M2 saturation margin | 1.085557 V | 0.495443 V |
+Both devices conduct in saturation with reasonably balanced nominal margins. Section 5 tests how those margins change during the signal; this OP check alone does not establish a low-distortion input range.
 
-The nominal resistor drops and both saturated current equations agree with simulation within 0.0001% relative tolerance. Finite channel-length modulation permits a small current change when RL changes. Both devices conduct in saturation at the two nominal operating points; this statement does not cover the entire DC sweep.
+## 2. Source Degeneration: Feedback, Gain and Linearity
 
-Within the **sampled** bias sweep, the first VB with both devices saturated is 1.106 V for RL=50 Ω and 1.110 V for RL=10 kΩ. Both remain saturated through the last sampled VB=1.700 V; that upper sample is not a measured maximum permissible bias. At low VB, M1 loses drain headroom even though the series current still flows.
+An increase in VIN initially raises M1 current. RE converts that increase into a rise of E, reducing the increase in VGS and supplying local negative feedback. Grounded bulk terminals also make the rising source voltage increase threshold; gmb therefore belongs in the feedback denominator.
 
-Raw evidence: [baseline OP log](simulations/source-degenerated-cascode/results/baseline-op.log), [10 kΩ OP log](simulations/source-degenerated-cascode/results/load-10k-op.log), [baseline bias CSV](simulations/source-degenerated-cascode/results/baseline-bias-sweep.csv) and [10 kΩ bias CSV](simulations/source-degenerated-cascode/results/load-10k-bias-sweep.csv).
-
-## Low-Frequency KCL and Signal Gain
-
-Take unknowns in **E, X, OUT order** and let $k_i=g_{mi}+g_{mbi}+g_{di}$, $g_E=1/R_E$, $g_L=1/R_L$. MOS drain currents use $i_d=g_mv_g+g_{mb}v_{body}+g_dv_d-kv_s$. With bodies and rails grounded in AC,
+Let $k_i=g_{mi}+g_{mbi}+g_{di}$. With rails and VB grounded in AC, the unknowns are ordered **E, X, OUT**. The MOS current convention is $i_d=g_mv_g+g_{mb}v_{body}+g_dv_d-kv_s$, giving
 
 $$
 G\begin{bmatrix}v_E\\v_X\\v_o\end{bmatrix}
-=\begin{bmatrix}g_{m1}\\-g_{m1}\\0\end{bmatrix}v_i
-+\begin{bmatrix}0\\g_{m2}\\-g_{m2}\end{bmatrix}v_b,
-$$
-
-$$
+=\begin{bmatrix}g_{m1}\\-g_{m1}\\0\end{bmatrix}v_i,
+\qquad
 G=\begin{bmatrix}
-g_E+k_1&-g_{d1}&0\\
+1/R_E+k_1&-g_{d1}&0\\
 -k_1&g_{d1}+k_2&-g_{d2}\\
-0&-k_2&g_L+g_{d2}
+0&-k_2&1/R_L+g_{d2}
 \end{bmatrix}.
 $$
 
-The equivalent series-current derivation makes degeneration explicit:
+The same result follows by tracking the incremental series current:
 
 $$
 i=g_{m1}v_i+g_{d1}v_X-k_1v_E,\quad v_E=iR_E,
 \quad i=av_i+bv_X,
 $$
 
-where $a=g_{m1}/(1+k_1R_E)$ and $b=g_{d1}/(1+k_1R_E)$. M2 gives $i=g_{m2}v_b+g_{d2}v_o-k_2v_X$, and $v_o=-iR_L$. Therefore
+$$
+a=\frac{g_{m1}}{1+k_1R_E},\quad b=\frac{g_{d1}}{1+k_1R_E},\quad
+\Delta=k_2+b(1+g_{d2}R_L).
+$$
 
-$$
-v_X=\frac{g_{m2}v_b-a(1+g_{d2}R_L)v_i}{\Delta},\qquad
-i=\frac{ak_2v_i+b g_{m2}v_b}{\Delta},\quad
-\Delta=k_2+b(1+g_{d2}R_L),
-$$
+M2 gives $i=g_{d2}v_o-k_2v_X$, while $v_o=-iR_L$. Thus
 
 $$
 \boxed{A_v=-\frac{R_Lak_2}{\Delta}},\qquad
-\boxed{A_E=\frac{R_Eak_2}{\Delta}},\qquad
-\boxed{A_X=-\frac{a(1+g_{d2}R_L)}{\Delta}}.
+A_E=\frac{R_Eak_2}{\Delta},\qquad
+A_X=-\frac{a(1+g_{d2}R_L)}{\Delta}.
 $$
 
-Increasing VIN raises current and lowers OUT, so Av is negative. E rises and supplies local negative feedback; X moves oppositely, reducing the gate-drain Miller multiplication of M1. Ignoring the small output-conductance corrections gives
+Neglecting small drain-conductance corrections gives
 
 $$
-A_v\approx-\frac{g_{m1}R_L}{1+(g_{m1}+g_{mb1})R_E}.
+\boxed{G_m\approx\frac{g_{m1}}{1+(g_{m1}+g_{mb1})R_E}},\qquad A_v\approx-G_mR_L.
 $$
 
-**Test:** each `ac-input` drives VIN AC=1, with all other sources AC=0. Complex OUT/E/X and VIN source current are captured. The independent calculation uses **OP gm/gmb/gds as inputs**, then builds and solves its own circuit equations. Independence is in topology, signs, matrix and transfer solution, not in the compact-model parameters or bias solution. The central DC slope is a second measurement method.
+At this OP the approximate feedback denominator is **1.29074**: effective transconductance is approximately **77.5%** of the bare gm. In the strong-degeneration limit, gain tends toward a resistor-ratio limit with an additional body-effect factor; increasing current does not provide unlimited gain.
 
-| Metric | Independent calculation | ngspice at 1 Hz / central DC slope |
+**Testbenches:** [input AC](simulations/source-degenerated-cascode/current-study/ac-input.cir) uses VIN AC=1, a derivative normalization. [Source bypass AC](simulations/source-degenerated-cascode/current-study/ac-bypass.cir) adds a noiseless 100 uF capacitor across RE. The capacitor is open at DC; a [separate OP test](simulations/source-degenerated-cascode/current-study/bypass-op.cir) verifies unchanged bias. At 10 kHz its reactance is about 0.159 ohm, so it nearly removes source feedback in AC. This capacitor is a diagnostic addition, not a component added to the saved schematic.
+
+![Source feedback, AC bypass and internal-node transfers](figures/source-degenerated-cascode/current/degeneration-and-nodes.png)
+
+Solid node curves are simulated; dashed curves are the independent KCL solution. The bypass transition occurs near $1/(2\pi R_EC_B)$, approximately 32 Hz; the complete circuit modifies that simple corner estimate.
+
+| Observable | Independent prediction | Simulation |
 |---|---:|---:|
-| Av, original 50 Ω | Closed form −0.0194479281 V/V; approximation −0.01951845 | −0.0194479280 V/V, −34.22253 dB |
-| Av, 10 kΩ | Closed form −3.88899858 V/V; approximation −3.903456 | −3.88899853 V/V, 11.79676 dB |
-| E/VIN, original | +0.0194479281 | +0.0194479280 |
-| X/VIN, original | −0.80353690 | −0.80353690 |
-| E/VIN, 10 kΩ | +0.019444993 | +0.019444993 |
-| X/VIN, 10 kΩ | −0.82413427 | −0.82413427 |
-| DC center slope, original | AC predicts −0.0194479280 V/V | −0.0194479272 V/V |
-| DC center slope, 10 kΩ | AC predicts −3.88899853 V/V | −3.88899836 V/V |
+| Low-frequency Av | −3.63974839 V/V | −3.63974838 V/V |
+| Approximate Av | −3.65574308 V/V | Approximation overestimates magnitude by 0.439% |
+| E/VIN / X/VIN | +0.181987 / −0.664953 | Full complex AC agrees with KCL |
+| Bypassed Av at 10 kHz | KCL including the bypass capacitor | −4.69767 − j0.004050 V/V |
 
-The simple gain approximation is about 0.36–0.37% larger in magnitude; keeping finite drain conductances explains the difference. Original RE gives $(g_{m1}+g_{mb1})R_E\approx0.0248$, so this is weak degeneration. Neither $-R_L/R_E$ nor a differential-pair expression describes it.
+The approximately 22.5% reduction in gain magnitude directly exposes source feedback at unchanged DC bias. Removing RE physically would also change current and device parameters, mixing two mechanisms.
 
-![AC gain/phase, full PZ reconstruction, output impedance and internal-node gains](figures/source-degenerated-cascode/ac-and-impedance.png)
+### A control experiment for distortion
 
-Raw evidence: [baseline AC CSV](simulations/source-degenerated-cascode/results/baseline-ac-input.csv), [10 kΩ AC CSV](simulations/source-degenerated-cascode/results/load-10k-ac-input.csv) and the corresponding `dc-transfer.csv` files in [results](simulations/source-degenerated-cascode/results/).
+For a large-signal feedback comparison, an [ideal DC source-clamp control](simulations/source-degenerated-cascode/current-study/sine-clamped-10mV.cir) replaces RE with a voltage source equal to the nominal E voltage. Its [OP check](simulations/source-degenerated-cascode/current-study/clamp-op.cir) verifies the same initial bias, but E cannot move with the signal. This is an ideal diagnostic circuit.
 
-## Output and Input Impedance: Equations to Plot
+With the same 1 kHz, 10 mV-peak input, the saved circuit produces **36.3963 mV** output fundamental and **0.42434% THD**; the source-clamped control produces **46.9768 mV** and **0.70642% THD**. RE reduces distortion at this input amplitude while reducing gain. Output amplitudes differ, so this experiment is not an equal-output-amplitude linearity comparison. THD includes harmonics 2–8; its measurement and independent prediction are specified in Section 5.
 
-Applying a test voltage at M1's drain, with its gate/body grounded, gives
+## 3. Cascode Action: Output Resistance and Internal-Node Motion
 
-$$
-R_1=r_{o1}+[1+(g_{m1}+g_{mb1})r_{o1}]R_E.
-$$
+If OUT moves, M2 changes its VGS to oppose changes in branch current. M1's drain therefore moves less than OUT, while the branch's incremental output resistance becomes much larger than either device's ro. Source degeneration also raises the resistance presented to M2.
 
-The common-gate stage multiplies this source resistance:
+Apply a test voltage at M1's drain with input and body grounded in AC:
 
 $$
-\boxed{R_{stack}=r_{o2}+[1+(g_{m2}+g_{mb2})r_{o2}]R_1},\qquad
-\boxed{R_{out}=R_L\parallel R_{stack}}.
+R_1=r_{o1}+\left[1+(g_{m1}+g_{mb1})r_{o1}\right]R_E.
 $$
 
-With output AC shorted, the transistor stack has $G_m=ak_2/(k_2+b)$, so $A_v=-G_mR_{out}$. The nominal formulas give $R_{stack}=166.027$ MΩ (original) and 161.877 MΩ (10 kΩ). These are **model-inferred intrinsic branch values**, not separately measured unloaded impedances. The measured whole-circuit impedance includes RL.
+The common-gate stage gives
 
-An independent check removes RL's conductance from the linearized KCL matrix and injects a unit output current. The resulting intrinsic resistance agrees with the expression above; $k_2$ already includes $g_{d2}$, so writing $r_{o2}+(1+k_2r_{o2})R_1$ would count one $R_1$ twice.
+$$
+\boxed{R_{stack}=r_{o2}+\left[1+(g_{m2}+g_{mb2})r_{o2}\right]R_1},
+\qquad R_{out}=R_L\parallel R_{stack}.
+$$
 
-**Test:** each `ac-output` injects 1 A AC into OUT with VIN, VB and both rails grounded in AC. $Z_o=v_o/i_{test}$ and its low-frequency real part gives $R_{out}$. The unit current is a small-signal normalization. Independent KCL computes $(G^{-1})_{33}$.
+The output-short-circuit transconductance is $G_m=ak_2/(k_2+b)$, so $A_v=-G_mR_{out}$. A large intrinsic resistance produces little loaded-gain benefit once RL dominates.
 
-| Output resistance | Closed form and KCL | ngspice at 1 Hz |
+**Testbench:** [output AC injection](simulations/source-degenerated-cascode/current-study/ac-output.cir) drives 1 A AC into OUT with the gate sources grounded in AC. The unit current normalizes impedance and is not a physical 1 A signal. Intrinsic resistance is independently calculated by removing RL's conductance from the linearized KCL matrix; this is a model calculation, not a separately simulated unloaded nonlinear bias.
+
+![Loaded output resistance and input-capacitance contributions](figures/source-degenerated-cascode/current/cascode-and-input.png)
+
+| Quantity | Independent model calculation | Simulation |
 |---|---:|---:|
-| Original RL=50 Ω | 49.99998494 Ω | 49.99998494 Ω |
-| Experiment RL=10 kΩ | 9999.382284 Ω | 9999.382385 Ω |
+| M1 ro / resistance R1 including RE | 41.02 kohm / 53.0013 kohm | From queried OP parameters |
+| Intrinsic cascode Rstack | **12.2404 Mohm** | Closed form agrees with unloaded KCL |
+| Loaded Rout | **999.918 ohm** | **999.918 ohm**, 1 Hz injection |
+| Output-short-circuit Gm | 3.64005 mS | Av and Rout are consistent with −Gm Rout |
 
-RL dominates in both cases. The large intrinsic resistance does not make the loaded circuit a high-gain OTA.
+The cascode raises the model's branch resistance by roughly 231 times relative to R1, yet the actual output resistance is essentially 1 kohm. These quantities must be distinguished when explaining the moderate voltage gain.
 
-VIN source current additionally measures input admittance. With fixed body voltage,
+### The input Miller term uses X, not OUT
 
-$$
-\boxed{Y_{in}(s)=s[C_{gs1}(1-A_E(s))+C_{gd1}(1-A_X(s))+C_{gb1}]}.
-$$
-
-**Test:** because ngspice defines positive source current entering the voltage source, $Y_{in}=-I(VIN)/1\ \mathrm V$. Its imaginary part divided by $2\pi f$ gives the low-frequency capacitance. The runner checks the complete complex capacitor-current equation over the entire AC grid.
-
-![Input impedance from actual source current and a low-frequency capacitance estimate](figures/source-degenerated-cascode/input-impedance.png)
-
-The predicted/measured low-frequency input capacitance is 0.726117 fF for original RL and 0.730238 fF for RL=10 kΩ. The tiny values belong to the stated model and geometry with zero junction capacitance. Finite-frequency impedance is capacitive, while the ideal-gate DC resistance is infinite. The dashed magnitude curves use only the low-frequency capacitance, so high-frequency deviation is expected.
-
-Raw evidence: [baseline output-injection CSV](simulations/source-degenerated-cascode/results/baseline-ac-output.csv), [10 kΩ output-injection CSV](simulations/source-degenerated-cascode/results/load-10k-ac-output.csv), and VIN current columns in the input AC CSVs.
-
-## VB Transfer and Supply Rejection: Equations to Plot
-
-The single signal input means differential/common-mode gains and CMRR are not defined. Instead, measure VB separately:
+The M1 gate current follows the voltages across its own capacitors:
 
 $$
-\boxed{A_b=-\frac{R_Lb g_{m2}}{\Delta}},\qquad
-\left|A_v/A_b\right|=\frac{g_{m1}k_2}{g_{d1}g_{m2}}.
+Y_{in}(s)=s\left[C_{gs1}(1-A_E(s))+C_{gd1}(1-A_X(s))+C_{gb1}\right].
 $$
 
-Finite M1 output conductance couples changes in X into current. The `ac-bias` deck applies VB AC=1 with VIN and rails grounded in AC. Its central bias-sweep slope agrees with AC. Bias rejection is about 48.69 dB at low frequency; it is not CMRR.
+Here Cgs1=3.72657 fF, Cgd1=2.00000 fF and Cgb1=0, already including m=10. Low-frequency AE=+0.181987 and AX=−0.664953 give a Cgs contribution of about 3.04838 fF and a Cgd contribution of 3.32991 fF, totaling **6.37829 fF**. The Miller factor on Cgd is **1.66495**, because M1's drain is X. Substituting the output gain −3.63975 into that term would describe the wrong capacitor connection.
 
-For supplies, define $A_{s+}=v_o/v_{DD}$, $A_{s-}=v_o/v_{SS}$ and PSRR$^\pm=|A_v/A_{s\pm}|$. With VIN/VB fixed to external ground, supply KCL adds
+The input-AC deck measures VIN source current, and its admittance agrees with the independent capacitor-current expression over the frequency grid. Tiny teaching-model capacitances and missing junction/wiring capacitances limit the physical interpretation.
 
-$$
-G\mathbf v=b_+v_{DD}+b_-v_{SS},\qquad
-b_+=\begin{bmatrix}0\\0\\g_L\end{bmatrix},\qquad
-b_-=\begin{bmatrix}g_E+g_{mb1}\\g_{mb2}-g_{mb1}\\-g_{mb2}\end{bmatrix}.
-$$
+## 4. Thermal Noise: Source Generation Versus Source Transfer
 
-Thus $A_{s\pm}=(G^{-1}b_\pm)_3$. The positive rail appears through RL; the negative rail moves RE's bottom and both bodies. Equivalently,
+M2 has almost the same gm as M1, and therefore generates almost the same intrinsic channel-current noise in this model. Its output contribution can nevertheless be tiny: a disturbance generated by M2 primarily moves X, while M1's high drain resistance constrains the branch current. The relevant quantity is generated PSD multiplied by its circuit transfer, not gm alone.
 
-$$
-\boxed{A_{s+}=\frac{R_{stack}}{R_L+R_{stack}}},\qquad
-\boxed{A_{s-}=1-A_v-A_b-A_{s+}}.
-$$
-
-**Test:** the `ac-psrr-positive` and `ac-psrr-negative` decks separately set VDD or VSS AC=1. The other rail, VIN and VB are fixed. OUT and CL remain ground-referenced. Complex supply transfers and all three node voltages are compared with independently stamped KCL over the same grid as signal gain.
-
-![Supply and bias transfers and their input-referred rejection](figures/source-degenerated-cascode/psrr-and-bias.png)
-
-| Low-frequency metric | Independent prediction, original / 10 kΩ | ngspice, original / 10 kΩ |
-|---|---|---|
-| VB → OUT | −7.15510e−5 / −0.01430551 V/V | −7.15511e−5 / −0.01430552 V/V |
-| VDD → OUT | +0.999999699 / +0.999938228 V/V | +0.999999699 / +0.999938218 V/V |
-| VSS → OUT | +0.019519780 / +3.90336590 V/V | +0.019519780 / +3.90336583 V/V |
-| PSRR+ | −34.22253 / 11.79729 dB | −34.22253 / 11.79729 dB |
-| PSRR− | −0.03203 / −0.03203 dB | −0.03203 / −0.03203 dB |
-
-OUT nearly follows VDD. In the baseline, gain is below unity, so **input-referred PSRR+ is negative in dB**; that follows the definition. Under this convention, VSS disturbances act much like an opposite input change, so PSRR− is near zero. Supply-following input/bias sources or a VSS-referenced output would give different transfers.
-
-Raw evidence: the two cases' `ac-bias.csv`, `ac-psrr-positive.csv` and `ac-psrr-negative.csv` in [results](simulations/source-degenerated-cascode/results/).
-
-## Thermal Noise: Source Derivation and Measured Contributions
-
-For one-sided PSDs and saturated MOS1, use $S_{i,Mj}=4k_BT(2/3)g_{mj}$. Resistors have Norton PSD $4k_BT/R$. Independent source injections in E/X/OUT order are
+Use one-sided PSDs at 300.15 K. Saturated MOS1 channel sources have $S_{i,Mj}=4k_BT(2/3)g_{mj}$; resistor Norton sources have $S_{i,R}=4k_BT/R$. In E/X/OUT order, independent source injections are
 
 $$
 q_{M1}=\begin{bmatrix}1\\-1\\0\end{bmatrix},\quad
@@ -251,240 +197,201 @@ q_{RE}=\begin{bmatrix}1\\0\\0\end{bmatrix},\quad
 q_{RL}=\begin{bmatrix}0\\0\\1\end{bmatrix}.
 $$
 
-Each transimpedance is $h_{j,o}=(G^{-1}q_j)_3$ at low frequency. The sign chosen for a noise-current direction does not affect its squared output contribution. Full frequency uses $(G+sC)^{-1}$ instead.
-
-Dividing by signal gain gives the four low-frequency transfer magnitudes:
+For source j, $h_{j,o}(s)=[(G+sC)^{-1}q_j]_3$ and $S_{v,o,j}=|h_{j,o}|^2S_{i,j}$. Independent source **powers** add. Referred to VIN at low frequency,
 
 $$
-\left|h_{M1,o}/A_v\right|=1/g_{m1},\quad
-\left|h_{M2,o}/A_v\right|=g_{d1}/(g_{m1}k_2),
+\left|\frac{h_{M1,o}}{A_v}\right|=\frac1{g_{m1}},\qquad
+\left|\frac{h_{M2,o}}{A_v}\right|=\frac{g_{d1}}{g_{m1}k_2},
 $$
 
 $$
-\left|h_{RE,o}/A_v\right|=k_1R_E/g_{m1},\quad
-\left|h_{RL,o}/A_v\right|=1/G_m.
+\left|\frac{h_{RE,o}}{A_v}\right|=\frac{k_1R_E}{g_{m1}},\qquad
+\left|\frac{h_{RL,o}}{A_v}\right|=\frac1{G_m}.
 $$
 
-Consequently,
+Therefore
 
 $$
 \boxed{S_{v,in}^{th}=4k_BT\left[
-\frac{2/3}{g_{m1}}+R_E\left(\frac{k_1}{g_{m1}}\right)^2+
+\frac{2/3}{g_{m1}}+
+R_E\left(\frac{k_1}{g_{m1}}\right)^2+
 \frac23g_{m2}\left(\frac{g_{d1}}{g_{m1}k_2}\right)^2+
 \frac{1}{G_m^2R_L}\right]}.
 $$
 
-**Test:** both `noise` decks reference the actual VIN source and keep KF=0. They record input/output amplitude density and separate M1, M2, RE and RL sources. The runner checks every source's spectrum against full-frequency independent current-noise MNA, source power addition and input referral $e_{n,in}=e_{n,out}/|A_v|$.
+For the two channel sources specifically,
 
-![Thermal/flicker spectra, thermal source contributions and finite-band RMS](figures/source-degenerated-cascode/noise.png)
+$$
+\boxed{\frac{S_{v,in,M2}}{S_{v,in,M1}}=
+\frac{g_{m2}}{g_{m1}}\left(\frac{g_{d1}}{k_2}\right)^2
+\approx1.89059\times10^{-5}}.
+$$
 
-| Thermal metric | Original RL=50 Ω | Experiment RL=10 kΩ |
+As gd1 tends to zero, this model's low-frequency M2 contribution tends to zero. At higher frequencies, capacitive currents at E and X change that constraint, so the low-frequency suppression must not be extended to all frequencies.
+
+**Testbench:** [thermal noise](simulations/source-degenerated-cascode/current-study/noise.cir) retains KF=0, references input source V2, and captures total and individual M1/M2/RE/RL spectra. Each source is separately predicted using its independent current-injection KCL transfer. Source-power addition and $e_{n,in}=e_{n,out}/|A_v|$ are checked across the same 1 Hz–100 THz mathematical frequency grid as AC.
+
+![Per-source thermal-noise spectra and low-frequency power fractions](figures/source-degenerated-cascode/current/thermal-noise.png)
+
+Solid spectra are simulated; dashed spectra are independent KCL predictions. The full grid exposes model behavior and is not a process frequency-validity claim.
+
+| Source, 1 Hz | Input-referred density | Fraction of total output PSD |
 |---|---:|---:|
-| Input amplitude density, 1 Hz; formula and ngspice | 47.1192 nV/$\sqrt{\mathrm{Hz}}$ | 6.31388 nV/$\sqrt{\mathrm{Hz}}$ |
-| Output amplitude density, 1 Hz | 0.916371 nV/$\sqrt{\mathrm{Hz}}$ | 24.5547 nV/$\sqrt{\mathrm{Hz}}$ |
-| M1 fraction of total output PSD | 1.24420% | 69.2982% |
-| M2 fraction | 0.0000166% | 0.0009325% |
-| RE fraction | 0.0576700% | 3.21184% |
-| RL fraction | **98.6981%** | 27.4891% |
-| Input RMS, 10 Hz–100 kHz | 14.8997 µV | 1.99652 µV |
-| Output RMS, 10 Hz–100 kHz | 0.289767 µV | 7.76442 µV |
+| M1 | 1.53034 nV/sqrt(Hz) | **48.1663%** |
+| M2 | 0.00665406 nV/sqrt(Hz) | **0.000910627%** |
+| RE | 1.12658 nV/sqrt(Hz) | **26.1031%** |
+| RL | 1.11849 nV/sqrt(Hz) | **25.7297%** |
+| Total | **2.20504 nV/sqrt(Hz)** | 100% |
 
-The original RL dominates input-referred thermal noise because its small value makes the signal gain tiny. Increasing RL lowers input-referred noise even though absolute output noise grows. M1 then dominates. M2's low-frequency noise is strongly suppressed; the plotted high-frequency increase shows why its small low-frequency contribution is not universal.
+Total output density is **8.02579 nV/sqrt(Hz)**. The noise transfer predictions agree with every simulated source spectrum within 0.03% relative tolerance; low-frequency M2/M1 power ratio agrees with the closed form.
 
-For a finite band,
+Three structural conclusions follow. M1 is the largest contributor. RE's feedback reduces gain and improves the tested linearity, but RE also adds substantial thermal noise. M2's own low-frequency channel noise is strongly suppressed, rather than absent. M1's input-referred channel-noise transfer is exactly 1/gm1 in this low-frequency model, so gain reduction alone does not establish an improvement in input-referred noise.
 
-$$
-v_{n,in,rms}=\sqrt{\int_{f_1}^{f_2}e_{n,in}^2(f)df}.
-$$
+For a finite band, $v_{n,in,rms}=\sqrt{\int_{f_1}^{f_2}S_{v,in}(f)df}$. Integrating **10 Hz–100 kHz**, including interpolated endpoints, gives **0.697260 uV RMS**. Amplitude densities are combined through squares; they are not summed directly.
 
-The stated band lies far below both output bandwidths, so the white approximation $\sqrt{S_w(f_2-f_1)}$ agrees with numerical integration. Ideal supplies/VB add no noise; bias-generator noise, resistor excess noise, mismatch and correlations are absent.
+### M2 gate-bias noise is a separate path
 
-Raw evidence: [baseline noise CSV](simulations/source-degenerated-cascode/results/baseline-noise.csv), [10 kΩ noise CSV](simulations/source-degenerated-cascode/results/load-10k-noise.csv).
-
-## Illustrative 1/f Noise and Integration Limits
-
-Each separate `noise-flicker` deck changes only KF/AF in its own process to KF=2e−33 and AF=1. The coefficient is reused from the existing educational NMOS example to make low-frequency excess noise visible across both load conditions; it has no SKY130 calibration. Actual OP, resistor noise and channel thermal spectra remain identical to baseline.
-
-For unit multiplicity, [MOS1's source equation](https://github.com/ngspice/ngspice/blob/master/src/spicelib/devices/mos1/mos1noi.c) is
+The [VB AC deck](simulations/source-degenerated-cascode/current-study/ac-bias.cir) checks
 
 $$
-S_{i,j}^{1/f}(f)=\frac{K_F|I_{Dj}|^{A_F}}{fW_jL_{eff,j}C_{ox}^2},\qquad
-L_{eff}=L-2L_D,\quad C_{ox}=\epsilon_{ox}/T_{ox}.
+A_b=-\frac{R_Lb g_{m2}}{\Delta}=-0.0158285\ \mathrm{V/V}
 $$
 
-Here LD=0, TOX=20 nm and $C_{ox}=1.72657$ mF/m². AF is the drain-current exponent; amplitude density varies as $1/\sqrt f$ before transfer weighting.
+at low frequency. Noise generated by a real VB source would refer to VIN through $|A_b/A_v|$; it is not the same as M2 channel noise. No bias-generator noise is included in the totals above. Similarly, ideal supply sources omit supply noise; RL provides a strong positive-rail-to-output path. KF=0 also means these are thermal-only totals. The historical 1/f illustration belongs to the archived m=1 cases and is not reused as a current-case numerical result.
 
-At low frequency, $S_{v,in}^{total}\approx S_w+B/f$, with B from the two MOS source equations and their input-referral weights. Thus
+## 5. Signal Range: Local Gain, Distortion and Saturation
+
+The small-signal gain is the slope at VIN=0.85 V. A finite sinusoid samples neighboring slopes and changes the internal voltage budget. The independent nonlinear solver uses the same body-effect threshold and saturated equation above, switching to
 
 $$
-f_c=B/S_w,\qquad
-\boxed{v_{n,in,rms}^2\approx S_w(f_2-f_1)+B\ln(f_2/f_1)}.
+I_D=m K_P\frac WL\left[(V_{GS}-V_T)V_{DS}-\frac12V_{DS}^2\right](1+\lambda V_{DS})
 $$
 
-**Test:** capture total MOS contributions and separate `_id`/`_1overf` vectors, plus resistor contributions and an OP snapshot. ngspice-33 MOS1 cannot query KF/AF through `@model`; record them from the executed deck, query TOX/LD/W/L, and independently verify the per-source spectral effects. Every source is checked over the full sweep using its transimpedance; total powers and integrated variances must add.
+in the forward triode region. It solves current and X from the two transistor equations, with E=ID RE and OUT=VDD−ID RL. This is an independent device-equation implementation, rather than an interpolation of simulated DC data.
 
-| Flicker/thermal quantity | Original RL=50 Ω | Experiment RL=10 kΩ |
+**Testbench:** [DC transfer](simulations/source-degenerated-cascode/current-study/dc-transfer.cir) varies VIN from **0.76 to 0.93 V in 0.5 mV steps**, holding VB, RL, RE and dimensions fixed. It records OUT/E/X and both saturation margins. A central derivative using VIN=0.8495 and 0.8505 V is compared with nominal AC gain.
+
+![Independent nonlinear transfer, nominal tangent and saturation margins](figures/source-degenerated-cascode/current/signal-range.png)
+
+| Check | Independent prediction | Simulation |
 |---|---:|---:|
-| White input PSD $S_w$ | 2.22022e−15 V²/Hz | 3.98650e−17 V²/Hz |
-| Flicker coefficient B | 1.65659e−12 V² | 1.65670e−12 V² |
-| Independent crossover B/Sw | 746.139 Hz | 41.5576 kHz |
-| Measured PSD crossover | 746.140 Hz | 41.5576 kHz |
-| Total input density at 1 Hz | 1287.95 nV/$\sqrt{\mathrm{Hz}}$ | 1287.14 nV/$\sqrt{\mathrm{Hz}}$ |
+| Nominal slope | AC/KCL: −3.63974839 V/V | Central DC slope: −3.63974799 V/V |
+| OUT/E/X across the DC interval | Independent MOS1 nonlinear solution | Agreement within 1e−7 relative plus 2 nV absolute tolerance |
+| Upper sampled VIN with both devices saturated | Saturation margins from the actual solution | **0.8835 V**; next sampled point violates M2 saturation |
 
-B barely changes because device current/gm barely change. Lowering the white floor with larger RL moves the crossover **up**, even with the same KF. That does not mean device flicker noise became intrinsically worse.
+The lower endpoint 0.76 V still has both devices saturated and is only the beginning of this tested interval, not a measured lower boundary. At VIN=0.90 V, M2's margin is about −66.9 mV. Thus a symmetric 50 mV-peak sinusoid around 0.85 V crosses the saturation boundary even though its fundamental gain can remain close to the nominal value.
 
-| Band and case | Thermal input RMS | Flicker input RMS | Total input RMS | $S_w+B/f$ prediction |
+### Predict distortion before measuring it
+
+For a smooth static transfer f near the bias,
+
+$$
+f(V_{IN}+A\sin\omega t)\approx f(V_{IN})+
+f'A\sin\omega t+\frac12f''A^2\sin^2\omega t,
+\qquad \frac{H_2}{H_1}\approx\frac{|f''|A}{4|f'|}.
+$$
+
+The DC curvature and slope predict approximately **0.42431% second harmonic at A=10 mV**. This curvature-based estimate uses measured DC derivatives; the separate full-waveform prediction below uses independently solved device equations. Since 1 kHz is far below the output pole, the nonlinear DC solution should closely predict the transient waveform and its harmonics.
+
+**Testbenches:** [5 mV](simulations/source-degenerated-cascode/current-study/sine-5mV.cir), [10 mV](simulations/source-degenerated-cascode/current-study/sine-10mV.cir), [20 mV](simulations/source-degenerated-cascode/current-study/sine-20mV.cir) and [50 mV](simulations/source-degenerated-cascode/current-study/sine-50mV.cir) apply 1 kHz sinusoids around 0.85 V. Transient duration is 10 ms, maximum timestep 1 us; a least-squares fit of DC plus sine/cosine harmonics 1–8 over the last 4 ms measures amplitudes and THD. Identical harmonic extraction is applied to independently predicted quasistatic waveforms evaluated at the measured input samples.
+
+![Measured sinusoids, independent device-equation prediction and harmonic distortion](figures/source-degenerated-cascode/current/sinusoidal-distortion.png)
+
+| Input peak | Output fundamental peak | Simulated THD, H2–H8 | Independent quasistatic THD | Minimum M1 / M2 margin |
 |---|---:|---:|---:|---:|
-| 1 Hz–1 kHz, original | 1.48929 µV | 3.38295 µV | 3.69626 µV | 3.69612 µV |
-| 1 Hz–1 kHz, 10 kΩ | 0.199562 µV | 3.38306 µV | 3.38894 µV | 3.38879 µV |
-| 10 Hz–100 kHz, original | 14.8997 µV | 3.90629 µV | 15.4032 µV | 15.4032 µV |
-| 10 Hz–100 kHz, 10 kΩ | 1.99652 µV | 3.90642 µV | 4.38705 µV | 4.38689 µV |
+| 5 mV | 18.1986 mV | 0.212169% | 0.212160% | +99.5 / +110.6 mV |
+| 10 mV | 36.3963 mV | 0.424341% | 0.424342% | +91.4 / +91.5 mV |
+| 20 mV | 72.7855 mV | 0.848859% | 0.848860% | +75.2 / +53.0 mV |
+| 50 mV | 181.811 mV | 2.11216% | 2.11216% | +22.1 / **−66.9 mV** |
 
-Variances add, then the square root gives total RMS. The lower-cutoff panel in the noise figure holds the upper limit at 100 kHz. An ideal 1/f PSD cannot be integrated to zero. The small integration differences above come from sampled trapezoidal quadrature; analytical and measured variances agree within 0.03%.
+The harmonic predictions agree within 0.2% relative tolerance, and fundamental amplitudes within 0.02%. Both devices remaining saturated does not guarantee negligible distortion: a 20 mV input remains saturated but has about 0.85% THD. Conversely, a nearly unchanged fundamental gain does not establish that the devices remain saturated. An acceptable amplitude requires a distortion specification as well as a voltage-margin check.
 
-Raw evidence: [baseline flicker CSV](simulations/source-degenerated-cascode/results/baseline-noise-flicker.csv), [10 kΩ flicker CSV](simulations/source-degenerated-cascode/results/load-10k-noise-flicker.csv), their logs, OP/model/geometry `.dat` snapshots and the report's `cases.*.noise` entries.
+## 6. Frequency Response and Small-Step Settling
 
-## Poles, Zeros and Bandwidth: Equations to Plot
-
-The nominal saturated MOS1 devices have $C_{gs}=0.372657$ fF, $C_{gd}=0.200000$ fF and $C_{gb}=0$. With junction capacitances zero and ideal gate sources,
+With the stated model's zero junction capacitances and ideal gate sources, the dynamic unknowns remain E/X/OUT:
 
 $$
-C=\operatorname{diag}(C_E,C_X,C_O)
-=\operatorname{diag}(C_{gs1},C_{gd1}+C_{gs2},C_L+C_{gd2}).
+C=\operatorname{diag}(C_{gs1},C_{gd1}+C_{gs2},C_L+C_{gd2}),
 $$
 
-The input includes capacitive feedforward:
-
 $$
-(G+sC)\mathbf v=\left[
-\begin{bmatrix}g_{m1}\\-g_{m1}\\0\end{bmatrix}
+(G+sC)\mathbf v=
+\left[\begin{bmatrix}g_{m1}\\-g_{m1}\\0\end{bmatrix}
 +s\begin{bmatrix}C_{gs1}\\C_{gd1}\\0\end{bmatrix}\right]v_i.
 $$
 
-Let $a_E=g_E+k_1$, $a_X=g_{d1}+k_2$ and $a_O=g_L+g_{d2}$. Taking the determinant gives
+Let $a_E=1/R_E+k_1$, $a_X=g_{d1}+k_2$, $a_O=1/R_L+g_{d2}$. The transfer denominator and numerator are
 
 $$
 D(s)=(a_E+sC_E)\left[(a_X+sC_X)(a_O+sC_O)-g_{d2}k_2\right]
--g_{d1}k_1(a_O+sC_O).
-$$
-
-Cramer's rule for OUT gives
-
-$$
-N(s)=k_2\left[(a_E+sC_E)(-g_{m1}+sC_{gd1})
-+k_1(g_{m1}+sC_{gs1})\right],
+-g_{d1}k_1(a_O+sC_O),
 $$
 
 $$
-\boxed{N(s)=k_2\left[-g_{m1}g_E+
+N(s)=k_2\left[-g_{m1}/R_E+
 s\{a_EC_{gd1}+(k_1-g_{m1})C_{gs1}\}
-+s^2C_{gs1}C_{gd1}\right]}.
++s^2C_{gs1}C_{gd1}\right].
 $$
 
-Thus $A_v(s)=N(s)/D(s)$, poles are eigenvalues of $-C^{-1}G$, and zeros are roots of this independently constructed quadratic. Positive capacitances and opposite signs of the constant/quadratic terms give one LHP and one RHP zero. Their locations are unrelated to the 5T OTA's mirror pole/zero.
+The poles are eigenvalues of $-C^{-1}G$ and zeros are roots of N. Opposite constant/quadratic signs give one LHP and one RHP zero in this model. The 1 pF output load should dominate the low-frequency pole, predicting $f_p\approx1/[2\pi R_{out}(C_L+C_{gd2})]$.
 
-**Test:** each `poles-zeros` deck provides the 0.75 V DC input through a controlled source and a 1 GΩ return at its signal port. PZ inserts its voltage excitation there; no ideal voltage source shorts that port. The same bias/load is used in AC. Signed rad/s roots are retained in CSV and reconstructed as
+**Testbenches:** input AC is compared with the full complex matrix over 1 Hz–100 THz, 80 points/decade. The [PZ deck](simulations/source-degenerated-cascode/current-study/poles-zeros.cir) uses a controlled input source and 1 Gohm DC return at its signal port, so an ideal voltage source does not short the PZ excitation. Signed roots reconstruct the entire AC transfer.
 
-$$
-H_{PZ}(s)=A_v(0)\frac{\prod_j(1-s/z_j)}{\prod_i(1-s/p_i)}.
-$$
+![Measured and predicted frequency response and small-step response](figures/source-degenerated-cascode/current/frequency-and-step.png)
 
-| Feature | Original RL=50 Ω | Experiment RL=10 kΩ |
+| Feature | Simulated result, independently checked |
+|---|---:|
+| Low-frequency gain | −3.63975 V/V, 11.2214 dB |
+| Slow LHP pole | **158.846 MHz** |
+| Measured falling −3.000 dB crossing | **158.469 MHz** |
+| First falling unity-gain crossing | **555.901 MHz** |
+| Other LHP poles | 156.336 GHz and 1.10372 THz |
+| RHP / LHP zeros | +226.064 GHz / −1.41878 THz |
+
+The −3.000 dB crossing differs slightly from an ideal pole's −3.0103 dB point. With gain only 3.64, the single-pole unity approximation $f_u\approx f_p\sqrt{|A_v(0)|^2-1}$ is more appropriate than simply multiplying pole frequency by DC gain. GHz/THz roots reflect the incomplete, tiny teaching capacitances; they are not a fabrication-speed claim.
+
+For a dominant pole, $\Delta v_o(t)\approx A_v(0)\Delta v_i(1-e^{-t/\tau})$ and $t_\epsilon\approx\tau\ln(1/\epsilon)$. The [small-step deck](simulations/source-degenerated-cascode/current-study/step.cir) applies VIN=0.85→0.8501 V with a 20 ps rising edge. A last-exit criterion measures settling relative to the plateau, from the end of the rising edge and before the falling edge.
+
+| Step metric | Dominant-pole / AC prediction | Simulation |
 |---|---:|---:|
-| Scalar output-pole estimate $1/(2\pi R_{out}C_O)$ | 3.182463 GHz | 15.91329 MHz |
-| Full slow PZ pole, LHP | 3.182457 GHz | 15.91326 MHz |
-| Measured −3 dB crossing | 3.173404 GHz | 15.87524 MHz |
-| First falling unity-gain crossing | None: DC gain <1 | 59.80527 MHz |
-| Full X-associated pole, LHP | 135.0190 GHz | 133.9033 GHz |
-| Full E-associated pole, LHP | 8.753994 THz | 8.753981 THz |
-| RHP zero | +297.8534 GHz | +297.8362 GHz |
-| LHP zero | −9.129170 THz | −9.129135 THz |
+| Final output change | −363.975 uV | −364.006 uV |
+| 1% settling | 4.61412 ns | 4.60583 ns |
+| 0.1% settling | 6.92118 ns | 6.91280 ns |
 
-The bandwidth measurement uses a **3.000 dB** drop on a sampled logarithmic grid; an ideal single pole at its pole frequency drops 3.0103 dB. This explains most of the small difference between −3 dB bandwidth and pole frequency here. Frequency interpolation and internal poles add small corrections.
+The plateau agrees with AC within 0.04%, and settling agrees with the dominant-pole prediction within 3%. Finite input-edge duration and internal dynamics explain the small residual. This is a small-signal open-loop experiment.
 
-For a dominant pole and $|A_v(0)|>1$, $f_u\approx f_p\sqrt{|A_v(0)|^2-1}$. The simpler $f_u\approx|A_v(0)|f_p\approx G_m/(2\pi C_O)$ requires gain well above unity. Use the first falling crossing, not an assumed gain-bandwidth product, and do not assign a unity frequency to the attenuating original circuit.
+## Reproduce and Interpret the Study
 
-![Signed pole/zero locations and load-gain/headroom experiment](figures/source-degenerated-cascode/poles-and-load.png)
+From the repository root:
 
-Full PZ reconstruction versus complex AC has maximum relative error 4.17e−9 (original) and 1.42e−8 (10 kΩ). All roots agree with independent polynomial/eigenvalue calculations. This confirms compact-model consistency. The GHz/THz values are artifacts of the specified very small, incomplete teaching capacitances; process prediction requires an appropriate PDK and real parasitics.
-
-Raw evidence: [baseline PZ CSV](simulations/source-degenerated-cascode/results/baseline-poles-zeros.csv), [10 kΩ PZ CSV](simulations/source-degenerated-cascode/results/load-10k-poles-zeros.csv) and their complete `.log` files.
-
-## Small Open-Loop Step and Settling
-
-With the output pole dominant,
-
-$$
-\Delta v_o(t)\approx A_v(0)\Delta v_i(1-e^{-t/\tau}),\qquad
-t_\epsilon\approx\tau\ln(1/\epsilon),\quad \tau=1/|p_{slow}|.
-$$
-
-**Test:** each `transient` applies VIN=0.75→0.7501 V, a 100 µV step. Times scale with $R_LC_L$: delay $10R_LC_L$, rise/fall $R_LC_L/50$, pulse width $20R_LC_L$, maximum timestep $R_LC_L/100$, and stop $40R_LC_L$. The plateau is measured 15–19 nominal time constants after the initial delay. Settling is the last exit from a relative error band before the falling edge, reported from the **end of the rising edge**. The formula assumes an instantaneous step, giving a small timing difference.
-
-![Output movement and last-exit settling error against the dominant-pole prediction](figures/source-degenerated-cascode/settling.png)
-
-| Metric | Independent prediction | ngspice |
-|---|---:|---:|
-| Final output movement, original | −1.944793 µV | −1.945102 µV |
-| Final output movement, 10 kΩ | −388.8999 µV | −388.9616 µV |
-| 1% settling, original | 0.230305 ns | 0.231528 ns |
-| 0.1% settling, original | 0.345457 ns | 0.346676 ns |
-| 1% settling, 10 kΩ | 46.0582 ns | 45.9594 ns |
-| 0.1% settling, 10 kΩ | 69.0872 ns | 68.9877 ns |
-
-Final step gain agrees with AC within 0.1%; both settling tolerances agree with the slow-pole prediction within 2%. Finite edge duration, internal roots and slight current nonlinearity explain the residual. These are small-signal **open-loop** tests, not large-signal slew, closed-loop stability or fabrication-speed claims.
-
-Raw evidence: [baseline transient CSV](simulations/source-degenerated-cascode/results/baseline-transient.csv), [10 kΩ transient CSV](simulations/source-degenerated-cascode/results/load-10k-transient.csv).
-
-## Load and Degeneration Experiments
-
-Increasing RL initially gives $|A_v|\approx G_mR_L$ while $V_O=V_{DD}-I_DR_L$ consumes headroom. The `load-sweep` recomputes OP and 1 Hz input AC for each explicitly selected RL from 50 Ω to 40 kΩ, recording both saturation margins.
-
-| RL | DC OUT | Measured Av | Nominal saturation check |
-|---|---:|---:|---|
-| 50 Ω | 1.79704 V | −0.0194479 | Both saturated |
-| 5 kΩ | 1.50365 V | −1.94465 | Both saturated |
-| 10 kΩ | 1.20732 V | −3.88900 | Both saturated |
-| 15 kΩ | 0.911007 V | −5.83304 | Both saturated |
-| 20 kΩ | 0.615179 V | −7.70008 | M2 outside saturation |
-| 25 kΩ | 0.355239 V | −3.79226 | Both outside saturation |
-| 40 kΩ | 0.181484 V | −0.735943 | Both outside saturation |
-
-The first sampled load violating saturation is **20 kΩ**, not an exact threshold. Local small-signal KCL still agrees when populated with each actual OP's gm/gmb/gds, but the saturated square-law interpretation and simple gain estimates no longer apply. The gain eventually falls instead of rising indefinitely. Red markers in the load plot identify these points.
-
-The `degeneration-sweep` holds RL=10 kΩ and varies RE from 0.1 Ω to 5 kΩ, recomputing OP at each point. This is not a fixed-gm sweep.
-
-![Degeneration sweep with independent closed-form gain and actual bias current](figures/source-degenerated-cascode/degeneration.png)
-
-| RE | Series current | Av |
-|---|---:|---:|
-| 0.1 Ω | 60.7423 µA | −4.03418 |
-| 50 Ω | 59.2680 µA | −3.88900 |
-| 500 Ω | 49.0766 µA | −2.96212 |
-| 2 kΩ | 32.5653 µA | −1.71073 |
-| 5 kΩ | 20.4583 µA | −0.962156 |
-
-All sampled degeneration points keep both devices saturated. Larger RE reduces current as well as effective signal transconductance. All sweep-point gains agree with independent closed forms using their recomputed device parameters.
-
-Raw evidence: [load CSV](simulations/source-degenerated-cascode/results/load-sweep.csv), [degeneration CSV](simulations/source-degenerated-cascode/results/degeneration-sweep.csv), logs and per-point OP/device/AC snapshots in [results](simulations/source-degenerated-cascode/results/).
-
-## Reproduction and Practical Limits
-
-The [lab README](simulations/source-degenerated-cascode/README.md) lists all 26 decks. From any working directory:
-
-```sh
-python /path/to/circuits-and-systems-classroom/code/run_cascode.py --ngspice /path/to/ngspice
+```powershell
+python code/run_cascode_structure.py
 ```
 
-The runner locates inputs relative to itself, hides Windows simulator windows, runs in a temporary directory, checks exit codes/logs/acquisition, and retains evidence after the independent checks pass. It preserves authored decks on ordinary reruns; `--generate-decks` explicitly regenerates them. Each plot has a PNG and SVG counterpart. The [report](simulations/source-degenerated-cascode/results/summary.json) contains actual simulator identity, executable hash, input/script hashes and per-case checks.
+The runner derives every deck from the **saved** `.kicad_sch`, checks terminal tuples and conducting saturation, runs in a temporary directory, and publishes results after the checks pass. Unsaved GUI edits are not visible. It requires the existing per-user KiCad installation plus NumPy, SciPy and Matplotlib; simulator subprocess windows are hidden. The [lab guide](simulations/source-degenerated-cascode/current-study/README.md) describes files and measurement definitions. Six plot pairs are generated as PNG/SVG, together with a fresh KiCad SVG export. The optional PNG schematic preview is rasterized from that SVG.
 
-No SKY130 PDK was loaded. The original structural netlist requires the correct process models, wrapper scale, corner and separately chosen bias before execution. Teaching decks use SI W/L suffixes and **must not add `scale=1u`**. Global model-source calibration, actual junction/wiring capacitance, bias noise, mismatch, source resistance, feedback and large-signal distortion remain outside the demonstrated model.
+The report records the saved schematic, model, runner, ngspice DLL and executed-deck hashes. A later rerun follows later saved edits, so its numerical report should be checked before using the numbers printed in this note. Historical results remain in their own directory.
+
+The current circuit is a useful small-signal teaching amplifier: source feedback trades gain for tested linearity and adds resistor noise; M2 raises intrinsic resistance and suppresses its low-frequency channel-noise contribution; RL limits loaded gain; internal headroom and distortion limit useful signal amplitude. A process design additionally needs an appropriate PDK, real parasitics, realistic bias/supply noise and specified loading, temperature, mismatch and distortion targets.
+
+## Appendix: Historical Resistor Experiments
+
+The [historical companion](Source-Degenerated-Cascode-Historical-Baseline.md) retains the complete original study and its [26-deck report](simulations/source-degenerated-cascode/results/summary.json), including the original source provenance, supply/bias transfer derivations and illustrative flicker model. Those experiments used **m=1, VIN=0.75 V and VB=1.25 V**, not the current values.
+
+| Historical condition | Current | Av | Interpretation |
+|---|---:|---:|---|
+| RL=50 ohm, RE=50 ohm | 59.2716 uA | −0.0194479 | Original low-impedance load limits gain |
+| RL=10 kohm, RE=50 ohm | 59.2680 uA | −3.88900 | Same geometry/bias, larger load |
+| Historical load scan, RL=20 kohm | Recomputed OP | −7.70008 | First sampled load with M2 outside saturation |
+| Historical RE scan, RE=5 kohm, RL=10 kohm | 20.4583 uA | −0.962156 | Bias and feedback both change |
+
+The old load and RE scans remain available for design tradeoff exploration. They are not the main evidence used to explain source feedback or M2 noise in the current circuit.
 
 ## Sources and Derivation Ownership
 
-1. User-supplied Analog Canvas project, received 2026-10-10. [Provenance](circuits/source-degenerated-cascode/provenance.json) identifies exact bytes and effective parameters; no unprovided Gallery identity is inferred.
-2. [ngspice documentation](https://ngspice.sourceforge.io/docs.html) and [official source](https://github.com/ngspice/ngspice), checked for noise/PZ/control conventions. Actual executed version is ngspice-33, as retained logs state.
-3. [MOS1 noise implementation](https://github.com/ngspice/ngspice/blob/master/src/spicelib/devices/mos1/mos1noi.c), for the channel-noise and KF/AF conventions, independently checked against this run.
-4. [SKY130 open-PDK documentation](https://skywater-pdk.readthedocs.io/en/main/), relevant only to the original model binding; no process-model result is claimed.
+1. User-edited [native KiCad schematic](circuits/source-degenerated-cascode/kicad/cascode-dc.kicad_sch), read at the hash recorded in the current report; original Canvas [provenance](circuits/source-degenerated-cascode/provenance.json) remains separate.
+2. The unchanged [NMOS_EDU model](simulations/source-degenerated-cascode/models.lib) and [ngspice documentation](https://ngspice.sourceforge.io/docs.html), with actual execution by ngspice-46.
+3. [MOS1 channel-noise implementation](https://github.com/ngspice/ngspice/blob/master/src/spicelib/devices/mos1/mos1noi.c), for the saturated channel-noise convention; current per-source simulation independently verifies its use with m=10.
+4. [KiCad simulation documentation](https://docs.kicad.org/10.0/en/eeschema/eeschema.html#simulator), for native schematic/model bindings and GUI workflow.
 
-KCL, gain/resistance/noise closed forms and the transfer polynomial are this note's independent derivations. The two 5T documents provide organizational examples, not evidence for the new circuit's equations or measured numbers.
+KCL, resistance and noise-transfer expressions, the transfer polynomial, and the independent nonlinear and harmonic calculations are this study's derivations. The archived note supplies historical context, not current-case verification.

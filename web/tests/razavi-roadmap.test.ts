@@ -60,11 +60,11 @@ describe('route diagram and portable exports', () => {
     }
   });
   it('assigns shared stages their actual week range in each independent route', () => {
-    expect(stageWeeks('adc', 'foundation', 6).feedback).toBe('第 1–2 周');
-    expect(stageWeeks('adc', 'beginner', 6).entry).toBe('第 1–3 周');
-    expect(stageWeeks('adc', 'beginner', 6).feedback).toBe('第 4–5 周');
-    expect(stageWeeks('adc', 'foundation', 6).capstone).toBe('第 16–17 周');
-    expect(stageWeeks('links', 'foundation', 6).capstone).toBe('第 15–16 周');
+    expect(stageWeeks('adc', 'foundation', 6).feedback).toBe('Weeks 1–2');
+    expect(stageWeeks('adc', 'beginner', 6).entry).toBe('Weeks 1–3');
+    expect(stageWeeks('adc', 'beginner', 6).feedback).toBe('Weeks 4–5');
+    expect(stageWeeks('adc', 'foundation', 6).capstone).toBe('Weeks 16–17');
+    expect(stageWeeks('links', 'foundation', 6).capstone).toBe('Weeks 15–16');
   });
   it('exports an editable scene with unique IDs and finite coordinates plus a standalone SVG', () => {
     const options = { track: 'pll' as Track, level: 'beginner' as Level, hours: 6, completed: ['entry', 'feedback'], started: ['phaseNoise'] };
@@ -72,16 +72,16 @@ describe('route diagram and portable exports', () => {
     expect(scene.type).toBe('excalidraw'); expect(scene.version).toBe(2);
     expect(new Set(scene.elements.map((element: { id: string }) => element.id)).size).toBe(scene.elements.length);
     const labels = scene.elements.filter((element: { type: string }) => element.type === 'text');
-    expect(labels.find((element: { id: string }) => element.id === 'text-feedback').text).toContain('已完成');
-    expect(labels.find((element: { id: string }) => element.id === 'text-phaseNoise').text).toContain('学习中');
-    expect(labels.find((element: { id: string }) => element.id === 'text-recovery').text).toContain('待学习');
+    expect(labels.find((element: { id: string }) => element.id === 'text-feedback').text).toContain('Complete');
+    expect(labels.find((element: { id: string }) => element.id === 'text-phaseNoise').text).toContain('In progress');
+    expect(labels.find((element: { id: string }) => element.id === 'text-recovery').text).toContain('Not started');
     for (const element of scene.elements) {
       expect([element.x, element.y, element.width, element.height].every(Number.isFinite)).toBe(true);
       expect(element.width).toBeGreaterThanOrEqual(0); expect(element.height).toBeGreaterThanOrEqual(0);
     }
     const svg = svgDiagram(options);
     expect(svg).toContain('xmlns="http://www.w3.org/2000/svg"');
-    expect(svg).toContain('PLL / 射频时钟'); expect(svg).toContain('CDR 时钟恢复');
-    expect(svg).toContain('进度为导出时快照');
+    expect(svg).toContain('PLL / RF clocks'); expect(svg).toContain('CDR clock recovery');
+    expect(svg).toContain('Progress snapshot at export');
   });
 });
